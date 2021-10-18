@@ -1,0 +1,33 @@
+:host {
+    ion-content {
+        --background: linear-gradient(135deg, #110A3B, #2f32a0);
+    }
+}
+
+.paz {
+    position: relative;
+    z-index: 10;
+}
+
+.mainSlide, .mainSlide ion-slide {
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    width: 120px;
+}
+
+.pick-avatar {
+    width: 80px;
+    opacity: 0.3;
+}
+
+.pick-avatar-seleccionado {
+    transition: opacity 0.5s linear;
+    opacity: 1 !important;
+}
+
+.bg-transparent {
+    background: transparent;
+  }
