@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { AvisosCreados } from '../interfaces/interfaces';
 
 
 const url = environment.url;
@@ -17,7 +18,7 @@ export class AvisosService {
   obtenerAvisos()
   {
     this.contadorPagina++;
-    return this.http.get(`${url}/avisos/?pagina=${this.contadorPagina}`);
+    return this.http.get<AvisosCreados>(`${url}/avisos/?pagina=${this.contadorPagina}`);
   }
 
 
