@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Avisos } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-avisos',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvisosComponent implements OnInit {
 
+  @Input() avisos: Avisos[] = [];
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //console.log(this.avisos)
+  }
 
 }
