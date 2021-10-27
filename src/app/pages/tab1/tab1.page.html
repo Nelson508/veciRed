@@ -3,13 +3,25 @@
     <ion-title class="ion-text-center">
       VeciRed
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="icon-only" name="add-outline">
+
+      </ion-icon>
+
+    </ion-buttons>
     
   </ion-toolbar>
+  
   
 </ion-header>
 
 <ion-content class="avisosContenedor"[fullscreen]="true">
-  <div class="avisosTitlte"><p class="ion-text-center">AVISOS</p></div>
+  <div class="avisosTitlte"><p class="ion-text-center">AVISOS</p>
+  
+  </div>
+  <!--Agregamos avisos para mostrar aca los avisos publicados-->
+  <app-avisos [avisos]='avisos'></app-avisos>
+
   
 
 
