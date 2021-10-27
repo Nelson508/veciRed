@@ -1,194 +1,70 @@
-<ion-content>
+<ion-content class="ion-text-center">
 
-
-  <ion-slides class="mainSlide">
-    
-    <ion-slide>
-
-      
-
-      <form (ngSubmit)="login(fLogin)" #fLogin="ngForm">
-        <ion-grid fixed>
-          <!-- Logo -->
-          <ion-row>
-            <ion-col>
-              <h4>
-                <ion-text color="light">
-                  VeciRed
-                </ion-text>
-              </h4>
-              <div>
-                <img src="/assets/icon/ionic4start-ico.png"> 
-              </div>
-            </ion-col>
-          </ion-row>
-
-          <!-- <ion-row>
-            <ion-col>
-              <img src="/assets/avatars/av-1.png">
-            </ion-col>
-          </ion-row> -->
-        
-          <ion-row>
-            <ion-col>
-              
-                <ion-list class="bg-transparent">
-                  
-                  <ion-item color="none">
-                    <ion-label position="floating" color="light">
-                      <ion-icon name="mail" item-start></ion-icon>
-                      Correo Electronico
-                    </ion-label>
-                      <ion-input name="email"
-                                  type="email"
-                                  required>
-                      </ion-input>
-                  </ion-item>
-
-                  <ion-item color="none">
-                    <ion-label position="floating" color="light">
-                      <ion-icon name="lock-closed" item-start></ion-icon>
-                      Contraseña
-                    </ion-label>
-                    <ion-input name="password"
-                                type="password"
-                                required>
-                    </ion-input>
-                  </ion-item>
-
-                </ion-list>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col>
-              <ion-button type="submit"
-                          color="tertiary"
-                          shape="round">
-                Login
-              </ion-button>
-            </ion-col>
-          </ion-row>
-
-        </ion-grid>
-      </form>
-
-      <!-- <p text-right tappable class="paz">
+   <!-- Logo -->
+   <ion-row>
+    <ion-col>
+      <h4>
         <ion-text color="light">
-          <strong>Forgot Pass?</strong>
+          VeciRed
         </ion-text>
-      </p> -->
+      </h4>
+      <div>
+        <img src="/assets/icon/ionic4start-ico.png">
+      </div>
+    </ion-col>
+  </ion-row>
 
+  <form (ngSubmit)="login(logearse)" #logearse="ngForm">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col>
 
-    </ion-slide>
+          <ion-list class="bg-transparent">
 
-    <ion-slide>
+            <ion-item color="none">
+              <ion-label position="floating" color="light" class="my-label">
+                <ion-icon name="mail" item-start></ion-icon>
+                Correo Electronico
+              </ion-label>
+              <ion-input name="email" type="email" required>
+              </ion-input>
+            </ion-item>
 
+            <ion-item color="none">
+              <ion-label position="floating" color="light" class="my-label">
+                <ion-icon name="lock-closed" item-start></ion-icon>
+                Contraseña
+              </ion-label>
+              <ion-input name="password" type="password" required>
+              </ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
       
-      <ion-grid fixed>
+      <p>
+        <ion-text color="light">
+          <strong>Olvido su contraseña?</strong>
+        </ion-text>
+      </p>
 
-            <ion-row>
-            <ion-col>
-                <h3>Seleccione Avatar</h3>
-            </ion-col>
-            </ion-row>
-
-            <ion-row>
-            <ion-col>
-                <ion-slides [options]="avatarSlide">
-                <ion-slide *ngFor="let avatar of avatars">
-                    <ion-img class="pick-avatar" 
-                            src="/assets/avatars/{{ avatar.img }}"
-                            [ngClass]="{ 'pick-avatar-seleccionado': avatar.seleccionado }"
-                            (click)="seleccionarAvatar(avatar)"></ion-img>
-                </ion-slide>
-                </ion-slides>
-            </ion-col>
-            </ion-row>
-        
-            <form (ngSubmit)="registro(fRegistro)" #fRegistro="ngForm">
-                <ion-row>
-                    <ion-col>
-                        
-                        <ion-list>
-                            
-                            <ion-item>
-                            <ion-label>Email</ion-label>
-                            <ion-input name="email" 
-                                        type="email"
-                                        required></ion-input>
-                            </ion-item>
-
-                            <ion-item>
-                            <ion-label>Nombre</ion-label>
-                            <ion-input name="nombre"
-                                        type="text"
-                                        required></ion-input>
-                            </ion-item>
-
-                            <ion-item>
-                            <ion-label>Password</ion-label>
-                            <ion-input name="password"
-                                        type="password"
-                                        required></ion-input>
-                            </ion-item>
-
-                        </ion-list>
-                    </ion-col>
-                </ion-row>
-                
-                <ion-row>
-                <ion-col>
-                    <ion-button type="submit"
-                                color="tertiary"
-                                shape="round">
-                        Crear usuario
-                    </ion-button>
-                </ion-col>
-            </ion-row>
-            
-            </form>
-        </ion-grid>
-  
-  
-      </ion-slide>
-
-
-  </ion-slides>
-
-
-
-</ion-content>
-<!-- 
-
-<ion-footer no-border>
-  <ion-toolbar>
-    
-    <ion-row>
-
-      <ion-col>
-          <ion-button shape="round"
-                      expand="full"
-                      size="small"
-                      fill="outline"
-                      color="tertiary">
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="tertiary" shape="round">
             Ingresar
           </ion-button>
-      </ion-col>
+        </ion-col>
+      </ion-row>
 
-      <ion-col>
-        <ion-button shape="round"
-                    expand="full"
-                    size="small"
-                    fill="outline"
-                    color="tertiary">
-          Registrarme
-        </ion-button>
-      </ion-col>
+    </ion-grid>
+  </form>
 
-    </ion-row>
+  <p (click)="registrarse()">
+    <ion-text color="light">
+      <strong>Registrarse</strong>
+    </ion-text>
+  </p>
 
+</ion-content>
 
-
-  </ion-toolbar>
-</ion-footer> -->

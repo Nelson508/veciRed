@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -8,65 +10,24 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginPage implements OnInit {
 
-  avatars = [
-    {
-      img: 'av-1.png',
-      seleccionado: true
-    },
-    {
-      img: 'av-2.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-3.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-4.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-5.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-6.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-7.png',
-      seleccionado: false
-    },
-    {
-      img: 'av-8.png',
-      seleccionado: false
-    },
-  ];
-
-  avatarSlide = {
-    slidesPerView: 3.5
+  User = {
+    email: 'nelson.dominguez@gmail.com',
+    password: '123456'
+  
   };
 
-  constructor() { }
+  constructor( public navCtrl: NavController,
+               public usuarioService: UsuarioService ) { }
 
   ngOnInit() {
   }
 
-  login(fLogin: NgForm){
+  login(logearse: NgForm){
 
-    console.log(fLogin.valid);
+    console.log(logearse.valid);
   }
 
-  registro(fRegistro:NgForm){
-
-    console.log(fRegistro.valid);
+  registrarse() {
+    this.navCtrl.navigateRoot('/registro');
   }
-
-  seleccionarAvatar(avatar){
-
-    this.avatars.forEach(av => av.seleccionado = false);
-
-    avatar.seleccionado = true;
-  }
-
 }
