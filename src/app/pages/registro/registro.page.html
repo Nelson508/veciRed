@@ -1,0 +1,89 @@
+<ion-content class="ion-text-center">
+
+  <!-- Logo -->
+  <ion-row>
+   <ion-col>
+     <h4>
+       <ion-text color="light">
+         VeciRed
+       </ion-text>
+     </h4>
+     <div>
+       <img src="/assets/icon/ionic4start-ico.png">
+     </div>
+   </ion-col>
+ </ion-row>
+
+ <form (ngSubmit)="registro(registrarse)" #registrarse="ngForm">
+   <ion-grid fixed>
+     <ion-row>
+       <ion-col>
+
+         <ion-list class="bg-transparent">
+
+          <ion-item color="none">
+            <ion-label position="floating" color="light" class="my-label">
+              <ion-icon name="person" item-start></ion-icon>
+              Nombre
+            </ion-label>
+            <ion-input name="email" type="email" required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item color="none">
+            <ion-label position="floating" color="light" class="my-label">
+              <ion-icon name="calendar" item-start></ion-icon>
+              Fecha Nacimiento
+            </ion-label>
+            <ion-input name="email" type="email" required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item color="none">
+             <ion-label position="floating" color="light" class="my-label">
+               <ion-icon name="mail" item-start></ion-icon>
+               Correo Electronico
+             </ion-label>
+             <ion-input name="email" type="email" required>
+             </ion-input>
+          </ion-item>
+
+          <ion-item color="none">
+             <ion-label position="floating" color="light" class="my-label">
+               <ion-icon name="lock-closed" item-start></ion-icon>
+               Contraseña
+             </ion-label>
+             <ion-input name="password" type="password" required>
+             </ion-input>
+          </ion-item>
+
+          <ion-item color="none">
+            <ion-label position="floating" color="light" class="my-label">
+              <ion-icon name="lock-closed" item-start></ion-icon>
+              Repita Contraseña
+            </ion-label>
+            <ion-input name="password" type="password" required>
+            </ion-input>
+          </ion-item>
+
+         </ion-list>
+       </ion-col>
+     </ion-row>
+     
+     <ion-row>
+       <ion-col>
+         <ion-button type="submit" color="tertiary" shape="round" class="my-button">
+           Registrarse
+         </ion-button>
+       </ion-col>
+     </ion-row>
+
+   </ion-grid>
+ </form>
+
+  <p (click)="login()">
+    <ion-text color="light">
+      <strong>Ya tengo cuenta</strong>
+    </ion-text>
+  </p>
+</ion-content>

@@ -14,7 +14,11 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'login'
+  },  {
+    path: 'registro',
+    loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   }
+
 ];
 @NgModule({
   imports: [
