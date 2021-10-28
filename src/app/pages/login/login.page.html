@@ -26,7 +26,7 @@
                 <ion-icon name="mail" item-start></ion-icon>
                 Correo Electronico
               </ion-label>
-              <ion-input name="email" type="email" required>
+              <ion-input name="correo" type="email" [(ngModel)]="User.email" color="light" required>
               </ion-input>
             </ion-item>
 
@@ -35,7 +35,7 @@
                 <ion-icon name="lock-closed" item-start></ion-icon>
                 Contraseña
               </ion-label>
-              <ion-input name="password" type="password" required>
+              <ion-input name="pass" type="password" [(ngModel)]="User.password" color="light" required>
               </ion-input>
             </ion-item>
 

@@ -24,7 +24,9 @@ export class LoginPage implements OnInit {
 
   login(logearse: NgForm){
 
-    console.log(logearse.valid);
+    if(logearse.invalid){return;}
+
+    this.usuarioService.login(this.User.email, this.User.password);
   }
 
   registrarse() {

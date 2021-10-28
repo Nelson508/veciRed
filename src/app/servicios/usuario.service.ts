@@ -15,9 +15,9 @@ export class UsuarioService {
   constructor( private http: HttpClient,
                private storage: Storage) { }
 
-  login(correo: string, pass: string){
+  login(email: string, password: string){
 
-    const datos =  {correo, pass};
+    const datos =  {email, password};
 
     this.http.post(`${URL}/usuario/login`, datos)
       .subscribe( resp => {
