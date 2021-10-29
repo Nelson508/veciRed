@@ -14,6 +14,8 @@ export interface Avisos {
   descripcion?: string;
   usuario?: Usuario;
   fechaCreacion?: string;
+  comunidad ?: Comunidad;
+  tipoAviso ?: number;
  
 }
 
@@ -24,5 +26,11 @@ export interface Usuario {
   email?: string;
   imagenPerfil?: string;
   rol?: number;
+  comunidad ?: Comunidad[];
   
+}
+
+export interface Comunidad{
+  _id?: string;
+  nombreComunidad?: string;
 }
