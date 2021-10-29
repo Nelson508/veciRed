@@ -1,4 +1,4 @@
-<div class="avisoUnitario">
+<!-- <div class="avisoUnitario">
   <p class="ion-text-center">
     Comunidad: {{aviso.titulo}}
   </p>
@@ -11,7 +11,62 @@
   <p class="ion-text-center">
     fotito: {{aviso.descripcion}}
   </p>
-</div>
+</div> -->
+<!-- <ion-icon slot="icon-only" name="accessbility-outline">
+
+</ion-icon> -->
+
+<ion-grid class="avisoUnitario" 
+ng-class="{'green-class': aviso.tipoAviso = 4, 'red-class' : aviso.tipoAviso = 1 }" >
+  <ion-row class="ion-text-center">
+    <!--Comunidad-->
+    <ion-col >
+    
+      <ion-icon name="body"></ion-icon>
+      {{aviso.comunidad.nombreComunidad}}
+
+    </ion-col>
+    
+  </ion-row >
+  <!--Titulo-->
+  <ion-row class="ion-text-center" style="font-size: small;" >
+    <ion-col >
+      <ion-label> <h1>{{aviso.titulo}}</h1></ion-label>
+
+    </ion-col>
+    
+  </ion-row>
+  <!--Descripcion-->
+  <ion-row class="ion-text-center" style="font-size: small;">
+    <ion-col >
+      <ion-icon name="document-text-outline"></ion-icon>
+      {{aviso.descripcion}}
+
+    </ion-col>
+    
+  </ion-row>
+  <!--Fotito-->
+  <ion-row class="ion-text-center">
+    <ion-col >
+      Pic: <img src="/`${{aviso.imagenAviso`}}">
+
+    </ion-col>
+    
+  </ion-row>
+
+   <!--Fotito-->
+   <ion-row class="ion-text-center">
+     <ion-col >
+       {{aviso.fechaCreacion}}
+     </ion-col>
+    <ion-col >
+      {{aviso.usuario.nombre}}
+      <ion-icon name="person-outline"></ion-icon>
+
+    </ion-col>
+    
+  </ion-row>
+</ion-grid>
 
 
 
