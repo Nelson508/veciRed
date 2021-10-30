@@ -24,6 +24,7 @@ export interface Usuario {
   nombre?: string;
   fechaNacimiento?: string;
   email?: string;
+  password?: string;
   imagenPerfil?: string;
   rol?: number;
   comunidad ?: Comunidad[];

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { UsuarioGuard } from './servicios/usuario.guard';
 
 const routes: Routes = [
   {
     path: 'main',
-    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
+    canLoad: [UsuarioGuard]
   },
   {
     path: 'login',
@@ -14,7 +16,8 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'login'
-  },  {
+  },
+  {
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   }
