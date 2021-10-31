@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AvisosComponent } from './avisos/avisos.component';
 import { AvisoPublicadoComponent } from './aviso-publicado/aviso-publicado.component';
 import { IonicModule } from '@ionic/angular';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -15,7 +16,8 @@ import { IonicModule } from '@ionic/angular';
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    PipesModule
   ],
   exports:[
     AvisosComponent

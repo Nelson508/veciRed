@@ -1,23 +1,15 @@
-<!-- <div class="avisoUnitario">
-  <p class="ion-text-center">
-    Comunidad: {{aviso.titulo}}
-  </p>
-  <p class="ion-text-center">
-    Titulo: {{aviso.titulo}}
-  </p>
-  <p class="ion-text-center">
-    Desc: {{aviso.descripcion}}
-  </p>
-  <p class="ion-text-center">
-    fotito: {{aviso.descripcion}}
-  </p>
-</div> -->
-<!-- <ion-icon slot="icon-only" name="accessbility-outline">
 
-</ion-icon> -->
 
 <ion-grid class="avisoUnitario" 
-ng-class="{'green-class': aviso.tipoAviso = 4, 'red-class' : aviso.tipoAviso = 1 }" >
+[ngClass]="{
+            'redEvent': aviso.tipoAviso === 1, 
+            'yellowEvent': aviso.tipoAviso === 5, 
+            'greenEvent': aviso.tipoAviso === 4,
+            'blueEvent': aviso.tipoAviso === 3
+          }"
+
+ 
+  > 
   <ion-row class="ion-text-center">
     <!--Comunidad-->
     <ion-col >
@@ -29,43 +21,56 @@ ng-class="{'green-class': aviso.tipoAviso = 4, 'red-class' : aviso.tipoAviso = 1
     
   </ion-row >
   <!--Titulo-->
-  <ion-row class="ion-text-center" style="font-size: small;" >
+  <ion-row class="ion-text-center" class="tituloAviso" >
     <ion-col >
-      <ion-label> <h1>{{aviso.titulo}}</h1></ion-label>
+      <ion-label> <h1><b>{{aviso.titulo}} </b> </h1></ion-label>
 
     </ion-col>
     
   </ion-row>
   <!--Descripcion-->
-  <ion-row class="ion-text-center" style="font-size: small;">
+  <ion-row class="ion-text-center" style="font-size: small; color: black;">
     <ion-col >
       <ion-icon name="document-text-outline"></ion-icon>
-      {{aviso.descripcion}}
-
+      <ion-label class="avisoDescripcion" >
+        {{aviso.descripcion}}
+      </ion-label>
     </ion-col>
     
   </ion-row>
   <!--Fotito-->
-  <ion-row class="ion-text-center">
+  <ion-grid >
+
+  
+  <ion-row class="ion-text-center" >
     <ion-col >
-      Pic: <img src="/`${{aviso.imagenAviso`}}">
+      <!-- Pic: <img src="/`${{aviso.imagenAviso`}}"> *ngIf="aviso.imagenAviso" -->
+      <!--
+        1- hacemos una validacion sobre la imagen si es que viene o no, si no viene no se muestra HTML
+        2.-se define una clase para darle estilo a la imagen y ademas
+        3.- se envia a traves del pipe mostrarImagen para reconstruir la imagen desde la BD
+
+      -->
+      <img *ngIf="aviso.imagenAviso.length > 0" class="formatoImagen" src="{{aviso.imagenAviso | mostrarImagen: aviso.usuario._id }}" >
 
     </ion-col>
     
   </ion-row>
-
+  </ion-grid>
    <!--Fotito-->
+   <ion-grid>
    <ion-row class="ion-text-center">
      <ion-col >
        {{aviso.fechaCreacion}}
      </ion-col>
     <ion-col >
       {{aviso.usuario.nombre}}
-      <ion-icon name="person-outline"></ion-icon>
+      <ion-icon name="person"></ion-icon>
 
     </ion-col>
     
   </ion-row>
+  </ion-grid>
 </ion-grid>
 
 
