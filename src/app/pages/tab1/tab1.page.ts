@@ -13,7 +13,9 @@ export class Tab1Page implements OnInit{
   avisos: Avisos[] = [];
 
   constructor( private AvisosService: AvisosService,
-               private menuCtrl: MenuController ) {}
+               private menuCtrl: MenuController) {
+                this.menuCtrl.enable(true, 'first');
+               }
 
   ngOnInit()
   {
@@ -23,10 +25,5 @@ export class Tab1Page implements OnInit{
         this.avisos.push(...respuesta.avisosPublicados);
       })
   }
-
-  /* menu(){
-    this.menuCtrl.open('first');
-
-  } */
 
 }
