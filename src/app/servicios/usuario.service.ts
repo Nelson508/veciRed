@@ -29,11 +29,11 @@ export class UsuarioService {
     return new Promise( resolve => {
 
       this.http.post(`${URL}/usuario/login`, datos)
-        .subscribe( resp => {
+        .subscribe(async resp => {
           console.log(resp);
   
           if(resp['ok']){
-            this.almacenarToken(resp['token']);
+            await this.almacenarToken(resp['token']);
             resolve(true);
           }else{
             this.userToken = null;
@@ -45,16 +45,24 @@ export class UsuarioService {
 
   }
 
+  logout(){
+
+    this.userToken = null;
+    this.usuario = null;
+    this.storage.clear();
+    this.navCtrl.navigateRoot('/login', {animated:true});
+  }
+
   registro( usuario: Usuario){
 
     return new Promise(resolve => {
 
       this.http.post(`${URL}/usuario/crear`, usuario)
-        .subscribe(resp => {
+        .subscribe(async resp => {
           console.log(resp);
 
           if(resp['ok']){
-            this.almacenarToken(resp['token']);
+            await this.almacenarToken(resp['token']);
             resolve(true);
           }else{
             this.userToken = null;
@@ -70,6 +78,8 @@ export class UsuarioService {
 
     this.userToken = token;
     await this.storage.set('token', token);
+
+    await this.verificaToken();
   }
 
   //Carga el Token desde el Storage

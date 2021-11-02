@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UsuarioService } from './servicios/usuario.service';
+import { AvisosService } from './servicios/avisos.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor( private usuarioService: UsuarioService,
+               private avisosService: AvisosService) {}
+
+  logout(){
+    this.avisosService.contadorPagina = 0;
+    this.usuarioService.logout();
+  }
 }

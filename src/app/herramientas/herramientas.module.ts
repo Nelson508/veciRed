@@ -4,6 +4,7 @@ import { AvisosComponent } from './avisos/avisos.component';
 import { AvisoPublicadoComponent } from './aviso-publicado/aviso-publicado.component';
 import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '../pipes/pipes.module';
+import { CabeceraComponent } from './cabecera/cabecera.component';
 
 
 
@@ -12,7 +13,8 @@ import { PipesModule } from '../pipes/pipes.module';
   declarations: 
   [
     AvisosComponent,
-    AvisoPublicadoComponent
+    AvisoPublicadoComponent,
+    CabeceraComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { PipesModule } from '../pipes/pipes.module';
     PipesModule
   ],
   exports:[
-    AvisosComponent
+    AvisosComponent,
+    CabeceraComponent
   ]
 })
 export class HerramientasModule { }

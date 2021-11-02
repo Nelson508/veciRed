@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, MenuController } from '@ionic/angular';
 import { Usuario } from '../../interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { AlertasService } from '../../servicios/alertas.service';
@@ -23,7 +23,10 @@ export class RegistroPage implements OnInit {
 
   constructor( public navCtrl: NavController,
                public usuarioService: UsuarioService,
-               public alertasService: AlertasService ) { }
+               public alertasService: AlertasService,
+               private menuCtrl: MenuController ) { 
+                this.menuCtrl.enable(false, 'first');
+               }
 
   ngOnInit() {
   }

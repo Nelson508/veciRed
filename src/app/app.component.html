@@ -3,13 +3,21 @@
   <ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Start Menu</ion-title>
+        <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item routerLink="/acuerdos">Acuerdos</ion-item>
-        <ion-item>Menu Item</ion-item>
+        <ion-menu-toggle>
+          <ion-item routerLink="/acuerdos">
+            <ion-icon name="megaphone-outline" slot="start"></ion-icon>
+            Acuerdos
+          </ion-item>
+          <ion-item (click)="logout()">
+            <ion-icon name="log-out-outline" slot="start"></ion-icon>
+            Cerrar Sesion
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>
