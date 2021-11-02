@@ -13,10 +13,10 @@ import { AlertasService } from '../../servicios/alertas.service';
 export class RegistroPage implements OnInit {
 
   userRegistro: Usuario = {
-    nombre: 'test',
-    fechaNacimiento: '10-10-1998',
-    email: 'test1@test1.com',
-    password: '123456',
+    nombre: '',
+    fechaNacimiento: '',
+    email: '',
+    password: '',
     rol: 2,
     
   }

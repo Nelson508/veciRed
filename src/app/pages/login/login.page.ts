@@ -12,7 +12,7 @@ import { AlertasService } from '../../servicios/alertas.service';
 export class LoginPage implements OnInit {
 
   User = {
-    email: 'nelson.dominguez@gmail.com',
+    email: 'test3@test3.com',
     password: '123456'
   
   };
