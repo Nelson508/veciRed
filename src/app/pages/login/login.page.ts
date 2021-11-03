@@ -29,7 +29,11 @@ export class LoginPage implements OnInit {
 
   async login(logearse: NgForm){
 
-    if(logearse.invalid){return;}
+    if(logearse.invalid){
+      
+      this.alertasService.alerta('Complete los campos vacíos');
+      return;
+    }
 
     const existe = await this.usuarioService.login(this.User.email, this.User.password);
 
@@ -38,7 +42,7 @@ export class LoginPage implements OnInit {
       this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
     }else{
       //mostrar alerta de usuario y contraseña no correctos
-      this.alertasService.alerta('Usario y/o contraseña no son correctos.');
+      this.alertasService.alerta('Usario y/o contraseña no son correctos');
     }
   }
 

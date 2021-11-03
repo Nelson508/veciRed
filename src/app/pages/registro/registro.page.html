@@ -35,8 +35,9 @@
               <ion-icon name="calendar" item-start></ion-icon>
               Fecha Nacimiento
             </ion-label>
-            <ion-input name="fechaNacimiento" type="date" [(ngModel)]="userRegistro.fechaNacimiento" color="light" required>
-            </ion-input>
+            <ion-datetime display-format="DD/MM/YYYY" name="fechaNacimiento" [(ngModel)]="userRegistro.fechaNacimiento"></ion-datetime>
+            <!-- <ion-input name="fechaNacimiento" type="date" [(ngModel)]="userRegistro.fechaNacimiento" color="light" required>
+            </ion-input> -->
           </ion-item>
 
           <ion-item color="none">
@@ -62,7 +63,7 @@
               <ion-icon name="lock-closed" item-start></ion-icon>
               Repita Contraseña
             </ion-label>
-            <ion-input name="password" type="password" [(ngModel)]="userRegistro.password" color="light" required>
+            <ion-input name="repitePass" type="password" [(ngModel)]="repitaPassword" color="light" required>
             </ion-input>
           </ion-item>
 
