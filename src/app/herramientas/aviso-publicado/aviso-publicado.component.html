@@ -29,10 +29,10 @@
     
   </ion-row>
   <!--Descripcion-->
-  <ion-row class="ion-text-center" style="font-size: small; color: black;">
+  <ion-row class="container avisosDescripcion" >
     <ion-col >
       <ion-icon name="document-text-outline"></ion-icon>
-      <ion-label class="avisoDescripcion" >
+      <ion-label  >
         {{aviso.descripcion}}
       </ion-label>
     </ion-col>
@@ -55,22 +55,28 @@
 
     </ion-col>
     
-  </ion-row>
-  </ion-grid>
-   <!--Fotito-->
-   <ion-grid>
-   <ion-row class="ion-text-center">
-     <ion-col >
-       {{aviso.fechaCreacion}}
-     </ion-col>
-    <ion-col >
-      {{aviso.usuario.nombre}}
-      <ion-icon name="person"></ion-icon>
-
-    </ion-col>
     
   </ion-row>
+  
   </ion-grid>
+   <!--Fotito-->
+   <!--FECHA Y AUTOR-->
+   <ion-grid  style="margin-top:-4% ; margin-bottom: 1%;">
+    <ion-row class="ion-text-center">
+      <ion-col style="margin-top:-0.5% ;" >
+        <ion-icon name="calendar-sharp"></ion-icon>
+        {{aviso.fechaCreacion}}
+      </ion-col>
+     <ion-col style="margin-top:-1% ;">
+       {{aviso.usuario.nombre}}
+       <ion-icon name="person"></ion-icon>
+ 
+     </ion-col>
+     
+   </ion-row>
+   </ion-grid>
+    <!--FECHA Y AUTOR-->
+   
 </ion-grid>
 
 

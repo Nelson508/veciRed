@@ -9,11 +9,13 @@ import { Avisos } from '../../interfaces/interfaces';
 export class AvisosComponent implements OnInit {
 
   @Input() avisos: Avisos[] = [];
-
+  
   constructor() { }
 
   ngOnInit() {
+    
     //console.log(this.avisos)
-  }
+    
 
+}
 }
