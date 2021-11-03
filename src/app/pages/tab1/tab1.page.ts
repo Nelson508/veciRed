@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { AvisosService } from '../../servicios/avisos.service';
 import { Avisos } from '../../interfaces/interfaces';
 import { MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -11,9 +12,12 @@ import { MenuController } from '@ionic/angular';
 export class Tab1Page implements OnInit{
 
   avisos: Avisos[] = [];
+  emptyAvisos=false;
 
   constructor( private AvisosService: AvisosService,
-               private menuCtrl: MenuController) {
+               private menuCtrl: MenuController,
+               private ruta: Router
+               ) {
                 this.menuCtrl.enable(true, 'first');
                }
 
@@ -21,9 +25,23 @@ export class Tab1Page implements OnInit{
   {
     this.AvisosService.obtenerAvisos().subscribe( respuesta =>
       {
-        console.log(respuesta.avisosPublicados[0].usuario.nombre);
+        
         this.avisos.push(...respuesta.avisosPublicados);
+        if(respuesta.avisosPublicados.length == 0)
+        {
+          this.emptyAvisos=true;
+
+        }
+        
       })
+      
+      
+  }
+
+  NavegarCrearAviso()
+  {
+
+    this.ruta.navigateByUrl('crear-aviso');
   }
 
 }

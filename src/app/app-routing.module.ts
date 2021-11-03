@@ -24,7 +24,11 @@ const routes: Routes = [
   {
     path: 'acuerdos',
     loadChildren: () => import('./pages/acuerdos/acuerdos.module').then( m => m.AcuerdosPageModule)
+  },  {
+    path: 'crear-aviso',
+    loadChildren: () => import('./pages/crear-aviso/crear-aviso.module').then( m => m.CrearAvisoPageModule)
   }
+
 
 
 ];
