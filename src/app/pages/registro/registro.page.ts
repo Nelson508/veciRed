@@ -21,6 +21,8 @@ export class RegistroPage implements OnInit {
     
   }
 
+  repitaPassword = '';
+
   constructor( public navCtrl: NavController,
                public usuarioService: UsuarioService,
                public alertasService: AlertasService,
@@ -34,7 +36,20 @@ export class RegistroPage implements OnInit {
   
   async registro(registrarse:NgForm){
 
-    if(registrarse.invalid){return;}
+    
+    //validacion de campos vacios
+    if(registrarse.invalid){
+      this.alertasService.alerta('Complete los campos vacíos');
+      return;
+    }
+
+    //validacion de contraseñas
+    if(this.repitaPassword != this.userRegistro.password){
+      this.alertasService.alerta('Las contraseñas no coinciden');
+      return;
+    } 
+
+
 
     const existe = await this.usuarioService.registro(this.userRegistro);
 
@@ -42,7 +57,7 @@ export class RegistroPage implements OnInit {
       //navegar al tabs
       this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
     }else{
-      //mostrar alerta de usuario y contraseña no correctos
+      //mostrar alerta si el carreo ya se encuentra regstrado
       this.alertasService.alerta('Ese correo electronico ya existe.');
     }
 
