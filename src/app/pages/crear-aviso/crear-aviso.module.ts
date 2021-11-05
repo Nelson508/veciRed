@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CrearAvisoPageRoutingModule } from './crear-aviso-routing.module';
 
 import { CrearAvisoPage } from './crear-aviso.page';
+import { HerramientasModule } from 'src/app/herramientas/herramientas.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearAvisoPageRoutingModule
+    CrearAvisoPageRoutingModule,
+    HerramientasModule
   ],
   declarations: [CrearAvisoPage]
 })

@@ -5,6 +5,8 @@ import { AvisoPublicadoComponent } from './aviso-publicado/aviso-publicado.compo
 import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '../pipes/pipes.module';
 import { CabeceraComponent } from './cabecera/cabecera.component';
+import { NuevoAvisoComponent } from './nuevo-aviso/nuevo-aviso.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,16 +16,19 @@ import { CabeceraComponent } from './cabecera/cabecera.component';
   [
     AvisosComponent,
     AvisoPublicadoComponent,
-    CabeceraComponent
+    CabeceraComponent,
+    NuevoAvisoComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
-    PipesModule
+    PipesModule,
+    FormsModule
   ],
   exports:[
     AvisosComponent,
-    CabeceraComponent
+    CabeceraComponent,
+    NuevoAvisoComponent
   ]
 })
 export class HerramientasModule { }
