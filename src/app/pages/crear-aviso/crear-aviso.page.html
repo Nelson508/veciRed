@@ -7,36 +7,73 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <div class="avisosTitlte"><h4 class="ion-text-center"><b>CREAR AVISO</b></h4></div>
   <!--INICIO FORM-->
   <!-- <app-nuevo-aviso></app-nuevo-aviso> -->
   <ion-grid>
   <ion-list >
+    <!---INICIO TITULO-->
     <ion-item>
       <ion-label position="floating"><b>Titulo:</b></ion-label>
       <ion-input [(ngModel)]="aviso.titulo" required ></ion-input>
     </ion-item>
+    <!---FIN TITULO-->
+
+    <!---INICIO DESCRIPCION-->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
       <ion-textarea [(ngModel)]="aviso.descripcion" required ></ion-textarea>
     </ion-item> 
-    
+    <!---FIN DESCRIPCION-->
+
+    <!---INICIO TIPO AVISO-->
     <ion-item>
       <ion-label><b>Tipo aviso:</b></ion-label>
-      <ion-select placeholder="Seleccione">
+      <ion-select placeholder="Seleccione"
+                  [(ngModel)]="aviso.tipoAviso">
         <ion-select-option value="1">Emergencia</ion-select-option>
         <ion-select-option value="3">Informacion</ion-select-option>
         <ion-select-option value="4">Normal</ion-select-option>
         <ion-select-option value="5">Problema</ion-select-option>
       </ion-select>
     </ion-item>
+    <!---FIN TIPO AVISO-->
 
+    <!---INICIO IMAGEN-->
     <ion-item>
-      <ion-button  color="tertiary" shape="round">
+      <ion-row style="width: 100%;">
+        <ion-col size="6" >
+          <ion-label><b>Imagen:</b></ion-label>
+
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full"
+                  shape="round"
+                  >
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Cámara
+      </ion-button>
+
+        </ion-col>
+      </ion-row>
+      
+      
+    </ion-item>
+    <!---FIN IMAGEN-->
+    
+      <ion-button  color="tertiary" 
+                   shape="round" 
+                   expand="full"
+                   (click)="crearAviso()"
+                   style="margin-top: 30%;"
+                   [disabled]="aviso.titulo.length < 1 ||
+                               aviso.descripcion.length < 1 ||
+                               aviso.tipoAviso == 0"
+                   >
         Publicar
       </ion-button>
-    </ion-item>
+    
      
   </ion-list>
 </ion-grid>
