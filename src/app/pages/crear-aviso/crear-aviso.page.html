@@ -9,29 +9,66 @@
 
 <ion-content>
   <div class="avisosTitlte"><h4 class="ion-text-center"><b>CREAR AVISO</b></h4></div>
+  <!--INICIO FORM-->
+  <!-- <app-nuevo-aviso></app-nuevo-aviso> -->
+  <ion-grid>
+  <ion-list >
+    <ion-item>
+      <ion-label position="floating"><b>Titulo:</b></ion-label>
+      <ion-input [(ngModel)]="aviso.titulo" required ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"><b>Descripción:</b></ion-label>
+      <ion-textarea [(ngModel)]="aviso.descripcion" required ></ion-textarea>
+    </ion-item> 
+    
+    <ion-item>
+      <ion-label><b>Tipo aviso:</b></ion-label>
+      <ion-select placeholder="Seleccione">
+        <ion-select-option value="1">Emergencia</ion-select-option>
+        <ion-select-option value="3">Informacion</ion-select-option>
+        <ion-select-option value="4">Normal</ion-select-option>
+        <ion-select-option value="5">Problema</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-button  color="tertiary" shape="round">
+        Publicar
+      </ion-button>
+    </ion-item>
+     
+  </ion-list>
+</ion-grid>
+
+  <!--FIN FORM   -->
 
 
 
   
 
 </ion-content>
-<ion-tabs>
 
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button routerLink="/main/tabs/tab1">
-        <ion-icon name="home"></ion-icon>
-        
-      </ion-tab-button>
-  
-      <ion-tab-button routerLink="/main/tabs/tab2">
-        <ion-icon name="notifications"></ion-icon>
-        
-      </ion-tab-button>
-  
-      <ion-tab-button routerLink="/main/tabs/tab3">
-        <ion-icon name="cart"></ion-icon>
-        
-      </ion-tab-button>
-    </ion-tab-bar>
-  
-  </ion-tabs>
+
+
+
+<!-- <ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/main/tabs/tab1">
+      <ion-icon name="home"></ion-icon>
+      
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/main/tabs/tab2">
+      <ion-icon name="notifications"></ion-icon>
+      
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/main/tabs/tab3">
+      <ion-icon name="cart"></ion-icon>
+      
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>   -->
