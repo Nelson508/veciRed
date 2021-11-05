@@ -13,6 +13,7 @@ export class Tab1Page implements OnInit{
 
   avisos: Avisos[] = [];
   emptyAvisos=false;
+  infiniteScroll= true;
 
   constructor( private AvisosService: AvisosService,
                private menuCtrl: MenuController,
@@ -23,25 +24,72 @@ export class Tab1Page implements OnInit{
 
   ngOnInit()
   {
-    this.AvisosService.obtenerAvisos().subscribe( respuesta =>
+    this.paginaSiguiente();
+
+    this.AvisosService.nuevoAviso.subscribe(
+      aviso =>
       {
+        //a traves de unshift insertaremos el nuevo aviso en el tope de nuestro arreglo
+        this.avisos.unshift(aviso);
+
+      }
+    );
+    
+      
+      
+  }
+  //FIN NGONINIT
+
+  
+  //funcion que nos obtiene los post paginados 
+  paginaSiguiente( event?, pull: boolean = false)
+  {
+    this.AvisosService.obtenerAvisos(pull).subscribe( respuesta =>
+      {
+
+        if(pull)
+        {
+          this.avisos = [];
+          this.infiniteScroll= true;
+        }
         
         this.avisos.push(...respuesta.avisosPublicados);
-        if(respuesta.avisosPublicados.length == 0)
+        console.log(respuesta);
+        //validacion para comprobar que no hay avisos, si no hay se manda mensaje a usuario
+        if(respuesta.avisosPublicados.length == 0 && respuesta.pagina=== 1)
         {
           this.emptyAvisos=true;
 
         }
+
+        if(event)
+        {
+          event.target.complete();
+
+          if(respuesta.avisosPublicados.length == 0)
+          {
+            //event.target.disabled = true;
+            this.infiniteScroll= false;
+          }
+          
+        }
         
       })
-      
-      
+
+
   }
 
   NavegarCrearAviso()
   {
 
     this.ruta.navigateByUrl('crear-aviso');
+  }
+
+  refresher(event)
+  {
+    this.paginaSiguiente(event, true)
+
+
   }
 
 }

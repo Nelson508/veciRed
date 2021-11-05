@@ -24,6 +24,11 @@
 
 <ion-content class="avisosContenedor"[fullscreen]="true">
   <div class="avisosTitlte"><h4 class="ion-text-center"><b>AVISOS</b></h4>
+
+    <!---Refrescar nuestra pagina con ion refresher-->
+    <ion-refresher slot="fixed" (ionRefresh)="refresher($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
   
   </div>
   <!--Agregamos avisos para mostrar aca los avisos publicados-->
@@ -36,6 +41,16 @@
   <app-avisos 
              [avisos]='avisos'>
   </app-avisos>
+
+
+  <ion-infinite-scroll [disabled]="!infiniteScroll"
+                       threshold="100px" 
+                       (ionInfinite)="paginaSiguiente($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   
 
   
