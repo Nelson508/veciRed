@@ -35,3 +35,20 @@ export interface Comunidad{
   _id?: string;
   nombreComunidad?: string;
 }
+
+export interface AcuerdosCreados {
+  ok: boolean;
+  pagina: number;
+  acuerdosPublicados: Acuerdos[];
+}
+
+export interface Acuerdos {
+  _id?: string;
+  titulo?: string;
+  descripcion?: string;
+  fecha?: Date;
+  imagenAcuerdo?: string[];
+  usuario?: Usuario;
+  comunidad ?: Comunidad;
+ 
+}
