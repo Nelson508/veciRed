@@ -7,6 +7,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { CabeceraComponent } from './cabecera/cabecera.component';
 import { NuevoAvisoComponent } from './nuevo-aviso/nuevo-aviso.component';
 import { FormsModule } from '@angular/forms';
+import { AcuerdosComunidadComponent } from './acuerdos-comunidad/acuerdos-comunidad.component';
+import { AcuerdoPublicadoComponent } from './acuerdo-publicado/acuerdo-publicado.component';
 
 
 
@@ -17,7 +19,9 @@ import { FormsModule } from '@angular/forms';
     AvisosComponent,
     AvisoPublicadoComponent,
     CabeceraComponent,
-    NuevoAvisoComponent
+    NuevoAvisoComponent,
+    AcuerdosComunidadComponent,
+    AcuerdoPublicadoComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,8 @@ import { FormsModule } from '@angular/forms';
   exports:[
     AvisosComponent,
     CabeceraComponent,
-    NuevoAvisoComponent
+    NuevoAvisoComponent,
+    AcuerdosComunidadComponent
   ]
 })
 export class HerramientasModule { }

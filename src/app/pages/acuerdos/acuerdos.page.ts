@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AcuerdosService } from '../../servicios/acuerdos.service';
+import { Acuerdos } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-acuerdos',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AcuerdosPage implements OnInit {
 
-  constructor() { }
+  acuerdos: Acuerdos[] = []; 
+
+  constructor(private acuerdosService: AcuerdosService) { }
 
   ngOnInit() {
+
+    this.acuerdosService.getAcuerdos()
+      .subscribe(response => {
+        console.log(response );
+        this.acuerdos.push(...response.acuerdosPublicados);
+      });
   }
 
 }
