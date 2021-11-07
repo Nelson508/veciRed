@@ -9,17 +9,40 @@ import { Acuerdos } from '../../interfaces/interfaces';
 })
 export class AcuerdosPage implements OnInit {
 
-  acuerdos: Acuerdos[] = []; 
+  acuerdos: Acuerdos[] = [];
+  deshabilitar = false;
 
   constructor(private acuerdosService: AcuerdosService) { }
 
   ngOnInit() {
 
-    this.acuerdosService.getAcuerdos()
+    this.scroll();
+  }
+
+  scroll(event?, pull: boolean = false){
+
+    this.acuerdosService.getAcuerdos(pull)
       .subscribe(response => {
         console.log(response );
         this.acuerdos.push(...response.acuerdosPublicados);
+
+        if(event)
+        {
+          event.target.complete();
+
+          if(response.acuerdosPublicados.length===0){
+            this.deshabilitar = true;
+          }
+          
+        }
       });
+  }
+
+  refresh(event?){
+
+    this.scroll(event, true);
+    this.acuerdos = [];
+    this.deshabilitar = false;
   }
 
 }

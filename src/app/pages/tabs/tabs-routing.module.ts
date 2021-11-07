@@ -20,6 +20,18 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'acuerdos',
+        loadChildren: () => import('../acuerdos/acuerdos.module').then(m => m.AcuerdosPageModule)
+      },/* 
+      {
+        path: 'crear-aviso',
+        loadChildren: () => import('../crear-aviso/crear-aviso.module').then(m => m.CrearAvisoPageModule)
+      }, */
+      {
+        path: 'crear-acuerdo',
+        loadChildren: () => import('../crear-acuerdo/crear-acuerdo.module').then( m => m.CrearAcuerdoPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
