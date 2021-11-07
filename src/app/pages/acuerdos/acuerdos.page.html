@@ -1,13 +1,39 @@
-<app-cabecera titulo="VeciRed"></app-cabecera>
+<!-- <app-cabecera titulo="VeciRed"></app-cabecera> -->
+<ion-header>
+  <ion-toolbar>
 
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  
+    <ion-title class="ion-text-center">VeciRed</ion-title>
+  
+    <ion-buttons slot="end">   
+      <ion-button shape="round" routerLink="/main/tabs/crear-acuerdo">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+      
+  </ion-toolbar>
+</ion-header>
+  
 
 
 <ion-content color="light">
 
     <!-- Refresher -->
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
     <!-- Acuerdos -->
     <app-acuerdos-comunidad [acuerdosComunidad] = "acuerdos"></app-acuerdos-comunidad>
     <!-- Scroll infinito -->
+    <ion-infinite-scroll    [disabled]="deshabilitar"
+                            threshold="100px" 
+                            (ionInfinite)="scroll($event)">
+        <ion-infinite-scroll-content>
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

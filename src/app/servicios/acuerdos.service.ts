@@ -16,7 +16,11 @@ export class AcuerdosService {
   constructor(private http: HttpClient,
               private usuarioService: UsuarioService) { }
 
-  getAcuerdos(){
+  getAcuerdos(pull: boolean = false){
+
+    if(pull){
+      this.pagiaAcuerdos = 0;
+    }
 
     const headers = new HttpHeaders({
       'UToken': this.usuarioService.userToken
