@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/crear-acuerdo"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title  class="ion-text-center">
+      VeciRed
+    </ion-title>
+
+    <ion-buttons slot="end">   
+      <ion-button disabled>
+        <ion-icon></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item class="titulo">
+      <ion-label class="ion-text-center subTitulo">Acuerdos</ion-label>
+    </ion-item>
+
+    <ion-item class="titulo">
+      <ion-label class="ion-text-center subTitulo">Opciones</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Opción 1</ion-label>
+      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Descripcion</ion-label>
+      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Opción 2</ion-label>
+      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Descripcion</ion-label>
+      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+    </ion-item>
+
+    <ion-item [hidden]="ocultarOpcion3">
+      <ion-label position="floating">Opción 3</ion-label>
+      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+    </ion-item>
+  
+    <ion-item [hidden]="ocultarOpcion3">
+      <ion-label position="floating">Descripcion</ion-label>
+      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+    </ion-item>
+
+    <ion-item [hidden]="ocultarOpcion4">
+      <ion-label position="floating">Opción 4</ion-label>
+      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+    </ion-item>
+  
+    <ion-item [hidden]="ocultarOpcion4">
+      <ion-label position="floating">Descripcion</ion-label>
+      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+    </ion-item>
+
+    <ion-row>
+      <ion-col offset="3">
+        <ion-buttons class="botones" (click)="agregarOpcion()">
+          <ion-button shape="round" [disabled]="desactivarBotonAdd">
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>  
+        </ion-buttons>
+      </ion-col>
+      <ion-col>
+        <ion-buttons class="botones">
+          <ion-button shape="round" (click)="eliminarOpcion()" [disabled]="desactivarBotonRemove">
+            <ion-icon name="remove-circle-outline"></ion-icon>
+          </ion-button>  
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+
+  </ion-list>
+
+
+</ion-content>

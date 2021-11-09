@@ -35,9 +35,15 @@
               <ion-icon name="calendar" item-start></ion-icon>
               Fecha Nacimiento
             </ion-label>
-            <ion-datetime display-format="DD/MM/YYYY" name="fechaNacimiento" [(ngModel)]="userRegistro.fechaNacimiento"></ion-datetime>
-            <!-- <ion-input name="fechaNacimiento" type="date" [(ngModel)]="userRegistro.fechaNacimiento" color="light" required>
-            </ion-input> -->
+            <ion-datetime 
+                      display-format="DD MMMM YYYY" 
+                      name="fechaNacimiento"
+                      picker-format="DD MMMM YYYY"
+                      month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                      [(ngModel)]="userRegistro.fechaNacimiento"
+                      doneText="Aceptar"
+                      cancelText="Cancelar" required>
+            </ion-datetime>
           </ion-item>
 
           <ion-item color="none">
