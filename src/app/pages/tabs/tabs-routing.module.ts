@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('../crear-acuerdo/crear-acuerdo.module').then( m => m.CrearAcuerdoPageModule)
       },
       {
+        path: 'opciones',
+        loadChildren: () => import('../opciones/opciones.module').then( m => m.OpcionesPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

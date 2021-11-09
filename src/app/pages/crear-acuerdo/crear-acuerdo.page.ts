@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AcuerdosService } from '../../servicios/acuerdos.service';
 
 @Component({
   selector: 'app-crear-acuerdo',
@@ -16,15 +18,24 @@ export class CrearAcuerdoPage implements OnInit {
 
   }
 
-  constructor() { }
+  constructor(private acuerdosService: AcuerdosService,
+              private navCtrl: NavController) { }
 
   ngOnInit() {
   }
 
-  crearAcuerdo(){
+  async crearAcuerdo(){
 
     console.log(this.acuerdo);
+    const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
 
+    this.acuerdo = { 
+      titulo:'',
+      descripcion:'',
+      fecha:''
+    };
+
+    this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
   }
 
 }
