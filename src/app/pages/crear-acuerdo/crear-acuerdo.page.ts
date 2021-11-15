@@ -14,28 +14,59 @@ export class CrearAcuerdoPage implements OnInit {
   acuerdo = {
     titulo:'',
     descripcion:'',
-    fecha:''
-
+    fecha:'',
+    opciones: {}
   }
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController) { }
 
   ngOnInit() {
+
+    this.acuerdosService.Objeto.subscribe(respuesta =>{
+
+      console.log(respuesta);
+      this.acuerdo.opciones = respuesta;
+      console.log(this.acuerdo.opciones);
+    });
+
+    
   }
 
   async crearAcuerdo(){
 
     console.log(this.acuerdo);
+    
     const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
 
     this.acuerdo = { 
       titulo:'',
       descripcion:'',
-      fecha:''
+      fecha:'',
+      opciones: {}
     };
+
 
     this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
   }
 
+  mostrarOpciones(){
+
+    this.acuerdo.opciones = {};
+
+    this.navCtrl.navigateRoot('/main/tabs/opciones', {animated: true});
+  
+  }
+
+  volverAtras(){
+
+    this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
+
+    this.acuerdo = {
+      titulo:'',
+      descripcion:'',
+      fecha:'',
+      opciones: {}
+    }
+  }
 }

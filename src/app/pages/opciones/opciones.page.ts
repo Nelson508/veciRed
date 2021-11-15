@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { AcuerdosService } from '../../servicios/acuerdos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-opciones',
@@ -7,10 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OpcionesPage implements OnInit {
 
-  opcion = {
+  opciones : Object[] = [];
+  titulos: string = '';
+
+  opcion1 = {
     titulo:'',
     descripcion:''
-  }
+  };
+
+  opcion2 = {
+    titulo:'',
+    descripcion:''
+  };
+
+  opcion3 = {
+    titulo:'',
+    descripcion:''
+  };
+
+  opcion4 = {
+    titulo:'',
+    descripcion:''
+  };
+
 
   ocultarOpcion3 = true;
   ocultarOpcion4 = true;
@@ -18,9 +40,12 @@ export class OpcionesPage implements OnInit {
   desactivarBotonAdd = false;
   desactivarBotonRemove = true;
 
-  constructor() { }
+  constructor(private acuerdosService: AcuerdosService,
+              private router: Router,
+              private navCtrl: NavController) { }
 
   ngOnInit() {
+    
   }
 
   agregarOpcion(){
@@ -57,4 +82,41 @@ export class OpcionesPage implements OnInit {
       this.desactivarBotonAdd = false;
     }
   }
+
+  enviarOpciones(){
+
+    this.opciones.push( this.opcion1 );
+    this.opciones.push( this.opcion2 );
+
+    if(this.contador >= 1){
+
+      this.opciones.push( this.opcion3 );
+    }
+
+    if(this.contador == 2){
+
+      this.opciones.push( this.opcion4 );
+    }
+    
+    console.log(this.opciones);
+   
+    this.acuerdosService.crearOpciones(this.opciones);
+    this.router.navigate(['/main/tabs/crear-acuerdo']);
+    //this.navCtrl.navigateRoot('/main/tabs/crear-acuerdo');
+    this.opciones = [];
+  
+  }
+
+  ionViewWillEnter(){
+
+    this.opcion1.titulo = '';
+    this.opcion2.titulo = '';
+    this.opcion3.titulo = '';
+    this.opcion4.titulo = '';
+    this.opcion1.descripcion = '';
+    this.opcion2.descripcion = '';
+    this.opcion3.descripcion = '';
+    this.opcion4.descripcion = '';
+  }
+
 }
