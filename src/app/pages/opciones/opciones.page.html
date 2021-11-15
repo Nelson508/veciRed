@@ -31,42 +31,42 @@
 
     <ion-item>
       <ion-label position="floating">Opción 1</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion1.titulo"></ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-label position="floating">Descripcion</ion-label>
-      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion1.descripcion"></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Opción 2</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion2.titulo"></ion-input>
     </ion-item>
   
     <ion-item>
       <ion-label position="floating">Descripcion</ion-label>
-      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion2.descripcion"></ion-textarea>
     </ion-item>
 
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating">Opción 3</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion3.titulo"></ion-input>
     </ion-item>
   
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating">Descripcion</ion-label>
-      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion3.descripcion"></ion-textarea>
     </ion-item>
 
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating">Opción 4</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion.titulo" required></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion4.titulo"></ion-input>
     </ion-item>
   
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating">Descripcion</ion-label>
-      <ion-textarea [(ngModel)]="opcion.descripcion" required></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion4.descripcion"></ion-textarea>
     </ion-item>
 
     <ion-row>
@@ -87,6 +87,22 @@
     </ion-row>
 
   </ion-list>
+
+  <ion-button  color="tertiary" 
+               shape="round" 
+               expand="full"
+               (click)="enviarOpciones()"
+               style="margin-top: 30%;"
+               [disabled]="opcion1.titulo.length < 1 ||
+                           opcion1.descripcion.length < 1 ||
+                           opcion2.titulo.length < 1 ||
+                           opcion2.descripcion.length < 1 ||
+                           (opcion3.titulo.length < 1 && contador > 0)||
+                           (opcion3.descripcion.length < 1 && contador > 0)||
+                           (opcion4.titulo.length < 1 && contador > 1)||
+                           (opcion4.descripcion.length < 1 && contador > 1)">
+    Enviar
+  </ion-button>
 
 
 </ion-content>

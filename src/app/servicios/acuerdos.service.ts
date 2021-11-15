@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UsuarioService } from './usuario.service';
 import { AcuerdosCreados, Acuerdos } from '../interfaces/interfaces';
+import { BehaviorSubject } from 'rxjs';
 
 const URL = environment.url;
 
@@ -12,10 +13,12 @@ const URL = environment.url;
 export class AcuerdosService {
 
   pagiaAcuerdos = 0;
+  Objeto=new BehaviorSubject<{}>({});
   nuevoAcuerdo = new EventEmitter<Acuerdos>();
 
   constructor(private http: HttpClient,
-              private usuarioService: UsuarioService) { }
+              private usuarioService: UsuarioService,
+              ) { }
 
   getAcuerdos(pull: boolean = false){
 
@@ -47,6 +50,12 @@ export class AcuerdosService {
             resolve(true);
           });
     });
+
+  }
+
+  crearOpciones(opc){
+
+    this.Objeto.next(opc);
 
   }
 }

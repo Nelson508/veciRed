@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/main/tabs/acuerdos"></ion-back-button>
+      <ion-button (click)="volverAtras()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+     <!--  <ion-back-button defaultHref="/main/tabs/acuerdos"></ion-back-button> -->
     </ion-buttons>
 
     <ion-title class="ion-text-center">
@@ -63,7 +66,7 @@
       <ion-textarea [(ngModel)]="acuerdo.descripcion" required></ion-textarea>
     </ion-item>
 
-    <ion-item detail="true" routerLink="/main/tabs/opciones">
+    <ion-item detail="true" (click)="mostrarOpciones()">
       <ion-label>Opciones</ion-label>
     </ion-item>
 
