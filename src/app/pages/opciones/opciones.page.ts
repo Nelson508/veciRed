@@ -100,7 +100,7 @@ export class OpcionesPage implements OnInit {
     
     console.log(this.opciones);
    
-    this.acuerdosService.crearOpciones(this.opciones);
+    this.acuerdosService.enviarDatos(this.opciones, true);
     this.router.navigate(['/main/tabs/crear-acuerdo']);
     //this.navCtrl.navigateRoot('/main/tabs/crear-acuerdo');
     this.opciones = [];

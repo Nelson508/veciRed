@@ -1,6 +1,9 @@
+import { DatePipe  } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
+import { Acuerdos } from '../../interfaces/interfaces';
+
 
 @Component({
   selector: 'app-crear-acuerdo',
@@ -11,12 +14,16 @@ export class CrearAcuerdoPage implements OnInit {
 
   tempImages: string[] = [];
 
-  acuerdo = {
+  acuerdo: Acuerdos = {
+
     titulo:'',
     descripcion:'',
-    fecha:'',
+    fecha:null,
+    hora:null,
     opciones: {}
-  }
+  };
+
+  botonEnviar = '';
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController) { }
@@ -25,24 +32,67 @@ export class CrearAcuerdoPage implements OnInit {
 
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
-      console.log(respuesta);
-      this.acuerdo.opciones = respuesta;
-      console.log(this.acuerdo.opciones);
-    });
+      if(respuesta['tipo']){
 
-    
+        console.log(respuesta['tipo']);
+        this.acuerdo.opciones = respuesta;
+        console.log(this.acuerdo.opciones);
+
+      }else if(respuesta['tipo'] == false){
+
+        this.botonEnviar = 'Editar';
+        console.log(respuesta);
+        this.acuerdo = respuesta;
+        console.log(this.acuerdo);
+      }else{
+
+        this.botonEnviar = 'Publicar';
+      }
+
+    });
+  }
+
+  elegirEvento(){
+
+    if(this.botonEnviar == 'Editar'){
+
+      this.actualizar();
+    this.botonEnviar = '';
+
+    }else{
+
+      this.crearAcuerdo();
+      this.botonEnviar = '';
+
+    }
+
   }
 
   async crearAcuerdo(){
 
     console.log(this.acuerdo);
-    
+
+    const datepipe: DatePipe = new DatePipe('en-US');
+
+    let fecha = new Date(this.acuerdo.fecha);
+
+    let days = ['Lunes','Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    var diaSemana = days[fecha.getUTCDay()-1];
+
+    this.acuerdo.fecha = diaSemana + datepipe.transform(fecha,', dd-MM-YYYY');
+    this.acuerdo.hora = datepipe.transform(this.acuerdo.hora,'HH:mm');
+
     const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
+
+
+    console.log(this.acuerdo);
+    console.log(this.acuerdo.fecha);
 
     this.acuerdo = { 
       titulo:'',
       descripcion:'',
-      fecha:'',
+      fecha:null,
+      hora:null,
       opciones: {}
     };
 
@@ -65,8 +115,28 @@ export class CrearAcuerdoPage implements OnInit {
     this.acuerdo = {
       titulo:'',
       descripcion:'',
-      fecha:'',
+      fecha:null,
+      hora:null,
       opciones: {}
     }
+
+    this.botonEnviar = '';
+  }
+
+  async actualizar(){
+
+    //if(formActualizar.invalid){return;} 
+
+    const actualizado = await this.acuerdosService.actualizarAcuerdo(this.acuerdo);
+
+    if(actualizado){
+      //Mensaje actualizado
+      console.log('Se logra' + actualizado);
+    }else{
+      //Mensaje error
+      console.log('No se logra' + actualizado);
+
+    }
+
   }
 }
