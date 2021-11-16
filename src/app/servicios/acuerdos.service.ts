@@ -13,7 +13,7 @@ const URL = environment.url;
 export class AcuerdosService {
 
   pagiaAcuerdos = 0;
-  Objeto=new BehaviorSubject<{}>({});
+  Objeto = new BehaviorSubject<{}>({});
   nuevoAcuerdo = new EventEmitter<Acuerdos>();
 
   constructor(private http: HttpClient,
@@ -53,9 +53,38 @@ export class AcuerdosService {
 
   }
 
-  crearOpciones(opc){
+  enviarDatos(datos, tipo?: boolean){
 
-    this.Objeto.next(opc);
+    datos.tipo=tipo;
+    this.Objeto.next(datos);
+  }
+
+  actualizarAcuerdo( acuerdo: Acuerdos){
+
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
+
+    return new Promise(resolve => {
+
+      this.http.post(`${URL}/acuerdos/actualizar`, acuerdo, {headers})
+        .subscribe(respuesta => {
+          
+          if(respuesta['ok']){
+            
+            resolve(true);
+          }else{
+
+            resolve(false);
+          }
+         
+  
+        });
+    });
+  }
+
+  eliminarAcuerdo(acuerdo){
+    
 
   }
 }
