@@ -21,10 +21,7 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
-  {
-    path: 'crear-aviso',
-    loadChildren: () => import('./pages/crear-aviso/crear-aviso.module').then( m => m.CrearAvisoPageModule)
-  }
+  
 
 
 

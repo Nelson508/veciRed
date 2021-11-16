@@ -82,7 +82,7 @@ export class Tab1Page implements OnInit{
   NavegarCrearAviso()
   {
 
-    this.ruta.navigateByUrl('crear-aviso');
+    this.ruta.navigateByUrl('main/tabs/crear-aviso');
   }
 
   refresher(event)

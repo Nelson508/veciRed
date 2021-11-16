@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "veciRed",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
