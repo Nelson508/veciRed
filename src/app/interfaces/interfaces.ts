@@ -46,9 +46,19 @@ export interface Acuerdos {
   _id?: string;
   titulo?: string;
   descripcion?: string;
-  fecha?: Date;
+  fecha?: string;
+  hora?: string;
   imagenAcuerdo?: string[];
+  opciones?: Object;
   usuario?: Usuario;
   comunidad ?: Comunidad;
+  estado?: number;
  
 }
+
+/* export interface Opciones{
+
+  titulo: string;
+  descripcion: string;
+  votos: number;
+} */

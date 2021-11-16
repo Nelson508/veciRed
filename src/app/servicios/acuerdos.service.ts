@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UsuarioService } from './usuario.service';
-import { AcuerdosCreados } from '../interfaces/interfaces';
+import { AcuerdosCreados, Acuerdos } from '../interfaces/interfaces';
+import { BehaviorSubject } from 'rxjs';
 
 const URL = environment.url;
 
@@ -12,9 +13,12 @@ const URL = environment.url;
 export class AcuerdosService {
 
   pagiaAcuerdos = 0;
+  Objeto = new BehaviorSubject<{}>({});
+  nuevoAcuerdo = new EventEmitter<Acuerdos>();
 
   constructor(private http: HttpClient,
-              private usuarioService: UsuarioService) { }
+              private usuarioService: UsuarioService,
+              ) { }
 
   getAcuerdos(pull: boolean = false){
 
@@ -24,10 +28,63 @@ export class AcuerdosService {
 
     const headers = new HttpHeaders({
       'UToken': this.usuarioService.userToken
-    })
+    });
 
     this.pagiaAcuerdos++;
 
     return this.http.get<AcuerdosCreados>(`${URL}/acuerdos/?pagina=${this.pagiaAcuerdos}`, {headers});
+  }
+
+  crearAcuerdo(acuerdo){
+
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
+
+    return new Promise( resolve => {
+
+      this.http.post(`${URL}/acuerdos`, acuerdo, {headers})
+          .subscribe(response => {
+            
+            this.nuevoAcuerdo.emit(response['acuerdo']);
+            resolve(true);
+          });
+    });
+
+  }
+
+  enviarDatos(datos, tipo?: boolean){
+
+    datos.tipo=tipo;
+    this.Objeto.next(datos);
+  }
+
+  actualizarAcuerdo( acuerdo: Acuerdos){
+
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
+
+    return new Promise(resolve => {
+
+      this.http.post(`${URL}/acuerdos/actualizar`, acuerdo, {headers})
+        .subscribe(respuesta => {
+          
+          if(respuesta['ok']){
+            
+            resolve(true);
+          }else{
+
+            resolve(false);
+          }
+         
+  
+        });
+    });
+  }
+
+  eliminarAcuerdo(acuerdo){
+    
+
   }
 }

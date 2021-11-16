@@ -1,39 +1,30 @@
-<ion-header no-border>
+<ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/main/tabs/acuerdos"></ion-back-button>
+      <ion-button (click)="volverAtras()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+     <!--  <ion-back-button defaultHref="/main/tabs/acuerdos"></ion-back-button> -->
     </ion-buttons>
 
-    <ion-title>
+    <ion-title class="ion-text-center">
       VeciRed
     </ion-title>
 
-    
+    <ion-buttons slot="end">   
+      <ion-button disabled>
+        <ion-icon></ion-icon>
+      </ion-button>
+    </ion-buttons>
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
-  <ion-row>
-    <ion-col size="3" *ngFor="let image of tempImages">
-      <ion-card>
-        <img src="">
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col size="6" offset="6">
-      <ion-button expand="full"
-                  shape="round">
-        <ion-icon slot="start" name="images"></ion-icon>
-        Galería
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
   <ion-list>
+    <ion-item>
+      <ion-label class="ion-text-center">Acuerdos</ion-label>
+    </ion-item>
     
     <ion-item>
       <ion-label position="floating">Titulo</ion-label>
@@ -41,8 +32,24 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Horario</ion-label>
-      <ion-datetime display-format="h:mm A" picker-format="h:mm A" [(ngModel)]="acuerdo.fecha" required></ion-datetime>
+      <ion-label position="floating">Día</ion-label>
+      <ion-datetime display-format="DD/MMMM/YYYY" 
+                    picker-format="DD/MMMM/YYYY"
+                    month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                    min="2015-01-01"
+                    max="2025-12-31" 
+                    [(ngModel)]="acuerdo.fecha" 
+                    doneText="Aceptar"
+                    cancelText="Cancelar" required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Hora</ion-label>
+      <ion-datetime display-format="HH:mm" 
+                    picker-format="HH mm"
+                    [(ngModel)]="acuerdo.hora" 
+                    doneText="Aceptar"
+                    cancelText="Cancelar" required></ion-datetime>
     </ion-item>
 
     <ion-item>
@@ -50,86 +57,38 @@
       <ion-textarea [(ngModel)]="acuerdo.descripcion" required></ion-textarea>
     </ion-item>
 
-    <ion-item detail="true">
-      <ion-label>
-        Opciones
-      </ion-label>
+    <ion-item detail="true" (click)="mostrarOpciones()">
+      <ion-label>Opciones</ion-label>
     </ion-item>
+
+    <ion-row>
+      <ion-col size="3" *ngFor="let image of tempImages">
+        <ion-card>
+          <img src="">
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" offset="6">
+        <ion-button expand="full"
+                    shape="round">
+          <ion-icon slot="start" name="images"></ion-icon>
+          Galería
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
   </ion-list>
 
   <ion-button  color="tertiary" 
                shape="round" 
                expand="full"
-               (click)="crearAcuerdo()"
+               (click)="elegirEvento()"
                style="margin-top: 30%;"
                [disabled]="acuerdo.titulo.length < 1 ||
                            acuerdo.descripcion.length < 1">
-    Publicar
+    {{this.botonEnviar}}
   </ion-button>
 
 </ion-content>
-<!-- 
-<ion-header no-border>
-  <ion-toolbar>
-    <ion-title>
-      Nuevo Post
-    </ion-title>
-
-    <ion-buttons slot="end">
-      <ion-button (click)="crearPost()"
-                  color="primary">
-        Compartir
-      </ion-button>
-    </ion-buttons>
-
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-  <ion-list>
-    
-    <ion-item>
-      <ion-label position="floating">Mensaje</ion-label>
-      <ion-textarea></ion-textarea>
-    </ion-item>
-
-    <ion-list>
-      <ion-item>
-        <ion-label>Posición actual</ion-label>
-        <ion-spinner name="lines-small"></ion-spinner>
-        <ion-toggle slot="end"></ion-toggle>
-      </ion-item>
-    </ion-list>
-
-
-  </ion-list>
-
-  <ion-row>
-    <ion-col size="6">
-      <ion-button expand="full"
-                  shape="round">
-        <ion-icon slot="start" name="camera"></ion-icon>
-        Cámara
-      </ion-button>
-    </ion-col>
-    <ion-col size="6">
-      <ion-button expand="full"
-                  shape="round">
-        <ion-icon slot="start" name="images"></ion-icon>
-        Galería
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col size="3" *ngFor="let image of tempImages">
-      <ion-card>
-        <img src="">
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-
-</ion-content> -->

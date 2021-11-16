@@ -32,6 +32,18 @@ const routes: Routes = [
         loadChildren: () => import('../crear-acuerdo/crear-acuerdo.module').then( m => m.CrearAcuerdoPageModule)
       },
       {
+        path: 'opciones',
+        loadChildren: () => import('../opciones/opciones.module').then( m => m.OpcionesPageModule)
+      },
+      {
+        path: 'votaciones',
+        loadChildren: () => import('../votaciones/votaciones.module').then( m => m.VotacionesPageModule)
+      },
+      {
+        path: 'detalle-votacion',
+        loadChildren: () => import('../detalle-votacion/detalle-votacion.module').then( m => m.DetalleVotacionPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

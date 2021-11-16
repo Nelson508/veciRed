@@ -9,6 +9,7 @@ import { NuevoAvisoComponent } from './nuevo-aviso/nuevo-aviso.component';
 import { FormsModule } from '@angular/forms';
 import { AcuerdosComunidadComponent } from './acuerdos-comunidad/acuerdos-comunidad.component';
 import { AcuerdoPublicadoComponent } from './acuerdo-publicado/acuerdo-publicado.component';
+import { VotacionPublicadaComponent } from './votacion-publicada/votacion-publicada.component';
 
 
 
@@ -21,7 +22,8 @@ import { AcuerdoPublicadoComponent } from './acuerdo-publicado/acuerdo-publicado
     CabeceraComponent,
     NuevoAvisoComponent,
     AcuerdosComunidadComponent,
-    AcuerdoPublicadoComponent
+    AcuerdoPublicadoComponent,
+    VotacionPublicadaComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { AcuerdoPublicadoComponent } from './acuerdo-publicado/acuerdo-publicado
     AvisosComponent,
     CabeceraComponent,
     NuevoAvisoComponent,
-    AcuerdosComunidadComponent
+    AcuerdosComunidadComponent,
+    VotacionPublicadaComponent
   ]
 })
 export class HerramientasModule { }
