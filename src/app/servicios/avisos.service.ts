@@ -4,6 +4,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { AvisosCreados } from '../interfaces/interfaces';
 import { UsuarioService } from './usuario.service';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 
 const url = environment.url;
@@ -16,7 +17,8 @@ export class AvisosService {
   contadorPagina= 0;
   //inyectamos el Http para poder hacer nuestra peticion de los avisos
   constructor( private http: HttpClient,
-               private usuarioService: UsuarioService ) { }
+               private usuarioService: UsuarioService,
+               private fileTransfer: FileTransfer ) { }
 
   
   obtenerAvisos(pull: boolean = false)
@@ -52,6 +54,29 @@ export class AvisosService {
 
    
 
+
+  }
+
+
+  uploadImagen(imagenAviso: string)
+  {
+    const options: FileUploadOptions =
+    {
+      fileKey: 'imagenAviso',
+      headers: {
+                'UToken' : this.usuarioService.userToken
+               }
+    };
+
+    //creamos una tarea
+    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+    fileTransfer.upload(imagenAviso, `${url}/avisos/subirImagen`, options  )
+    .then( data => {
+      console.log(data);
+    }).catch( err => {
+      console.log('Fallo al subir imagen:', err);
+    });
 
   }
 

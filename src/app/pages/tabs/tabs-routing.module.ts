@@ -22,11 +22,11 @@ const routes: Routes = [
       {
         path: 'acuerdos',
         loadChildren: () => import('../acuerdos/acuerdos.module').then(m => m.AcuerdosPageModule)
-      },/* 
+      },
       {
         path: 'crear-aviso',
         loadChildren: () => import('../crear-aviso/crear-aviso.module').then(m => m.CrearAvisoPageModule)
-      }, */
+      }, 
       {
         path: 'crear-acuerdo',
         loadChildren: () => import('../crear-acuerdo/crear-acuerdo.module').then( m => m.CrearAcuerdoPageModule)

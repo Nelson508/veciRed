@@ -11,6 +11,9 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { IonicStorageModule } from '@ionic/storage-angular';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +24,14 @@ import { IonicStorageModule } from '@ionic/storage-angular';
    AppRoutingModule,
    HttpClientModule,
    IonicStorageModule.forRoot()],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: 
+  [
+    Camera,
+    FileTransfer,
+    { 
+    provide: 
+      RouteReuseStrategy, 
+      useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

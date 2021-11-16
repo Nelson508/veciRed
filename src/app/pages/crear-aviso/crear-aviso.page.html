@@ -4,6 +4,14 @@
       <ion-back-button defaultHref="/main/tabs/tab1"></ion-back-button>
     </ion-buttons>
     <ion-title  class="ion-text-center">VeciRed</ion-title>
+    <ion-buttons  
+                  
+                  slot="end">
+                  <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+
+      
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -42,14 +50,16 @@
 
     <!---INICIO IMAGEN-->
     <ion-item>
-      <ion-row style="width: 100%;">
+      <ion-row style="width: 100%; margin-top:3%;">
         <ion-col size="6" >
-          <ion-label><b>Imagen:</b></ion-label>
+          <ion-label style="margin-top:4.5%;"><b>Imagen:</b></ion-label>
 
         </ion-col>
         <ion-col size="6">
           <ion-button expand="full"
                   shape="round"
+                  style="margin-bottom: 9%;"
+                  (click)="getImagen()"
                   >
         <ion-icon slot="start" name="camera"></ion-icon>
         Cámara
@@ -61,6 +71,17 @@
       
     </ion-item>
     <!---FIN IMAGEN-->
+
+    <!---INICIO IMAGEN OBTENIDA -->
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img [src]="imagenCarrete">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!---FIN IMAGEN OBTENIDA -->
     
       <ion-button  color="tertiary" 
                    shape="round" 

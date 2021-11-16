@@ -21,19 +21,11 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
-  {
-    path: 'crear-aviso',
-    loadChildren: () => import('./pages/crear-aviso/crear-aviso.module').then( m => m.CrearAvisoPageModule)
-  },
-  /*
-  {
-    path: 'detalle-votacion',
-    loadChildren: () => import('./pages/detalle-votacion/detalle-votacion.module').then( m => m.DetalleVotacionPageModule)
-  },
-  {
-    path: 'votaciones',
-    loadChildren: () => import('./pages/votaciones/votaciones.module').then( m => m.VotacionesPageModule)
-  } */
+
+  
+
+
+
 
 ];
 @NgModule({
