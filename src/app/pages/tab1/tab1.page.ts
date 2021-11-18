@@ -29,6 +29,8 @@ export class Tab1Page implements OnInit{
     this.AvisosService.nuevoAviso.subscribe(
       aviso =>
       {
+        // cambiamos el valor de empty avisos a falso para que desaparesca el aviso vacio
+        this.emptyAvisos=false;
         //a traves de unshift insertaremos el nuevo aviso en el tope de nuestro arreglo
         this.avisos.unshift(aviso);
 

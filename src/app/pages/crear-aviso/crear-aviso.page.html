@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title  class="ion-text-center">VeciRed</ion-title>
     <ion-buttons  
-                  
+                  (click)="openModal()"
                   slot="end">
                   <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
 
@@ -23,7 +23,7 @@
   <ion-list >
     <!---INICIO TITULO-->
     <ion-item>
-      <ion-label position="floating"><b>Titulo:</b></ion-label>
+      <ion-label position="floating"><b>Título:</b></ion-label>
       <ion-input [(ngModel)]="aviso.titulo" required ></ion-input>
     </ion-item>
     <!---FIN TITULO-->
@@ -36,13 +36,26 @@
     <!---FIN DESCRIPCION-->
 
     <!---INICIO TIPO AVISO-->
-    <ion-item>
+    <!--Miembros directiva-->
+    <ion-item *ngIf="usuario.rol == 1">
+      
       <ion-label><b>Tipo aviso:</b></ion-label>
       <ion-select placeholder="Seleccione"
                   [(ngModel)]="aviso.tipoAviso">
         <ion-select-option value="1">Emergencia</ion-select-option>
-        <ion-select-option value="3">Informacion</ion-select-option>
-        <ion-select-option value="4">Normal</ion-select-option>
+        <ion-select-option value="3">Información</ion-select-option>
+        <ion-select-option value="4">Otro</ion-select-option>
+        <ion-select-option value="5">Problema</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!--Miembro normal-->
+    <ion-item *ngIf="usuario.rol == 2">
+      
+      <ion-label><b>Tipo aviso:</b></ion-label>
+      <ion-select placeholder="Seleccione"
+                  [(ngModel)]="aviso.tipoAviso">
+        <ion-select-option value="1">Emergencia</ion-select-option>
+        <ion-select-option value="4">Otro</ion-select-option>
         <ion-select-option value="5">Problema</ion-select-option>
       </ion-select>
     </ion-item>
@@ -61,8 +74,8 @@
                   style="margin-bottom: 9%;"
                   (click)="getImagen()"
                   >
-        <ion-icon slot="start" name="camera"></ion-icon>
-        Cámara
+        <ion-icon slot="start" name="images"></ion-icon>
+        Galería
       </ion-button>
 
         </ion-col>
@@ -73,12 +86,12 @@
     <!---FIN IMAGEN-->
 
     <!---INICIO IMAGEN OBTENIDA -->
-    <ion-grid>
-      <ion-row>
-        <ion-col>
+    <ion-grid *ngIf="imagenCarrete">
+      
+          <ion-card>
           <img [src]="imagenCarrete">
-        </ion-col>
-      </ion-row>
+          </ion-card>
+      
     </ion-grid>
 
     <!---FIN IMAGEN OBTENIDA -->

@@ -1,67 +1,21 @@
-
-
-<ion-grid class="avisoUnitario" 
+<ion-card class="avisoUnitario"
 [ngClass]="{
-            'redEvent': aviso.tipoAviso === 1, 
-            'yellowEvent': aviso.tipoAviso === 5, 
-            'greenEvent': aviso.tipoAviso === 4,
-            'blueEvent': aviso.tipoAviso === 3
-          }"
+  'redEvent': aviso.tipoAviso === 1, 
+  'yellowEvent': aviso.tipoAviso === 5, 
+  'greenEvent': aviso.tipoAviso === 4,
+  'blueEvent': aviso.tipoAviso === 3
+}"
+>
+  <ion-card-header>
+    <ion-card-subtitle class=" fontColor ion-text-center"><ion-icon name="body"></ion-icon>
+      {{aviso.comunidad.nombreComunidad}}</ion-card-subtitle>
+    <ion-card-title class="ion-text-center"><b>{{aviso.titulo}}</b></ion-card-title>
+  </ion-card-header>
 
- 
-  > 
-  <ion-row class="ion-text-center">
-    <!--Comunidad-->
-    <ion-col >
-    
-      <ion-icon name="body"></ion-icon>
-      {{aviso.comunidad.nombreComunidad}}
-
-    </ion-col>
-    
-  </ion-row >
-  <!--Titulo-->
-  <ion-row class="ion-text-center" class="tituloAviso" >
-    <ion-col >
-      <ion-label> <h1><b>{{aviso.titulo}} </b> </h1></ion-label>
-
-    </ion-col>
-    
-  </ion-row>
-  <!--Descripcion-->
-  <ion-row class="container avisosDescripcion" >
-    <ion-col >
-      <ion-icon name="document-text-outline"></ion-icon>
-      <ion-label  >
-        {{aviso.descripcion}}
-      </ion-label>
-    </ion-col>
-    
-  </ion-row>
-  <!--Fotito-->
-  <ion-grid >
-
-  
-  <ion-row class="ion-text-center" >
-    <ion-col >
-      <!-- Pic: <img src="/`${{aviso.imagenAviso`}}"> *ngIf="aviso.imagenAviso" -->
-      <!--
-        1- hacemos una validacion sobre la imagen si es que viene o no, si no viene no se muestra HTML
-        2.-se define una clase para darle estilo a la imagen y ademas
-        3.- se envia a traves del pipe mostrarImagen para reconstruir la imagen desde la BD
-
-      -->
-      <img *ngIf="aviso.imagenAviso.length > 0" class="formatoImagen" src="{{aviso.imagenAviso | mostrarImagen: aviso.usuario._id }}" >
-
-    </ion-col>
-    
-    
-  </ion-row>
-  
-  </ion-grid>
-   <!--Fotito-->
-   <!--FECHA Y AUTOR-->
-   <ion-grid  style="margin-top:-4% ; margin-bottom: 1%;">
+  <ion-card-content class="fontColor ion-text-center">
+    <ion-icon name="document-text-outline"></ion-icon>
+    {{aviso.descripcion}}
+    <img *ngIf="aviso.imagenAviso.length > 0" class="formatoImagen" src="{{aviso.imagenAviso | mostrarImagen: aviso.usuario._id }}" >
     <ion-row class="ion-text-center">
       <ion-col style="margin-top:-0.5% ;" >
         <ion-icon name="calendar-sharp"></ion-icon>
@@ -74,10 +28,5 @@
      </ion-col>
      
    </ion-row>
-   </ion-grid>
-    <!--FECHA Y AUTOR-->
-   
-</ion-grid>
-
-
-
+  </ion-card-content>
+</ion-card>
