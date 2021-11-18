@@ -119,4 +119,9 @@ export class UsuarioService {
 
     });
   }
+
+  obtenerRolUsuario()
+  {
+    return this.usuario;
+  }
 }

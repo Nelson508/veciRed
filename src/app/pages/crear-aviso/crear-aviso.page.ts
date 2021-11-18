@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { AvisosService } from '../../servicios/avisos.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AlertasService } from '../../servicios/alertas.service';
+import { ModalController } from '@ionic/angular';
+import { AvisoModalComponent } from 'src/app/herramientas/aviso-modal/aviso-modal.component';
+import { Usuario } from 'src/app/interfaces/interfaces';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 declare var window: any;
 
@@ -20,18 +24,23 @@ export class CrearAvisoPage implements OnInit {
   };
 
   imagenCarrete: string;
+
+  usuario: Usuario = {};
  
 
   constructor(  private ruta: Router,
                 private avisosService: AvisosService,
                 private camera: Camera,
-                public alertasService: AlertasService ) {
+                public alertasService: AlertasService,
+                private modalController: ModalController,
+                private usuarioService: UsuarioService ) {
     
    }
 
    ngOnInit() {
+    this.obtenerRolUsuario();
   }
-  //https://www.youtube.com/watch?v=8Sv2Nubc5MQ
+  
    async crearAviso()
    {
      if(this.aviso.titulo.length > 30)
@@ -47,13 +56,14 @@ export class CrearAvisoPage implements OnInit {
      }
      console.log(this.aviso);
      const avisoInsertado = await this.avisosService.crearNuevoAviso(this.aviso);
-
+     //Vaciamos las variables para limpiar los campos
      this.aviso = {
       titulo: '',
       descripcion: '',
       tipoAviso: 0
     };
     this.imagenCarrete = '';
+
 
     this.ruta.navigateByUrl('main/tabs/tab1');
 
@@ -90,6 +100,23 @@ export class CrearAvisoPage implements OnInit {
     });
 
 
+
+  }
+
+  async openModal()
+  {
+    console.log('modal jeje');
+    const modal = await this.modalController.create({
+      component: AvisoModalComponent
+
+    });
+
+    await modal.present();
+  }
+
+  obtenerRolUsuario()
+  {
+    this.usuario = this.usuarioService.obtenerRolUsuario();
 
   }
 
