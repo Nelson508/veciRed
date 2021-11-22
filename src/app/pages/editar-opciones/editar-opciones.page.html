@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/main/tabs/crear-acuerdo"></ion-back-button>
+      <ion-back-button defaultHref="/main/tabs/editar-acuerdo"></ion-back-button>
     </ion-buttons>
 
     <ion-title  class="ion-text-center">
@@ -31,42 +31,42 @@
 
     <ion-item>
       <ion-label position="floating">Opción 1</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion1.titulo"></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion[0]['titulo'] "></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea [(ngModel)]="opcion1.descripcion"></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion[0]['descripcion']"></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Opción 2</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion2.titulo"></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion[1]['titulo'] "></ion-input>
     </ion-item>
   
     <ion-item>
       <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea [(ngModel)]="opcion2.descripcion"></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion[1]['descripcion']"></ion-textarea>
     </ion-item>
 
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating">Opción 3</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion3.titulo"></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion[2]['titulo'] "></ion-input>
     </ion-item>
   
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea [(ngModel)]="opcion3.descripcion"></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion[2]['descripcion']"></ion-textarea>
     </ion-item>
 
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating">Opción 4</ion-label>
-      <ion-input type="text" [(ngModel)]="opcion4.titulo"></ion-input>
+      <ion-input type="text" [(ngModel)]="opcion[3]['titulo'] "></ion-input>
     </ion-item>
   
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea [(ngModel)]="opcion4.descripcion"></ion-textarea>
+      <ion-textarea [(ngModel)]="opcion[3]['descripcion']"></ion-textarea>
     </ion-item>
 
     <ion-row>
@@ -92,14 +92,14 @@
                shape="round" 
                expand="full"
                (click)="enviarOpciones()"
-               [disabled]="opcion1.titulo.length < 1 ||
-                           opcion1.descripcion.length < 1 ||
-                           opcion2.titulo.length < 1 ||
-                           opcion2.descripcion.length < 1 ||
-                           (opcion3.titulo.length < 1 && contador > 0)||
-                           (opcion3.descripcion.length < 1 && contador > 0)||
-                           (opcion4.titulo.length < 1 && contador > 1)||
-                           (opcion4.descripcion.length < 1 && contador > 1)">
+               [disabled]="opcion[0]['titulo'].length < 1 ||
+                           opcion[0]['descripcion'].length < 1 ||
+                           opcion[1]['titulo'].length < 1 ||
+                           opcion[1]['descripcion'].length < 1 ||
+                           (opcion[2]['titulo'].length < 1 && contador > 0)||
+                           (opcion[2]['descripcion'].length < 1 && contador > 0)||
+                           (opcion[3]['titulo'].length < 1 && contador > 1)||
+                           (opcion[3]['descripcion'].length < 1 && contador > 1)">
     Enviar
   </ion-button>
 

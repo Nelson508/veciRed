@@ -13,7 +13,10 @@ export class AcuerdosComunidadComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.acuerdosComunidad);
+    
+    console.log(this.acuerdosComunidad.length);
   }
 
 }
+
+

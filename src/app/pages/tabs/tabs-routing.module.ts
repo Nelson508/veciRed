@@ -44,9 +44,17 @@ const routes: Routes = [
         loadChildren: () => import('../detalle-votacion/detalle-votacion.module').then( m => m.DetalleVotacionPageModule)
       },
       {
+        path: 'editar-acuerdo',
+        loadChildren: () => import('../editar-acuerdo/editar-acuerdo.module').then( m => m.EditarAcuerdoPageModule)
+      },
+      {
+        path: 'editar-opciones',
+        loadChildren: () => import('../editar-opciones/editar-opciones.module').then( m => m.EditarOpcionesPageModule)
+      },
+      {
         path: 'mis-avisos',
-    loadChildren: () => import('../mis-avisos/mis-avisos.module').then( m => m.MisAvisosPageModule)
-    },
+        loadChildren: () => import('../mis-avisos/mis-avisos.module').then( m => m.MisAvisosPageModule)
+      },
       {
         path: '',
         redirectTo: '/tabs/tab1',

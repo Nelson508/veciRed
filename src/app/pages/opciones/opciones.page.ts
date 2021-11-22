@@ -45,7 +45,23 @@ export class OpcionesPage implements OnInit {
               private navCtrl: NavController) { }
 
   ngOnInit() {
-    
+    /* this.acuerdosService.Objeto.subscribe(respuesta =>{
+
+      if(respuesta['tipo'] == false){
+
+        var res = respuesta;
+        
+        this.opcion1.titulo = res[0]['titulo'];
+        this.opcion2.titulo = res[1]['titulo'];
+        this.opcion3.titulo = res[2]['titulo'];
+        this.opcion4.titulo = res[3]['titulo'];
+        this.opcion1.descripcion = res[0]['descripcion'];
+        this.opcion2.descripcion = res[1]['descripcion'];
+        this.opcion3.descripcion = res[2]['descripcion'];
+        this.opcion4.descripcion = res[3]['descripcion'];
+      }
+
+    }); */
   }
 
   agregarOpcion(){
@@ -100,14 +116,14 @@ export class OpcionesPage implements OnInit {
     
     console.log(this.opciones);
    
-    this.acuerdosService.enviarDatos(this.opciones, true);
+    this.acuerdosService.enviarDatos(this.opciones);
     this.router.navigate(['/main/tabs/crear-acuerdo']);
     //this.navCtrl.navigateRoot('/main/tabs/crear-acuerdo');
     this.opciones = [];
   
   }
 
-  ionViewWillEnter(){
+  /* ionViewWillEnter(){
 
     this.opcion1.titulo = '';
     this.opcion2.titulo = '';
@@ -118,5 +134,5 @@ export class OpcionesPage implements OnInit {
     this.opcion3.descripcion = '';
     this.opcion4.descripcion = '';
   }
-
+ */
 }

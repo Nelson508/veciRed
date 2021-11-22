@@ -22,24 +22,29 @@ export class AlertasService {
   }
 
   async alertaDecision(message: string) {
+    let choice;
     const alert = await this.alertController.create({
       backdropDismiss: false,
-      cssClass: 'my-custom-class',
       message,
-      buttons: ['OK', 'Cancel']
+      buttons: [
+        {
+         text: 'OK',
+          handler: () => {
+
+            alert.dismiss(true);
+            return false;
+          }
+        },
+        {
+          text: 'Cancelar'
+        }
+    ]
     });
 
     await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    await alert.onDidDismiss().then((data) => {
+        choice = data
+    })
+    return choice
   }
-  /* async presentToast( message: string ) {
-    const toast = await this.toastController.create({
-      message,
-      position: 'top',
-      duration: 1500
-    });
-    toast.present();
-  } */
 }

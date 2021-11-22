@@ -11,7 +11,10 @@ import { NavController } from '@ionic/angular';
 export class AcuerdosPage implements OnInit {
 
   acuerdos: Acuerdos[] = [];
-  deshabilitar = false;
+  emptyAcuerdos:boolean = false;
+  deshabilitar: boolean = false;
+
+
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl :NavController) { }
@@ -23,8 +26,19 @@ export class AcuerdosPage implements OnInit {
     this.acuerdosService.nuevoAcuerdo
         .subscribe( acuerdo => {
 
+          this.emptyAcuerdos=false;
+
           this.acuerdos.unshift(acuerdo);
         });
+
+    this.acuerdosService.acuerdoEliminado
+        .subscribe( acuerdo => {
+
+          //this.emptyAcuerdos=false;
+          this.refresh();
+          //this.acuerdos.unshift(acuerdo);
+        });    
+
   }
 
   scroll(event?, pull: boolean = false){
@@ -33,6 +47,14 @@ export class AcuerdosPage implements OnInit {
       .subscribe(response => {
         console.log(response );
         this.acuerdos.push(...response.acuerdosPublicados);
+
+
+        if(response.acuerdosPublicados.length == 0 && response.pagina === 1)
+        {
+          this.emptyAcuerdos=true;
+          console.log(this.emptyAcuerdos );
+        }
+       
 
         if(event)
         {
@@ -44,14 +66,11 @@ export class AcuerdosPage implements OnInit {
           
         }
       });
+
+
+
   }
   
-  /* crearAcuerdo()
-  {
-
-    this.navCtrl.navigateRoot('/main/tabs/crear-acuerdo', {animated:true});
-  } */
-
   refresh(event?){
 
     this.scroll(event, true);

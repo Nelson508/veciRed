@@ -15,6 +15,8 @@ export class AcuerdosService {
   pagiaAcuerdos = 0;
   Objeto = new BehaviorSubject<{}>({});
   nuevoAcuerdo = new EventEmitter<Acuerdos>();
+  acuerdoEliminado = new EventEmitter<Acuerdos>();
+
 
   constructor(private http: HttpClient,
               private usuarioService: UsuarioService,
@@ -83,8 +85,25 @@ export class AcuerdosService {
     });
   }
 
-  eliminarAcuerdo(acuerdo){
-    
+  eliminarAcuerdo(acuerdo: Acuerdos){
 
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
+
+    return new Promise(resolve => {
+
+      this.http.post(`${URL}/acuerdos/actualizar`, acuerdo, {headers})
+        .subscribe(respuesta => {
+          
+          if(respuesta['ok']){
+            this.acuerdoEliminado.emit(respuesta['acuerdo']);
+            resolve(true);
+          }else{
+
+            resolve(false);
+          }
+        });
+    });
   }
 }

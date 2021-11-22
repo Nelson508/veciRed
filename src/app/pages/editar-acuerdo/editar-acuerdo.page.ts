@@ -1,18 +1,18 @@
-import { DatePipe  } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Acuerdos } from '../../interfaces/interfaces';
-
+import { AcuerdosService } from '../../servicios/acuerdos.service';
+import { NavController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-crear-acuerdo',
-  templateUrl: './crear-acuerdo.page.html',
-  styleUrls: ['./crear-acuerdo.page.scss'],
+  selector: 'app-editar-acuerdo',
+  templateUrl: './editar-acuerdo.page.html',
+  styleUrls: ['./editar-acuerdo.page.scss'],
 })
-export class CrearAcuerdoPage implements OnInit {
+export class EditarAcuerdoPage implements OnInit {
 
-  tempImages: string[] = [];
+  //tempImages: string[] = [];
 
   acuerdo: Acuerdos = {
 
@@ -24,23 +24,35 @@ export class CrearAcuerdoPage implements OnInit {
   };
 
   constructor(private acuerdosService: AcuerdosService,
-              private navCtrl: NavController) { }
+              private navCtrl: NavController,
+              private router: Router) { }
 
   ngOnInit() {
 
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
-      //if(respuesta['tipo']){
+      if(respuesta['tipo']){
+
+
+        var res = respuesta;
+        console.log(respuesta);
+        this.acuerdo = res;
+        console.log(this.acuerdo);
+
+        
+
+      }else if(respuesta['tipo'] == false){
 
         console.log(respuesta['tipo']);
         this.acuerdo.opciones = respuesta;
         console.log(this.acuerdo.opciones);
+          
+      }
 
-      //}
     });
   }
 
-  async crearAcuerdo(){
+  /* async crearAcuerdo(){
 
     console.log(this.acuerdo);
 
@@ -70,20 +82,29 @@ export class CrearAcuerdoPage implements OnInit {
 
 
     this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
-  }
+  } */
 
   mostrarOpciones(){
 
-    //if(this.acuerdo['tipo']){
+    /* if(this.acuerdo['tipo']){
 
       this.acuerdo.opciones = {};
       
-    /* }else if(this.acuerdo['tipo'] == false){
+    }else if(this.acuerdo['tipo'] == false){ */
+      //this.acuerdo = this.acuerdo;
+      this.acuerdosService.enviarDatos(this.acuerdo);
+      this.router.navigate(['/main/tabs/editar-opciones']);
+      //this.navCtrl.navigateRoot('/main/tabs/editar-opciones');
+      //this.acuerdo = this.acuerdo;
+   // }
+    //this.navCtrl.navigateRoot('/main/tabs/editar-opciones');
 
-      this.acuerdosService.enviarDatos(this.acuerdo.opciones, false);
-      //this.navCtrl.navigateRoot('/main/tabs/opciones');
+    /* this.acuerdo = {
+      titulo:'',
+      descripcion:'',
+      fecha:null,
+      hora:null
     } */
-    this.navCtrl.navigateRoot('/main/tabs/opciones', {animated: true});
   
   }
 
@@ -98,10 +119,9 @@ export class CrearAcuerdoPage implements OnInit {
       hora:null,
       opciones: {}
     }
-
   }
 
-  /* async actualizar(){
+  async actualizar(){
 
     //if(formActualizar.invalid){return;} 
 
@@ -109,12 +129,13 @@ export class CrearAcuerdoPage implements OnInit {
 
     if(actualizado){
       //Mensaje actualizado
-      console.log('Se logra' + actualizado);
+      this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
     }else{
       //Mensaje error
       console.log('No se logra' + actualizado);
 
     }
 
-  } */
+  }
+
 }

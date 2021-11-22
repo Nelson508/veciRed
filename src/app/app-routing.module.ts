@@ -22,12 +22,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
 
-
-  
-
-
-
-
 ];
 @NgModule({
   imports: [

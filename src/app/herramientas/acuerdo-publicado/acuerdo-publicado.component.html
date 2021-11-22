@@ -1,9 +1,9 @@
-<ion-card  class="acuerdo">
+<ion-card  class="acuerdo card-background-color">
   <ion-grid fixed>
 
     <ion-row>
       <ion-col size="12">
-        <ion-item lines="none">
+        <ion-item lines="none" class="item-background-color">
       
           <ion-avatar slot="start">
             <img src="/assets/avatars/{{acuerdoPublicado.usuario.imagenPerfil}}" />
@@ -17,7 +17,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-card-content>
+    <ion-card-content class="fontColor">
       <ion-row>
     
         <ion-col size="11">
@@ -37,9 +37,9 @@
         </ion-col>
         <ion-col size="1">
   
-          <ion-buttons class="botones">
-            <ion-button shape="round">
-              <ion-icon name="add-circle-outline"></ion-icon>
+          <ion-buttons class="botones" >
+            <ion-button shape="round" (click)="lanzarVotacion()" [disabled]="!ocultar">
+              <ion-icon name="arrow-forward-circle-outline"></ion-icon>
             </ion-button>  
           </ion-buttons>
 
@@ -49,9 +49,14 @@
             </ion-button>  
           </ion-buttons>
 
-          <ion-buttons class="botones">
+          <ion-buttons class="botones" [hidden]="!ocultar">
             <ion-button shape="round" (click)="eliminar()">
               <ion-icon name="trash-bin-outline"></ion-icon>
+            </ion-button>          
+          </ion-buttons>
+          <ion-buttons class="botones" [hidden]="ocultar">
+            <ion-button shape="round">
+              <ion-icon name="hourglass-outline"></ion-icon>
             </ion-button>          
           </ion-buttons>
   
