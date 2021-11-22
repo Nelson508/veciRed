@@ -15,6 +15,7 @@ export class AvisosService {
   //se crea un nuevo event emitter que enviara nuestro aviso recien creado al tab1
   nuevoAviso = new EventEmitter<Avisos>();
   contadorPagina= 0;
+  contadorPaginaAvisosUser= 0;
   //inyectamos el Http para poder hacer nuestra peticion de los avisos
   constructor( private http: HttpClient,
                private usuarioService: UsuarioService,
@@ -77,6 +78,22 @@ export class AvisosService {
     }).catch( err => {
       console.log('Fallo al subir imagen:', err);
     });
+
+  }
+
+  obtenerAvisosUsuario(pull: boolean = false)
+  {
+
+    if(pull)
+    {
+      this.contadorPaginaAvisosUser = 0;
+    }
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    })
+    this.contadorPaginaAvisosUser++;
+    //this.contadorPagina++;
+    return this.http.get<AvisosCreados>(`${url}/avisos/usuario/?pagina=${this.contadorPaginaAvisosUser}`,{headers});
 
   }
 
