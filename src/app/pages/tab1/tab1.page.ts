@@ -56,7 +56,7 @@ export class Tab1Page implements OnInit{
         }
         
         this.avisos.push(...respuesta.avisosPublicados);
-        console.log(respuesta);
+        //console.log(respuesta);
         //validacion para comprobar que no hay avisos, si no hay se manda mensaje a usuario
         if(respuesta.avisosPublicados.length == 0 && respuesta.pagina=== 1)
         {

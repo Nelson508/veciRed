@@ -25,12 +25,13 @@
 <ion-content class="avisosContenedor"[fullscreen]="true">
   <div class="avisosTitlte"><h4 class="ion-text-center"><b>AVISOS</b></h4>
 
-    <!---Refrescar nuestra pagina con ion refresher-->
-    <ion-refresher slot="fixed" (ionRefresh)="refresher($event)">
-      <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+   
   
   </div>
+   <!---Refrescar nuestra pagina con ion refresher-->
+   <ion-refresher slot="fixed" (ionRefresh)="refresher($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!--Agregamos avisos para mostrar aca los avisos publicados-->
   <div class="noAvisos"  *ngIf="emptyAvisos">
     <h3 class="noAvisosTitle"><b>Aún no hay avisos en tu comunidad</b></h3>

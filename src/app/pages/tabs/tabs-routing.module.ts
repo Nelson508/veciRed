@@ -44,6 +44,10 @@ const routes: Routes = [
         loadChildren: () => import('../detalle-votacion/detalle-votacion.module').then( m => m.DetalleVotacionPageModule)
       },
       {
+        path: 'mis-avisos',
+    loadChildren: () => import('../mis-avisos/mis-avisos.module').then( m => m.MisAvisosPageModule)
+    },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
