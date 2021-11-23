@@ -4,13 +4,12 @@ import { AvisosComponent } from './avisos/avisos.component';
 import { AvisoPublicadoComponent } from './aviso-publicado/aviso-publicado.component';
 import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '../pipes/pipes.module';
-
-
 import { FormsModule } from '@angular/forms';
 import { AcuerdosComunidadComponent } from './acuerdos-comunidad/acuerdos-comunidad.component';
 import { AcuerdoPublicadoComponent } from './acuerdo-publicado/acuerdo-publicado.component';
 import { VotacionPublicadaComponent } from './votacion-publicada/votacion-publicada.component';
 import { AvisoModalComponent } from './aviso-modal/aviso-modal.component';
+import { CuentaRegresivaComponent } from './cuenta-regresiva/cuenta-regresiva.component';
 
 
 
@@ -19,12 +18,11 @@ import { AvisoModalComponent } from './aviso-modal/aviso-modal.component';
   [
     AvisosComponent,
     AvisoPublicadoComponent,
-    
-    
     AcuerdosComunidadComponent,
     AcuerdoPublicadoComponent,
     VotacionPublicadaComponent,
-    AvisoModalComponent
+    AvisoModalComponent,
+    CuentaRegresivaComponent
   ],
   imports: [
     CommonModule,
@@ -34,11 +32,10 @@ import { AvisoModalComponent } from './aviso-modal/aviso-modal.component';
   ],
   exports:[
     AvisosComponent,
-    
-    
     AcuerdosComunidadComponent,
     VotacionPublicadaComponent,
-    AvisoModalComponent
+    AvisoModalComponent,
+    CuentaRegresivaComponent
   ]
 })
 export class HerramientasModule { }

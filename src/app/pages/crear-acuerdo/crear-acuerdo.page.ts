@@ -30,13 +30,9 @@ export class CrearAcuerdoPage implements OnInit {
 
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
-      //if(respuesta['tipo']){
-
-        console.log(respuesta['tipo']);
-        this.acuerdo.opciones = respuesta;
-        console.log(this.acuerdo.opciones);
-
-      //}
+      console.log(respuesta['tipo']);
+      this.acuerdo.opciones = respuesta;
+      console.log(this.acuerdo.opciones);
     });
   }
 
@@ -74,17 +70,8 @@ export class CrearAcuerdoPage implements OnInit {
 
   mostrarOpciones(){
 
-    //if(this.acuerdo['tipo']){
-
-      this.acuerdo.opciones = {};
-      
-    /* }else if(this.acuerdo['tipo'] == false){
-
-      this.acuerdosService.enviarDatos(this.acuerdo.opciones, false);
-      //this.navCtrl.navigateRoot('/main/tabs/opciones');
-    } */
+    this.acuerdo.opciones = {};  
     this.navCtrl.navigateRoot('/main/tabs/opciones', {animated: true});
-  
   }
 
   volverAtras(){
@@ -100,21 +87,4 @@ export class CrearAcuerdoPage implements OnInit {
     }
 
   }
-
-  /* async actualizar(){
-
-    //if(formActualizar.invalid){return;} 
-
-    const actualizado = await this.acuerdosService.actualizarAcuerdo(this.acuerdo);
-
-    if(actualizado){
-      //Mensaje actualizado
-      console.log('Se logra' + actualizado);
-    }else{
-      //Mensaje error
-      console.log('No se logra' + actualizado);
-
-    }
-
-  } */
 }
