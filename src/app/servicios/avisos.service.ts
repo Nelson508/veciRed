@@ -1,10 +1,11 @@
-import { Avisos } from './../interfaces/interfaces';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { AvisosCreados } from '../interfaces/interfaces';
+import { AvisosCreados, Avisos } from '../interfaces/interfaces';
 import { UsuarioService } from './usuario.service';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { BehaviorSubject } from 'rxjs';
 
 
 const url = environment.url;
@@ -14,8 +15,13 @@ const url = environment.url;
 export class AvisosService {
   //se crea un nuevo event emitter que enviara nuestro aviso recien creado al tab1
   nuevoAviso = new EventEmitter<Avisos>();
+  //contadores de la paginación de los avisos
   contadorPagina= 0;
   contadorPaginaAvisosUser= 0;
+
+  //objeto que recibe data desde mis avisos y lo envia a editar aviso
+  Objeto = new BehaviorSubject<{}>({});
+
   //inyectamos el Http para poder hacer nuestra peticion de los avisos
   constructor( private http: HttpClient,
                private usuarioService: UsuarioService,
@@ -35,7 +41,7 @@ export class AvisosService {
     return this.http.get<AvisosCreados>(`${url}/avisos/?pagina=${this.contadorPagina}`,{headers});
   }
 
-
+  //funcion que recibe un aviso desde aviso-publicado y lo inserta en BD
   crearNuevoAviso(aviso)
   {
     const headers = new HttpHeaders({
@@ -58,7 +64,7 @@ export class AvisosService {
 
   }
 
-
+  //servicio para subir la imagen a la BD
   uploadImagen(imagenAviso: string)
   {
     const options: FileUploadOptions =
@@ -94,6 +100,42 @@ export class AvisosService {
     this.contadorPaginaAvisosUser++;
     //this.contadorPagina++;
     return this.http.get<AvisosCreados>(`${url}/avisos/usuario/?pagina=${this.contadorPaginaAvisosUser}`,{headers});
+
+  }
+
+  //funcion que recibe data desde mis avisos y lo envia a editar aviso
+  enviarDatos(datos)
+  {
+    this.Objeto.next(datos);
+  }
+
+  //funcion para actualizar una viso
+  actualizarAviso(aviso: Avisos)
+  {
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    })
+
+    return new Promise(resolve =>
+      {
+        this.http.post(`${url}/avisos/actualizar`, aviso,{headers}).subscribe(
+          respuesta =>
+          {
+            if(respuesta['ok'])
+            {
+              resolve(true);
+            }else
+            {
+              resolve(false);
+            }
+          }
+        )
+      })
+
+
+
+
+
 
   }
 

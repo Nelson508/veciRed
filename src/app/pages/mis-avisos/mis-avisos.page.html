@@ -7,10 +7,13 @@
   
     <ion-title class="ion-text-center">VeciRed</ion-title>
   
-    <ion-buttons slot="end">   
-      <ion-button shape="round" routerLink="/main/tabs/crear-acuerdo">
-        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-      </ion-button>
+    <ion-buttons  
+                  (click)="openModal()"
+                  slot="end">
+                  <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+
+      
+
     </ion-buttons>
       
   </ion-toolbar>
@@ -76,7 +79,10 @@
        <ion-row >
          <ion-col  style="margin-left: 20%;">
            <ion-buttons>
-             <ion-button (click)="editarAviso()">
+             <ion-button 
+                          (click)="editarAviso(aviso)"
+             >
+               
               <ion-icon slot="icon-only" name="create-outline"></ion-icon>
              </ion-button>
            </ion-buttons>

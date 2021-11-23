@@ -1,6 +1,9 @@
 import { Avisos } from './../../interfaces/interfaces';
 import { Component, OnInit } from '@angular/core';
 import { AvisosService } from '../../servicios/avisos.service';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { AvisoModalComponent } from 'src/app/herramientas/aviso-modal/aviso-modal.component';
 
 @Component({
   selector: 'app-mis-avisos',
@@ -13,12 +16,14 @@ export class MisAvisosPage implements OnInit {
   infiniteScroll= true;
   emptyAvisos=false;
 
-  constructor( private AvisosService: AvisosService
+  constructor( private AvisosService: AvisosService,
+               private ruta: Router,
+               private modalController: ModalController
 
   ) { }
 
   ngOnInit() {
-    this.avisosPorUsuario(true);
+    this.avisosPorUsuario();
   }
 
   avisosPorUsuario(event?, pull: boolean = false)
@@ -38,6 +43,8 @@ export class MisAvisosPage implements OnInit {
          {
            this.emptyAvisos=true;
  
+         }else{
+           this.emptyAvisos=false;
          }
 
         if(event)
@@ -62,9 +69,16 @@ export class MisAvisosPage implements OnInit {
     
   }
 
-  editarAviso()
+  editarAviso(aviso)
   {
-    console.log('click');
+    //console.log('click');
+    console.log(aviso.titulo);
+    console.log(aviso.descripcion);
+    console.log(aviso.tipoAviso);
+    //enviamos el aviso a traves del service
+    this.AvisosService.enviarDatos(aviso);
+    //redireccionamos al usuario a editar-aviso
+    this.ruta.navigateByUrl('main/tabs/editar-aviso');
   }
 
   eliminarAviso()
@@ -72,5 +86,18 @@ export class MisAvisosPage implements OnInit {
     console.log('click');
 
   }
+
+  async openModal()
+  {
+    console.log('modal jeje');
+    const modal = await this.modalController.create({
+      component: AvisoModalComponent
+
+    });
+
+    await modal.present();
+  }
+
+  
 
 }

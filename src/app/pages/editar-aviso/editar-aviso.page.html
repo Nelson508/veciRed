@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/mis-avisos"></ion-back-button>
+    </ion-buttons>
+  
+    <ion-title class="ion-text-center">VeciRed</ion-title>
+  
+    <ion-buttons slot="end">   
+      <ion-button disabled>
+        <ion-icon></ion-icon>
+      </ion-button>
+    </ion-buttons>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="avisosTitlte"><h4 class="ion-text-center"><b>EDITAR AVISO</b></h4></div>
+  <!---INICIO FORMULARIO-->
+  <ion-grid>
+    <!---INICIO TITULO-->
+    <ion-item>
+      <ion-label position="floating"><b>Título:</b></ion-label>
+      <ion-input [(ngModel)]="avisoEdicion.titulo" required ></ion-input>
+    </ion-item>
+    <!---FIN TITULO-->
+    <!---INICIO DESCRIPCION-->
+    <ion-item>
+      <ion-label position="floating"><b>Descripción:</b></ion-label>
+      <ion-textarea [(ngModel)]="avisoEdicion.descripcion" required ></ion-textarea>
+    </ion-item> 
+    <!---FIN DESCRIPCION-->
+    <!---INICIO TIPO AVISO-->
+    <!--Miembros directiva-->
+    <ion-item *ngIf="usuario.rol == 1">
+      
+      <ion-label><b>Tipo aviso:</b></ion-label>
+      <ion-select 
+                  [(ngModel)]="avisoEdicion.tipoAviso">
+        <ion-select-option value="1">Emergencia</ion-select-option>
+        <ion-select-option value="3">Información</ion-select-option>
+        <ion-select-option value="4">Otro</ion-select-option>
+        <ion-select-option value="5">Problema</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!--Miembro normal-->
+    <ion-item *ngIf="usuario.rol == 2">
+      
+      <ion-label><b>Tipo aviso:</b></ion-label>
+      <ion-select placeholder="Seleccione"
+                  [(ngModel)]="avisoEdicion.tipoAviso">
+        <ion-select-option value="1">Emergencia</ion-select-option>
+        <ion-select-option value="4">Otro</ion-select-option>
+        <ion-select-option value="5">Problema</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!---FIN TIPO AVISO-->
+
+
+    <!--INICIO BOTON ACTUALIZAR-->
+    <ion-button  color="tertiary" 
+                   shape="round" 
+                   expand="full"
+                   (click)="editarAviso()"
+                   style="margin-top: 30%;"
+                   [disabled]="avisoEdicion.titulo.length < 1 ||
+                               avisoEdicion.descripcion.length < 1 ||
+                               avisoEdicion.tipoAviso == 0"
+                   >
+        Actualizar
+      </ion-button>
+      <!--FIN BOTON ACTUALIZAR-->
+
+  </ion-grid>
+  <!---FIN FORMULARIO-->
+</ion-content>

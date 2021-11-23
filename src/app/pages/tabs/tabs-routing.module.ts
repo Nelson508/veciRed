@@ -56,6 +56,10 @@ const routes: Routes = [
         loadChildren: () => import('../mis-avisos/mis-avisos.module').then( m => m.MisAvisosPageModule)
       },
       {
+        path: 'editar-aviso',
+        loadChildren: () => import('../editar-aviso/editar-aviso.module').then( m => m.EditarAvisoPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

@@ -4,6 +4,9 @@ import { Avisos } from '../../interfaces/interfaces';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
+import { MisAvisosPage } from '../mis-avisos/mis-avisos.page';
+
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -17,7 +20,8 @@ export class Tab1Page implements OnInit{
 
   constructor( private AvisosService: AvisosService,
                private menuCtrl: MenuController,
-               private ruta: Router
+               private ruta: Router,
+               
                ) {
                 this.menuCtrl.enable(true, 'first');
                }
@@ -33,6 +37,8 @@ export class Tab1Page implements OnInit{
         this.emptyAvisos=false;
         //a traves de unshift insertaremos el nuevo aviso en el tope de nuestro arreglo
         this.avisos.unshift(aviso);
+        //this.misAvisos.refresher(event.target.complete());
+
 
       }
     );
