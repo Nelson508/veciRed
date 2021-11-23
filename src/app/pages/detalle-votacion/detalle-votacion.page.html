@@ -35,29 +35,17 @@
 
   <ion-card  class="acuerdo">
     <ion-card-content>
-      <ion-list style="background-color: #f4f5f8;">
+      <ion-list style="background-color: #f4f5f8;" *ngFor="let opcion of votacion.opciones | keyvalue; let i=index;">
 
-        <ion-item [color]="buttonValue == 0 ? 'secondary' : 'light'" (click)="buttonValue = 0">
-          <ion-label class="ion-text-center">{{this.votacion.opciones[0]['titulo']}}</ion-label>
-        </ion-item>
-
-        <ion-item [color]="buttonValue == 1 ? 'secondary' : 'light'" (click)="buttonValue = 1">
-          <ion-label class="ion-text-center">{{this.votacion.opciones[1]['titulo']}}</ion-label>
-        </ion-item>
-
-        <ion-item [color]="buttonValue == 2 ? 'secondary' : 'light'" (click)="buttonValue = 2">
-          <ion-label class="ion-text-center">{{this.votacion.opciones[2]['titulo']}}</ion-label>
-        </ion-item>
-
-        <ion-item [color]="buttonValue == 3 ? 'secondary' : 'light'" (click)="buttonValue = 3">
-          <ion-label class="ion-text-center">{{this.votacion.opciones[3]['titulo']}}</ion-label>
+        <ion-item [color]="buttonValue == i ? 'secondary' : 'light'" (click)="buttonValue = i">
+          <ion-label class="ion-text-center">{{opcion.value['titulo']}}</ion-label>
         </ion-item>
 
       </ion-list>
          
     </ion-card-content>
   </ion-card>
-      
+  <app-cuenta-regresiva></app-cuenta-regresiva>
   <ion-row>
    
     <ion-col size="6">
@@ -73,7 +61,7 @@
       <ion-button  color="tertiary"
                    expand="full"
                    shape="round"
-                   (click)="votar()"
+                   (click)="votar(buttonValue)"
                    [disabled]="buttonValue == -1">
         Votar
       </ion-button>

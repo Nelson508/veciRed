@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { DetalleVotacionPageRoutingModule } from './detalle-votacion-routing.module';
 
 import { DetalleVotacionPage } from './detalle-votacion.page';
+import { HerramientasModule } from '../../herramientas/herramientas.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetalleVotacionPageRoutingModule
+    DetalleVotacionPageRoutingModule,
+    HerramientasModule
   ],
   declarations: [DetalleVotacionPage]
 })

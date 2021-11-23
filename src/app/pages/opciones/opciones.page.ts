@@ -15,22 +15,26 @@ export class OpcionesPage implements OnInit {
 
   opcion1 = {
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   };
 
   opcion2 = {
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   };
 
   opcion3 = {
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   };
 
   opcion4 = {
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   };
 
 

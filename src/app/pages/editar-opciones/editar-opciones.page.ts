@@ -17,19 +17,23 @@ export class EditarOpcionesPage implements OnInit {
   opcion: Object[]  = [{
 
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   },
   {
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   },
   {
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   },
   {
     titulo:'',
-    descripcion:''
+    descripcion:'',
+    votos: 0
   }];
   
 
