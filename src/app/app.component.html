@@ -16,8 +16,8 @@
           <ion-item routerLink="/main/tabs/votaciones">
             <ion-icon name="megaphone-outline" slot="start"></ion-icon>
             Acuerdos - Votacion
-          </ion-item>
-          <ion-item routerLink="/main/tabs/mis-avisos">
+          </ion-item >
+          <ion-item (click)="goToMisAvisos()">
             <ion-icon name="receipt-outline" slot="start"></ion-icon>
             Mis avisos
           </ion-item>
