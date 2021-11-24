@@ -49,7 +49,7 @@ export class CrearAvisoPage implements OnInit {
       return;
      }
 
-     if(this.aviso.descripcion.length > 222)
+     if(this.aviso.descripcion.length > 250)
      {
        this.alertasService.alerta('Descripción demasiada larga');
        return;

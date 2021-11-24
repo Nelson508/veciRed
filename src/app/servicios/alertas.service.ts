@@ -28,7 +28,7 @@ export class AlertasService {
       message,
       buttons: [
         {
-         text: 'OK',
+         text: 'ACEPTAR',
           handler: () => {
 
             alert.dismiss(true);

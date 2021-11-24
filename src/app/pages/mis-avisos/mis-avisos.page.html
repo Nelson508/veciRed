@@ -28,7 +28,7 @@
   <div class="avisosTitlte"><h4 class="ion-text-center"><b>MIS AVISOS</b></h4></div>
 
   <!--Agregamos avisos para mostrar aca los avisos publicados-->
-  <div class="noAvisos"  *ngIf="emptyAvisos">
+  <div class="noAvisos"  *ngIf="emptyMisAvisos">
     <h3 class="noAvisosTitle"><b>Aún no has creado ningún aviso</b></h3>
     <img class="noAvisosImage"src="/../../assets/sadHouse.png">
     <h3 class="noAvisosTitle"><b>¡Crea el primero!</b></h3>
@@ -90,7 +90,7 @@
          </ion-col>
          <ion-col >
           <ion-buttons>
-            <ion-button (click)="eliminarAviso()">
+            <ion-button (click)="eliminarAviso(aviso)">
              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
             </ion-button>
           </ion-buttons>
