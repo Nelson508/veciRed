@@ -25,12 +25,14 @@
       <ion-label position="floating"><b>Título:</b></ion-label>
       <ion-input [(ngModel)]="avisoEdicion.titulo" required ></ion-input>
     </ion-item>
+    <span class="caracteres">{{ 30 - avisoEdicion.titulo.length }} caracteres restantes</span> 
     <!---FIN TITULO-->
     <!---INICIO DESCRIPCION-->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
       <ion-textarea [(ngModel)]="avisoEdicion.descripcion" required ></ion-textarea>
-    </ion-item> 
+    </ion-item>
+    <span class="caracteres">{{ 250 - avisoEdicion.descripcion.length }} caracteres restantes</span> 
     <!---FIN DESCRIPCION-->
     <!---INICIO TIPO AVISO-->
     <!--Miembros directiva-->
@@ -38,6 +40,7 @@
       
       <ion-label><b>Tipo aviso:</b></ion-label>
       <ion-select 
+                  placeholder="{{tipoAvisoName}}"
                   [(ngModel)]="avisoEdicion.tipoAviso">
         <ion-select-option value="1">Emergencia</ion-select-option>
         <ion-select-option value="3">Información</ion-select-option>
@@ -49,7 +52,7 @@
     <ion-item *ngIf="usuario.rol == 2">
       
       <ion-label><b>Tipo aviso:</b></ion-label>
-      <ion-select placeholder="Seleccione"
+      <ion-select placeholder="{{tipoAvisoName}}"
                   [(ngModel)]="avisoEdicion.tipoAviso">
         <ion-select-option value="1">Emergencia</ion-select-option>
         <ion-select-option value="4">Otro</ion-select-option>
@@ -57,6 +60,30 @@
       </ion-select>
     </ion-item>
     <!---FIN TIPO AVISO-->
+
+    <!---INICIO IMAGEN-->
+    <ion-item>
+      <ion-row style="width: 100%; margin-top:3%;">
+        <ion-col size="6" >
+          <ion-label style="margin-top:4.5%;"><b>Imagen:</b></ion-label>
+
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full"
+                  shape="round"
+                  style="margin-bottom: 9%;"
+                  (click)="getImagen()"
+                  >
+        <ion-icon slot="start" name="images"></ion-icon>
+        Galería
+      </ion-button>
+
+        </ion-col>
+      </ion-row>
+      
+      
+    </ion-item>
+    <!---FIN IMAGEN-->
 
 
     <!--INICIO BOTON ACTUALIZAR-->

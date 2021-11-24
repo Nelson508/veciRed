@@ -16,6 +16,7 @@ export interface Avisos {
   fechaCreacion?: string;
   comunidad ?: Comunidad;
   tipoAviso ?: number;
+  estadoAviso ?: number;
  
 }
 

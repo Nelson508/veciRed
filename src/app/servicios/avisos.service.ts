@@ -15,6 +15,7 @@ const url = environment.url;
 export class AvisosService {
   //se crea un nuevo event emitter que enviara nuestro aviso recien creado al tab1
   nuevoAviso = new EventEmitter<Avisos>();
+  avisoEliminado = new EventEmitter<Avisos>();
   //contadores de la paginación de los avisos
   contadorPagina= 0;
   contadorPaginaAvisosUser= 0;
@@ -123,6 +124,7 @@ export class AvisosService {
           {
             if(respuesta['ok'])
             {
+              this.nuevoAviso.emit(respuesta['aviso']);
               resolve(true);
             }else
             {
@@ -131,9 +133,31 @@ export class AvisosService {
           }
         )
       })
+  }
 
 
+  //funcion para eliminar un aviso
+  eliminarAviso(aviso: Avisos)
+  {
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
 
+    return new Promise(resolve =>
+      {
+        this.http.post(`${url}/avisos/eliminar`, aviso, {headers}).subscribe(
+          respuesta =>
+          {
+            if(respuesta['ok'])
+            {
+              this.avisoEliminado.emit(respuesta['aviso']);
+              resolve(true);
+            }else{
+              resolve(false);
+            }
+          }
+        )
+      });
 
 
 
