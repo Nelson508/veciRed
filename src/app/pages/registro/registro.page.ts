@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NavController, MenuController } from '@ionic/angular';
-import { Usuario } from '../../interfaces/interfaces';
+import { Usuario, Comunidad } from '../../interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { AlertasService } from '../../servicios/alertas.service';
 
@@ -19,6 +19,13 @@ export class RegistroPage implements OnInit {
     password: '',
     rol: 2,
     
+    
+  }
+
+  veciRed:Comunidad = {
+    _id: '619f11e875415805c3424bbb',
+    nombreComunidad: 'Comunidad VeciRed'
+
   }
 
   repitaPassword = '';
@@ -31,6 +38,7 @@ export class RegistroPage implements OnInit {
                }
 
   ngOnInit() {
+  
   }
 
   

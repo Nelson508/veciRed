@@ -35,8 +35,9 @@ export class Tab1Page implements OnInit{
       {
         // cambiamos el valor de empty avisos a falso para que desaparesca el aviso vacio
         this.emptyAvisos=false;
+        this.refresher();
         //a traves de unshift insertaremos el nuevo aviso en el tope de nuestro arreglo
-        this.avisos.unshift(aviso);
+        //this.avisos.unshift(aviso);
         //this.misAvisos.refresher(event.target.complete());
 
 
@@ -93,7 +94,7 @@ export class Tab1Page implements OnInit{
     this.ruta.navigateByUrl('main/tabs/crear-aviso');
   }
 
-  refresher(event)
+  refresher(event?)
   {
     this.paginaSiguiente(event, true)
 

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  
+    <ion-title class="ion-text-center">VeciRed</ion-title>
+  
+    <ion-buttons slot="end">   
+      <ion-button shape="round" routerLink="/main/tabs/crear-com">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="avisosTitlte"><h4 class="ion-text-center"><b>MIS COMUNIDADES</b></h4></div>
+  <ion-row>
+    <ion-col size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12"
+    *ngFor="let comunidad of Comunidad"
+    >
+    <ion-card class="avisoUnitario">
+      <ion-card-header class=" fontColor ion-text-center">
+        <ion-card-title>
+          <ion-icon name="body"></ion-icon>
+          {{comunidad.nombreComunidad}}
+        </ion-card-title>
+        
+      </ion-card-header>
+      <ion-card-content class=" fontColor ion-text-center">
+        <ion-icon name="document-text-outline"></ion-icon>
+        {{comunidad.descripcion}}
+       
+        
+      </ion-card-content>
+    </ion-card>
+      
+
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

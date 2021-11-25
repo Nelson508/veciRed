@@ -85,6 +85,17 @@
     </ion-item>
     <!---FIN IMAGEN-->
 
+    <!---INICIO IMAGEN OBTENIDA -->
+    <ion-grid *ngIf="imagenCarrete">
+      
+      <ion-card>
+      <img [src]="imagenCarrete">
+      </ion-card>
+  
+</ion-grid>
+
+<!---FIN IMAGEN OBTENIDA -->
+
 
     <!--INICIO BOTON ACTUALIZAR-->
     <ion-button  color="tertiary" 

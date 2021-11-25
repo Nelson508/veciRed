@@ -60,6 +60,14 @@ const routes: Routes = [
         loadChildren: () => import('../editar-aviso/editar-aviso.module').then( m => m.EditarAvisoPageModule)
       },
       {
+        path: 'comunidad',
+        loadChildren: () => import('../comunidad/comunidad.module').then( m => m.ComunidadPageModule)
+      },
+      {
+        path: 'crear-com',
+        loadChildren: () => import('../crear-com/crear-com.module').then( m => m.CrearComPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

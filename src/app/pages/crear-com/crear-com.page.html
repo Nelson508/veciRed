@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/comunidad"></ion-back-button>
+    </ion-buttons>
+  
+    <ion-title class="ion-text-center">VeciRed</ion-title>
+  
+    <ion-buttons slot="end">   
+      <ion-button disabled>
+        <ion-icon></ion-icon>
+      </ion-button>
+    </ion-buttons>
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="avisosTitlte"><h4 class="ion-text-center"><b>CREAR COMUNIDAD</b></h4></div>
+  <ion-grid>
+    <ion-list>
+      <!--INICIO NOMBRE COMUNIDAD-->
+      <ion-item>
+        <ion-label  position="floating"><b>Nombre:</b></ion-label>
+        <ion-input [(ngModel)]='comunidad.nombreComunidad' required></ion-input>
+
+      </ion-item>
+      <span class="caracteres">{{ 25 - comunidad.nombreComunidad.length }} caracteres restantes</span>
+      <!--FINS NOMBRE COMUNIDAD-->
+
+      <!--INICIO DESCRIPCION-->
+      <ion-item>
+        <ion-label position="floating"><b>Descripción:</b></ion-label>
+        <ion-textarea [(ngModel)]='comunidad.descripcion' required></ion-textarea>
+
+      </ion-item>
+      <span class="caracteres">{{ 250 - comunidad.descripcion.length }} caracteres restantes</span>
+
+      <!--FIN DESCRIPCION-->
+
+      <!---INICIO UBICACION-->
+      <ion-item>
+        <ion-label><b>Ubicación:</b></ion-label>
+        <ion-input></ion-input>
+
+      </ion-item>
+
+      <!---FIN UBICACION-->
+
+      <!---INICIO BOTON PUBLICAR-->
+      <ion-button  color="tertiary" 
+                   shape="round" 
+                   expand="full"
+                   (click)="crearComunidad()"
+                   style="margin-top: 30%;"
+                   [disabled]="comunidad.nombreComunidad.length < 1 ||
+                               comunidad.descripcion.length < 1
+                   "
+                   
+                   >
+        CREAR
+      </ion-button>
+
+      <!-- FIN BOTON PUBLICAR-->
+
+    </ion-list>
+  </ion-grid>
+
+</ion-content>

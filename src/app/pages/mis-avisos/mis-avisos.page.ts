@@ -26,26 +26,27 @@ export class MisAvisosPage implements OnInit {
 
   ngOnInit() {
     //this.avisosPorUsuario();
-    this.refresher();
+    //this.refresher();
 
     //actualizar la pagina si se elimino un aviso
     this.AvisosService.avisoEliminado.subscribe(
       aviso =>
       {
+        this.misAvisos = [];
         this.refresher();
       }
     )
 
-    this.AvisosService.nuevoAviso.subscribe(
-      aviso =>
-      {
-        
-        //this.avisosPorUsuario();
-        //this.misAvisos.unshift(aviso);
-        this.refresher();
+    // this.AvisosService.nuevoAviso.subscribe(
+    //   aviso =>
+    //   {
+    //     this.misAvisos = [];
+    //     //this.avisosPorUsuario();
+    //     //this.misAvisos.unshift(aviso);
+    //     this.refresher();
 
-      }
-    );
+    //   }
+    // );
   }
 
   avisosPorUsuario(event?, pull: boolean = false)
@@ -58,6 +59,7 @@ export class MisAvisosPage implements OnInit {
     }
     this.AvisosService.obtenerAvisosUsuario(pull).subscribe( respuesta =>
       {
+        
         this.misAvisos.push(...respuesta.avisosPublicados);
         console.log(respuesta);
          //validacion para comprobar que no hay avisos, si no hay se manda mensaje a usuario
@@ -86,6 +88,7 @@ export class MisAvisosPage implements OnInit {
 
   refresher(event?)
   {
+    this.misAvisos = []; 
     this.avisosPorUsuario(event, true);
 
     
@@ -136,6 +139,16 @@ export class MisAvisosPage implements OnInit {
     });
 
     await modal.present();
+  }
+
+  ionViewWillEnter() {
+    this.misAvisos = [];
+    
+    //if (this.child) {
+   //this.ngOnInit();
+   this.refresher();
+    //}
+    
   }
 
   
