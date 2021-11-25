@@ -11,17 +11,23 @@ export class VotacionesPage implements OnInit {
 
   acuerdos: Acuerdos[] = [];
   deshabilitar = false;
+  contador = 0;
+  acuerdoLanzado: Acuerdos = {};
+
 
   constructor(private acuerdosService: AcuerdosService) { }
 
   ngOnInit() {
 
-    this.scroll();
+    //this.scroll();
+    this.refresh();
     
-    this.acuerdosService.nuevoAcuerdo
+    this.acuerdosService.acuerdoEliminado
         .subscribe( acuerdo => {
 
-          this.acuerdos.unshift(acuerdo);
+          //this.emptyAcuerdos=false;
+          this.refresh();
+          //this.acuerdos.unshift(acuerdo);
         });
   }
 
@@ -30,8 +36,30 @@ export class VotacionesPage implements OnInit {
     this.acuerdosService.getAcuerdos(pull)
       .subscribe(response => {
         console.log(response );
-        this.acuerdos.push(...response.acuerdosPublicados);
 
+        for (let index = 0; index < response.acuerdosPublicados.length; index++) {
+          //const element = response.acuerdosPublicados[index];
+          console.log(index);
+          if(response.acuerdosPublicados[index]['estado'] == 2){
+            this.acuerdoLanzado = response.acuerdosPublicados[index];
+            //console.log(response.acuerdosPublicados[index]['estado']);
+            //this.acuerdos.push(...response.acuerdosPublicados['estado']);
+            this.acuerdos.push(this.acuerdoLanzado);
+            //console.log(this.acuerdos);
+          }
+
+        }
+        
+        /* if(response.acuerdosPublicados[this.contador]['estado'] == 2){
+
+          this.acuerdos.push(response.acuerdosPublicados[this.contador]);
+        }
+        console.log(this.acuerdos);
+        this.contador++; */
+       /*  console.log(response.acuerdosPublicados[0]);
+        this.contador++;
+        console.log(response.acuerdosPublicados[1]);
+ */
         if(event)
         {
           event.target.complete();

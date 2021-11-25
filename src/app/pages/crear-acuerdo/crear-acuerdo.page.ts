@@ -20,6 +20,7 @@ export class CrearAcuerdoPage implements OnInit {
     descripcion:'',
     fecha:null,
     hora:null,
+    duracion:0,
     opciones: {}
   };
 
@@ -61,6 +62,7 @@ export class CrearAcuerdoPage implements OnInit {
       descripcion:'',
       fecha:null,
       hora:null,
+      duracion:0,
       opciones: {}
     };
 
@@ -83,6 +85,7 @@ export class CrearAcuerdoPage implements OnInit {
       descripcion:'',
       fecha:null,
       hora:null,
+      duracion:0,
       opciones: {}
     }
 

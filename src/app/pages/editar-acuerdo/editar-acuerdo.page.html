@@ -53,6 +53,11 @@
     </ion-item>
 
     <ion-item>
+      <ion-label position="floating">Duracion</ion-label>
+      <ion-input type="number" min="0" max="23" [(ngModel)]="acuerdo.duracion" required></ion-input>
+    </ion-item>
+
+    <ion-item>
       <ion-label position="floating">Descripción</ion-label>
       <ion-textarea [(ngModel)]="acuerdo.descripcion" required></ion-textarea>
     </ion-item>
@@ -86,7 +91,11 @@
                expand="full"
                (click)="actualizar()"
                [disabled]="acuerdo.titulo.length < 1 ||
-                           acuerdo.descripcion.length < 1">
+                           acuerdo.descripcion.length < 1 ||
+                           acuerdo.fecha == null ||
+                           acuerdo.hora == null ||
+                           acuerdo.duracion < 1 ||
+                           (acuerdo.opciones | json) == '{}' ">
     Editar
   </ion-button>
 

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Acuerdos } from '../../interfaces/interfaces';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
+import { CuentaRegresivaComponent } from '../../herramientas/cuenta-regresiva/cuenta-regresiva.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detalle-votacion',
@@ -9,6 +11,10 @@ import { AcuerdosService } from '../../servicios/acuerdos.service';
   styleUrls: ['./detalle-votacion.page.scss'],
 })
 export class DetalleVotacionPage implements OnInit {
+  
+  @ViewChild(CuentaRegresivaComponent) child;
+  //subscriptions;
+  private subscription: Subscription;
 
   buttonValue = -1;
 
@@ -18,6 +24,7 @@ export class DetalleVotacionPage implements OnInit {
     descripcion:'',
     fecha:null,
     hora:null,
+    duracion:0,
     opciones: {}
   };
 
@@ -25,7 +32,8 @@ export class DetalleVotacionPage implements OnInit {
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController) { }
-
+              
+              
   ngOnInit() {
 
     this.acuerdosService.Objeto.subscribe(respuesta =>{
@@ -33,6 +41,7 @@ export class DetalleVotacionPage implements OnInit {
       this.votacion = respuesta;
       console.log(this.votacion);
       console.log(this.votacion.opciones[0]['titulo']);
+      //this.ionViewDidLoad();
     });
   }
 
@@ -53,6 +62,29 @@ export class DetalleVotacionPage implements OnInit {
       //Mensaje error
       console.log('No se logra' + actualizado);
 
+    }
+  }
+
+ /*  volverAtras(){
+
+    this.navCtrl.navigateRoot('/main/tabs/votaciones', {animated: true});
+    //this. ionViewWillUnload();
+    //this.ngOnDestroy();
+  } */
+  
+  ionViewWillEnter() {
+    
+    //if (this.child) {
+   this.child.ngOnInit();
+    //}
+    
+  } 
+
+  ionViewWillLeave() {
+    //this.subscriptions.unsubscribe();
+    //this.subscription.unsubscribe;
+    if (this.child) {
+      this.child.ngOnDestroy();
     }
   }
 }

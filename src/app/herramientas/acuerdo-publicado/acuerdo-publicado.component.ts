@@ -61,6 +61,8 @@ export class AcuerdoPublicadoComponent implements OnInit {
 
       if(respuesta['data']){
 
+        var lanzamiento = new Date().getTime();
+        this.acuerdoPublicado.fechaLanzada = lanzamiento;
         this.acuerdoPublicado.estado = 2;
         console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
