@@ -44,7 +44,7 @@
           </ion-buttons>
 
           <ion-buttons class="botones">
-            <ion-button shape="round" (click)="abrirEditar()">
+            <ion-button shape="round" (click)="abrirEditar()" [disabled]="!ocultar">
               <ion-icon name="create-outline"></ion-icon>
             </ion-button>  
           </ion-buttons>

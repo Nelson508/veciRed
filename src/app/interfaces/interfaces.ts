@@ -49,10 +49,12 @@ export interface Acuerdos {
   descripcion?: string;
   fecha?: string;
   hora?: string;
+  duracion?: number;
+  fechaLanzada?: number;
   imagenAcuerdo?: string[];
   opciones?: Object;
   usuario?: Usuario;
-  comunidad ?: Comunidad;
+  comunidad?: Comunidad;
   estado?: number;
  
 }

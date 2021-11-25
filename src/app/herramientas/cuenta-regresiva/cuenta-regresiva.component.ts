@@ -1,5 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, HostListener } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { Subscription, interval } from 'rxjs';
+import { Acuerdos } from '../../interfaces/interfaces';
+import { AcuerdosService } from '../../servicios/acuerdos.service';
 
 @Component({
   selector: 'app-cuenta-regresiva',
@@ -8,41 +11,69 @@ import { Subscription, interval } from 'rxjs';
 })
 export class CuentaRegresivaComponent implements OnInit, OnDestroy {
 
-    private subscription: Subscription;
+  @Input() votacionLanzada: Acuerdos = {};
+  private subscription: Subscription;
+
+  public dateNow = new Date();
   
-    public dateNow = new Date();
-    public dDay = new Date('Jan 01 2022 00:00:00');
-    milliSecondsInASecond = 1000;
-    hoursInADay = 24;
-    minutesInAnHour = 60;
-    SecondsInAMinute  = 60;
+  milliSecondsInASecond = 1000;
+  hoursInADay = 24;
+  minutesInAnHour = 60;
+  SecondsInAMinute  = 60;
+  
+  public timeDifference;
+  public secondsToDday;
+  public minutesToDday;
+  public hoursToDday;
 
-    public timeDifference;
-    public secondsToDday;
-    public minutesToDday;
-    public hoursToDday;
-    public daysToDday;
+  constructor(private acuerdosService: AcuerdosService,
+              private navCtrl: NavController) { }
 
+  private getTimeDifference () {
 
-    private getTimeDifference () {
-        this.timeDifference = this.dDay.getTime() - new  Date().getTime();
-        this.allocateTimeUnits(this.timeDifference);
+    var duracionMilisegundos = (this.votacionLanzada.duracion * this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute);
+    //fecha lanzada + duracion en milisegundos componen el dDay
+    var dDay = this.votacionLanzada.fechaLanzada + duracionMilisegundos;
+    this.timeDifference = dDay - new  Date().getTime();
+    console.log(this.timeDifference);
+
+    if(this.timeDifference < 0){ 
+
+      this.finVotacion();
     }
 
-  private allocateTimeUnits (timeDifference) {
-        this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
-        this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
-        this.hoursToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute) % this.hoursInADay);
-        this.daysToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay));
+    this.allocateTimeUnits(this.timeDifference);
   }
 
-    ngOnInit() {
-       this.subscription = interval(1000)
-           .subscribe(x => { this.getTimeDifference(); });
-    }
+  private allocateTimeUnits (timeDifference) {
 
-   ngOnDestroy() {
-      this.subscription.unsubscribe();
-   }
+    this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute);
+    this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute);
+    this.hoursToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute) % this.hoursInADay);
+  }
 
+  finVotacion(){
+
+    this.votacionLanzada.estado = 3;
+    console.log(this.votacionLanzada);
+    this.acuerdosService.eliminarAcuerdo(this.votacionLanzada);
+    console.log('el plazo de la votacion a terminado');
+    //navctrl eso falta
+    this.navCtrl.navigateRoot('/main/tabs/votaciones');
+    //this.ngOnDestroy();
+  }
+
+  ngOnInit() {
+
+    this.subscription = interval(1000)
+        .subscribe(x => { this.getTimeDifference(); });
+  }
+
+  ngOnDestroy() {
+
+   // this.votacionLanzada = {};
+    //this.timeDifference = 0;
+    this.subscription.unsubscribe();
+    //this.subscription = null;
+  }
 }

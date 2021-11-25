@@ -21,7 +21,8 @@ export class AcuerdosPage implements OnInit {
 
   ngOnInit() {
 
-    this.scroll();
+    //this.scroll();
+    this.refresh();
 
     this.acuerdosService.nuevoAcuerdo
         .subscribe( acuerdo => {
