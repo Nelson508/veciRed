@@ -107,7 +107,8 @@ export class AvisosService {
   //funcion que recibe data desde mis avisos y lo envia a editar aviso
   enviarDatos(datos)
   {
-    this.Objeto.next(datos);
+    const aux = datos;
+    this.Objeto.next(aux);
   }
 
   //funcion para actualizar una viso

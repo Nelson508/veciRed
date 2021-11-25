@@ -35,6 +35,9 @@ export interface Usuario {
 export interface Comunidad{
   _id?: string;
   nombreComunidad?: string;
+  descripcion?: string;
+  coordenadas?: string;
+
 }
 
 export interface AcuerdosCreados {

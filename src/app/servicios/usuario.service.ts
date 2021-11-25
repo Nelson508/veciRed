@@ -119,9 +119,20 @@ export class UsuarioService {
 
     });
   }
-
+  //obtenemos la informacion del usuario para filtrar por rol en
+  //crear avisos y editar avisos
   obtenerRolUsuario()
   {
     return this.usuario;
+  }
+
+  obtenerComunidadUsuario()
+  {
+    const headers = new HttpHeaders({
+      'Utoken': this.userToken
+    });
+
+    return this.http.get<Usuario>(`${URL}/usuario/comunidad`, {headers});
+
   }
 }
