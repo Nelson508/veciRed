@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { AlertasService } from '../../servicios/alertas.service';
+import { ComunidadService } from '../../servicios/comunidad.service';
+import { Usuario } from '../../interfaces/interfaces';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-crear-com',
@@ -11,17 +15,24 @@ export class CrearComPage implements OnInit {
   comunidad = {
     nombreComunidad: '',
     descripcion: '',
-    coordenadas: ''
+    coordenadas: '',
+    usuario: ''
   }
 
-  constructor( private alertasService: AlertasService
+  usuario: Usuario = {};
+
+  constructor( private alertasService: AlertasService,
+               private comunidadService: ComunidadService,
+               private navController: NavController,
+               private usuarioService: UsuarioService
 
              ) { }
 
   ngOnInit() {
+    this.obtenerUsuario();
   }
 
-  crearComunidad()
+  async crearComunidad()
   {
 
     if(this.comunidad.nombreComunidad.length > 25)
@@ -36,8 +47,33 @@ export class CrearComPage implements OnInit {
       return;
 
     }
-    console.log('click');
+
+    const comunidadCreada =  await this.comunidadService.crearComunidad(this.comunidad);
+    if(comunidadCreada)
+    {
+      this.comunidad = {
+        nombreComunidad: '',
+        descripcion: '',
+        coordenadas: '',
+        usuario: ''
+      }
+
+      this.navController.navigateRoot('main/tabs/comunidad');
+      
+    }
+    
     console.log(this.comunidad);
+  }
+
+
+  obtenerUsuario()
+  {
+    this.usuario = this.usuarioService.obtenerRolUsuario();
+    console.log(this.usuario);
+    console.log(this.usuario._id);
+    this.comunidad.usuario = this.usuario._id;
+    console.log(this.comunidad.usuario);
+
   }
 
 }

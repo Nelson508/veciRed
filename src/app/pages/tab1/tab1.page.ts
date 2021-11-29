@@ -101,4 +101,10 @@ export class Tab1Page implements OnInit{
 
   }
 
+
+  actualizarToken()
+  {
+    console.log('click');
+  }
+
 }
