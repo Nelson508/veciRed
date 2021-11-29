@@ -2,7 +2,7 @@
   <ion-card-content>
 
     <ion-item class="item-content ion-text-center" lines="none">
-      <ion-label>{{hoursToDday}}:{{minutesToDday}}:{{secondsToDday}} | Horas restantes</ion-label>
+      <ion-label><b>{{hoursToDday | number:'2.0'}}:{{minutesToDday | number:'2.0'}}:{{secondsToDday | number:'2.0'}} | Horas restantes</b></ion-label>
     </ion-item>
     
   </ion-card-content>

@@ -21,18 +21,20 @@
 </ion-header>
 
 <ion-content padding>
+  <!-- TITULO -->
+  <div class="titulo"><h4 class="ion-text-center"><b>EDITAR ACUERDO</b></h4></div>
+
   <ion-list>
+    <!-- ACUERDO TITULO -->
     <ion-item>
-      <ion-label class="ion-text-center">Acuerdos</ion-label>
-    </ion-item>
-    
-    <ion-item>
-      <ion-label position="floating">Título</ion-label>
+      <ion-label position="floating"><b>Título:</b></ion-label>
       <ion-input type="text" [(ngModel)]="acuerdo.titulo" required></ion-input>
     </ion-item>
+    <span class="caracteres">{{ 30 - acuerdo.titulo.length }} caracteres restantes</span>
 
+    <!-- ACUERDO DÍA -->
     <ion-item>
-      <ion-label position="floating">Día</ion-label>
+      <ion-label position="floating"><b>Día:</b></ion-label>
       <ion-datetime display-format="DD/MMMM/YYYY" 
                     picker-format="DD/MMMM/YYYY"
                     month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
@@ -43,8 +45,9 @@
                     cancelText="Cancelar" required></ion-datetime>
     </ion-item>
 
+    <!-- ACUERDO HORA -->
     <ion-item>
-      <ion-label position="floating">Hora</ion-label>
+      <ion-label position="floating"><b>Hora:</b></ion-label>
       <ion-datetime display-format="HH:mm" 
                     picker-format="HH mm"
                     [(ngModel)]="acuerdo.hora" 
@@ -52,18 +55,22 @@
                     cancelText="Cancelar" required></ion-datetime>
     </ion-item>
 
+    <!-- ACUERDO DURACIÓN -->
     <ion-item>
-      <ion-label position="floating">Duracion</ion-label>
+      <ion-label position="floating"><b>Duración:</b></ion-label>
       <ion-input type="number" min="0" max="23" [(ngModel)]="acuerdo.duracion" required></ion-input>
     </ion-item>
 
+    <!-- ACUERDO DESCRIPCIÓN -->
     <ion-item>
-      <ion-label position="floating">Descripción</ion-label>
+      <ion-label position="floating"><b>Descripción:</b></ion-label>
       <ion-textarea [(ngModel)]="acuerdo.descripcion" required></ion-textarea>
     </ion-item>
+    <span class="caracteres">{{ 250 - acuerdo.descripcion.length }} caracteres restantes</span>
 
+    <!-- ACUERDO OPCIONES -->
     <ion-item detail="true" (click)="mostrarOpciones()">
-      <ion-label>Opciones</ion-label>
+      <ion-label><b>Opciones</b></ion-label>
     </ion-item>
 
     <!-- <ion-row>

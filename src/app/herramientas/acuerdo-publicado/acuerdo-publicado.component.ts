@@ -40,7 +40,7 @@ export class AcuerdoPublicadoComponent implements OnInit {
 
   async eliminar(){
 
-    await this.alertasService.alertaDecision('Desea eliminar este acuerdo').then( respuesta => {
+    await this.alertasService.alertaDecision('¿Desea eliminar este acuerdo?').then( respuesta => {
 
       if(respuesta['data'] === true){
 
@@ -48,7 +48,7 @@ export class AcuerdoPublicadoComponent implements OnInit {
         console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
         console.log(respuesta['data']);
-     }else{
+      }else{
 
         console.log('No desea eliminar');
       }
@@ -59,7 +59,7 @@ export class AcuerdoPublicadoComponent implements OnInit {
 
     await this.alertasService.alertaDecision('¿Desea dar comienzo a esta votación?').then( respuesta => {
 
-      if(respuesta['data']){
+      if(respuesta['data'] === true){
 
         var lanzamiento = new Date().getTime();
         this.acuerdoPublicado.fechaLanzada = lanzamiento;
@@ -67,7 +67,24 @@ export class AcuerdoPublicadoComponent implements OnInit {
         console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
         console.log(respuesta['data']);
-     }else{
+      }else{
+
+        console.log('No desea eliminar');
+      }
+    })
+  }
+
+  async terminar(){
+
+    await this.alertasService.alertaDecision('¿Desea que se de termino a la votación?').then( respuesta => {
+
+      if(respuesta['data'] === true){
+
+        this.acuerdoPublicado.estado = 3;
+        console.log(this.acuerdoPublicado);
+        this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
+        console.log(respuesta['data']);
+      }else{
 
         console.log('No desea eliminar');
       }

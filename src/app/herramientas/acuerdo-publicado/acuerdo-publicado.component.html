@@ -55,7 +55,7 @@
             </ion-button>          
           </ion-buttons>
           <ion-buttons class="botones" [hidden]="ocultar">
-            <ion-button shape="round">
+            <ion-button shape="round" (click)="terminar()">
               <ion-icon name="hourglass-outline"></ion-icon>
             </ion-button>          
           </ion-buttons>
@@ -69,6 +69,9 @@
         <label class="fechaBorde">
           {{acuerdoPublicado.fecha}} | {{acuerdoPublicado.hora}}
         </label>
+        <!-- <label class="fechaBorde" [hidden]="ocultar">
+          <app-cuenta-regresiva [votacionLanzada]="acuerdoPublicado"></app-cuenta-regresiva>
+        </label> -->
       </ion-col>
     </ion-row>
   </ion-grid>

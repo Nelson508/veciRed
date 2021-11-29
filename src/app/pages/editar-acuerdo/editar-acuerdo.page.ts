@@ -20,7 +20,7 @@ export class EditarAcuerdoPage implements OnInit {
     descripcion:'',
     fecha:null,
     hora:null,
-    duracion:0,
+    duracion:null,
     opciones: {}
   };
 
@@ -68,7 +68,7 @@ export class EditarAcuerdoPage implements OnInit {
       descripcion:'',
       fecha:null,
       hora:null,
-      duracion:0,
+      duracion:null,
       opciones: {}
     }
   }

@@ -1,8 +1,9 @@
 import { DatePipe  } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Acuerdos } from '../../interfaces/interfaces';
+import { OpcionesPage } from '../opciones/opciones.page';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { Acuerdos } from '../../interfaces/interfaces';
 })
 export class CrearAcuerdoPage implements OnInit {
 
+  @ViewChild(OpcionesPage) child;
+
   tempImages: string[] = [];
 
   acuerdo: Acuerdos = {
@@ -20,7 +23,7 @@ export class CrearAcuerdoPage implements OnInit {
     descripcion:'',
     fecha:null,
     hora:null,
-    duracion:0,
+    duracion:null,
     opciones: {}
   };
 
@@ -62,10 +65,11 @@ export class CrearAcuerdoPage implements OnInit {
       descripcion:'',
       fecha:null,
       hora:null,
-      duracion:0,
+      duracion:null,
       opciones: {}
     };
 
+    this.acuerdosService.limpiar(true);
 
     this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
   }
@@ -76,18 +80,17 @@ export class CrearAcuerdoPage implements OnInit {
     this.navCtrl.navigateRoot('/main/tabs/opciones', {animated: true});
   }
 
-  volverAtras(){
+  volverAtras() {
 
-    this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
-
+    this.acuerdosService.limpiar(true);
+    
     this.acuerdo = {
       titulo:'',
       descripcion:'',
       fecha:null,
       hora:null,
-      duracion:0,
+      duracion:null,
       opciones: {}
     }
-
   }
 }

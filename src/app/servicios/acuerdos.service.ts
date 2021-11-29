@@ -61,6 +61,11 @@ export class AcuerdosService {
     this.Objeto.next(datos);
   }
 
+  limpiar(variable: boolean){
+
+    this.Objeto.next(variable);
+  }
+
   actualizarAcuerdo( acuerdo: Acuerdos){
 
     const headers = new HttpHeaders({

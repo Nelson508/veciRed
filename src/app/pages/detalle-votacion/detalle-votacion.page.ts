@@ -64,27 +64,15 @@ export class DetalleVotacionPage implements OnInit {
 
     }
   }
-
- /*  volverAtras(){
-
-    this.navCtrl.navigateRoot('/main/tabs/votaciones', {animated: true});
-    //this. ionViewWillUnload();
-    //this.ngOnDestroy();
-  } */
   
   ionViewWillEnter() {
     
-    //if (this.child) {
-   this.child.ngOnInit();
-    //}
-    
+    this.child.ngOnDestroy();
+    this.child.ngOnInit();
   } 
 
-  ionViewWillLeave() {
-    //this.subscriptions.unsubscribe();
-    //this.subscription.unsubscribe;
-    if (this.child) {
-      this.child.ngOnDestroy();
-    }
+  ionViewDidLeave() {
+    
+    this.child.ngOnDestroy();
   }
 }
