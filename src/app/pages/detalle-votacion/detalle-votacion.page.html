@@ -17,28 +17,27 @@
 </ion-header>
 
 <ion-content>
+  <!-- TITULO -->
+  <div class="titulo"><h4 class="ion-text-center"><b>VOTACIÓN</b></h4></div>
   
-  <ion-grid> 
+  <!-- <ion-grid> 
     <ion-row>
       <ion-col size="12">
+
         <ion-item class="titulo">
           <ion-label class="ion-text-center subTitulo">Acuerdos</ion-label>
         </ion-item>
-      </ion-col>
-      <ion-col size="12" class="button">    
-        <ion-button color="success">
-          JJ Los Lirios
-        </ion-button>    
+
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <ion-card  class="acuerdo">
     <ion-card-content>
       <ion-list style="background-color: #f4f5f8;" *ngFor="let opcion of votacion.opciones | keyvalue; let i=index;">
 
         <ion-item [color]="buttonValue == i ? 'secondary' : 'light'" (click)="buttonValue = i">
-          <ion-label class="ion-text-center">{{opcion.value['titulo']}}</ion-label>
+          <ion-label class="ion-text-center"><b>{{opcion.value['titulo']}}</b></ion-label>
         </ion-item>
 
       </ion-list>

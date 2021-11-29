@@ -49,23 +49,17 @@ export class OpcionesPage implements OnInit {
               private navCtrl: NavController) { }
 
   ngOnInit() {
-    /* this.acuerdosService.Objeto.subscribe(respuesta =>{
+    
+    this.acuerdosService.Objeto.subscribe(respuesta =>{
 
-      if(respuesta['tipo'] == false){
+      console.log('la respuesta es: ' + respuesta);
 
-        var res = respuesta;
-        
-        this.opcion1.titulo = res[0]['titulo'];
-        this.opcion2.titulo = res[1]['titulo'];
-        this.opcion3.titulo = res[2]['titulo'];
-        this.opcion4.titulo = res[3]['titulo'];
-        this.opcion1.descripcion = res[0]['descripcion'];
-        this.opcion2.descripcion = res[1]['descripcion'];
-        this.opcion3.descripcion = res[2]['descripcion'];
-        this.opcion4.descripcion = res[3]['descripcion'];
+      if(respuesta == true){
+
+        console.log(respuesta);
+        this.limpiar();
       }
-
-    }); */
+    });
   }
 
   agregarOpcion(){
@@ -127,7 +121,7 @@ export class OpcionesPage implements OnInit {
   
   }
 
-  /* ionViewWillEnter(){
+  limpiar(){
 
     this.opcion1.titulo = '';
     this.opcion2.titulo = '';
@@ -138,5 +132,5 @@ export class OpcionesPage implements OnInit {
     this.opcion3.descripcion = '';
     this.opcion4.descripcion = '';
   }
- */
+
 }
