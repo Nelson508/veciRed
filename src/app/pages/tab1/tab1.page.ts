@@ -1,10 +1,14 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { AvisosService } from '../../servicios/avisos.service';
-import { Avisos } from '../../interfaces/interfaces';
-import { MenuController } from '@ionic/angular';
+import { Avisos, Comunidad } from '../../interfaces/interfaces';
+import { IonSelect, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../servicios/usuario.service';
 
-import { MisAvisosPage } from '../mis-avisos/mis-avisos.page';
+
+
+
+
 
 
 @Component({
@@ -12,15 +16,24 @@ import { MisAvisosPage } from '../mis-avisos/mis-avisos.page';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
+
 export class Tab1Page implements OnInit{
+  @ViewChild('sectionSelect', { static: false }) selectRef: IonSelect;
+
+  //@ViewChild('sectionSelect') sectionSelect: Select;
 
   avisos: Avisos[] = [];
   emptyAvisos=false;
   infiniteScroll= true;
+  Comunidad: Comunidad[] = [];
+  Idcomunidad = '';
+  contaRol = 0;
 
   constructor( private AvisosService: AvisosService,
                private menuCtrl: MenuController,
                private ruta: Router,
+               private usuarioService: UsuarioService
                
                ) {
                 this.menuCtrl.enable(true, 'first');
@@ -104,7 +117,66 @@ export class Tab1Page implements OnInit{
 
   actualizarToken()
   {
-    console.log('click');
+    
+    
+    console.log(this.Idcomunidad);
+    // this.contaRol = this.Comunidad._id.findIndex( id => id == this.Idcomunidad);
+    // console.log(this.contaRol);
+    let aux = 0;
+    /*Obtenemos la posicion de la Id seleccionada
+    para obtener el rol y poder actualizar el token
+    rol y comunidad comparten la misma posicion
+    */
+    this.Comunidad.forEach( 
+      item =>
+      {
+        if(item._id == this.Idcomunidad)
+        {
+          console.log("lo encontro");
+          this.contaRol = aux;        
+        }else{
+          aux++;         
+        }             
+      });
+    
+      console.log(this.contaRol)
+    
+    
+    
   }
+  //funcion que nos muestra el select oculto en el icono
+  mostrarSelect()
+  {
+    
+    this.obtenerComunidades();
+    this.selectRef.open();
+    this.Comunidad = [];
+
+
+
+    
+    
+  }
+
+  obtenerComunidades()
+  {
+    this.usuarioService.obtenerComunidadUsuario().subscribe(
+      respuesta =>
+      {
+        
+        //this.comunidad.push(...this.usuario.comunidad);
+        //console.log(respuesta['comunidades']['comunidad'][0].nombreComunidad);
+        console.log(respuesta['comunidades']['comunidad'][1]);
+        this.Comunidad.push(...respuesta['comunidades']['comunidad']);
+        
+  
+        
+      }
+    )
+
+  }
+
+
+
 
 }

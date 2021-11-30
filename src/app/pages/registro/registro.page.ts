@@ -17,7 +17,7 @@ export class RegistroPage implements OnInit {
     fechaNacimiento: '',
     email: '',
     password: '',
-    rol: 2,
+    
     
     
   }
