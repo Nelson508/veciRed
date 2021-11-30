@@ -23,19 +23,32 @@
 </ion-header>
 
 <ion-content class="avisosContenedor"[fullscreen]="true">
-  <div class="">
-    <ion-row>
-      <ion-col>
-        <h4 class="ion-text-center"><b>AVISOS</b></h4>
-      </ion-col>
-      <ion-col>
-        <ion-button class=""
-            size="small"
-            expand="block"
-            (click)="actualizarToken()"
-            >comunidad</ion-button> 
-      </ion-col>
-    </ion-row>
+
+  <ion-select #sectionSelect style="display: none !important;" 
+   [(ngModel)]="Idcomunidad"
+   (ionChange) = "actualizarToken()"
+  >
+
+        <ion-select-option *ngFor="let comunidad of Comunidad" [value]="comunidad._id" >
+          {{comunidad.nombreComunidad}}
+        </ion-select-option>
+  
+  </ion-select>
+  <div class="avisosTitlte">
+    <div class=" ripple-parent">
+      <b>AVISOS</b>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+        <!-- <h4 class=""><b>AVISOS</b></h4> -->
+        <ion-buttons  class="cambiarComunidad"
+                  (click)="mostrarSelect()"
+                  >
+          
+                  <ion-icon slot="icon-only" name="people"></ion-icon>
+        
+      
+        </ion-buttons>
+      
     
     
             
