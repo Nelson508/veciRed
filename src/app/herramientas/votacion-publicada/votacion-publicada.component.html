@@ -3,37 +3,36 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-item lines="none">
+        <ion-item lines="none" class="item-background-color">
       
           <ion-avatar slot="start">
             <img src="/assets/avatars/{{votacionPublicada.usuario.imagenPerfil}}" />
           </ion-avatar>
       
           <ion-label>
-            <h3>{{votacionPublicada.comunidad.nombreComunidad}}</h3>
+            <h3><b>{{votacionPublicada.comunidad.nombreComunidad}}</b></h3>
           </ion-label>
       
         </ion-item>
       </ion-col>
     </ion-row>
 
-    <ion-card-content>
+    <ion-card-content class="fontColor">
       <ion-row>
     
         <ion-col size="12">
-         <div>
-           <ion-label class="titulo">
-             <h2>{{votacionPublicada.titulo}}</h2>
-           </ion-label>
-          </div>
-          <div>
+          <!-- TITULO -->
+          <ion-card-title class="titulo">{{votacionPublicada.titulo}}</ion-card-title>
+          <!-- DESCRIPCIÓN -->
+          <div class="ion-text-center">{{votacionPublicada.descripcion}}</div>
+          <!-- <div>
            <ion-label>
             {{votacionPublicada.descripcion}}
            </ion-label>
-         </div>
+         </div> -->
 
-         <!-- <img *ngIf="votacionPublicada.imagenAcuerdo.length > 0" class="formatoImagen" src="{{votacionPublicada.imagenAcuerdo | mostrarImagen: votacionPublicada.usuario._id }}" > -->
-          <img src="/assets/descarga.jpg">
+         <img *ngIf="votacionPublicada.imagenAcuerdo.length > 0" class="formatoImagen" src="{{votacionPublicada.imagenAcuerdo | mostrarImagen: votacionPublicada.usuario._id }}" >
+          <!-- <img src="/assets/descarga.jpg"> -->
         </ion-col>
       </ion-row>
     </ion-card-content>

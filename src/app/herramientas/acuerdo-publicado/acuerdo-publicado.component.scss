@@ -2,12 +2,14 @@
 
     margin-top: 10px;
     box-shadow: 0 0 2em rgba(30, 30, 31, 0.932);
+    background-color: rgba(91, 240, 4, 0.250);
 }
 
 .titulo{
 
     color: black;
     text-align: center;
+    margin-bottom: 1em;
 }
 
 .imagen{
@@ -22,23 +24,10 @@
     border: 2px #424242 solid;
     border-radius: 5px;
 }
-/* 
-.botones{
-
-    margin: 2.5rem 0rem;
-} */
-
 
 .fontColor
 {
     color:black;
-}
-
-.card-background-color {
-    //background-color: #87cefa;
-    //background-color: rgba(44, 117, 212, 0.250);
-    //background-color: rgba(240, 20, 20, 0.300);
-    background-color: rgba(91, 240, 4, 0.250);
 }
 
 .item-background-color{

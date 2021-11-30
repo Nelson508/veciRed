@@ -1,4 +1,4 @@
-<ion-card  class="acuerdo card-background-color">
+<ion-card  class="acuerdo">
   <ion-grid fixed>
 
     <ion-row>
@@ -10,7 +10,7 @@
           </ion-avatar>
       
           <ion-label>
-            <h3>{{acuerdoPublicado.comunidad.nombreComunidad}}</h3>
+            <h3><b>{{acuerdoPublicado.comunidad.nombreComunidad}}</b></h3>
           </ion-label>
       
         </ion-item>
@@ -21,18 +21,12 @@
       <ion-row>
     
         <ion-col size="11">
-         <div>
-           <ion-label class="titulo">
-             <h2>{{acuerdoPublicado.titulo}}</h2>
-           </ion-label>
-          </div>
-          <div>
-           <ion-label>
-            {{acuerdoPublicado.descripcion}}
-           </ion-label>
-         </div>
-
-         <img *ngIf="acuerdoPublicado.imagenAcuerdo.length > 0" class="formatoImagen" src="{{acuerdoPublicado.imagenAcuerdo | mostrarImagen: acuerdoPublicado.usuario._id }}" >
+          <!-- TITULO -->
+          <ion-card-title class="titulo">{{acuerdoPublicado.titulo}}</ion-card-title>
+          <!-- DESCRIPCIÓN -->
+          <div class="ion-text-center">{{acuerdoPublicado.descripcion}}</div>
+           <!-- IMAGEN -->
+          <img *ngIf="acuerdoPublicado.imagenAcuerdo.length > 0" class="formatoImagen" src="{{acuerdoPublicado.imagenAcuerdo | mostrarImagen: acuerdoPublicado.usuario._id }}" >
           <!-- <img src="/assets/descarga.jpg"> -->
         </ion-col>
         <ion-col size="1">
