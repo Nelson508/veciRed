@@ -23,7 +23,7 @@
 </ion-header>
 
 <ion-content class="avisosContenedor"[fullscreen]="true">
-
+  
   <ion-select #sectionSelect style="display: none !important;" 
    [(ngModel)]="Idcomunidad"
    (ionChange) = "actualizarToken()"
@@ -34,27 +34,28 @@
         </ion-select-option>
   
   </ion-select>
-  <div class="avisosTitlte">
-    <div class=" ripple-parent">
-      <b>AVISOS</b>
+  <ion-grid>
+    <div class="ripple-parent">
+
+      <ion-row>
+        <ion-col>
+
+        </ion-col>    
+        <ion-col  class="avisosTitlte ion-text-center">
+          <b>AVISOS</b>
+        </ion-col>
+        <ion-col >
+          <ion-buttons  class="cambiarComunidad"
+                  (click)="mostrarSelect()"
+                  >      
+                  <ion-icon slot="icon-only" name="people"></ion-icon>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>     
       <ion-ripple-effect></ion-ripple-effect>
     </div>
         <!-- <h4 class=""><b>AVISOS</b></h4> -->
-        <ion-buttons  class="cambiarComunidad"
-                  (click)="mostrarSelect()"
-                  >
-          
-                  <ion-icon slot="icon-only" name="people"></ion-icon>
-        
-      
-        </ion-buttons>
-      
-    
-    
-            
-   
-  
-  </div>
+  </ion-grid>
    <!---Refrescar nuestra pagina con ion refresher-->
    <ion-refresher slot="fixed" (ionRefresh)="refresher($event)">
     <ion-refresher-content></ion-refresher-content>

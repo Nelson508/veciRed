@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Comunidad } from '../interfaces/interfaces';
 
 
 
@@ -10,6 +11,8 @@ const url = environment.url;
   providedIn: 'root'
 })
 export class ComunidadService {
+
+  nuevaComunidad = new EventEmitter<Comunidad>();
 
   constructor( private http: HttpClient
     
@@ -23,6 +26,7 @@ export class ComunidadService {
         this.http.post(`${url}/comunidad/crear`, comunidad).subscribe(
           respuesta =>
           {
+            this.nuevaComunidad.emit(respuesta)
             resolve(true);
           }
         )

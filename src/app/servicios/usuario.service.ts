@@ -135,4 +135,33 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${URL}/usuario/comunidad`, {headers});
 
   }
+
+
+  actualizarToken(data)
+  {
+    
+
+    return new Promise<boolean>( resolve =>
+      {
+        this.http.post(`${URL}/usuario/updateToken`, data)
+        .subscribe( async respuesta =>
+          {
+            
+            console.log(respuesta);
+            if(respuesta['ok'])
+            {
+              await this.almacenarToken(respuesta['token']);
+              resolve(true);
+            }else{
+              console.log('fallo');
+              resolve(false);
+              
+            }
+          })
+
+      })
+
+
+
+  }
 }

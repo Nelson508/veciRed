@@ -25,8 +25,6 @@ export class MisAvisosPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.avisosPorUsuario();
-    //this.refresher();
 
     //actualizar la pagina si se elimino un aviso
     this.AvisosService.avisoEliminado.subscribe(
@@ -36,22 +34,10 @@ export class MisAvisosPage implements OnInit {
         this.refresher();
       }
     )
-
-    // this.AvisosService.nuevoAviso.subscribe(
-    //   aviso =>
-    //   {
-    //     this.misAvisos = [];
-    //     //this.avisosPorUsuario();
-    //     //this.misAvisos.unshift(aviso);
-    //     this.refresher();
-
-    //   }
-    // );
   }
 
   avisosPorUsuario(event?, pull: boolean = false)
   {
-
     if(pull)
     {
       this.misAvisos = [];
@@ -61,7 +47,6 @@ export class MisAvisosPage implements OnInit {
       {
         
         this.misAvisos.push(...respuesta.avisosPublicados);
-        console.log(respuesta);
          //validacion para comprobar que no hay avisos, si no hay se manda mensaje a usuario
          if(respuesta.avisosPublicados.length == 0 && respuesta.pagina=== 1)
          {
@@ -70,7 +55,6 @@ export class MisAvisosPage implements OnInit {
          }else{
            this.emptyMisAvisos=false;
          }
-
         if(event)
         {
           event.target.complete();
@@ -89,17 +73,11 @@ export class MisAvisosPage implements OnInit {
   refresher(event?)
   {
     this.misAvisos = []; 
-    this.avisosPorUsuario(event, true);
-
-    
+    this.avisosPorUsuario(event, true);    
   }
 
   editarAviso(aviso)
   {
-    //console.log('click');
-    console.log(aviso.titulo);
-    console.log(aviso.descripcion);
-    console.log(aviso.tipoAviso);
     //enviamos el aviso a traves del service
     this.AvisosService.enviarDatos(aviso);
     //redireccionamos al usuario a editar-aviso
@@ -108,18 +86,14 @@ export class MisAvisosPage implements OnInit {
 
   async eliminarAviso(aviso)
   {
-    //console.log('click');
+
     await this.alertasService.alertaDecision('Este aviso será eliminado permanentemente').then(
       respuesta =>
       {
         if(respuesta['data'] === true)
         {
           aviso.estadoAviso = 0;
-          this.AvisosService.eliminarAviso(aviso);
-          
-          //this.ruta.navigateByUrl('main/tabs/mis-avisos');
-
-          
+          this.AvisosService.eliminarAviso(aviso);      
         }else{
           console.log('No desea eliminar');
         }
@@ -132,10 +106,8 @@ export class MisAvisosPage implements OnInit {
 
   async openModal()
   {
-    //console.log('modal jeje');
     const modal = await this.modalController.create({
       component: AvisoModalComponent
-
     });
 
     await modal.present();
@@ -143,14 +115,8 @@ export class MisAvisosPage implements OnInit {
 
   ionViewWillEnter() {
     this.misAvisos = [];
-    
-    //if (this.child) {
-   //this.ngOnInit();
    this.refresher();
-    //}
-    
   }
 
-  
 
 }

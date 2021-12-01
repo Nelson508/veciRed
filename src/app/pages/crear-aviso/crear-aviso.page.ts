@@ -23,6 +23,8 @@ export class CrearAvisoPage implements OnInit {
 
   };
 
+  Roltype = [];
+
   imagenCarrete: string;
 
   usuario: Usuario = {};
@@ -39,6 +41,7 @@ export class CrearAvisoPage implements OnInit {
 
    ngOnInit() {
     this.obtenerRolUsuario();
+    
   }
   
    async crearAviso()
@@ -54,7 +57,7 @@ export class CrearAvisoPage implements OnInit {
        this.alertasService.alerta('Descripción demasiada larga');
        return;
      }
-     console.log(this.aviso);
+
      const avisoInsertado = await this.avisosService.crearNuevoAviso(this.aviso);
      //Vaciamos las variables para limpiar los campos
      this.aviso = {
@@ -63,12 +66,10 @@ export class CrearAvisoPage implements OnInit {
       tipoAviso: 0
     };
     this.imagenCarrete = '';
-
+    this.Roltype = [];
+    this.usuario = {};
 
     this.ruta.navigateByUrl('main/tabs/tab1');
-
-
-
    }
 
   
@@ -105,7 +106,6 @@ export class CrearAvisoPage implements OnInit {
 
   async openModal()
   {
-    console.log('modal jeje');
     const modal = await this.modalController.create({
       component: AvisoModalComponent
 
@@ -117,7 +117,13 @@ export class CrearAvisoPage implements OnInit {
   obtenerRolUsuario()
   {
     this.usuario = this.usuarioService.obtenerRolUsuario();
+    this.Roltype[0] = this.usuario.rol
 
+  }
+
+  ionViewWillEnter() {
+    this.obtenerRolUsuario();
+    
   }
 
 }

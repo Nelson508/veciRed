@@ -20,6 +20,7 @@ export class EditarAvisoPage implements OnInit {
   imagenCarrete: string;
   usuario: Usuario = {};
   tipoAvisoName = 'default';
+  Roltype = [];
 
   constructor( private usuarioService: UsuarioService,
                private avisosService: AvisosService,
@@ -57,6 +58,9 @@ export class EditarAvisoPage implements OnInit {
     if(actualizado)
     {
       this.imagenCarrete= '';
+      this.Roltype = [];
+      this.usuario = {};
+      this.avisoEdicion = {};
       this.navController.navigateRoot('/main/tabs/mis-avisos',{animated: true});
     }else
     {
@@ -68,7 +72,7 @@ export class EditarAvisoPage implements OnInit {
   obtenerRolUsuario()
   {
     this.usuario = this.usuarioService.obtenerRolUsuario();
-
+    this.Roltype[0] = this.usuario.rol
   }
 
   obtenerAvisoEditar()
@@ -120,6 +124,12 @@ export class EditarAvisoPage implements OnInit {
      }, (err) => {
       console.log(err);
      });
+  }
+
+
+  ionViewWillEnter() {
+    this.obtenerRolUsuario();
+    
   }
 
 }
