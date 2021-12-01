@@ -29,6 +29,7 @@ export class Tab1Page implements OnInit{
   Comunidad: Comunidad[] = [];
   Idcomunidad = '';
   contaRol = 0;
+  Idusuario = '';
 
   constructor( private AvisosService: AvisosService,
                private menuCtrl: MenuController,
@@ -49,26 +50,16 @@ export class Tab1Page implements OnInit{
         // cambiamos el valor de empty avisos a falso para que desaparesca el aviso vacio
         this.emptyAvisos=false;
         this.refresher();
-        //a traves de unshift insertaremos el nuevo aviso en el tope de nuestro arreglo
-        //this.avisos.unshift(aviso);
-        //this.misAvisos.refresher(event.target.complete());
-
-
       }
     );
-    
-      
-      
   }
   //FIN NGONINIT
 
-  
   //funcion que nos obtiene los post paginados 
   paginaSiguiente( event?, pull: boolean = false)
   {
     this.AvisosService.obtenerAvisos(pull).subscribe( respuesta =>
       {
-
         if(pull)
         {
           this.avisos = [];
@@ -90,38 +81,27 @@ export class Tab1Page implements OnInit{
 
           if(respuesta.avisosPublicados.length == 0)
           {
-            //event.target.disabled = true;
             this.infiniteScroll= false;
           }
           
         }
         
       })
-
-
   }
 
   NavegarCrearAviso()
   {
-
     this.ruta.navigateByUrl('main/tabs/crear-aviso');
   }
 
   refresher(event?)
   {
-    this.paginaSiguiente(event, true)
-
-
+    this.paginaSiguiente(event, true);
   }
 
 
-  actualizarToken()
-  {
-    
-    
-    console.log(this.Idcomunidad);
-    // this.contaRol = this.Comunidad._id.findIndex( id => id == this.Idcomunidad);
-    // console.log(this.contaRol);
+  async actualizarToken()
+  {   
     let aux = 0;
     /*Obtenemos la posicion de la Id seleccionada
     para obtener el rol y poder actualizar el token
@@ -132,30 +112,35 @@ export class Tab1Page implements OnInit{
       {
         if(item._id == this.Idcomunidad)
         {
-          console.log("lo encontro");
           this.contaRol = aux;        
         }else{
           aux++;         
         }             
       });
-    
-      console.log(this.contaRol)
-    
+      let sendData = {
+        usuario: this.Idusuario,
+        posicion: this.contaRol
+      }
+      const tokenActualizado = await this.usuarioService.actualizarToken(sendData);
+      if(tokenActualizado)
+      {       
+        this.emptyAvisos=false;
+        this.Idusuario = '';
+        this.contaRol = null;
+        this.refresher();
+      }
+      else{
+        console.log('fallo');
+      }
     
     
   }
   //funcion que nos muestra el select oculto en el icono
   mostrarSelect()
   {
-    
     this.obtenerComunidades();
     this.selectRef.open();
-    this.Comunidad = [];
-
-
-
-    
-    
+    this.Comunidad = []; 
   }
 
   obtenerComunidades()
@@ -163,20 +148,10 @@ export class Tab1Page implements OnInit{
     this.usuarioService.obtenerComunidadUsuario().subscribe(
       respuesta =>
       {
-        
-        //this.comunidad.push(...this.usuario.comunidad);
-        //console.log(respuesta['comunidades']['comunidad'][0].nombreComunidad);
-        console.log(respuesta['comunidades']['comunidad'][1]);
-        this.Comunidad.push(...respuesta['comunidades']['comunidad']);
-        
-  
-        
+        this.Idusuario = respuesta['comunidades']._id;
+        this.Comunidad.push(...respuesta['comunidades']['comunidad']);    
       }
     )
 
   }
-
-
-
-
 }

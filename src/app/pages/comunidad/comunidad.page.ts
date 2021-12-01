@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Comunidad } from '../../interfaces/interfaces';
+import { ComunidadService } from '../../servicios/comunidad.service';
 
 @Component({
   selector: 'app-comunidad',
@@ -15,10 +16,20 @@ export class ComunidadPage implements OnInit {
   };
   Comunidad: Comunidad[] = [];
 
-  constructor( private usuarioService: UsuarioService) { }
+  constructor( private usuarioService: UsuarioService,
+               private comunidadService: ComunidadService 
+              ) { }
 
   ngOnInit() {
     this.obtenerComunidades();
+    this.comunidadService.nuevaComunidad.subscribe(
+      respuesta =>
+      {
+        this.Comunidad = [];
+        this.obtenerComunidades();
+      }
+    )
+
   }
 
   obtenerComunidades()
@@ -27,14 +38,7 @@ export class ComunidadPage implements OnInit {
       respuesta =>
       {
         this.usuario = respuesta;
-        //this.comunidad.push(...this.usuario.comunidad);
-        //console.log(respuesta['comunidades']['comunidad'][0].nombreComunidad);
-        console.log(respuesta['comunidades']['comunidad'][0]);
-        this.Comunidad.push(...respuesta['comunidades']['comunidad']);
-        console.log('comunidad' + this.Comunidad );
-        //console.log(this.usuario);
-        //console.log(this.usuario.comunidad[0]['_id']);
-        
+        this.Comunidad.push(...respuesta['comunidades']['comunidad']);    
       }
     )
 

@@ -25,7 +25,19 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!--FIN ION REFRESHER-->
-  <div class="avisosTitlte"><h4 class="ion-text-center"><b>MIS AVISOS</b></h4></div>
+  
+  <!--INICIO TITULO-->
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>    
+        <ion-col  class="avisosTitlte ion-text-center">
+          <b>MIS AVISOS</b>
+        </ion-col>
+      </ion-row>     
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!--FIN TITULO-->
 
   <!--Agregamos avisos para mostrar aca los avisos publicados-->
   <div class="noAvisos"  *ngIf="emptyMisAvisos">

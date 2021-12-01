@@ -16,9 +16,19 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="avisosTitlte"><h4 class="ion-text-center"><b>CREAR AVISO</b></h4></div>
+  <!--INICIO TITULO-->
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>    
+        <ion-col  class="avisosTitlte ion-text-center">
+          <b>CREAR AVISO</b>
+        </ion-col>
+      </ion-row>     
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!--FIN TITULO-->
   <!--INICIO FORM-->
-  <!-- <app-nuevo-aviso></app-nuevo-aviso> -->
   <ion-grid>
   <ion-list >
     <!---INICIO TITULO-->
@@ -41,7 +51,7 @@
 
     <!---INICIO TIPO AVISO-->
     <!--Miembros directiva-->
-    <ion-item *ngIf="usuario.rol[0] == 1" >
+    <ion-item *ngIf="Roltype[0] == 1" >
       
       <ion-label><b>Tipo aviso:</b></ion-label>
       <ion-select placeholder="Seleccione"
@@ -53,7 +63,7 @@
       </ion-select>
     </ion-item>
     <!--Miembro normal-->
-    <ion-item *ngIf="usuario.rol[0] == 2">
+    <ion-item *ngIf="Roltype[0] == 2">
       
       <ion-label><b>Tipo aviso:</b></ion-label>
       <ion-select placeholder="Seleccione"

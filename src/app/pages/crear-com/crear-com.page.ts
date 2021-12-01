@@ -51,28 +51,25 @@ export class CrearComPage implements OnInit {
     const comunidadCreada =  await this.comunidadService.crearComunidad(this.comunidad);
     if(comunidadCreada)
     {
+      //VACIAMOS VARIABLES 8)
       this.comunidad = {
         nombreComunidad: '',
         descripcion: '',
         coordenadas: '',
         usuario: ''
       }
-
-      this.navController.navigateRoot('main/tabs/comunidad');
-      
+      this.usuario = {};
+      this.navController.navigateRoot('main/tabs/comunidad');  
     }
-    
-    console.log(this.comunidad);
+  
   }
 
 
   obtenerUsuario()
   {
     this.usuario = this.usuarioService.obtenerRolUsuario();
-    console.log(this.usuario);
-    console.log(this.usuario._id);
     this.comunidad.usuario = this.usuario._id;
-    console.log(this.comunidad.usuario);
+
 
   }
 
