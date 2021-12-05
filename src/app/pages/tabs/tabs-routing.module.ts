@@ -68,6 +68,10 @@ const routes: Routes = [
         loadChildren: () => import('../crear-com/crear-com.module').then( m => m.CrearComPageModule)
       },
       {
+        path: 'editar-com',
+        loadChildren: () => import('../editar-com/editar-com.module').then( m => m.EditarComPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

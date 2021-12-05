@@ -140,11 +140,12 @@ export class Tab1Page implements OnInit{
   {
     this.obtenerComunidades();
     this.selectRef.open();
-    this.Comunidad = []; 
+     
   }
 
   obtenerComunidades()
   {
+    this.Comunidad = [];
     this.usuarioService.obtenerComunidadUsuario().subscribe(
       respuesta =>
       {

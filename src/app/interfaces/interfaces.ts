@@ -37,6 +37,8 @@ export interface Comunidad{
   nombreComunidad?: string;
   descripcion?: string;
   coordenadas?: string;
+  region?: string;
+  comuna?: string;
 
 }
 

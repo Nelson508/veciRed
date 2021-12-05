@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Comunidad } from '../interfaces/interfaces';
+import { BehaviorSubject } from 'rxjs';
 
 
 
@@ -13,6 +14,8 @@ const url = environment.url;
 export class ComunidadService {
 
   nuevaComunidad = new EventEmitter<Comunidad>();
+
+  Objeto = new BehaviorSubject<{}>({});
 
   constructor( private http: HttpClient
     
@@ -33,5 +36,34 @@ export class ComunidadService {
       });
 
 
+  }
+
+
+  enviarDatos(datos)
+  {
+    const aux = datos;
+    this.Objeto.next(aux);
+  }
+
+
+  actualizarComunidad(comunidad)
+  {
+    return new Promise( resolve =>
+      {
+        this.http.post(`${url}/comunidad/actualizar`, comunidad).subscribe(
+          respuesta =>
+          {
+            if(respuesta['ok'])
+            {
+              this.nuevaComunidad.emit(respuesta);
+              resolve(true);
+            }else{
+              resolve(false);
+            }
+            
+          }
+        )
+
+      })
   }
 }
