@@ -16,7 +16,9 @@ export class CrearComPage implements OnInit {
     nombreComunidad: '',
     descripcion: '',
     coordenadas: '',
-    usuario: ''
+    usuario: '',
+    region: '',
+    comuna: ''
   }
 
   usuario: Usuario = {};
@@ -56,7 +58,9 @@ export class CrearComPage implements OnInit {
         nombreComunidad: '',
         descripcion: '',
         coordenadas: '',
-        usuario: ''
+        usuario: '',
+        region: '',
+        comuna: ''
       }
       this.usuario = {};
       this.navController.navigateRoot('main/tabs/comunidad');  

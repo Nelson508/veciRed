@@ -22,7 +22,7 @@
     <div class="ripple-parent">
       <ion-row>    
         <ion-col  class="avisosTitlte ion-text-center">
-          <b>CREAR NUEVA COMUNIDAD</b>
+          <b>EDITAR COMUNIDAD</b>
         </ion-col>
       </ion-row>     
       <ion-ripple-effect></ion-ripple-effect>
@@ -34,30 +34,21 @@
       <!--INICIO NOMBRE COMUNIDAD-->
       <ion-item>
         <ion-label  position="floating"><b>Nombre:</b></ion-label>
-        <ion-input [(ngModel)]='comunidad.nombreComunidad' required></ion-input>
+        <ion-input [(ngModel)]='comunidadEditada.nombreComunidad' required></ion-input>
 
       </ion-item>
-      <span class="caracteres">{{ 25 - comunidad.nombreComunidad.length }} caracteres restantes</span>
+      <span class="caracteres">{{ 25 - comunidadEditada.nombreComunidad.length }} caracteres restantes</span>
       <!--FINS NOMBRE COMUNIDAD-->
 
       <!--INICIO DESCRIPCION-->
       <ion-item>
         <ion-label position="floating"><b>Descripción:</b></ion-label>
-        <ion-textarea [(ngModel)]='comunidad.descripcion' required></ion-textarea>
+        <ion-textarea [(ngModel)]='comunidadEditada.descripcion' required></ion-textarea>
 
       </ion-item>
-      <span class="caracteres">{{ 250 - comunidad.descripcion.length }} caracteres restantes</span>
+      <span class="caracteres">{{ 250 - comunidadEditada.descripcion.length }} caracteres restantes</span>
 
       <!--FIN DESCRIPCION-->
-
-      <!-- -INICIO UBICACION-->
-      <!-- <ion-item>
-        <ion-label><b>Ubicación:</b></ion-label>
-        <ion-input [(ngModel)]='comunidad.coordenadas' ></ion-input>
-
-      </ion-item> -->
-
-      <!---FIN UBICACION -->
 
       <!---INICIO SELECCION REGION-->
       <!---https://www.bcn.cl/siit/nuestropais/regiones-->
@@ -65,7 +56,7 @@
       
         <ion-label><b>Región:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.region">
+                    [(ngModel)]="comunidadEditada.region">
           <ion-select-option value="Arica y Parinacota">Arica y Parinacota</ion-select-option>
           <ion-select-option value="Tarapacá">Tarapacá</ion-select-option>
           <ion-select-option value="Antofagasta">Antofagasta</ion-select-option>
@@ -90,10 +81,10 @@
       <!---INICIO SELECCION DE COMUNAS-->
 
       <!--INICIO ARICA Y PARINACOTA-->
-      <ion-item *ngIf="comunidad.region == 'Arica y Parinacota' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Arica y Parinacota' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Arica">Arica</ion-select-option>
           <ion-select-option value="Camarones">Camarones</ion-select-option>
           <ion-select-option value="Putre">Putre</ion-select-option>
@@ -103,10 +94,10 @@
       <!--FIN ARICA Y PARINACOTA-->
 
       <!--INICIO TARAPACA-->
-      <ion-item *ngIf="comunidad.region == 'Tarapacá' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Tarapacá' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Alto Hospicio">Alto Hospicio</ion-select-option>
           <ion-select-option value="Iquique">Iquique</ion-select-option>
           <ion-select-option value="Huara">Huara</ion-select-option>
@@ -119,10 +110,10 @@
       <!--FIN TARAPACA-->
 
       <!--INICIO Antofagasta-->
-      <ion-item *ngIf="comunidad.region == 'Antofagasta' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Antofagasta' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Tocopilla">Tocopilla</ion-select-option>
           <ion-select-option value="Maria Elena">Maria Elena</ion-select-option>
           <ion-select-option value="Calama">Calama</ion-select-option>
@@ -137,10 +128,10 @@
       <!--FIN Antofagasta-->
 
       <!--INICIO Atacama-->
-      <ion-item *ngIf="comunidad.region == 'Atacama' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Atacama' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Chañaral">Chañaral</ion-select-option>
           <ion-select-option value="Diego de Almagro">Diego de Almagro</ion-select-option>
           <ion-select-option value="Copiapó">Copiapó</ion-select-option>
@@ -155,10 +146,10 @@
       <!--FIN Atacama-->
 
       <!--INICIO Coquimbo-->
-      <ion-item *ngIf="comunidad.region == 'Coquimbo' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Coquimbo' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="La serena">La serena</ion-select-option>
           <ion-select-option value="La higuera">La higuera</ion-select-option>
           <ion-select-option value="Coquimbo">Coquimbo</ion-select-option>
@@ -172,17 +163,17 @@
           <ion-select-option value="Punitaqui">Punitaqui</ion-select-option>
           <ion-select-option value="Illapel">Illapel</ion-select-option>
           <ion-select-option value="Salamanca">Salamanca</ion-select-option>
-          <ion-select-option value="Los Vilos">Los Vilos</ion-select-option>
+          <ion-select-option value="">Los Vilos</ion-select-option>
           <ion-select-option value="Canela">Canela</ion-select-option>
         </ion-select>
       </ion-item>
       <!--FIN Coquimbo-->
 
       <!--INICIO Valparaíso-->
-      <ion-item *ngIf="comunidad.region == 'Valparaíso' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Valparaíso' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="La Ligua">La Ligua</ion-select-option>
           <ion-select-option value="Petorca">Petorca</ion-select-option>
           <ion-select-option value="Cabildo">Cabildo</ion-select-option>
@@ -226,10 +217,10 @@
       <!--FIN Valparaíso-->
 
       <!--INICIO Bernardo O'higgins-->
-      <ion-item *ngIf="comunidad.region.includes('Bernardo') " >
+      <ion-item *ngIf="comunidadEditada.region.includes('Bernardo') " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Rancagua">Rancagua</ion-select-option>
           <ion-select-option value="Graneros">Graneros</ion-select-option>
           <ion-select-option value="Mostazal">Mostazal</ion-select-option>
@@ -268,10 +259,10 @@
       <!--FIN Bernardo O'higgins-->
 
       <!--INICIO Maule-->
-      <ion-item *ngIf="comunidad.region == 'Maule' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Maule' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Curicó">Curicó</ion-select-option>
           <ion-select-option value="Teno">Teno</ion-select-option>
           <ion-select-option value="Romeral">Romeral</ion-select-option>
@@ -308,10 +299,10 @@
       <!--FIN Maule-->
 
        <!--INICIO Ñuble-->
-       <ion-item *ngIf="comunidad.region == 'Ñuble' " >
+       <ion-item *ngIf="comunidadEditada.region == 'Ñuble' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Chillán">Chillán</ion-select-option>
           <ion-select-option value="Bulnes">Bulnes</ion-select-option>
           <ion-select-option value="Chillán Viejo">Chillán Viejo</ion-select-option>
@@ -338,10 +329,10 @@
       <!--FIN Ñuble-->
 
       <!--INICIO Bío-Bío-->
-      <ion-item *ngIf="comunidad.region == 'Bío-Bío' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Bío-Bío' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Alto Bío-Bío">Alto Bío-Bío</ion-select-option>
           <ion-select-option value="Los Ángeles">Los Ángeles</ion-select-option>
           <ion-select-option value="Cabrero">Cabrero</ion-select-option>
@@ -379,10 +370,10 @@
       <!--FIN Bío-Bío-->
 
       <!--INICIO La Araucanía-->
-      <ion-item *ngIf="comunidad.region == 'La Araucanía' " >
+      <ion-item *ngIf="comunidadEditada.region == 'La Araucanía' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Angol">Angol</ion-select-option>
           <ion-select-option value="Renaico">Renaico</ion-select-option>
           <ion-select-option value="Collipulli">Collipulli</ion-select-option>
@@ -421,10 +412,10 @@
 
 
       <!--INICIO Los Ríos-->
-      <ion-item *ngIf="comunidad.region == 'Los Ríos' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Los Ríos' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Valdivia">Valdivia</ion-select-option>
           <ion-select-option value="Corral">Corral</ion-select-option>
           <ion-select-option value="Lanco">Lanco</ion-select-option>
@@ -442,10 +433,10 @@
       <!--FIN Los Ríos-->
 
       <!--INICIO Los Lagos-->
-      <ion-item *ngIf="comunidad.region == 'Los Lagos' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Los Lagos' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Quinchao">Quinchao</ion-select-option>
           <ion-select-option value="Castro">Castro</ion-select-option>
           <ion-select-option value="Ancud">Ancud</ion-select-option>
@@ -482,10 +473,10 @@
 
 
       <!--INICIO Aysen-->
-      <ion-item *ngIf="comunidad.region == 'Aysen' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Aysen' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Aysen">Aysen</ion-select-option>
           <ion-select-option value="Cisnes">Cisnes</ion-select-option>
           <ion-select-option value="Guaitecas">Guaitecas</ion-select-option>
@@ -502,10 +493,10 @@
 
 
       <!--INICIO Magallanes-->
-      <ion-item *ngIf="comunidad.region == 'Magallanes' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Magallanes' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Porvenir">Porvenir</ion-select-option>
           <ion-select-option value="Primavera">Primavera</ion-select-option>
           <ion-select-option value="Timaukel">Timaukel</ion-select-option>
@@ -523,10 +514,10 @@
 
 
       <!--INICIO Metropolitana-->
-      <ion-item *ngIf="comunidad.region == 'Metropolitana' " >
+      <ion-item *ngIf="comunidadEditada.region == 'Metropolitana' " >
         <ion-label><b>Comuna:</b></ion-label>
         <ion-select placeholder="Seleccione"
-                    [(ngModel)]="comunidad.comuna">
+                    [(ngModel)]="comunidadEditada.comuna">
           <ion-select-option value="Talagante">Talagante</ion-select-option>
           <ion-select-option value="El Monte">El Monte</ion-select-option>
           <ion-select-option value="Isla de Maipo">Isla de Maipo</ion-select-option>
@@ -590,21 +581,22 @@
       <ion-button  color="tertiary" 
                    shape="round" 
                    expand="full"
-                   (click)="crearComunidad()"
+                   (click)="editarComunidad()"
                    style="margin-top: 30%;"
-                   [disabled]="comunidad.nombreComunidad.length < 1 ||
-                               comunidad.descripcion.length < 1     ||
-                               comunidad.region == ''               ||
-                               comunidad.comuna == ''
+                   [disabled]="comunidadEditada.nombreComunidad.length < 1 ||
+                               comunidadEditada.descripcion.length < 1 ||
+                               comunidadEditada.region == '' ||
+                               comunidadEditada.comuna == ''
                    "
                    
                    >
-        CREAR
+        ACTUALIZAR
       </ion-button>
 
       <!-- FIN BOTON PUBLICAR-->
 
     </ion-list>
   </ion-grid>
+
 
 </ion-content>
