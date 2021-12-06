@@ -32,8 +32,19 @@ export class ComunidadPage implements OnInit {
       respuesta =>
       {
         this.Comunidad = [];
+        this.roles = [];
         this.obtenerComunidades();
       }
+    );
+
+    this.usuarioService.comunidadRemovida.subscribe(
+     respuesta =>
+     {
+      this.Comunidad = [];
+      this.roles = [];
+      this.obtenerComunidades();
+
+     }
     )
 
   }
@@ -73,7 +84,7 @@ export class ComunidadPage implements OnInit {
   async abandonarComunidad(comunidad, indexOfelement)
   {
     console.log('click');
-    console.log(comunidad);
+    
     console.log(indexOfelement);
     if(indexOfelement === 0)
     {
@@ -85,6 +96,8 @@ export class ComunidadPage implements OnInit {
         {
           if(respuesta['data'] === true)
           {
+            
+            this.usuarioService.removerComunidad(comunidad);
             console.log('OK');
           }else{
             console.log('FALSE');
