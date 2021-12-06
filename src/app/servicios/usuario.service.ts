@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { environment } from '../../environments/environment';
@@ -13,7 +13,8 @@ const URL = environment.url;
 export class UsuarioService {
 
   userToken: string = null;
-  usuario: Usuario = {}; 
+  usuario: Usuario = {};
+  comunidadRemovida = new EventEmitter(); 
 
   constructor( private http: HttpClient,
                private storage: Storage,
@@ -164,4 +165,45 @@ export class UsuarioService {
 
 
   }
+
+
+  //funcion para remover comunidad de usuario
+  removerComunidad(comunidad)
+  {
+    const headers = new HttpHeaders({
+      'Utoken': this.userToken
+    });
+
+    console.log(comunidad);
+
+    return new Promise(resolve =>
+      {
+        this.http.post(`${URL}/usuario/abandonarComunidad`, comunidad, {headers})
+        .subscribe( async respuesta =>
+          {
+            console.log(respuesta);
+            if(respuesta['token'])
+            {
+              await this.almacenarToken(respuesta['token']);
+              this.comunidadRemovida.emit(respuesta);
+              resolve(true);
+            };
+
+            if(respuesta['ok'] === true)
+            {
+              this.comunidadRemovida.emit(respuesta);
+              console.log('no se actualizo token');
+              resolve(true);
+            }else{
+              console.log('fallo');
+              resolve(false);
+            }
+
+
+          })
+      })
+
+  }
+
+
 }
