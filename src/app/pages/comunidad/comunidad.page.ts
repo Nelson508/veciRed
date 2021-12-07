@@ -55,9 +55,9 @@ export class ComunidadPage implements OnInit {
       respuesta =>
       {
       
-        console.log(respuesta);
+        //console.log(respuesta);
         this.Comunidad.push(...respuesta['comunidades']['comunidad']);
-        console.log(respuesta['comunidades']['rol']);
+        //console.log(respuesta['comunidades']['rol']);
         this.roles.push(...respuesta['comunidades']['rol']);
         
       }
@@ -109,6 +109,13 @@ export class ComunidadPage implements OnInit {
     }
     
 
+  }
+
+
+  buscarComunidad()
+  {
+    console.log('click');
+    this.ruta.navigateByUrl('main/tabs/buscar-com');
   }
 
 }

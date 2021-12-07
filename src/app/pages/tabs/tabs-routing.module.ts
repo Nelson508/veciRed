@@ -72,6 +72,10 @@ const routes: Routes = [
         loadChildren: () => import('../editar-com/editar-com.module').then( m => m.EditarComPageModule)
       },
       {
+        path: 'buscar-com',
+        loadChildren: () => import('../buscar-com/buscar-com.module').then( m => m.BuscarComPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
