@@ -29,6 +29,7 @@ export class ComunidadService {
         this.http.post(`${url}/comunidad/crear`, comunidad).subscribe(
           respuesta =>
           {
+            console.log(respuesta);
             this.nuevaComunidad.emit(respuesta)
             resolve(true);
           }
@@ -65,5 +66,15 @@ export class ComunidadService {
         )
 
       })
+  }
+
+
+  filtrarComunidad(comunidad)
+  {
+
+    return this.http.post<Comunidad[]>(`${url}/comunidad/buscar`, comunidad);
+   
+    
+
   }
 }

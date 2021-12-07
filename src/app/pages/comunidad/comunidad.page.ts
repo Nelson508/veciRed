@@ -32,8 +32,19 @@ export class ComunidadPage implements OnInit {
       respuesta =>
       {
         this.Comunidad = [];
+        this.roles = [];
         this.obtenerComunidades();
       }
+    );
+
+    this.usuarioService.comunidadRemovida.subscribe(
+     respuesta =>
+     {
+      this.Comunidad = [];
+      this.roles = [];
+      this.obtenerComunidades();
+
+     }
     )
 
   }
@@ -44,9 +55,9 @@ export class ComunidadPage implements OnInit {
       respuesta =>
       {
       
-        console.log(respuesta);
+        //console.log(respuesta);
         this.Comunidad.push(...respuesta['comunidades']['comunidad']);
-        console.log(respuesta['comunidades']['rol']);
+        //console.log(respuesta['comunidades']['rol']);
         this.roles.push(...respuesta['comunidades']['rol']);
         
       }
@@ -73,7 +84,7 @@ export class ComunidadPage implements OnInit {
   async abandonarComunidad(comunidad, indexOfelement)
   {
     console.log('click');
-    console.log(comunidad);
+    
     console.log(indexOfelement);
     if(indexOfelement === 0)
     {
@@ -85,6 +96,8 @@ export class ComunidadPage implements OnInit {
         {
           if(respuesta['data'] === true)
           {
+            
+            this.usuarioService.removerComunidad(comunidad);
             console.log('OK');
           }else{
             console.log('FALSE');
@@ -96,6 +109,13 @@ export class ComunidadPage implements OnInit {
     }
     
 
+  }
+
+
+  buscarComunidad()
+  {
+    console.log('click');
+    this.ruta.navigateByUrl('main/tabs/buscar-com');
   }
 
 }
