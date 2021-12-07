@@ -7,10 +7,10 @@
   
     <ion-title class="ion-text-center">VeciRed</ion-title>
   
-    <ion-buttons slot="end">   
-      <ion-button shape="round" routerLink="/main/tabs/crear-com">
+    <ion-buttons routerLink="/main/tabs/crear-com" slot="end">   
+      
         <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-      </ion-button>
+     
     </ion-buttons>
       
   </ion-toolbar>
@@ -20,9 +20,20 @@
   <!--INICIO TITULO-->
   <ion-grid>
     <div class="ripple-parent">
-      <ion-row>    
+      <ion-row>
+        <ion-col>
+
+        </ion-col>    
         <ion-col  class="avisosTitlte ion-text-center">
-          <b>MIS COMUNIDADES</b>
+          <b>COMUNIDADES</b>
+        </ion-col>
+        <ion-col >
+          <ion-buttons  class="cambiarComunidad"
+                  (click)="buscarComunidad()"
+                  >
+                  <ion-icon slot="icon-only" name="person-add-sharp"></ion-icon>      
+                  <ion-icon slot="icon-only" name="search-sharp"></ion-icon>
+          </ion-buttons>
         </ion-col>
       </ion-row>     
       <ion-ripple-effect></ion-ripple-effect>
