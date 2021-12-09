@@ -28,7 +28,7 @@
     <!-- ACUERDO TITULO -->
     <ion-item>
       <ion-label position="floating"><b>Título:</b></ion-label>
-      <ion-input type="text" [(ngModel)]="acuerdo.titulo" required></ion-input>
+      <ion-input type="text" maxlength="30" [(ngModel)]="acuerdo.titulo"></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - acuerdo.titulo.length }} caracteres restantes</span>
 
@@ -38,7 +38,7 @@
       <ion-datetime display-format="DD/MMMM/YYYY" 
                     picker-format="DD/MMMM/YYYY"
                     month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
-                    min="2015-01-01"
+                    [min]="minTime"
                     max="2025-12-31" 
                     [(ngModel)]="acuerdo.fecha" 
                     doneText="Aceptar"
@@ -58,13 +58,13 @@
     <!-- ACUERDO DURACIÓN -->
     <ion-item>
       <ion-label position="floating"><b>Duración:</b></ion-label>
-      <ion-input type="number" min="0" max="23" [(ngModel)]="acuerdo.duracion" required></ion-input>
+      <ion-input type="number" min="0" max="23" [(ngModel)]="acuerdo.duracion"></ion-input>
     </ion-item>
 
     <!-- ACUERDO DESCRIPCIÓN -->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea [(ngModel)]="acuerdo.descripcion" required></ion-textarea>
+      <ion-textarea maxlength="250" [(ngModel)]="acuerdo.descripcion"></ion-textarea>
     </ion-item>
     <span class="caracteres">{{ 250 - acuerdo.descripcion.length }} caracteres restantes</span>
 

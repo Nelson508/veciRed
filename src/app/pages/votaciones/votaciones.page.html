@@ -30,7 +30,7 @@
     <ion-row>
       <ion-col  size="12" size-lg="4" size-md="6" size-sm="12" size-xs="12"
                 *ngFor="let votacionPublicada of acuerdos">
-        <app-votacion-publicada [votacionPublicada]="votacionPublicada" ></app-votacion-publicada>
+        <app-votacion-publicada [votacionPublicada]="votacionPublicada"></app-votacion-publicada>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -43,3 +43,13 @@
       </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+
+<!-- Boton acuerdos anteriores -->
+<ion-fab vertical="bottom" slot="fixed">
+    <ion-button  color="tertiary"
+                 expand="full"
+                 shape="round"
+                 (click)="msotrarRegistro()">
+      Acuerdos anteriores
+    </ion-button>
+</ion-fab>

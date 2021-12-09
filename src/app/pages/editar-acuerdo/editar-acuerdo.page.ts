@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class EditarAcuerdoPage implements OnInit {
 
   //tempImages: string[] = [];
+  minTime: String = new Date(new Date().setHours(new Date().getHours() - 48)).toISOString();
 
   acuerdo: Acuerdos = {
 

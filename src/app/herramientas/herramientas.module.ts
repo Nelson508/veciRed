@@ -10,6 +10,7 @@ import { AcuerdoPublicadoComponent } from './acuerdo-publicado/acuerdo-publicado
 import { VotacionPublicadaComponent } from './votacion-publicada/votacion-publicada.component';
 import { AvisoModalComponent } from './aviso-modal/aviso-modal.component';
 import { CuentaRegresivaComponent } from './cuenta-regresiva/cuenta-regresiva.component';
+import { GraficoComponent } from './grafico/grafico.component';
 
 
 
@@ -22,7 +23,8 @@ import { CuentaRegresivaComponent } from './cuenta-regresiva/cuenta-regresiva.co
     AcuerdoPublicadoComponent,
     VotacionPublicadaComponent,
     AvisoModalComponent,
-    CuentaRegresivaComponent
+    CuentaRegresivaComponent,
+    GraficoComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { CuentaRegresivaComponent } from './cuenta-regresiva/cuenta-regresiva.co
     AcuerdosComunidadComponent,
     VotacionPublicadaComponent,
     AvisoModalComponent,
-    CuentaRegresivaComponent
+    CuentaRegresivaComponent,
+    GraficoComponent
   ]
 })
 export class HerramientasModule { }

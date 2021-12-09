@@ -26,56 +26,56 @@
     <!-- OPCIÓN 1 -->
     <ion-item>
       <ion-label position="floating"><b>Opción 1:</b></ion-label>
-      <ion-input type="text" [(ngModel)]="opcion1.titulo"></ion-input>
+      <ion-input type="text" maxlength="30" [(ngModel)]="opcion1.titulo"></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - opcion1.titulo.length }} caracteres restantes</span> 
 
     <!-- DESCRIPCIÓN 1 -->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea [(ngModel)]="opcion1.descripcion"></ion-textarea>
+      <ion-textarea maxlength="250" [(ngModel)]="opcion1.descripcion"></ion-textarea>
     </ion-item>
     <span class="caracteres">{{ 250 - opcion1.descripcion.length }} caracteres restantes</span> 
 
     <!-- OPCIÓN 2 -->
     <ion-item>
       <ion-label position="floating"><b>Opción 2:</b></ion-label>
-      <ion-input type="text" [(ngModel)]="opcion2.titulo"></ion-input>
+      <ion-input type="text" maxlength="30" [(ngModel)]="opcion2.titulo"></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - opcion2.titulo.length }} caracteres restantes</span>
     
     <!-- DESCRIPCIÓN 2 -->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea [(ngModel)]="opcion2.descripcion"></ion-textarea>
+      <ion-textarea maxlength="250" [(ngModel)]="opcion2.descripcion"></ion-textarea>
     </ion-item>
     <span class="caracteres">{{ 250 - opcion2.descripcion.length }} caracteres restantes</span>
 
     <!-- OPCIÓN 3 -->
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating"><b>Opción 3:</b></ion-label>
-      <ion-input type="text" [(ngModel)]="opcion3.titulo"></ion-input>
+      <ion-input type="text" maxlength="30" [(ngModel)]="opcion3.titulo"></ion-input>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion3">{{ 30 - opcion3.titulo.length }} caracteres restantes</span>
     
     <!-- DESCRIPCIÓN 3 -->
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea [(ngModel)]="opcion3.descripcion"></ion-textarea>
+      <ion-textarea maxlength="250" [(ngModel)]="opcion3.descripcion"></ion-textarea>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion3">{{ 250 - opcion3.descripcion.length }} caracteres restantes</span>
 
     <!-- OPCIÓN 4 -->
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating"><b>Opción 4:</b></ion-label>
-      <ion-input type="text" [(ngModel)]="opcion4.titulo"></ion-input>
+      <ion-input type="text" maxlength="30" [(ngModel)]="opcion4.titulo"></ion-input>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion4">{{ 30 - opcion4.titulo.length }} caracteres restantes</span>
     
     <!-- DESCRIPCIÓN 4 -->
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea [(ngModel)]="opcion4.descripcion"></ion-textarea>
+      <ion-textarea maxlength="250" [(ngModel)]="opcion4.descripcion"></ion-textarea>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion4">{{ 250 - opcion4.descripcion.length }} caracteres restantes</span>
 
