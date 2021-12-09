@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class DetalleVotacionPage implements OnInit {
   
   @ViewChild(CuentaRegresivaComponent) child;
-  //subscriptions;
+ 
   private subscription: Subscription;
 
   buttonValue = -1;
@@ -27,8 +27,6 @@ export class DetalleVotacionPage implements OnInit {
     duracion:0,
     opciones: {}
   };
-
-  count=0;
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController) { }
@@ -46,6 +44,9 @@ export class DetalleVotacionPage implements OnInit {
   }
 
   mostrarInfo(){
+    
+    this.acuerdosService.enviarDatos(this.votacion);
+    this.navCtrl.navigateRoot('/main/tabs/info');
 
   }
 

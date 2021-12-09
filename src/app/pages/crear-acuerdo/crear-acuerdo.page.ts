@@ -17,6 +17,8 @@ export class CrearAcuerdoPage implements OnInit {
 
   tempImages: string[] = [];
 
+  minTime: String = new Date().toISOString();
+
   acuerdo: Acuerdos = {
 
     titulo:'',

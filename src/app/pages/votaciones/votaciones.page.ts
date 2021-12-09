@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Acuerdos } from '../../interfaces/interfaces';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-votaciones',
@@ -15,7 +16,8 @@ export class VotacionesPage implements OnInit {
   acuerdoLanzado: Acuerdos = {};
 
 
-  constructor(private acuerdosService: AcuerdosService) { }
+  constructor(private acuerdosService: AcuerdosService,
+              private navCtrl: NavController) { }
 
   ngOnInit() {
 
@@ -71,6 +73,12 @@ export class VotacionesPage implements OnInit {
         }
       });
   }
+
+  msotrarRegistro(){
+
+    this.navCtrl.navigateRoot('/main/tabs/registros-acuerdos');
+  }
+
 
   refresh(event?){
 

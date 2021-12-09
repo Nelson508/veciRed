@@ -76,6 +76,14 @@ const routes: Routes = [
         loadChildren: () => import('../buscar-com/buscar-com.module').then( m => m.BuscarComPageModule)
       },
       {
+        path: 'info',
+        loadChildren: () => import('../info/info.module').then( m => m.InfoPageModule)
+      },
+      {
+        path: 'registros-acuerdos',
+        loadChildren: () => import('../registros-acuerdos/registros-acuerdos.module').then( m => m.RegistrosAcuerdosPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
