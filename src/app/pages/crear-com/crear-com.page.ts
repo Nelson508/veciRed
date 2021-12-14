@@ -31,7 +31,7 @@ export class CrearComPage implements OnInit {
              ) { }
 
   ngOnInit() {
-    this.obtenerUsuario();
+    //this.obtenerUsuario();
   }
 
   async crearComunidad()
@@ -75,6 +75,20 @@ export class CrearComPage implements OnInit {
     this.comunidad.usuario = this.usuario._id;
 
 
+  }
+
+  ionViewWillEnter() {
+    //VACIAMOS VARIABLES 8)
+    this.comunidad = {
+      nombreComunidad: '',
+      descripcion: '',
+      coordenadas: '',
+      usuario: '',
+      region: '',
+      comuna: ''
+    }
+    this.usuario = {};
+    this.obtenerUsuario();
   }
 
 }

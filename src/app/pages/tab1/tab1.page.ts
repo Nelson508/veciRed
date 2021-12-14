@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { AvisosService } from '../../servicios/avisos.service';
-import { Avisos, Comunidad } from '../../interfaces/interfaces';
+import { Avisos, Comunidad, Usuario } from '../../interfaces/interfaces';
 import { IonSelect, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { stringify } from 'querystring';
 
 
 
@@ -30,6 +31,9 @@ export class Tab1Page implements OnInit{
   Idcomunidad = '';
   contaRol = 0;
   Idusuario = '';
+  disabledCrear= false;
+  Roltype = [];
+  usuario: Usuario = {};
 
   constructor( private AvisosService: AvisosService,
                private menuCtrl: MenuController,
@@ -87,6 +91,7 @@ export class Tab1Page implements OnInit{
         }
         
       })
+      this.obtenerComunidades();
   }
 
   NavegarCrearAviso()
@@ -146,13 +151,33 @@ export class Tab1Page implements OnInit{
   obtenerComunidades()
   {
     this.Comunidad = [];
+    this.usuario = {};
     this.usuarioService.obtenerComunidadUsuario().subscribe(
       respuesta =>
       {
         this.Idusuario = respuesta['comunidades']._id;
-        this.Comunidad.push(...respuesta['comunidades']['comunidad']);    
+        this.Comunidad.push(...respuesta['comunidades']['comunidad']);
+        this.usuario = this.usuarioService.obtenerRolUsuario();
+        var var1: string = this.Comunidad[0]._id;
+        const var2: string = this.usuario.comunidad.toString();
+        if(var1 === var2)
+        {
+          this.disabledCrear = true;
+        }else{
+          this.disabledCrear = false;
+        }
+
       }
     )
 
+  }
+
+
+  ionViewWillEnter() {
+    this.obtenerComunidades();
+    console.log("hola");
+    
+
+    
   }
 }

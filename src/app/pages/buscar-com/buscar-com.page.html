@@ -627,6 +627,7 @@
                 size="small"
                 color="tertiary"
                 (click)="enviarSolicitud(comunity)"
+                [disabled]="this.solicitud.mensaje.length < 1"
                 ><span >Enviar</span>
               </ion-button>
             </ion-col>

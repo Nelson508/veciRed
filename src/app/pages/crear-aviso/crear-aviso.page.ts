@@ -118,11 +118,13 @@ export class CrearAvisoPage implements OnInit {
   {
     this.usuario = this.usuarioService.obtenerRolUsuario();
     this.Roltype[0] = this.usuario.rol
+    console.log('rol:' + this.Roltype[0])
 
   }
 
   ionViewWillEnter() {
     this.obtenerRolUsuario();
+
     
   }
 

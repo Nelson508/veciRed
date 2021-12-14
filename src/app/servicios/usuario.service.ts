@@ -205,5 +205,16 @@ export class UsuarioService {
 
   }
 
+  //funcion que nos entrega solo el array de comunidades del usuarii
+  obtenerArrayComunidadesUsuario()
+  {
+    const headers = new HttpHeaders({
+      'Utoken': this.userToken
+    });
+
+    return this.http.get<Usuario>(`${URL}/usuario/arrayComunidad`, {headers});
+
+  }
+
 
 }

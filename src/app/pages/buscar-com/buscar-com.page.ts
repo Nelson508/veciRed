@@ -3,6 +3,7 @@ import { UsuarioService } from '../../servicios/usuario.service';
 import { Comunidad } from '../../interfaces/interfaces';
 import { ComunidadService } from '../../servicios/comunidad.service';
 import { SolicitudService } from '../../servicios/solicitud.service';
+import { AlertasService } from '../../servicios/alertas.service';
 
 @Component({
   selector: 'app-buscar-com',
@@ -11,29 +12,38 @@ import { SolicitudService } from '../../servicios/solicitud.service';
 })
 export class BuscarComPage implements OnInit {
 
+  //objeto que nos guarda los valores del buscador
   comunidad = {
     nombreComunidad: '',
     region: '',
     comuna: ''
   }
-
+  //array objeto que nos muestra el conjunto de comunidades que cumplan con la busqueda
   comunidades: Comunidad[] = [];
-
+  //variable que se hace true y muestra img en pantalla
   noComunity = false;
 
   mostrarInputMensaje = false;
-
+  //objeto que contiene la id de la comunidad y el mensaje de solicitud a registrar
   solicitud = {
     _id: '',
     mensaje: '¡Hola!, me gustaria unirme a tu comunidad'
   }
-
+  //variable que nos guarda la posicion de la comunidad a enviar
   position;
+  //array que nos guarda las com... para compararlas y verificar que usuario no pertenece
+  arrayComunidades = [];
+
+  perteneceUser = false;
 
   constructor(private comunidadService: ComunidadService,
-              private solicitudService: SolicitudService) { }
+              private solicitudService: SolicitudService,
+              private alertasService: AlertasService,
+              private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+
+    this.obtenerComunidadesUsuario();
   }
 
   async buscar()
@@ -42,6 +52,11 @@ export class BuscarComPage implements OnInit {
     await this.comunidadService.filtrarComunidad(this.comunidad).subscribe(
       respuesta =>
       {
+          this.comunidad = {
+          nombreComunidad: '',
+          region: '',
+          comuna: ''
+        }
         this.comunidades = [];
         this.noComunity = false;
         this.solicitud = {
@@ -89,24 +104,52 @@ export class BuscarComPage implements OnInit {
 
   unirme(indexOfelement)
   {
+    this.solicitud = {
+      _id: '',
+      mensaje: '¡Hola!, me gustaria unirme a tu comunidad'
+    };
     this.position = indexOfelement;
     this.mostrarInputMensaje = true;
    
   }
 
-  async enviarSolicitud(comunity)
+    async enviarSolicitud(comunity)
   {
+    //validacion para comprobar que usuario no pertenece
     this.solicitud._id = comunity._id;
+    let index = this.arrayComunidades.indexOf(this.solicitud._id);
+    if(index != -1)
+    {
+      this.alertasService.alerta('¡Ya perteneces a esta comunidad!');
+      return;    
+    }
     
-    console.log(this.solicitud);
+    //INICIO ENVIO DE DATOS
     this.solicitudService.crearSolicitud(this.solicitud);
     await this.solicitudService.nuevaSolicitud.subscribe(
-      respuesta =>
+      async respuesta =>
       {
-        console.log('subs')
-        console.log(respuesta);
+        if(respuesta['ok'] === true)
+        {
+          await this.alertasService.alerta('¡Su solicitud ha sido enviada!');
+          return;
+        }else{
+          await this.alertasService.alerta('¡Ya has enviado una solicitud a esta comunidad!');
+          return;
+        }
       }
+    ).unsubscribe;
+    //FIN ENVIO DE DATOS
 
+  }
+
+   async obtenerComunidadesUsuario()
+  {
+    await this.usuarioService.obtenerArrayComunidadesUsuario().subscribe(
+       respuesta =>
+      {
+        this.arrayComunidades =  respuesta['comunidades']['comunidad'] 
+      }
     )
 
   }

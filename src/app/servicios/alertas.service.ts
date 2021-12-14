@@ -12,7 +12,10 @@ export class AlertasService {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       message,
-      buttons: ['OK']
+      buttons: [{
+        text: 'Ok',
+        role: 'cancel'
+      }]
     });
 
     await alert.present();
