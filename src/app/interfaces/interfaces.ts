@@ -70,3 +70,10 @@ export interface Acuerdos {
   descripcion: string;
   votos: number;
 } */
+
+export interface Solicitud{
+  _id?: string;
+  usuario?: Usuario;
+  comunidad?: Comunidad;
+  mensaje?: string;
+}

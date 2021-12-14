@@ -1,6 +1,6 @@
 <ion-app>
 
-  <ion-menu side="start" menuId="first" contentId="main">
+  <ion-menu (ionDidOpen)="menuOpened()" side="start" menuId="first" contentId="main" >
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Menu</ion-title>
@@ -8,10 +8,14 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-menu-toggle>
+        <ion-menu-toggle >
           <ion-item routerLink="/main/tabs/comunidad">
             <ion-icon name="people-outline" slot="start"></ion-icon>
             Mis comunidades
+          </ion-item>
+          <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/solicitud" >
+            <ion-icon slot="start" name="person-add-outline"></ion-icon> 
+            Mis solicitudes
           </ion-item>
           <ion-item routerLink="/main/tabs/acuerdos">
             <ion-icon name="megaphone-outline" slot="start"></ion-icon>
@@ -29,6 +33,8 @@
             <ion-icon name="log-out-outline" slot="start"></ion-icon>
             Cerrar Sesion
           </ion-item>
+          
+          
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

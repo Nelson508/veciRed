@@ -118,5 +118,10 @@ export class MisAvisosPage implements OnInit {
    this.refresher();
   }
 
+  NavegarCrearAviso()
+  {
+    this.ruta.navigateByUrl('main/tabs/crear-aviso');
+  }
+
 
 }

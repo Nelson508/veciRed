@@ -84,6 +84,10 @@ const routes: Routes = [
         loadChildren: () => import('../registros-acuerdos/registros-acuerdos.module').then( m => m.RegistrosAcuerdosPageModule)
       },
       {
+        path: 'solicitud',
+        loadChildren: () => import('../solicitud/solicitud.module').then( m => m.SolicitudPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

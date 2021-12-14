@@ -13,6 +13,7 @@ const url = environment.url;
 export class SolicitudService {
 
   nuevaSolicitud = new EventEmitter();
+  deletedSolicitud = new EventEmitter();
 
   constructor(private http: HttpClient,
               private usuarioService: UsuarioService
@@ -31,12 +32,56 @@ export class SolicitudService {
         this.http.post(`${url}/solicitud/crear`, solicitud, {headers})
         .subscribe(respuesta =>
           {
-            this.nuevaSolicitud.emit(respuesta['solicitudBD']);
-            resolve(true);
+            
+              this.nuevaSolicitud.emit(respuesta);
+              resolve(true);
+            
+            
           })
       }
       )
 
+
+  }
+
+
+  obtenerSolicitudes()
+  {
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
+    return this.http.get(`${url}/solicitud/`,{headers});
+  }
+
+  eliminarSolicitudes(rechazar)
+  {
+    return new Promise(resolve =>
+      {
+        this.http.post(`${url}/solicitud/eliminar`, rechazar)
+        .subscribe(respuesta =>
+          {
+            this.deletedSolicitud.emit(respuesta);
+             resolve(true);
+          })
+      }
+      )
+  }
+
+
+  aceptarSolicitud(aceptar)
+  {
+    return new Promise(resolve =>
+      {
+        this.http.post(`${url}/solicitud/aceptar`, aceptar)
+        .subscribe(respuesta =>
+          {
+            console.log('resp: =>>>>')
+            console.log(respuesta);
+            this.deletedSolicitud.emit(respuesta);
+             resolve(true);
+          })
+      }
+      )
 
   }
 }
