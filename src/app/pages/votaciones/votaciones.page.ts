@@ -15,6 +15,13 @@ export class VotacionesPage implements OnInit {
   contador = 0;
   acuerdoLanzado: Acuerdos = {};
 
+  milliSecondsInASecond = 1000;
+  hoursInADay = 24;
+  minutesInAnHour = 60;
+  SecondsInAMinute  = 60;
+
+  public timeDifference;
+
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController) { }
@@ -24,13 +31,13 @@ export class VotacionesPage implements OnInit {
     //this.scroll();
     this.refresh();
     
-    this.acuerdosService.acuerdoEliminado
-        .subscribe( acuerdo => {
+    //this.acuerdosService.acuerdoEliminado
+        //.subscribe( acuerdo => {
 
           //this.emptyAcuerdos=false;
-          this.refresh();
+          //this.refresh();
           //this.acuerdos.unshift(acuerdo);
-        });
+        //});
   }
 
   scroll(event?, pull: boolean = false){
@@ -38,16 +45,26 @@ export class VotacionesPage implements OnInit {
     this.acuerdosService.getAcuerdos(pull)
       .subscribe(response => {
         console.log(response );
+        console.log(this.acuerdos);
 
         for (let index = 0; index < response.acuerdosPublicados.length; index++) {
           //const element = response.acuerdosPublicados[index];
-          console.log(index);
+          //console.log(index);
           if(response.acuerdosPublicados[index]['estado'] == 2){
+
             this.acuerdoLanzado = response.acuerdosPublicados[index];
-            //console.log(response.acuerdosPublicados[index]['estado']);
-            //this.acuerdos.push(...response.acuerdosPublicados['estado']);
+            
+            var duracionMilisegundos = (this.acuerdoLanzado.duracion * this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute);
+            var dDay = this.acuerdoLanzado.fechaLanzada + duracionMilisegundos;
+            this.timeDifference = dDay - new  Date().getTime();
+
+            if(this.timeDifference < 0){ 
+
+              this.acuerdoLanzado.estado = 3;
+              this.acuerdosService.eliminarAcuerdo(this.acuerdoLanzado);
+            }
+            
             this.acuerdos.push(this.acuerdoLanzado);
-            //console.log(this.acuerdos);
           }
 
         }
@@ -58,10 +75,10 @@ export class VotacionesPage implements OnInit {
         }
         console.log(this.acuerdos);
         this.contador++; */
-       /*  console.log(response.acuerdosPublicados[0]);
+       /*console.log(response.acuerdosPublicados[0]);
         this.contador++;
-        console.log(response.acuerdosPublicados[1]);
- */
+        console.log(response.acuerdosPublicados[1]);*/
+
         if(event)
         {
           event.target.complete();
@@ -71,20 +88,24 @@ export class VotacionesPage implements OnInit {
           }
           
         }
-      });
+      }).unsubscribe;
   }
 
-  msotrarRegistro(){
+  mostrarRegistro(){
 
     this.navCtrl.navigateRoot('/main/tabs/registros-acuerdos');
   }
-
 
   refresh(event?){
 
     this.scroll(event, true);
     this.acuerdos = [];
     this.deshabilitar = false;
+  }
+
+  ionViewWillEnter() {
+    
+    this.refresh();
   }
 
 }

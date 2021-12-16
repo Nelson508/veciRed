@@ -13,6 +13,14 @@ export class AcuerdosPage implements OnInit {
   acuerdos: Acuerdos[] = [];
   emptyAcuerdos:boolean = false;
   deshabilitar: boolean = false;
+  acuerdosCreadosLanzados: Acuerdos = {};
+
+  milliSecondsInASecond = 1000;
+  hoursInADay = 24;
+  minutesInAnHour = 60;
+  SecondsInAMinute  = 60;
+
+  public timeDifference;
 
 
 
@@ -47,7 +55,31 @@ export class AcuerdosPage implements OnInit {
     this.acuerdosService.getAcuerdos(pull)
       .subscribe(response => {
         console.log(response );
-        this.acuerdos.push(...response.acuerdosPublicados);
+
+        for (let index = 0; index < response.acuerdosPublicados.length; index++) {
+
+          if(response.acuerdosPublicados[index]['estado'] == 1 || response.acuerdosPublicados[index]['estado'] == 2 ){
+            
+            this.acuerdosCreadosLanzados = response.acuerdosPublicados[index];
+
+            if(this.acuerdosCreadosLanzados.estado == 2){
+
+              var duracionMilisegundos = (this.acuerdosCreadosLanzados.duracion * this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute);
+              var dDay = this.acuerdosCreadosLanzados.fechaLanzada + duracionMilisegundos;
+              this.timeDifference = dDay - new  Date().getTime();
+  
+              if(this.timeDifference < 0){ 
+  
+                this.acuerdosCreadosLanzados.estado = 3;
+                this.acuerdosService.eliminarAcuerdo(this.acuerdosCreadosLanzados);
+              }
+            }
+  
+            this.acuerdos.push(this.acuerdosCreadosLanzados);
+          }
+
+        }
+        //this.acuerdos.push(...response.acuerdosPublicados);
 
 
         if(response.acuerdosPublicados.length == 0 && response.pagina === 1)
@@ -77,6 +109,11 @@ export class AcuerdosPage implements OnInit {
     this.scroll(event, true);
     this.acuerdos = [];
     this.deshabilitar = false;
+  }
+
+  ionViewWillEnter() {
+    
+    this.refresh();
   }
 
 }
