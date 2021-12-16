@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subscription, interval } from 'rxjs';
 import { Acuerdos } from '../../interfaces/interfaces';
@@ -27,6 +28,7 @@ export class CuentaRegresivaComponent implements OnInit, OnDestroy {
   public hoursToDday;
 
   constructor(private acuerdosService: AcuerdosService,
+              private router: Router,
               private navCtrl: NavController) { }
 
   private getTimeDifference () {
@@ -60,6 +62,7 @@ export class CuentaRegresivaComponent implements OnInit, OnDestroy {
     console.log('el plazo de la votacion a terminado');
     //navctrl eso falta
     this.navCtrl.navigateRoot('/main/tabs/votaciones');
+    //this.router.
     //this.ngOnDestroy();
   }
 
