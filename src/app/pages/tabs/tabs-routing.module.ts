@@ -88,6 +88,10 @@ const routes: Routes = [
         loadChildren: () => import('../solicitud/solicitud.module').then( m => m.SolicitudPageModule)
       },
       {
+        path: 'gestionar',
+        loadChildren: () => import('../gestionar/gestionar.module').then( m => m.GestionarPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

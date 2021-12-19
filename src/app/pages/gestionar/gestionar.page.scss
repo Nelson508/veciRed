@@ -6,7 +6,6 @@
     font-size: x-large;
 }
 
-
 .avisoUnitario{
     //border: 0.1px #241816 solid;
     //border-radius: 5%;
@@ -26,29 +25,15 @@
     color:black;
 }
 
-.noAvisos{
-    background-color: #AFEEEE;
-    border: 2px #241816 solid;
-    border-bottom-left-radius: 9%;
-    border-bottom-right-radius: 9%;
-    border-top-left-radius:9%;
-    border-top-right-radius:9%;
-    box-shadow: 0 0 2em rgba(30, 30, 31, 0.932);
-}
-
-
-.noAvisosTitle{
-    
-    color: black; 
-    
-    text-align: center;
-    font-family: monospace;
-}
-
-
-.noAvisosImage{
-    //margin-left:30%;
-     width: 40%;
-     height: 50%;
-     max-height: 70%;
-}
+ion-select {
+    /* Applies to the value and placeholder color */
+    color: #1e2030;
+  
+    /* Set a different placeholder color */
+    --placeholder-color: #050505;
+  
+    /* Set full opacity on the placeholder */
+    --placeholder-opacity: 1;
+    font-size:large;
+    //border:1px #241816 solid;
+  }

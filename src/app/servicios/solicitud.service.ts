@@ -16,7 +16,8 @@ export class SolicitudService {
   deletedSolicitud = new EventEmitter();
 
   constructor(private http: HttpClient,
-              private usuarioService: UsuarioService
+              private usuarioService: UsuarioService,
+              
     ) { }
 
 

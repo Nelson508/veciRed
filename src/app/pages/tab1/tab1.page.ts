@@ -175,9 +175,5 @@ export class Tab1Page implements OnInit{
 
   ionViewWillEnter() {
     this.obtenerComunidades();
-    console.log("hola");
-    
-
-    
   }
 }

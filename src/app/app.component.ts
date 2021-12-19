@@ -37,6 +37,8 @@ export class AppComponent implements OnInit{
 
   obtenerRolUsuario()
   {
+    this.Roltype = [];
+    this.usuario = {};
     this.usuario = this.usuarioService.obtenerRolUsuario();
     this.Roltype[0] = this.usuario.rol;
   }
@@ -45,8 +47,7 @@ export class AppComponent implements OnInit{
 
   menuOpened()
   {
-    this.Roltype = [];
-    this.usuario = {};
+    
     this.obtenerRolUsuario();
   }
 
