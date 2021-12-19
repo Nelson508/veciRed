@@ -15,7 +15,7 @@
           </ion-item>
           <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/solicitud" >
             <ion-icon slot="start" name="person-add-outline"></ion-icon> 
-            Mis solicitudes
+            Mis solicitudes <span *ngIf="largoSolicitud >= 1" slot="end" class="solicitud">+{{largoSolicitud}}</span>
           </ion-item>
           <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/gestionar" >
             <ion-icon slot="start" name="body-outline"></ion-icon> 

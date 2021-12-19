@@ -85,4 +85,14 @@ export class SolicitudService {
       )
 
   }
+
+
+  obtenerLargoSolicitudes()
+  {
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
+    return this.http.get(`${url}/solicitud/length`,{headers});
+  }
+
 }
