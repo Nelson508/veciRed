@@ -141,9 +141,9 @@ export class Tab1Page implements OnInit{
     
   }
   //funcion que nos muestra el select oculto en el icono
-  mostrarSelect()
+  async mostrarSelect()
   {
-    this.obtenerComunidades();
+    await this.obtenerComunidades();
     this.selectRef.open();
      
   }

@@ -3,6 +3,7 @@ import { UsuarioService } from './servicios/usuario.service';
 import { AvisosService } from './servicios/avisos.service';
 import { NavController, MenuController } from '@ionic/angular';
 import { Usuario } from './interfaces/interfaces';
+import { SolicitudService } from './servicios/solicitud.service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,12 @@ export class AppComponent implements OnInit{
 
   Roltype = [];
   usuario: Usuario = {};
+  largoSolicitud = 0;
   constructor( private usuarioService: UsuarioService,
                private avisosService: AvisosService,
                private navController: NavController,
-               public menuCtrl: MenuController) {}
+               public menuCtrl: MenuController,
+               private solicitudService: SolicitudService) {}
   
   ngOnInit() 
   {
@@ -43,12 +46,27 @@ export class AppComponent implements OnInit{
     this.Roltype[0] = this.usuario.rol;
   }
 
+  obtenerLargoSolicitud()
+  {
+    this.solicitudService.obtenerLargoSolicitudes().subscribe(
+      respuesta =>
+      {
+        this.largoSolicitud = respuesta['length'];
+      }
+    )
+  }
+
   
 
   menuOpened()
   {
     
     this.obtenerRolUsuario();
+    if(this.Roltype[0] == 1)
+    {
+      this.obtenerLargoSolicitud();
+    }
+    
   }
 
 
