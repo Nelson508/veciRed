@@ -44,6 +44,20 @@ export class BuscarComPage implements OnInit {
   ngOnInit() {
 
     this.obtenerComunidadesUsuario();
+    
+    this.solicitudService.nuevaSolicitud.subscribe(
+      async respuesta =>
+      {
+        if(respuesta['ok'] === true)
+        {
+          await this.alertasService.alerta('¡Su solicitud ha sido enviada!');
+          return;
+        }else{
+          await this.alertasService.alerta('¡Ya has enviado una solicitud a esta comunidad!');
+          return;
+        }
+      }
+    );
   }
 
   async buscar()
@@ -66,13 +80,12 @@ export class BuscarComPage implements OnInit {
 
         this.mostrarInputMensaje = false;
         this.position = null;
-       
-        console.log(respuesta);
+        
+        
         this.comunidades.push(...respuesta['comunidades']);
         //respuesta para busqueda no exitosa
         if(respuesta['comunidades'].length < 1)
         {
-          console.log('entro')
           this.noComunity = true;
         }
         
@@ -99,6 +112,9 @@ export class BuscarComPage implements OnInit {
 
     this.mostrarInputMensaje = false;
     this.position = null;
+    //this.arrayComunidades = [];
+    this.obtenerComunidadesUsuario();
+    
   }
 
 
@@ -116,7 +132,11 @@ export class BuscarComPage implements OnInit {
     async enviarSolicitud(comunity)
   {
     //validacion para comprobar que usuario no pertenece
+    /*enviamos desde el *ngFor a comunity._id variable que almacena la id del usuario y luego la evaluamos en el array
+    del usuario para verificar si existe alguna coincidencia*/
+    
     this.solicitud._id = comunity._id;
+
     let index = this.arrayComunidades.indexOf(this.solicitud._id);
     if(index != -1)
     {
@@ -126,19 +146,19 @@ export class BuscarComPage implements OnInit {
     
     //INICIO ENVIO DE DATOS
     this.solicitudService.crearSolicitud(this.solicitud);
-    await this.solicitudService.nuevaSolicitud.subscribe(
-      async respuesta =>
-      {
-        if(respuesta['ok'] === true)
-        {
-          await this.alertasService.alerta('¡Su solicitud ha sido enviada!');
-          return;
-        }else{
-          await this.alertasService.alerta('¡Ya has enviado una solicitud a esta comunidad!');
-          return;
-        }
-      }
-    ).unsubscribe;
+    // await this.solicitudService.nuevaSolicitud.subscribe(
+    //   async respuesta =>
+    //   {
+    //     if(respuesta['ok'] === true)
+    //     {
+    //       await this.alertasService.alerta('¡Su solicitud ha sido enviada!');
+    //       return;
+    //     }else{
+    //       await this.alertasService.alerta('¡Ya has enviado una solicitud a esta comunidad!');
+    //       return;
+    //     }
+    //   }
+    // );
     //FIN ENVIO DE DATOS
 
   }
@@ -146,9 +166,9 @@ export class BuscarComPage implements OnInit {
    async obtenerComunidadesUsuario()
   {
     await this.usuarioService.obtenerArrayComunidadesUsuario().subscribe(
-       respuesta =>
+       async respuesta =>
       {
-        this.arrayComunidades =  respuesta['comunidades']['comunidad'] 
+        this.arrayComunidades = await respuesta['comunidades']['comunidad']; 
       }
     )
 

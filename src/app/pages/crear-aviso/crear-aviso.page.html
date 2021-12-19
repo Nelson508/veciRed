@@ -34,7 +34,7 @@
     <!---INICIO TITULO-->
     <ion-item>
       <ion-label position="floating"><b>Título:</b></ion-label>
-      <ion-input [(ngModel)]="aviso.titulo" required ></ion-input>
+      <ion-input type="text" maxlength="30" [(ngModel)]="aviso.titulo" required ></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - aviso.titulo.length }} caracteres restantes</span> 
     
@@ -43,7 +43,7 @@
     <!---INICIO DESCRIPCION-->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea [(ngModel)]="aviso.descripcion" required ></ion-textarea>
+      <ion-textarea type="text" maxlength="250" [(ngModel)]="aviso.descripcion"  required ></ion-textarea>
       
     </ion-item>
     <span class="caracteres">{{ 250 - aviso.descripcion.length }} caracteres restantes</span> 

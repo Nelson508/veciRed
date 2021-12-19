@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Comunidad } from '../interfaces/interfaces';
 import { BehaviorSubject } from 'rxjs';
+import { UsuarioService } from './usuario.service';
 
 
 
@@ -17,7 +18,8 @@ export class ComunidadService {
 
   Objeto = new BehaviorSubject<{}>({});
 
-  constructor( private http: HttpClient
+  constructor( private http: HttpClient,
+               private usuarioService: UsuarioService
     
              ) { }
 
@@ -74,6 +76,17 @@ export class ComunidadService {
 
     return this.http.post<Comunidad[]>(`${url}/comunidad/buscar`, comunidad);
    
+    
+
+  }
+
+  obtenerNombreComunidad()
+  {
+    const headers = new HttpHeaders({
+      'UToken': this.usuarioService.userToken
+    });
+
+    return this.http.get(`${url}/comunidad/nombreComunidad`,{headers});
     
 
   }

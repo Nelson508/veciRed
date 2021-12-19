@@ -1,6 +1,6 @@
 <ion-app>
 
-  <ion-menu (ionDidOpen)="menuOpened()" side="start" menuId="first" contentId="main" >
+  <ion-menu (ionWillOpen)="menuOpened()" side="start" menuId="first" contentId="main" >
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Menu</ion-title>
@@ -16,6 +16,10 @@
           <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/solicitud" >
             <ion-icon slot="start" name="person-add-outline"></ion-icon> 
             Mis solicitudes
+          </ion-item>
+          <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/gestionar" >
+            <ion-icon slot="start" name="body-outline"></ion-icon> 
+            Miembros
           </ion-item>
           <ion-item routerLink="/main/tabs/acuerdos">
             <ion-icon name="megaphone-outline" slot="start"></ion-icon>

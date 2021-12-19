@@ -216,5 +216,33 @@ export class UsuarioService {
 
   }
 
+  //funcion que nos entrega todos los miembros de una comunidad
+   obtenerMiembrosComunidad()
+  {
+    const headers = new HttpHeaders({
+      'Utoken': this.userToken
+    });
+
+     
+      return  this.http.get<Usuario[]>(`${URL}/usuario/miembrosComunidad`, {headers});
+      
+
+    
+    //return this.http.get<Usuario[]>(`${URL}/usuario/miembrosComunidad`, {headers}); 
+}
+
+actualizarRolUsuario(dataUsuario)
+{
+  return new Promise( resolve =>
+    {
+      this.http.post(`${URL}/usuario/actualizarRol`, dataUsuario).subscribe(
+        respuesta =>
+        { 
+          resolve(true);
+        }
+      )
+    });
+
+}
 
 }
