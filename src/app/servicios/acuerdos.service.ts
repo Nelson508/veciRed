@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { UsuarioService } from './usuario.service';
 import { AcuerdosCreados, Acuerdos } from '../interfaces/interfaces';
 import { BehaviorSubject } from 'rxjs';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 const URL = environment.url;
 
@@ -20,7 +21,7 @@ export class AcuerdosService {
 
   constructor(private http: HttpClient,
               private usuarioService: UsuarioService,
-              ) { }
+              private fileTransfer: FileTransfer) { }
 
   getAcuerdos(pull: boolean = false){
 
@@ -110,5 +111,27 @@ export class AcuerdosService {
           }
         });
     });
+  }
+
+  subirImagen( img: string){
+
+    const options: FileUploadOptions = {
+      
+      fileKey: 'imagenAcuerdo',
+      headers: {
+                'UToken' : this.usuarioService.userToken
+               }
+    };
+
+    //creamos una tarea
+    const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
+    fileTransfer.upload(img, `${URL}/acuerdos/upload`, options  )
+    .then( data => {
+      console.log(data);
+    }).catch( err => {
+      console.log('Fallo al subir imagen:', err);
+    });
+
   }
 }

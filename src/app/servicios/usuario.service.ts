@@ -127,6 +127,11 @@ export class UsuarioService {
     return this.usuario;
   }
 
+  obtenerUsuario()
+  {
+    return this.usuario;
+  }
+
   obtenerComunidadUsuario()
   {
     const headers = new HttpHeaders({
