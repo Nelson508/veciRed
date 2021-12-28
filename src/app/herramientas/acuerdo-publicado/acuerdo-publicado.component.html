@@ -25,9 +25,8 @@
           <ion-card-title class="titulo">{{acuerdoPublicado.titulo}}</ion-card-title>
           <!-- DESCRIPCIÓN -->
           <div class="ion-text-center">{{acuerdoPublicado.descripcion}}</div>
-           <!-- IMAGEN -->
-          <img *ngIf="acuerdoPublicado.imagenAcuerdo.length > 0" class="formatoImagen" src="{{acuerdoPublicado.imagenAcuerdo | mostrarImagen: acuerdoPublicado.usuario._id }}" >
-          <!-- <img src="/assets/descarga.jpg"> -->
+          <!-- IMAGEN -->
+          <img *ngIf="acuerdoPublicado.imagenAcuerdo.length > 0" class="formatoImagen" src="{{acuerdoPublicado.imagenAcuerdo[0] | imagenAcuerdo: acuerdoPublicado.usuario._id }}" >
         </ion-col>
         <ion-col size="1">
   

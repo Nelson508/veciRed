@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="cabecera">
     <ion-buttons slot="start" (click)="volverAtras()">
       <ion-back-button defaultHref="/main/tabs/acuerdos"></ion-back-button>
     </ion-buttons>
@@ -69,24 +69,56 @@
     <ion-item detail="true" (click)="mostrarOpciones()">
       <ion-label><b>Opciones</b></ion-label>
     </ion-item>
+    
+    <!-- ACUERDO  IMAGEN-->
+    <ion-item>
+      <ion-row style="width: 100%; margin-top:3%;">
+        <ion-col size="6" >
+          <ion-label style="margin-top:4.5%;"><b>Imagen:</b></ion-label>
 
-    <!-- <ion-row>
-      <ion-col size="3" *ngFor="let image of tempImages">
-        <ion-card>
-          <img src="">
-        </ion-card>
-      </ion-col>
-    </ion-row> -->
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="full"
+                  shape="round"
+                  style="margin-bottom: 9%;"
+                  (click)="galeria()"
+                  >
+        <ion-icon slot="start" name="images"></ion-icon>
+        Galería
+      </ion-button>
 
-    <ion-row>
+        </ion-col>
+      </ion-row>
+      
+      
+    </ion-item>
+
+   <!--  <ion-row>
       <ion-col size="6" offset="6">
         <ion-button expand="full"
-                    shape="round">
+                    shape="round"
+                    (click)="galeria()">
           <ion-icon slot="start" name="images"></ion-icon>
           Galería
         </ion-button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
+    <!---MOSTRAR IMAGEN -->
+    <ion-grid *ngIf="tempImages">
+      
+      <ion-card>
+        <img [src]="tempImages">
+      </ion-card>
+  
+    </ion-grid>
+
+    <!-- <ion-row>
+      <ion-col size="3" *ngFor="let image of tempImages">
+        <ion-card>
+          <img [src]="image">
+        </ion-card>
+      </ion-col>
+    </ion-row> -->
 
   </ion-list>
 

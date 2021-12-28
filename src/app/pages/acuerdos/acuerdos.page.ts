@@ -29,8 +29,8 @@ export class AcuerdosPage implements OnInit {
 
   ngOnInit() {
 
-    //this.scroll();
-    this.refresh();
+    this.scroll();
+    //this.refresh();
 
     this.acuerdosService.nuevoAcuerdo
         .subscribe( acuerdo => {
@@ -44,7 +44,8 @@ export class AcuerdosPage implements OnInit {
         .subscribe( acuerdo => {
 
           //this.emptyAcuerdos=false;
-          this.refresh();
+          this.scroll();
+          //this.refresh();
           //this.acuerdos.unshift(acuerdo);
         });    
 

@@ -21,7 +21,10 @@
   <div class="titulo"><h4 class="ion-text-center"><b>VOTACIÓN</b></h4></div>
   
 
-  <ion-card  class="acuerdo">
+  <app-grafico [graficoVotacion]="votacion" [hidden]="ocultar"></app-grafico>
+
+  <ion-card  class="acuerdo" [hidden]="!ocultar">
+
     <ion-card-content>
       <ion-list style="background-color: #f4f5f8;" *ngFor="let opcion of votacion.opciones | keyvalue; let i=index;">
 

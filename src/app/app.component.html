@@ -21,13 +21,13 @@
             <ion-icon slot="start" name="body-outline"></ion-icon> 
             Miembros
           </ion-item>
-          <ion-item routerLink="/main/tabs/acuerdos">
+          <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/acuerdos">
             <ion-icon name="megaphone-outline" slot="start"></ion-icon>
             Acuerdos
           </ion-item>
           <ion-item routerLink="/main/tabs/votaciones">
             <ion-icon name="megaphone-outline" slot="start"></ion-icon>
-            Acuerdos - Votacion
+            Votaciones
           </ion-item >
           <ion-item (click)="goToMisAvisos()">
             <ion-icon name="receipt-outline" slot="start"></ion-icon>
@@ -35,7 +35,7 @@
           </ion-item>
           <ion-item (click)="logout()">
             <ion-icon name="log-out-outline" slot="start"></ion-icon>
-            Cerrar Sesion
+            Cerrar Sesión
           </ion-item>
           
           

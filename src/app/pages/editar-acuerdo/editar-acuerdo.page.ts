@@ -4,6 +4,9 @@ import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { NavController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+declare var window: any;
 
 @Component({
   selector: 'app-editar-acuerdo',
@@ -12,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class EditarAcuerdoPage implements OnInit {
 
-  //tempImages: string[] = [];
+  tempImages: string;
   minTime: String = new Date(new Date().setHours(new Date().getHours() - 48)).toISOString();
 
   acuerdo: Acuerdos = {
@@ -27,7 +30,8 @@ export class EditarAcuerdoPage implements OnInit {
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController,
-              private router: Router) { }
+              private router: Router,
+              private camera: Camera) { }
 
   ngOnInit() {
 
@@ -72,6 +76,29 @@ export class EditarAcuerdoPage implements OnInit {
       duracion:null,
       opciones: {}
     }
+  }
+
+  galeria(){
+
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     
+      const imagen = window.Ionic.WebView.convertFileSrc(imageData);
+
+      this.acuerdosService.subirImagen(imageData);
+      this.tempImages = imagen;
+      
+    }, (err) => {
+     console.log(err);
+    });
   }
 
   async actualizar(){

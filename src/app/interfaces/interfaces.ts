@@ -58,18 +58,12 @@ export interface Acuerdos {
   fechaLanzada?: number;
   imagenAcuerdo?: string[];
   opciones?: Object;
+  votantes?: string[];
   usuario?: Usuario;
   comunidad?: Comunidad;
   estado?: number;
  
 }
-
-/* export interface Opciones{
-
-  titulo: string;
-  descripcion: string;
-  votos: number;
-} */
 
 export interface Solicitud{
   _id?: string;
