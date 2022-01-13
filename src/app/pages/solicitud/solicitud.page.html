@@ -29,12 +29,17 @@
     </div>
   </ion-grid>
   <!--FIN TITULO-->
+
+  <!---Refrescar nuestra pagina con ion refresher-->
+  <ion-refresher slot="fixed" (ionRefresh)="refresher($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   
   <!--INICIO EMTPY SOLICITUD-->
   <ion-grid  *ngIf="emptySolicitud" >
     <ion-card class=" ion-text-center noAvisos">
     <img class="noAvisosImage"src="/../../assets/noComunity.png"> 
-    <h3 class="noAvisosTitle"><b>Aún no existen solicitudes en tu comunidad</b></h3>
+    <h3 class="noAvisosTitle"><b>No existen solicitudes en tu comunidad</b></h3>
     </ion-card>
   </ion-grid>
   <!--INICIO EMTPY SOLICITUD-->

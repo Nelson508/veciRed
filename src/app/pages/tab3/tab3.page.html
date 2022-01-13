@@ -1,17 +1,59 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  
+    <ion-title class="ion-text-center">VeciRed</ion-title>
+  
+    <ion-buttons slot="end">   
+      <ion-button disabled>
+        <ion-icon></ion-icon>
+      </ion-button>
+    </ion-buttons>
+      
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!--INICIO TITULO-->
+  <ion-grid>
+    <div class="ripple-parent">
+      <ion-row>    
+        <ion-col  class="avisosTitlte ion-text-center">
+          <b>MI PERFIL</b>
+        </ion-col>
+      </ion-row>     
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+  </ion-grid>
+  <!--FIN TITULO-->
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-grid >
+    <h3 style="text-align: center;" ><b> Datos personales</b></h3>
+    <ion-list class="perfile ion-text-center" >
+      
+      <ion-item class="textiee">
+        <ion-icon slot="start" name="id-card-outline" style="color: black;"></ion-icon> {{usuario.nombre}}
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="mail-outline" style="color: black;"></ion-icon> {{ usuario.email}}
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="calendar-outline" style="color: black;"></ion-icon> {{usuario.fechaNacimiento}}
+      </ion-item>
+    </ion-list>
+    <!--inicio boton condiciones de uso-->
+    <ion-button    style="margin-top: 20%;"
+                   routerLink="/main/tabs/condiciones"
+                   color="secondary" 
+                   shape="round" 
+                   expand="full"
+                     
+                   >
+        Condiciones de uso
+      </ion-button>
+  </ion-grid>
+
 </ion-content>

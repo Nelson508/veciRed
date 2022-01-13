@@ -4,7 +4,7 @@ import { Avisos, Comunidad, Usuario } from '../../interfaces/interfaces';
 import { IonSelect, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { stringify } from 'querystring';
+
 
 
 
@@ -31,7 +31,8 @@ export class Tab1Page implements OnInit{
   Idcomunidad = '';
   contaRol = 0;
   Idusuario = '';
-  disabledCrear= false;
+  //cuando disabledCrear es true no se pueden crear avisos
+  disabledCrear= true;
   Roltype = [];
   usuario: Usuario = {};
 
@@ -91,7 +92,8 @@ export class Tab1Page implements OnInit{
         }
         
       })
-      this.obtenerComunidades();
+      //this.obtenerComunidades();
+      this.validarCrearAviso();
   }
 
   NavegarCrearAviso()
@@ -155,17 +157,25 @@ export class Tab1Page implements OnInit{
     this.usuarioService.obtenerComunidadUsuario().subscribe(
       respuesta =>
       {
+        
         this.Idusuario = respuesta['comunidades']._id;
         this.Comunidad.push(...respuesta['comunidades']['comunidad']);
-        this.usuario = this.usuarioService.obtenerRolUsuario();
-        var var1: string = this.Comunidad[0]._id;
-        const var2: string = this.usuario.comunidad.toString();
-        if(var1 === var2)
+        //Obtenemos el rol del usuario
+        //cuando disabled crear es TRUE no se pueden crear avisos
+        this.usuario = this.usuarioService.obtenerUsuario();
+
+        if( String(this.usuario.comunidad) == '61ac3ce9c27143f6fe782cf0' && respuesta['comunidades'].rol[0] == 2 )
         {
           this.disabledCrear = true;
         }else{
           this.disabledCrear = false;
         }
+
+
+        //respuesta['comunidades'].rol[0] != 1 
+        console.log(respuesta['comunidades'].rol[0]);
+        //console.log(respuesta['comunidades'].comunidad[0]);
+        console.log(this.usuario.comunidad);
 
       }
     )
@@ -175,5 +185,23 @@ export class Tab1Page implements OnInit{
 
   ionViewWillEnter() {
     this.obtenerComunidades();
+  }
+
+  validarCrearAviso()
+  {
+    this.usuario = this.usuarioService.obtenerUsuario();
+    this.usuarioService.obtenerRolBD().subscribe(
+      respuesta =>
+      {
+        console.log(respuesta['currentRol'])
+        if( String(this.usuario.comunidad) == '61ac3ce9c27143f6fe782cf0' && respuesta['currentRol'] == 2 )
+        {
+          this.disabledCrear = true;
+        }else{
+          this.disabledCrear = false;
+        }
+      }
+    )
+
   }
 }

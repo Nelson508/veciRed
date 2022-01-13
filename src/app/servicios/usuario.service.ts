@@ -250,4 +250,36 @@ actualizarRolUsuario(dataUsuario)
 
 }
 
+obtenerRolBD()
+{
+  const headers = new HttpHeaders({
+    'Utoken': this.userToken
+  });
+
+    return  this.http.get(`${URL}/usuario/obtenerRol`, {headers});
+    
+
+}
+
+obtenerDataPerfil()
+{
+  const headers = new HttpHeaders({
+    'Utoken': this.userToken
+  });
+
+    return  this.http.get(`${URL}/usuario/mostrarDatos`, {headers});
+
+}
+
+
+validarCrearAviso()
+{
+  const headers = new HttpHeaders({
+    'Utoken': this.userToken
+  });
+
+    return  this.http.get(`${URL}/usuario/validarCrearAviso`, {headers});
+
+}
+
 }

@@ -24,12 +24,13 @@ export class CrearAvisoPage implements OnInit {
   };
 
   Roltype = [];
+  rol;
 
   imagenCarrete: string;
 
   usuario: Usuario = {};
- 
 
+ 
   constructor(  private ruta: Router,
                 private avisosService: AvisosService,
                 private camera: Camera,
@@ -40,7 +41,7 @@ export class CrearAvisoPage implements OnInit {
    }
 
    ngOnInit() {
-    this.obtenerRolUsuario();
+    //this.obtenerRolUsuario();
     
   }
   
@@ -116,9 +117,14 @@ export class CrearAvisoPage implements OnInit {
 
   obtenerRolUsuario()
   {
-    this.usuario = this.usuarioService.obtenerRolUsuario();
-    this.Roltype[0] = this.usuario.rol
-    console.log('rol:' + this.Roltype[0])
+    
+    this.usuarioService.obtenerRolBD().subscribe( 
+      respuesta =>
+      {
+        this.rol = respuesta['currentRol'];
+      }
+    )
+
 
   }
 
