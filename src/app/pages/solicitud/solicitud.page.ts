@@ -29,7 +29,7 @@ export class SolicitudPage implements OnInit {
     
   }
 
-  obtenerSolicitudes()
+  obtenerSolicitudes(event?)
   {
     this.solicitudService.obtenerSolicitudes().subscribe(
       respuesta => {
@@ -39,21 +39,28 @@ export class SolicitudPage implements OnInit {
         if(this.solicitudes.length == 0)
         {
           this.emptySolicitud = true;
-          console.log(this.emptySolicitud);
+          
         }else{
           this.emptySolicitud = false;
-          console.log(this.emptySolicitud);
+          
         }
 
 
       }
     )
 
+    if(event)
+        {
+          event.target.complete();
+
+          
+        }
+
   }
 
   aceptarVecino(idComunidad, idUsuario, idSolicitud)
   {
-    console.log("asekto" + idComunidad + "user:" +idUsuario);
+    //console.log("asekto" + idComunidad + "user:" +idUsuario);
     var aceptar = {
       idComunidad: idComunidad,
       idUsuario: idUsuario,
@@ -65,7 +72,7 @@ export class SolicitudPage implements OnInit {
       {
         if(respuesta['data'] === true)
         {
-          console.log('entro');
+          //console.log('entro');
           this.solicitudService.aceptarSolicitud(aceptar);
           
               
@@ -87,13 +94,11 @@ export class SolicitudPage implements OnInit {
     var rechazar = {
       idSolicitud: id
     }
-    console.log("rechazo" + id);
     await this.alertasService.alertaDecision('¿Desea rechazar a este usuario?').then(
       respuesta =>
       {
         if(respuesta['data'] === true)
         {
-          console.log('entro');
           this.solicitudService.eliminarSolicitudes(rechazar);
               
         }else{
@@ -110,6 +115,11 @@ export class SolicitudPage implements OnInit {
   ionViewWillEnter() {
     this.solicitudes = [];
     this.obtenerSolicitudes();
+  }
+
+  refresher(event?)
+  {
+    this.obtenerSolicitudes(event);
   }
 
 }

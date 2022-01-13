@@ -6,15 +6,25 @@
     </ion-buttons>
   
     <ion-title class="ion-text-center">VeciRed</ion-title>
-  
-    <ion-buttons  
+    
+
+    <ion-buttons size="large" fill="clear" slot="end" >
+      <ion-button [disabled]="disabledCrear"
+                    (click)="NavegarCrearAviso()"
+                    
+                    
+        >
+        <ion-icon slot="icon-only" name="add-outline" ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    <!-- <ion-buttons  
                   (click)="NavegarCrearAviso()"
                   slot="end">
       <ion-icon slot="icon-only" name="add-outline">
 
       </ion-icon>
 
-    </ion-buttons>
+    </ion-buttons> -->
       
   </ion-toolbar>
 </ion-header>
