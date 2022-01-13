@@ -1,3 +1,8 @@
+ion-item{
+    
+    --background: #f4f5f8;
+}
+
 .titulo
 {
     margin-top: -3%;
@@ -8,10 +13,17 @@
 .caracteres{
     font-size:small;
     margin-left: 55%;
-   
+    background-color: #f4f5f8;
     color: grey;
+
 }
 
-/* .cabecera{
+.cabecera{
     --background: linear-gradient(135deg, #110A3B, #2f32a0);
-} */
+}
+
+.color-fondo{
+
+    //--background: #f4f5f8;
+    background-color: #f4f5f8;
+}
