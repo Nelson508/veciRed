@@ -12,14 +12,13 @@ import { AlertasService } from '../../servicios/alertas.service';
 })
 export class RegistroPage implements OnInit {
 
+  maxTime: String = new Date().toISOString();
+
   userRegistro: Usuario = {
     nombre: '',
     fechaNacimiento: '',
     email: '',
     password: '',
-    
-    
-    
   }
 
   veciRed:Comunidad = {
@@ -44,20 +43,33 @@ export class RegistroPage implements OnInit {
   
   async registro(registrarse:NgForm){
 
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{1,50})+$/g;
+
+    if(caracteres.test(this.userRegistro.nombre) == false){
+      this.alertasService.alerta('El nombre de usuario no permite tener los caracteres ingresados');
+      return;
+    }
+
+    //Validación de correo
+    var correo = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    if(correo.test(this.userRegistro.email) == false){
+      this.alertasService.alerta('Debe ingresar un correo valido');
+      return;
+    }
     
-    //validacion de campos vacios
+    //Validación de contraseñas
+    if(this.repitaPassword != this.userRegistro.password){
+      this.alertasService.alerta('Las contraseñas no coinciden');
+      return;
+    }
+    
+    //Validación de campos vacios
     if(registrarse.invalid){
       this.alertasService.alerta('Complete los campos vacíos');
       return;
     }
-
-    //validacion de contraseñas
-    if(this.repitaPassword != this.userRegistro.password){
-      this.alertasService.alerta('Las contraseñas no coinciden');
-      return;
-    } 
-
-
 
     const existe = await this.usuarioService.registro(this.userRegistro);
 

@@ -26,9 +26,10 @@
               <ion-icon name="person" item-start></ion-icon>
               Nombre
             </ion-label>
-            <ion-input name="nombre" type="text" [(ngModel)]="userRegistro.nombre" color="light" required>
+            <ion-input name="nombre" type="text" maxlength="50" [(ngModel)]="userRegistro.nombre" color="light" required>
             </ion-input>
           </ion-item>
+          <span class="caracteres">{{ 50 - userRegistro.nombre.length }} caracteres restantes</span> 
 
           <ion-item color="none">
             <ion-label position="floating" color="light" class="my-label">
@@ -40,6 +41,7 @@
                       name="fechaNacimiento"
                       picker-format="DD MMMM YYYY"
                       month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+                      [max]="maxTime"
                       [(ngModel)]="userRegistro.fechaNacimiento"
                       doneText="Aceptar"
                       cancelText="Cancelar" required>
@@ -51,27 +53,30 @@
                <ion-icon name="mail" item-start></ion-icon>
                Correo Electronico
              </ion-label>
-             <ion-input name="email" type="email" [(ngModel)]="userRegistro.email" color="light" color="light" required>
+             <ion-input name="email" type="email" maxlength="150" [(ngModel)]="userRegistro.email" color="light" color="light" required>
              </ion-input>
           </ion-item>
+          <span class="caracteres">{{ 150 - userRegistro.email.length }} caracteres restantes</span> 
 
           <ion-item color="none">
              <ion-label position="floating" color="light" class="my-label">
                <ion-icon name="lock-closed" item-start></ion-icon>
                Contraseña
              </ion-label>
-             <ion-input name="password" type="password" [(ngModel)]="userRegistro.password" color="light" required>
+             <ion-input name="password" type="password" maxlength="100" [(ngModel)]="userRegistro.password" color="light" required>
              </ion-input>
           </ion-item>
+          <span class="caracteres">{{ 100 - userRegistro.password.length }} caracteres restantes</span>
 
           <ion-item color="none">
             <ion-label position="floating" color="light" class="my-label">
               <ion-icon name="lock-closed" item-start></ion-icon>
               Repita Contraseña
             </ion-label>
-            <ion-input name="repitePass" type="password" [(ngModel)]="repitaPassword" color="light" required>
+            <ion-input name="repitePass" type="password" maxlength="100" [(ngModel)]="repitaPassword" color="light" required>
             </ion-input>
           </ion-item>
+          <span class="caracteres">{{ 100 - repitaPassword.length }} caracteres restantes</span>
 
          </ion-list>
        </ion-col>
