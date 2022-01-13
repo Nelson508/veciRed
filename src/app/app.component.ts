@@ -12,7 +12,7 @@ import { SolicitudService } from './servicios/solicitud.service';
 })
 export class AppComponent implements OnInit{
 
-  Roltype = [];
+  rol;
   usuario: Usuario = {};
   largoSolicitud = 0;
   constructor( private usuarioService: UsuarioService,
@@ -40,10 +40,13 @@ export class AppComponent implements OnInit{
 
   obtenerRolUsuario()
   {
-    this.Roltype = [];
-    this.usuario = {};
-    this.usuario = this.usuarioService.obtenerRolUsuario();
-    this.Roltype[0] = this.usuario.rol;
+    this.usuarioService.obtenerRolBD().subscribe(
+      respuesta =>{
+   
+        this.rol = respuesta['currentRol'];
+       
+      }
+    )
   }
 
   obtenerLargoSolicitud()
@@ -62,7 +65,8 @@ export class AppComponent implements OnInit{
   {
     
     this.obtenerRolUsuario();
-    if(this.Roltype[0] == 1)
+
+    if(this.rol == 1)
     {
       this.obtenerLargoSolicitud();
     }

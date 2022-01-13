@@ -92,6 +92,10 @@ const routes: Routes = [
         loadChildren: () => import('../gestionar/gestionar.module').then( m => m.GestionarPageModule)
       },
       {
+        path: 'condiciones',
+        loadChildren: () => import('../condiciones/condiciones.module').then( m => m.CondicionesPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

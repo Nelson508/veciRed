@@ -13,15 +13,15 @@
             <ion-icon name="people-outline" slot="start"></ion-icon>
             Mis comunidades
           </ion-item>
-          <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/solicitud" >
+          <ion-item *ngIf="rol == 1" routerLink="/main/tabs/solicitud" >
             <ion-icon slot="start" name="person-add-outline"></ion-icon> 
             Mis solicitudes <span *ngIf="largoSolicitud >= 1" slot="end" class="solicitud">+{{largoSolicitud}}</span>
           </ion-item>
-          <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/gestionar" >
+          <ion-item *ngIf="rol == 1" routerLink="/main/tabs/gestionar" >
             <ion-icon slot="start" name="body-outline"></ion-icon> 
             Miembros
           </ion-item>
-          <ion-item *ngIf="Roltype[0] == 1" routerLink="/main/tabs/acuerdos">
+          <ion-item *ngIf="rol == 1" routerLink="/main/tabs/acuerdos">
             <ion-icon name="megaphone-outline" slot="start"></ion-icon>
             Acuerdos
           </ion-item>

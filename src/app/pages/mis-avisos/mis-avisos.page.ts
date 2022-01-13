@@ -1,10 +1,11 @@
-import { Avisos } from './../../interfaces/interfaces';
+import { Avisos, Usuario } from './../../interfaces/interfaces';
 import { Component, OnInit } from '@angular/core';
 import { AvisosService } from '../../servicios/avisos.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AvisoModalComponent } from 'src/app/herramientas/aviso-modal/aviso-modal.component';
 import { AlertasService } from '../../servicios/alertas.service';
+import { UsuarioService } from '../../servicios/usuario.service';
 
 @Component({
   selector: 'app-mis-avisos',
@@ -17,10 +18,16 @@ export class MisAvisosPage implements OnInit {
   infiniteScroll= true;
   emptyMisAvisos=false;
 
+   //cuando disabledCrear es true no se pueden crear avisos
+   disabledCrear= false;
+   rol;
+   usuario: Usuario = {};
+
   constructor( private AvisosService: AvisosService,
                private ruta: Router,
                private modalController: ModalController,
-               private alertasService: AlertasService
+               private alertasService: AlertasService,
+               private usuarioService: UsuarioService
 
   ) { }
 
@@ -116,11 +123,30 @@ export class MisAvisosPage implements OnInit {
   ionViewWillEnter() {
     this.misAvisos = [];
    this.refresher();
+   this.validarCrearAviso();
   }
 
   NavegarCrearAviso()
   {
     this.ruta.navigateByUrl('main/tabs/crear-aviso');
+  }
+
+  validarCrearAviso()
+  {
+    this.usuario = this.usuarioService.obtenerUsuario();
+    this.usuarioService.obtenerRolBD().subscribe(
+      respuesta =>
+      {
+        console.log(respuesta['currentRol'])
+        if( String(this.usuario.comunidad) == '61ac3ce9c27143f6fe782cf0' && respuesta['currentRol'] == 2 )
+        {
+          this.disabledCrear = true;
+        }else{
+          this.disabledCrear = false;
+        }
+      }
+    )
+
   }
 
 
