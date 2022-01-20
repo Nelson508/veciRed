@@ -22,20 +22,19 @@
   <ion-list>
     
      <!-- TITULO -->
-  <div class="titulo"><h4 class="ion-text-center"><b>NOTIFICACIONES</b></h4></div>
+    <div class="titulo"><h4 class="ion-text-center"><b>NOTIFICACIONES</b></h4></div>
 
-  <ion-buttons slot="end">
-    <ion-button (click)="borrarMensajes()"
-                color="danger">
-      <ion-icon slot="icon-only" name="trash"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+    <!-- Refresher -->
+    <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
 
- <!--  <ion-item>
-    <ion-label>
-      <h3>{{pushService.userId}}</h3>
-    </ion-label>
-  </ion-item> -->
+    <!--  <ion-buttons slot="end">
+        <ion-button (click)="enviarNoti()"
+                    color="danger">
+          <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
 
     <ion-item *ngFor="let push of mensajes">
       <ion-label>
@@ -44,4 +43,12 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <!-- Scroll infinito -->
+  <ion-infinite-scroll    [disabled]="deshabilitar"
+                          threshold="100px" 
+                          (ionInfinite)="scroll($event)">
+      <ion-infinite-scroll-content>
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

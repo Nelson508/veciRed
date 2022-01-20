@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { NavController, MenuController } from '@ionic/angular';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { AlertasService } from '../../servicios/alertas.service';
+import { PushService } from '../../servicios/push.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,14 @@ export class LoginPage implements OnInit {
    */
   };
 
+  //Array que guarda las comunidades
+  arrayComunidades = [];
+
   constructor( public navCtrl: NavController,
                public usuarioService: UsuarioService,
                public alertasService: AlertasService,
-               private menuCtrl: MenuController ) { 
+               private menuCtrl: MenuController,
+               private pushService: PushService ) { 
                 this.menuCtrl.enable(false, 'first');
                }
 
@@ -41,14 +46,35 @@ export class LoginPage implements OnInit {
 
     if(existe){
       //navegar al tabs
+      console.log('antes');
+      //await this.comunidadesUsuario();
       this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
+      this.pushService.setUserId();
+      
+      console.log('despues');
     }else{
       //mostrar alerta de usuario y contraseña no correctos
       this.alertasService.alerta('Usario y/o contraseña no son correctos');
     }
+
   }
 
   registrarse() {
     this.navCtrl.navigateRoot('/registro');
   }
+
+  /* async comunidadesUsuario(){
+
+    await this.usuarioService.obtenerArrayComunidadesUsuario().subscribe(
+      async respuesta =>
+     {
+       this.arrayComunidades = await respuesta['comunidades']['comunidad']; 
+       console.log('Respuesta de mis comunidades: ' + this.arrayComunidades);
+     }
+   )
+
+   console.log('Mis comunidades: ' + this.arrayComunidades);
+   this.pushService.setUserId(this.arrayComunidades);
+
+  } */
 }

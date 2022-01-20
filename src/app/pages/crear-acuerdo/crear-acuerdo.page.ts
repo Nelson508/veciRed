@@ -60,6 +60,7 @@ export class CrearAcuerdoPage implements OnInit {
     this.acuerdo.hora = datepipe.transform(this.acuerdo.hora,'HH:mm');
 
     const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
+    
 
 
     console.log(this.acuerdo);

@@ -231,6 +231,16 @@ export class UsuarioService {
     //return this.http.get<Usuario[]>(`${URL}/usuario/miembrosComunidad`, {headers}); 
 }
 
+  //funcion que nos entrega el id de todos los miembros de una comunidad
+  obtenerIdMiembrosComunidad()
+  {
+    const headers = new HttpHeaders({
+      'Utoken': this.userToken
+    });
+    
+    return  this.http.get<Usuario[]>(`${URL}/usuario/arrayMiembrosComunidad`, {headers});    
+  }
+
 actualizarRolUsuario(dataUsuario)
 {
   return new Promise( resolve =>
