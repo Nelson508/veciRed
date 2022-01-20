@@ -25,6 +25,15 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <!-- Votaciones vacio -->
+  <div class="sinVotaciones"  *ngIf="emptyVotaciones">
+    <h3 class="sinVotacionesTitulo"><b>Aún no hay votaciones en tu comunidad</b></h3>
+    <img class="sinVotacionesImagen"src="/../../assets/sadHouse.png">
+    <!-- <h3 class="sinAcuerdosTitulo"><b>¡Crea el primero!</b></h3> -->
+      
+  </div>
+
+
   <!-- Acuerdos -->
   <ion-grid fixed>
     <ion-row>

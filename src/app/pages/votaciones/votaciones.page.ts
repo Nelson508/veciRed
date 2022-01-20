@@ -14,6 +14,7 @@ export class VotacionesPage implements OnInit {
   deshabilitar = false;
   contador = 0;
   acuerdoLanzado: Acuerdos = {};
+  emptyVotaciones:boolean = false;
 
   milliSecondsInASecond = 1000;
   hoursInADay = 24;
@@ -47,10 +48,16 @@ export class VotacionesPage implements OnInit {
         console.log(response );
         console.log(this.acuerdos);
 
+        this.emptyVotaciones=true;
+
         for (let index = 0; index < response.acuerdosPublicados.length; index++) {
           //const element = response.acuerdosPublicados[index];
           //console.log(index);
+
+          
           if(response.acuerdosPublicados[index]['estado'] == 2){
+
+            this.emptyVotaciones=false;
 
             this.acuerdoLanzado = response.acuerdosPublicados[index];
             
@@ -78,6 +85,11 @@ export class VotacionesPage implements OnInit {
        /*console.log(response.acuerdosPublicados[0]);
         this.contador++;
         console.log(response.acuerdosPublicados[1]);*/
+        if(response.acuerdosPublicados.length == 0 && response.pagina === 1)
+        {
+          this.emptyVotaciones=true;
+          console.log(this.emptyVotaciones );
+        }
 
         if(event)
         {
