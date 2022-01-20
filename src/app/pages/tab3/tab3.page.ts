@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { DatePipe  } from '@angular/common';
 
 @Component({
   selector: 'app-tab3',
@@ -23,11 +24,13 @@ export class Tab3Page implements OnInit {
       {
         //console.log(respuesta['usuarioBD'])
         this.usuario = respuesta['usuarioBD'];
+        const datepipe: DatePipe = new DatePipe('en-US');
+        let fecha = new Date(this.usuario.fechaNacimiento)
+        console.log(fecha);
+        this.usuario.fechaNacimiento = datepipe.transform(fecha,' dd-MM-YYYY');
         //console.log(this.usuario.fechaNacimiento);
-        // var date: Date = this.usuario.fechaNacimiento
-        // var dd = String(this.usuario.fechaNacimiento.getDate()).padStart(2, '0');
-        // var mm = String(this.usuario.fechaNacimiento.getMonth() + 1).padStart(2, '0'); //January is 0!
-        // var yyyy = this.usuario.fechaNacimiento.getFullYear();
+        //  var date: Date = this.usuario.fechaNacimiento
+         
       }
     )
   }

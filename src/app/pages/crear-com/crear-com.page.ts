@@ -63,7 +63,8 @@ export class CrearComPage implements OnInit {
         comuna: ''
       }
       this.usuario = {};
-      this.navController.navigateRoot('main/tabs/comunidad');  
+      this.navController.navigateRoot('main/tabs/comunidad');
+      this.alertasService.presentToast('Comunidad creada exitosamente'); 
     }
   
   }

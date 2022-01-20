@@ -227,12 +227,7 @@ export class UsuarioService {
     const headers = new HttpHeaders({
       'Utoken': this.userToken
     });
-
-     
-      return  this.http.get<Usuario[]>(`${URL}/usuario/miembrosComunidad`, {headers});
-      
-
-    
+    return  this.http.get<Usuario[]>(`${URL}/usuario/miembrosComunidad`, {headers});
     //return this.http.get<Usuario[]>(`${URL}/usuario/miembrosComunidad`, {headers}); 
 }
 
