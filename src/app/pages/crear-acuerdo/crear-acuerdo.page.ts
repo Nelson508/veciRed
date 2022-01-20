@@ -5,6 +5,7 @@ import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Acuerdos } from '../../interfaces/interfaces';
 import { OpcionesPage } from '../opciones/opciones.page';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { PushService } from '../../servicios/push.service';
 
 declare var window: any;
 
@@ -33,7 +34,8 @@ export class CrearAcuerdoPage implements OnInit {
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController,
-              private camera: Camera) { }
+              private camera: Camera,
+              private pushService: PushService) { }
 
   ngOnInit() {
 
@@ -60,8 +62,8 @@ export class CrearAcuerdoPage implements OnInit {
     this.acuerdo.hora = datepipe.transform(this.acuerdo.hora,'HH:mm');
 
     const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
-    
 
+    this.pushService.enviarNotificacion(this.acuerdo.titulo, this.acuerdo.descripcion);
 
     console.log(this.acuerdo);
     console.log(this.acuerdo.fecha);

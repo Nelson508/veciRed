@@ -28,10 +28,11 @@
       <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="noAvisos"  *ngIf="emptyAcuerdos">
-    <h3 class="noAvisosTitle"><b>Aún no hay acuerdos en tu comunidad</b></h3>
-    <img class="noAvisosImage"src="/../../assets/sadHouse.png">
-    <h3 class="noAvisosTitle"><b>¡Crea el primero!</b></h3>
+  <!-- Acuerdos vacio -->
+  <div class="sinAcuerdos"  *ngIf="emptyAcuerdos">
+    <h3 class="sinAcuerdosTitulo"><b>Aún no hay acuerdos en tu comunidad</b></h3>
+    <img class="sinAcuerdosImagen"src="/../../assets/sadHouse.png">
+    <h3 class="sinAcuerdosTitulo"><b>¡Crea el primero!</b></h3>
       
   </div>
 
