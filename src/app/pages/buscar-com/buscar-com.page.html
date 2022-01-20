@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="cabecera">
 
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/main/tabs/comunidad"></ion-back-button>
+    <ion-buttons slot="start" color="light">
+      <ion-back-button defaultHref="/main/tabs/comunidad" color="light"></ion-back-button>
     </ion-buttons>
   
-    <ion-title class="ion-text-center">VeciRed</ion-title>
+    <ion-title class="ion-text-center" color="light">VeciRed</ion-title>
   
     <ion-buttons slot="end">   
       <ion-button disabled>
@@ -621,8 +621,14 @@
             <ion-col>
               
               <ion-textarea [(ngModel)]="solicitud.mensaje"
-                            style="border: 1px #241816 solid;">
+                            style="border: 1px #241816 solid;"
+                            >
+                            
               </ion-textarea>
+              <ion-row >
+                <span class="caracteres">{{ 250 - solicitud.mensaje.length }} caracteres restantes</span>
+              </ion-row>
+              
               <ion-button  
                 size="small"
                 color="tertiary"

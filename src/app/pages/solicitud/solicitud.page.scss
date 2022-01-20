@@ -16,7 +16,7 @@
     // border-top-right-radius:3%;
     box-shadow: 0 0 2em rgba(30, 30, 31, 0.932);
     //max-height: 95%;
-    background-color: rgba(91, 240, 4, 0.250);
+    background-color: #AFEEEE;
     
     
 }
@@ -52,3 +52,8 @@
      height: 50%;
      max-height: 70%;
 }
+
+.cabecera{
+    --background: linear-gradient(135deg, #110A3B, #2f32a0);
+}
+

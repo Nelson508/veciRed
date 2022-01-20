@@ -74,14 +74,12 @@ export class SolicitudPage implements OnInit {
         {
           //console.log('entro');
           this.solicitudService.aceptarSolicitud(aceptar);
-          
+          this.alertasService.presentToast('Vecino aceptado exitosamente');
               
         }else
         {
           console.log('No desea eliminar');
         }
-        
-
         
 
       }
@@ -100,6 +98,7 @@ export class SolicitudPage implements OnInit {
         if(respuesta['data'] === true)
         {
           this.solicitudService.eliminarSolicitudes(rechazar);
+          this.alertasService.presentToast('Vecino rechazado exitosamente');
               
         }else{
           console.log('No desea eliminar');
