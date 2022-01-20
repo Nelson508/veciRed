@@ -4,6 +4,7 @@ import { AvisosService } from './servicios/avisos.service';
 import { NavController, MenuController } from '@ionic/angular';
 import { Usuario } from './interfaces/interfaces';
 import { SolicitudService } from './servicios/solicitud.service';
+import { PushService } from './servicios/push.service';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,12 @@ export class AppComponent implements OnInit{
                private avisosService: AvisosService,
                private navController: NavController,
                public menuCtrl: MenuController,
-               private solicitudService: SolicitudService) {}
+               private solicitudService: SolicitudService,
+               private pushService: PushService) {}
   
   ngOnInit() 
   {
-    
+    this.pushService.OneSignalInit(); 
      
   }
 

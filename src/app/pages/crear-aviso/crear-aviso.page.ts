@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { AvisoModalComponent } from 'src/app/herramientas/aviso-modal/aviso-modal.component';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { PushService } from '../../servicios/push.service';
 
 declare var window: any;
 
@@ -36,7 +37,8 @@ export class CrearAvisoPage implements OnInit {
                 private camera: Camera,
                 public alertasService: AlertasService,
                 private modalController: ModalController,
-                private usuarioService: UsuarioService ) {
+                private usuarioService: UsuarioService,
+                private pushService: PushService ) {
     
    }
 
@@ -60,6 +62,12 @@ export class CrearAvisoPage implements OnInit {
      }
 
      const avisoInsertado = await this.avisosService.crearNuevoAviso(this.aviso);
+
+     if(this.aviso.tipoAviso == 1){
+      
+      this.pushService.enviarNotificacion(this.aviso.titulo,this.aviso.descripcion);
+
+     }
      //Vaciamos las variables para limpiar los campos
      this.aviso = {
       titulo: '',

@@ -57,11 +57,14 @@ export class AcuerdosPage implements OnInit {
       .subscribe(response => {
         console.log(response );
 
+        this.emptyAcuerdos=true;
+
         for (let index = 0; index < response.acuerdosPublicados.length; index++) {
 
           if(response.acuerdosPublicados[index]['estado'] == 1 || response.acuerdosPublicados[index]['estado'] == 2 ){
             
             this.acuerdosCreadosLanzados = response.acuerdosPublicados[index];
+            this.emptyAcuerdos=false;
 
             if(this.acuerdosCreadosLanzados.estado == 2){
 
