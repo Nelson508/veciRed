@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-editar-opciones',
@@ -13,7 +14,8 @@ export class EditarOpcionesPage implements OnInit {
   opciones : Object[] = [];
   titulos: string = '';
   res: string[] = [];
-  
+ // res = new EventEmitter<{}>();
+
   opcion: Object[]  = [{
 
     titulo:'',

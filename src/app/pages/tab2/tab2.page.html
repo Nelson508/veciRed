@@ -29,12 +29,13 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
 
-    <!--  <ion-buttons slot="end">
-        <ion-button (click)="enviarNoti()"
-                    color="danger">
-          <ion-icon slot="icon-only" name="send"></ion-icon>
-        </ion-button>
-      </ion-buttons> -->
+    <!-- Notificaciones vacio-->
+    <ion-grid  *ngIf="emptyNotificaciones" >
+      <ion-card class=" ion-text-center sinNotificaciones">
+      <img class="sinNotificacionesImagen"src="/../../assets/noComunity.png"> 
+      <h3 class="sinNotificacionesTitulo"><b>No sé registrado actividad en la comunidad</b></h3>
+      </ion-card>
+    </ion-grid>
 
     <ion-item *ngFor="let push of mensajes">
       <ion-label>

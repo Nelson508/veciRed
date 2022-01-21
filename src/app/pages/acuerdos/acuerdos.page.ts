@@ -44,8 +44,8 @@ export class AcuerdosPage implements OnInit {
         .subscribe( acuerdo => {
 
           //this.emptyAcuerdos=false;
-          this.scroll();
-          //this.refresh();
+          //this.scroll();
+          this.refresh();
           //this.acuerdos.unshift(acuerdo);
         });    
 
@@ -57,14 +57,21 @@ export class AcuerdosPage implements OnInit {
       .subscribe(response => {
         console.log(response );
 
-        this.emptyAcuerdos=true;
+        //this.emptyAcuerdos=true;
+
+        if(pull)
+        {
+          this.acuerdos = [];
+          this.deshabilitar = false;
+        }
+        
 
         for (let index = 0; index < response.acuerdosPublicados.length; index++) {
 
           if(response.acuerdosPublicados[index]['estado'] == 1 || response.acuerdosPublicados[index]['estado'] == 2 ){
             
             this.acuerdosCreadosLanzados = response.acuerdosPublicados[index];
-            this.emptyAcuerdos=false;
+            //this.emptyAcuerdos=false;
 
             if(this.acuerdosCreadosLanzados.estado == 2){
 
@@ -86,7 +93,7 @@ export class AcuerdosPage implements OnInit {
         //this.acuerdos.push(...response.acuerdosPublicados);
 
 
-        if(response.acuerdosPublicados.length == 0 && response.pagina === 1)
+        if(this.acuerdos.length == 0 && response.pagina === 1)
         {
           this.emptyAcuerdos=true;
           console.log(this.emptyAcuerdos );

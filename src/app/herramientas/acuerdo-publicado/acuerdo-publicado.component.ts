@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Acuerdos } from '../../interfaces/interfaces';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { AlertasService } from '../../servicios/alertas.service';
+import { PushService } from '../../servicios/push.service';
 
 @Component({
   selector: 'app-acuerdo-publicado',
@@ -16,7 +17,8 @@ export class AcuerdoPublicadoComponent implements OnInit {
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController,
-              private alertasService: AlertasService) { }
+              private alertasService: AlertasService,
+              private pushService: PushService) { }
 
   ngOnInit() {
 
@@ -48,6 +50,7 @@ export class AcuerdoPublicadoComponent implements OnInit {
         console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
         console.log(respuesta['data']);
+        this.alertasService.presentToast('Votación eliminada exitosamente');//d
       }else{
 
         console.log('No desea eliminar');
@@ -67,6 +70,8 @@ export class AcuerdoPublicadoComponent implements OnInit {
         console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
         console.log(respuesta['data']);
+        this.alertasService.presentToast('Votación lanzada exitosamente');
+        this.pushService.enviarNotificacion(this.acuerdoPublicado.titulo, this.acuerdoPublicado.descripcion);
       }else{
 
         console.log('No desea eliminar');
@@ -84,6 +89,7 @@ export class AcuerdoPublicadoComponent implements OnInit {
         console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
         console.log(respuesta['data']);
+        this.alertasService.presentToast('Votación terminada exitosamente');
       }else{
 
         console.log('No desea eliminar');

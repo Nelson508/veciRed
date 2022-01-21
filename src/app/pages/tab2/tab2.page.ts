@@ -17,6 +17,7 @@ export class Tab2Page implements OnInit {
   Comunidad: Comunidad[] = [];
   Idcomunidad = '';
   usuario: Usuario = {};
+  emptyNotificaciones = false;
 
   constructor(private pushService: PushService,
               private applicationRef: ApplicationRef,
@@ -29,6 +30,7 @@ export class Tab2Page implements OnInit {
 
       //Se subscribe al puchListener para insertar las nuevas notificaciones
       this.pushService.pushListener.subscribe( noti => {
+        this.emptyNotificaciones = false;
         this.mensajes.unshift(noti);
         //Reinicia el ciclo de detección de cambios en angular al agregar la variable al arreglo
         this.applicationRef.tick();
@@ -44,20 +46,6 @@ export class Tab2Page implements OnInit {
     this.mensajes = await this.pushService.getMensajes();
   } */
 
-  /* async enviarNoti(){
-
-    
-
-    //console.log(this.usuario.comunidad);
-    //this.pushService.enviarNotificacion(this.usuario.comunidad);
-
-    var title = 'Aviso de emergencia';
-    var body = 'Emergencia de Tsunami en el sector';
-      
-    this.pushService.enviarNotificacion(title, body);
-
-  } */
-
   refresh( event ) {
 
     this.scroll( event, true );
@@ -68,24 +56,23 @@ export class Tab2Page implements OnInit {
 
   async scroll( event?, pull: boolean = false ) {
 
+    this.emptyNotificaciones = false;
     var mensajesPaginados = await this.pushService.getMensajes(pull);
-      /* .subscribe( resp =>{
-        console.log( resp );
+    this.mensajes.push(...mensajesPaginados);
 
-        this.mensajes.push( ...mensajesPaginados );
+    if(mensajesPaginados.length === 0)
+    {
+      this.emptyNotificaciones=true;
+    }
+
+    if( event ){
+      event.target.complete();
+
+      if(mensajesPaginados.length === 0){
+        this.deshabilitar = true;
         
-      });
-      */
-
-      this.mensajes.push(...mensajesPaginados);
-
-      if( event ){
-        event.target.complete();
-
-        if(mensajesPaginados.length === 0){
-          this.deshabilitar = true;
-        }
       }
+    }
   }
 
 }

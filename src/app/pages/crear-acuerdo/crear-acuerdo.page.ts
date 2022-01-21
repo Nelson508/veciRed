@@ -5,7 +5,7 @@ import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Acuerdos } from '../../interfaces/interfaces';
 import { OpcionesPage } from '../opciones/opciones.page';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { PushService } from '../../servicios/push.service';
+import { AlertasService } from '../../servicios/alertas.service';
 
 declare var window: any;
 
@@ -35,7 +35,7 @@ export class CrearAcuerdoPage implements OnInit {
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController,
               private camera: Camera,
-              private pushService: PushService) { }
+              private alertasService: AlertasService) { }
 
   ngOnInit() {
 
@@ -63,8 +63,6 @@ export class CrearAcuerdoPage implements OnInit {
 
     const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
 
-    this.pushService.enviarNotificacion(this.acuerdo.titulo, this.acuerdo.descripcion);
-
     console.log(this.acuerdo);
     console.log(this.acuerdo.fecha);
 
@@ -82,6 +80,7 @@ export class CrearAcuerdoPage implements OnInit {
     this.acuerdosService.limpiar(true);
 
     this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
+    this.alertasService.presentToast('Acuerdo creado exitosamente'); 
   }
 
   galeria(){

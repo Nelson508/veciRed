@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { AlertasService } from '../../servicios/alertas.service';
 
 declare var window: any;
 
@@ -31,7 +32,8 @@ export class EditarAcuerdoPage implements OnInit {
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController,
               private router: Router,
-              private camera: Camera) { }
+              private camera: Camera,
+              private alertasService: AlertasService) { }
 
   ngOnInit() {
 
@@ -108,6 +110,7 @@ export class EditarAcuerdoPage implements OnInit {
     if(actualizado){
       //Mensaje actualizado
       this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
+      this.alertasService.presentToast('Votación modificada exitosamente');
     }else{
       //Mensaje error
       console.log('No se logra' + actualizado);
