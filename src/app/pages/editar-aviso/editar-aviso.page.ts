@@ -16,7 +16,9 @@ declare var window: any;
 })
 export class EditarAvisoPage implements OnInit {
 
-  avisoEdicion: Avisos = {};
+  avisoEdicion: Avisos = {
+    
+  };
   imagenCarrete: string;
   usuario: Usuario = {};
   tipoAvisoName = 'default';
@@ -31,6 +33,7 @@ export class EditarAvisoPage implements OnInit {
 
   ngOnInit() 
   {
+
     //al cargar la pagina llamamos a obtenerRolUsuario para cargar los datos de usuario
     this.obtenerRolUsuario();
     //obtenemos el aviso enviado desde mis avisos
@@ -41,17 +44,17 @@ export class EditarAvisoPage implements OnInit {
 
   async editarAviso()
   {
-    if(this.avisoEdicion.titulo.length > 30)
-     {
-      this.alertasService.alerta('Título demasiado largo');
-      return;
-     }
+    // if(this.avisoEdicion.titulo.length > 30)
+    //  {
+    //   this.alertasService.alerta('Título demasiado largo');
+    //   return;
+    //  }
 
-     if(this.avisoEdicion.descripcion.length > 250)
-     {
-       this.alertasService.alerta('Descripción demasiada larga');
-       return;
-     }
+    //  if(this.avisoEdicion.descripcion.length > 250)
+    //  {
+    //    this.alertasService.alerta('Descripción demasiada larga');
+    //    return;
+    //  }
     //console.log('click' + this.avisoEdicion.descripcion + this.avisoEdicion.titulo + this.avisoEdicion.tipoAviso);
     const actualizado = await this.avisosService.actualizarAviso(this.avisoEdicion);
 
@@ -62,6 +65,7 @@ export class EditarAvisoPage implements OnInit {
       this.usuario = {};
       this.avisoEdicion = {};
       this.navController.navigateRoot('/main/tabs/mis-avisos',{animated: true});
+      this.alertasService.presentToast('Aviso actualizado exitosamente'); 
     }else
     {
       console.log('error' + actualizado);
@@ -100,7 +104,7 @@ export class EditarAvisoPage implements OnInit {
 
   getImagen()
   {
-    console.log('toma chupete');
+    
     const options: CameraOptions = 
     {
       quality: 50,

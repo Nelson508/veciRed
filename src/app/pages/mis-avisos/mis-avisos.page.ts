@@ -100,7 +100,8 @@ export class MisAvisosPage implements OnInit {
         if(respuesta['data'] === true)
         {
           aviso.estadoAviso = 0;
-          this.AvisosService.eliminarAviso(aviso);      
+          this.AvisosService.eliminarAviso(aviso);
+          this.alertasService.presentToast('Aviso eliminado exitosamente');       
         }else{
           console.log('No desea eliminar');
         }
@@ -137,7 +138,7 @@ export class MisAvisosPage implements OnInit {
     this.usuarioService.obtenerRolBD().subscribe(
       respuesta =>
       {
-        console.log(respuesta['currentRol'])
+ 
         if( String(this.usuario.comunidad) == '61ac3ce9c27143f6fe782cf0' && respuesta['currentRol'] == 2 )
         {
           this.disabledCrear = true;

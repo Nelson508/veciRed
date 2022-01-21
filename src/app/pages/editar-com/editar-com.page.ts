@@ -43,6 +43,7 @@ export class EditarComPage implements OnInit {
     {
       this.comunidadEditada = {};
       this.navController.navigateRoot('/main/tabs/comunidad',{animated: true});
+      this.alertasService.presentToast('Comunidad editada exitosamente'); 
     }else{
       console.log('fallo');
     }
