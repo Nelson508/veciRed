@@ -79,6 +79,7 @@ export class CrearAvisoPage implements OnInit {
     this.usuario = {};
 
     this.ruta.navigateByUrl('main/tabs/tab1');
+    this.alertasService.presentToast('Aviso publicado exitosamente'); 
    }
 
   

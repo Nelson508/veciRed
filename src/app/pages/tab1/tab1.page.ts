@@ -137,7 +137,7 @@ export class Tab1Page implements OnInit{
         this.refresher();
       }
       else{
-        console.log('fallo');
+        //console.log('fallo');
       }
     
     
@@ -171,12 +171,6 @@ export class Tab1Page implements OnInit{
           this.disabledCrear = false;
         }
 
-
-        //respuesta['comunidades'].rol[0] != 1 
-        console.log(respuesta['comunidades'].rol[0]);
-        //console.log(respuesta['comunidades'].comunidad[0]);
-        console.log(this.usuario.comunidad);
-
       }
     )
 
@@ -193,7 +187,7 @@ export class Tab1Page implements OnInit{
     this.usuarioService.obtenerRolBD().subscribe(
       respuesta =>
       {
-        console.log(respuesta['currentRol'])
+        
         if( String(this.usuario.comunidad) == '61ac3ce9c27143f6fe782cf0' && respuesta['currentRol'] == 2 )
         {
           this.disabledCrear = true;

@@ -83,9 +83,9 @@ export class ComunidadPage implements OnInit {
 
   async abandonarComunidad(comunidad, indexOfelement)
   {
-    console.log('click');
+   
     
-    console.log(indexOfelement);
+    
     if(indexOfelement === 0)
     {
       this.alertasService.alerta('No puedes abandonar esta comunidad');
@@ -98,9 +98,9 @@ export class ComunidadPage implements OnInit {
           {
             
             this.usuarioService.removerComunidad(comunidad);
-            console.log('OK');
+            this.alertasService.presentToast('Comunidad removida exitosamente'); 
           }else{
-            console.log('FALSE');
+            //no acepta
           }
         }
         
@@ -114,7 +114,7 @@ export class ComunidadPage implements OnInit {
 
   buscarComunidad()
   {
-    console.log('click');
+  
     this.ruta.navigateByUrl('main/tabs/buscar-com');
   }
 
