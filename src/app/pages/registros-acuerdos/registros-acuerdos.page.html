@@ -17,13 +17,21 @@
 </ion-header>
 
 <ion-content>
-  <!-- TITULO -->
+  <!-- Titulo -->
   <div class="titulo"><h4 class="ion-text-center"><b>ACUERDOS ANTERIORES</b></h4></div>
 
   <!-- Refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
+  <!--Acuerdos terminados-->
+  <ion-grid  *ngIf="emptyAcuerdos" >
+    <ion-card class=" ion-text-center sinAcuerdos">
+    <img class="sinAcuerdosImagen"src="/../../assets/noComunity.png"> 
+    <h3 class="sinAcuerdosTitulo"><b>No se han registrado acuerdos</b></h3>
+    </ion-card>
+  </ion-grid>
 
 
   <!-- Graficos -->

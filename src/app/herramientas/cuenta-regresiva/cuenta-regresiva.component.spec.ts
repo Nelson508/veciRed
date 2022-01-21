@@ -12,12 +12,14 @@ describe('CuentaRegresivaComponent', () => {
   let fixture: ComponentFixture<CuentaRegresivaComponent>;
 
   beforeEach(waitForAsync(() => {
+    //jasmine.DEFAULT_TIMEOUT_INTERVAL = 0;
     TestBed.configureTestingModule({
       providers: [Storage, FileTransfer],
       declarations: [ CuentaRegresivaComponent ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule]
     }).compileComponents();
 
+    
     fixture = TestBed.createComponent(CuentaRegresivaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -26,4 +28,8 @@ describe('CuentaRegresivaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  /* beforeAll(function() {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 0;
+  }); */
 });

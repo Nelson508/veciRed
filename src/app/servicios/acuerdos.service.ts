@@ -14,7 +14,8 @@ const URL = environment.url;
 export class AcuerdosService {
 
   pagiaAcuerdos = 0;
-  Objeto = new BehaviorSubject<{}>({});
+  //Objeto = new BehaviorSubject<{}>({});
+  Objeto = new EventEmitter<{}>();
   nuevoAcuerdo = new EventEmitter<Acuerdos>();
   acuerdoEliminado = new EventEmitter<Acuerdos>();
 
