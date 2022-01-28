@@ -1,6 +1,6 @@
 import { DatePipe  } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Acuerdos } from '../../interfaces/interfaces';
 import { OpcionesPage } from '../opciones/opciones.page';
@@ -22,8 +22,10 @@ export class CrearAcuerdoPage implements OnInit {
 
   minTime: String = new Date().toISOString();
 
-  acuerdo: Acuerdos = {
+  plataforma:boolean;
 
+  acuerdo: Acuerdos = 
+  {
     titulo:'',
     descripcion:'',
     fecha:null,
@@ -35,9 +37,16 @@ export class CrearAcuerdoPage implements OnInit {
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController,
               private camera: Camera,
-              private alertasService: AlertasService) { }
+              private alertasService: AlertasService,
+              private platform: Platform) { }
 
   ngOnInit() {
+
+    if(this.platform.is('capacitor')){
+      this.plataforma = false;
+    }else{
+      this.plataforma = true;
+    }
 
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
@@ -55,10 +64,7 @@ export class CrearAcuerdoPage implements OnInit {
 
     let fecha = new Date(this.acuerdo.fecha);
 
-    let days = ['Lunes','Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-    var diaSemana = days[fecha.getUTCDay()-1];
-
-    this.acuerdo.fecha = diaSemana + datepipe.transform(fecha,', dd-MM-YYYY');
+    this.acuerdo.fecha = datepipe.transform(fecha,'YYYY-MM-dd');
     this.acuerdo.hora = datepipe.transform(this.acuerdo.hora,'HH:mm');
 
     const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);

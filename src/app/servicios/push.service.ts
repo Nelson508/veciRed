@@ -34,7 +34,8 @@ export class PushService {
     app_id: "971b279e-dd53-47c9-9c33-286653e8243d",
     contents: { en: "Englis message from Postman", es: ""},
     headings: { es: ""},
-    include_external_user_ids: []
+    include_external_user_ids: [],
+    small_icon: "/drawable/small_icon"
   }
 
   constructor(private platform: Platform,
@@ -191,11 +192,11 @@ export class PushService {
       this.notificacion.include_external_user_ids = this.userId;
       this.notificacion.contents.es = title;
       this.notificacion.headings.es = body; 
-///asdass
+
       console.log(this.notificacion.include_external_user_ids);
 
       const headers = new HttpHeaders({
-        'Authorization': 'Basic YWQ1OGE1OGYtOTUwZC00ZWE3LWFmZDQtMDRkMDkxZjIwZWY1'
+        'Authorization': 'Aqui va la clave de OneSignal Luis'
       });
 
       return new Promise( resolve => {

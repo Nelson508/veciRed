@@ -10,9 +10,9 @@ import { CuentaRegresivaComponent } from './cuenta-regresiva.component';
 describe('CuentaRegresivaComponent', () => {
   let component: CuentaRegresivaComponent;
   let fixture: ComponentFixture<CuentaRegresivaComponent>;
+  var originalTimeout;
 
-  beforeEach(waitForAsync(() => {
-    //jasmine.DEFAULT_TIMEOUT_INTERVAL = 0;
+  beforeEach((() => {   
     TestBed.configureTestingModule({
       providers: [Storage, FileTransfer],
       declarations: [ CuentaRegresivaComponent ],
@@ -28,8 +28,4 @@ describe('CuentaRegresivaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  /* beforeAll(function() {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 0;
-  }); */
 });

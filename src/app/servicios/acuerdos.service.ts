@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UsuarioService } from './usuario.service';
 import { AcuerdosCreados, Acuerdos } from '../interfaces/interfaces';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, ReplaySubject } from 'rxjs';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 
 const URL = environment.url;
@@ -15,7 +15,10 @@ export class AcuerdosService {
 
   pagiaAcuerdos = 0;
   //Objeto = new BehaviorSubject<{}>({});
-  Objeto = new EventEmitter<{}>();
+  //EventReceiver
+  //private subscription: Subscription;
+  Objeto = new ReplaySubject<{}>();
+  //Objeto = new EventEmitter<{}>();
   nuevoAcuerdo = new EventEmitter<Acuerdos>();
   acuerdoEliminado = new EventEmitter<Acuerdos>();
 

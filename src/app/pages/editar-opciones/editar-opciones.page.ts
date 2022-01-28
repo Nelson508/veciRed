@@ -13,7 +13,7 @@ export class EditarOpcionesPage implements OnInit {
 
   opciones : Object[] = [];
   titulos: string = '';
-  res: string[] = [];
+  res: Object[] = [];
  // res = new EventEmitter<{}>();
 
   opcion: Object[]  = [{

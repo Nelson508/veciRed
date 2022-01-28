@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { DatePipe  } from '@angular/common';
 import { Acuerdos } from '../../interfaces/interfaces';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { AlertasService } from '../../servicios/alertas.service';
@@ -12,8 +13,20 @@ import { PushService } from '../../servicios/push.service';
 })
 export class AcuerdoPublicadoComponent implements OnInit {
 
-  @Input() acuerdoPublicado: Acuerdos = {};
+  @Input() acuerdoPublicado: Acuerdos = {
+    
+    titulo:'',
+    descripcion:'',
+    fecha:null,
+    hora:null,
+    duracion:null,
+    imagenAcuerdo: [],
+    opciones: {},
+    comunidad: {},
+    usuario: {}
+  };
   ocultar: boolean = true;
+  fechaFormateada = null;
 
   constructor(private acuerdosService: AcuerdosService,
               private navCtrl: NavController,
@@ -30,10 +43,13 @@ export class AcuerdoPublicadoComponent implements OnInit {
       console.log(this.ocultar);
       
     }
-    
+
+    this.formatearFecha();
+   
   }
 
   abrirEditar(){
+    
 
     this.acuerdosService.enviarDatos(this.acuerdoPublicado, true);
     //this.router.navigate(['/main/tabs/crear-acuerdo']);
@@ -95,5 +111,19 @@ export class AcuerdoPublicadoComponent implements OnInit {
         console.log('No desea eliminar');
       }
     })
+  }
+
+  formatearFecha(){
+    
+    const datepipe: DatePipe = new DatePipe('en-US');
+    console.log(this.acuerdoPublicado.fecha);
+    let fecha = new Date(this.acuerdoPublicado.fecha);
+    console.log(fecha);
+
+    let days = ['Lunes','Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    var diaSemana = days[fecha.getUTCDay()-1];
+
+    this.fechaFormateada = diaSemana + datepipe.transform(this.acuerdoPublicado.fecha,', dd-MM-YYYY');
+
   }
 }

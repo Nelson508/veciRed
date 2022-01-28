@@ -74,7 +74,7 @@
     </ion-item>
     
     <!-- ACUERDO  IMAGEN-->
-    <ion-item>
+    <ion-item [hidden]="plataforma">
       <ion-row style="width: 100%; margin-top:3%;">
         <ion-col size="6" >
           <ion-label style="margin-top:4.5%;"><b>Imagen:</b></ion-label>
@@ -100,7 +100,7 @@
     <ion-grid *ngIf="tempImages">
       
       <ion-card>
-        <img [src]="tempImages">
+        <img [src]="tempImages" class="formatoImagen">
       </ion-card>
   
     </ion-grid>

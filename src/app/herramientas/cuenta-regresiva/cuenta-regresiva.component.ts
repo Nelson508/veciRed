@@ -37,7 +37,7 @@ export class CuentaRegresivaComponent implements OnInit, OnDestroy {
     //fecha lanzada + duracion en milisegundos componen el dDay
     var dDay = this.votacionLanzada.fechaLanzada + duracionMilisegundos;
     this.timeDifference = dDay - new  Date().getTime();
-    console.log(this.timeDifference);
+    //console.log(this.timeDifference);
 
     if(this.timeDifference < 0){ 
 

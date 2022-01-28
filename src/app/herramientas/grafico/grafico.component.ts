@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild  } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { Acuerdos } from '../../interfaces/interfaces';
 
@@ -9,20 +9,25 @@ import { Acuerdos } from '../../interfaces/interfaces';
   templateUrl: './grafico.component.html',
   styleUrls: ['./grafico.component.scss'],
 })
-export class GraficoComponent implements AfterViewInit   {
+export class GraficoComponent implements AfterViewInit, OnDestroy   {
 
-  @Input() graficoVotacion: Acuerdos = {};
+  @Input() graficoVotacion: Acuerdos = 
+  {
+    opciones: {}
+  };
   @ViewChild('doughnutCanvas') private doughnutCanvas: ElementRef;
 
   titulos: Object[]= [];
   votos: Object[]= [];
   doughnutChart: any;
+  sinVotos:boolean = false;
 
-  constructor() { }
+  constructor(private cdRef:ChangeDetectorRef) { }
 
   ngAfterViewInit() {
-
+    
     this.doughnutChartMethod();
+    this.cdRef.detectChanges();
   }
 
   doughnutChartMethod() {
@@ -34,6 +39,15 @@ export class GraficoComponent implements AfterViewInit   {
       this.titulos.push(this.graficoVotacion.opciones[index]['titulo']);
       this.votos.push(this.graficoVotacion.opciones[index]['votos']);
     }
+
+    //Verifica si todos los valores son cero
+    if(this.votos.every(item => item === 0)){
+
+      this.sinVotos = true;
+    }else{
+      this.sinVotos = false;
+    }
+
 
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       type: 'doughnut',
@@ -57,5 +71,12 @@ export class GraficoComponent implements AfterViewInit   {
         }]
       }
     });
+  }
+
+  ngOnDestroy() {
+
+    this.titulos = [];
+    this.votos = [];
+    this.doughnutChart.destroy();
   }
 }

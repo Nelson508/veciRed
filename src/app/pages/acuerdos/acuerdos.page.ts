@@ -63,6 +63,7 @@ export class AcuerdosPage implements OnInit {
         {
           this.acuerdos = [];
           this.deshabilitar = false;
+          this.emptyAcuerdos=false;
         }
         
 
@@ -90,8 +91,6 @@ export class AcuerdosPage implements OnInit {
           }
 
         }
-        //this.acuerdos.push(...response.acuerdosPublicados);
-
 
         if(this.acuerdos.length == 0 && response.pagina === 1)
         {
@@ -123,7 +122,8 @@ export class AcuerdosPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    
+
+    this.emptyAcuerdos=false;
     this.refresh();
   }
 

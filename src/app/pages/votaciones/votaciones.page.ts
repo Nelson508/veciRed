@@ -31,6 +31,8 @@ export class VotacionesPage implements OnInit {
 
     //this.scroll();
     this.refresh();
+
+    
     
     //this.acuerdosService.acuerdoEliminado
         //.subscribe( acuerdo => {
@@ -48,7 +50,14 @@ export class VotacionesPage implements OnInit {
         console.log(response );
         console.log(this.acuerdos);
 
-        this.emptyVotaciones=true;
+        //this.emptyVotaciones=true;
+
+        if(pull)
+        {
+          this.acuerdos = [];
+          this.deshabilitar = false;
+          this.emptyVotaciones = false;
+        }
 
         for (let index = 0; index < response.acuerdosPublicados.length; index++) {
           //const element = response.acuerdosPublicados[index];
@@ -57,7 +66,7 @@ export class VotacionesPage implements OnInit {
           
           if(response.acuerdosPublicados[index]['estado'] == 2){
 
-            this.emptyVotaciones=false;
+            //this.emptyVotaciones=false;
 
             this.acuerdoLanzado = response.acuerdosPublicados[index];
             
@@ -85,7 +94,7 @@ export class VotacionesPage implements OnInit {
        /*console.log(response.acuerdosPublicados[0]);
         this.contador++;
         console.log(response.acuerdosPublicados[1]);*/
-        if(response.acuerdosPublicados.length == 0 && response.pagina === 1)
+        if(this.acuerdos.length == 0 && response.pagina === 1)
         {
           this.emptyVotaciones=true;
           console.log(this.emptyVotaciones );
@@ -116,7 +125,7 @@ export class VotacionesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    
+    this.emptyVotaciones=false;
     this.refresh();
   }
 
