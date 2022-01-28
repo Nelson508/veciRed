@@ -12,7 +12,7 @@ export class RegistrosAcuerdosPage implements OnInit {
   acuerdos: Acuerdos[] = [];
   deshabilitar = false;
   acuerdoTerminado: Acuerdos = {};
-  emptyAcuerdos = false;
+  emptyAcuerdos:boolean = false;
 
   constructor(private acuerdosService: AcuerdosService) { }
 
@@ -25,18 +25,30 @@ export class RegistrosAcuerdosPage implements OnInit {
 
     this.acuerdosService.getAcuerdos(pull)
       .subscribe(response => {
-        this.emptyAcuerdos = true;
+       
+
+        if(pull)
+        {
+          this.acuerdos = [];
+          this.deshabilitar = false;
+        }
 
         for (let index = 0; index < response.acuerdosPublicados.length; index++) {
 
 
           if(response.acuerdosPublicados[index]['estado'] == 3){
-            this.emptyAcuerdos = false;
+            //this.emptyAcuerdos = false;
             //console.log(response.acuerdosPublicados[index]['estado']);
             this.acuerdoTerminado = response.acuerdosPublicados[index];
             this.acuerdos.push(this.acuerdoTerminado);
           }
 
+        }
+
+        if(this.acuerdos.length == 0 && response.pagina === 1)
+        {
+          this.emptyAcuerdos=true;
+          console.log(this.emptyAcuerdos );
         }
         
         if(event)
@@ -56,6 +68,12 @@ export class RegistrosAcuerdosPage implements OnInit {
     this.scroll(event, true);
     this.acuerdos = [];
     this.deshabilitar = false;
+  }
+
+  ionViewWillEnter() {
+    
+    this.emptyAcuerdos = false;
+    this.refresh();
   }
 
 }

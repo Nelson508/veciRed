@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from "@angular/router/testing";
 import { Storage } from '@ionic/storage';
+import { FormsModule } from '@angular/forms';
 
 import { LoginPage } from './login.page';
 
@@ -14,7 +15,7 @@ describe('LoginPage', () => {
     TestBed.configureTestingModule({
       providers: [Storage],
       declarations: [ LoginPage ],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule]
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, FormsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);

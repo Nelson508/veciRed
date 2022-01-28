@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="cabecera">
-    <ion-buttons slot="start" (click)="volverAtras()">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/main/tabs/acuerdos" color="light"></ion-back-button>
     </ion-buttons>
 
@@ -71,7 +71,7 @@
     </ion-item>
     
     <!-- ACUERDO  IMAGEN-->
-    <ion-item>
+    <ion-item [hidden]="plataforma">
       <ion-row style="width: 100%; margin-top:3%;">
         <ion-col size="6" >
           <ion-label style="margin-top:4.5%;"><b>Imagen:</b></ion-label>
@@ -90,7 +90,6 @@
         </ion-col>
       </ion-row>
       
-      
     </ion-item>
 
    <!--  <ion-row>
@@ -107,7 +106,7 @@
     <ion-grid *ngIf="tempImages">
       
       <ion-card>
-        <img [src]="tempImages">
+        <img [src]="tempImages" class="formatoImagen">
       </ion-card>
   
     </ion-grid>
@@ -126,11 +125,12 @@
                shape="round" 
                expand="full"
                (click)="crearAcuerdo()"
-               [disabled]="acuerdo.titulo.length < 1 ||
-                           acuerdo.descripcion.length < 1 ||
+               [disabled]="acuerdo.titulo.length < 3 ||
+                           acuerdo.descripcion.length < 3 ||
                            acuerdo.fecha == null ||
                            acuerdo.hora == null ||
                            acuerdo.duracion < 1 ||
+                           acuerdo.duracion > 48 ||
                            (acuerdo.opciones | json) == '{}' ">
     Publicar
   </ion-button>

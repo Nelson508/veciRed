@@ -5,6 +5,7 @@ import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { CuentaRegresivaComponent } from '../../herramientas/cuenta-regresiva/cuenta-regresiva.component';
 import { Subscription } from 'rxjs';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { GraficoComponent } from '../../herramientas/grafico/grafico.component';
 
 @Component({
   selector: 'app-detalle-votacion',
@@ -14,6 +15,7 @@ import { UsuarioService } from '../../servicios/usuario.service';
 export class DetalleVotacionPage implements OnInit {
   
   @ViewChild(CuentaRegresivaComponent) child;
+  @ViewChild(GraficoComponent) grafico;
  
   private subscription: Subscription;
 
@@ -45,9 +47,6 @@ export class DetalleVotacionPage implements OnInit {
   
       this.votacion = respuesta;
       console.log(this.votacion);
-      //console.log(this.votacion.opciones[0]['titulo']);
-      //console.log(this.votacion.usuario);
-      //this.ionViewDidLoad();
     });
 
     this.obtenerUsuario();
@@ -69,9 +68,13 @@ export class DetalleVotacionPage implements OnInit {
     const actualizado = await this.acuerdosService.actualizarAcuerdo(this.votacion);
     //Si la actualizacion ocurrio sin problemas se redirecciona a votaciones
     if(actualizado){
-      //Mensaje actualizado
-      //this.navCtrl.navigateRoot('/main/tabs/votaciones', {animated: true});
+      //Se vuelve a crear el grafico con los datos acualizados     
+      this.grafico.ngOnDestroy();
+      this.grafico.ngAfterViewInit();
+      //Se ocultan las opcion para mostrar el grafico   
       this.ocultar = false;
+      //Se bloquea el boton votar
+      this.buttonValue = -1;
     }else{
       //Mensaje error
       console.log('No se logra' + actualizado);
@@ -82,28 +85,38 @@ export class DetalleVotacionPage implements OnInit {
   obtenerUsuario(){
 
     this.usuario = this.usuarioService.obtenerUsuario();
-    console.log(this.usuario);
-    console.log(this.votacion.votantes);
+    //console.log(this.usuario);
+    //console.log(this.votacion.votantes);
 
-    for (let index = 0; index < this.votacion.votantes.length; index++) {
-      
-      console.log(this.usuario._id);
-      console.log(this.votacion.votantes[index]);
+    if(this.votacion.votantes.length !== 0){
 
-      if(this.usuario._id == this.votacion.votantes[index]){
-        this.ocultar = false;
+      console.log(this.votacion.votantes.length);
+      for (let index = 0; index < this.votacion.votantes.length; index++) {
+        
+        //console.log(this.usuario._id);
+        //console.log(this.votacion.votantes[index]);
+  
+        if(this.usuario._id == this.votacion.votantes[index]){
+          this.ocultar = false;
+        }
       }
+    }else{
+      this.ocultar = true;
     }
   }
   
   ionViewWillEnter() {
-    
+  
     this.child.ngOnDestroy();
     this.child.ngOnInit();
+    this.grafico.ngOnDestroy();
+    this.grafico.ngAfterViewInit();
+    this.obtenerUsuario();
   } 
 
   ionViewDidLeave() {
     
     this.child.ngOnDestroy();
+    this.grafico.ngOnDestroy();
   }
 }

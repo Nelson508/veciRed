@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Acuerdos } from '../../interfaces/interfaces';
 import { AcuerdosService } from '../../servicios/acuerdos.service';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
@@ -18,6 +18,7 @@ export class EditarAcuerdoPage implements OnInit {
 
   tempImages: string;
   minTime: String = new Date(new Date().setHours(new Date().getHours() - 48)).toISOString();
+  plataforma:boolean;
 
   acuerdo: Acuerdos = {
 
@@ -33,9 +34,16 @@ export class EditarAcuerdoPage implements OnInit {
               private navCtrl: NavController,
               private router: Router,
               private camera: Camera,
-              private alertasService: AlertasService) { }
+              private alertasService: AlertasService,
+              private platform: Platform) { }
 
   ngOnInit() {
+
+    if(this.platform.is('capacitor')){
+      this.plataforma = false;
+    }else{
+      this.plataforma = true;
+    }
 
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
@@ -105,6 +113,12 @@ export class EditarAcuerdoPage implements OnInit {
 
   async actualizar(){
 
+    const datepipe: DatePipe = new DatePipe('en-US');
+
+    let fecha = new Date(this.acuerdo.fecha);
+
+    this.acuerdo.fecha = datepipe.transform(fecha,'YYYY-MM-dd');
+    
     const actualizado = await this.acuerdosService.actualizarAcuerdo(this.acuerdo);
 
     if(actualizado){

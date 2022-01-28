@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, MenuController } from '@ionic/angular';
+import { NavController, MenuController, Platform } from '@ionic/angular';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { AlertasService } from '../../servicios/alertas.service';
 import { PushService } from '../../servicios/push.service';
@@ -27,6 +27,7 @@ export class LoginPage implements OnInit {
                public usuarioService: UsuarioService,
                public alertasService: AlertasService,
                private menuCtrl: MenuController,
+               private platform: Platform,
                private pushService: PushService ) { 
                 this.menuCtrl.enable(false, 'first');
                }
@@ -46,12 +47,12 @@ export class LoginPage implements OnInit {
 
     if(existe){
       //navegar al tabs
-      console.log('antes');
-      //await this.comunidadesUsuario();
       this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
-      this.pushService.setUserId();
+
+      if(this.platform.is('capacitor')){
+        this.pushService.setUserId();
+      }
       
-      console.log('despues');
     }else{
       //mostrar alerta de usuario y contraseña no correctos
       this.alertasService.alerta('Usario y/o contraseña no son correctos');
