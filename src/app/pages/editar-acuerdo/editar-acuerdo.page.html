@@ -28,7 +28,7 @@
     <!-- ACUERDO TITULO -->
     <ion-item>
       <ion-label position="floating"><b>Título:</b></ion-label>
-      <ion-input type="text" maxlength="30" [(ngModel)]="acuerdo.titulo"></ion-input>
+      <ion-input type="text" minlength="3" maxlength="30" [(ngModel)]="acuerdo.titulo" required></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - acuerdo.titulo.length }} caracteres restantes</span>
 
@@ -39,7 +39,7 @@
                     picker-format="DD/MMMM/YYYY"
                     month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
                     [min]="minTime"
-                    max="2025-12-31" 
+                    max="2125-12-31" 
                     [(ngModel)]="acuerdo.fecha" 
                     doneText="Aceptar"
                     cancelText="Cancelar" required></ion-datetime>
@@ -58,13 +58,13 @@
     <!-- ACUERDO DURACIÓN -->
     <ion-item>
       <ion-label position="floating"><b>Duración:</b></ion-label>
-      <ion-input type="number" min="0" max="23" [(ngModel)]="acuerdo.duracion"></ion-input>
+      <ion-input type="number" min="0" max="23" [(ngModel)]="acuerdo.duracion" required></ion-input>
     </ion-item>
 
     <!-- ACUERDO DESCRIPCIÓN -->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea maxlength="250" [(ngModel)]="acuerdo.descripcion"></ion-textarea>
+      <ion-textarea minlength="3" maxlength="250" [(ngModel)]="acuerdo.descripcion" required></ion-textarea>
     </ion-item>
     <span class="caracteres">{{ 250 - acuerdo.descripcion.length }} caracteres restantes</span>
 
@@ -130,8 +130,8 @@
                shape="round" 
                expand="full"
                (click)="actualizar()"
-               [disabled]="acuerdo.titulo.length < 1 ||
-                           acuerdo.descripcion.length < 1 ||
+               [disabled]="acuerdo.titulo.length < 3 ||
+                           acuerdo.descripcion.length < 3 ||
                            acuerdo.fecha == null ||
                            acuerdo.hora == null ||
                            acuerdo.duracion < 1 ||

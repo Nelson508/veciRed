@@ -113,23 +113,50 @@ export class EditarAcuerdoPage implements OnInit {
 
   async actualizar(){
 
-    const datepipe: DatePipe = new DatePipe('en-US');
+    const validado = this.validacion();
 
-    let fecha = new Date(this.acuerdo.fecha);
+    if(validado == null){
 
-    this.acuerdo.fecha = datepipe.transform(fecha,'YYYY-MM-dd');
-    
-    const actualizado = await this.acuerdosService.actualizarAcuerdo(this.acuerdo);
+      const datepipe: DatePipe = new DatePipe('en-US');
+  
+      let fecha = new Date(this.acuerdo.fecha);
+  
+      this.acuerdo.fecha = datepipe.transform(fecha,'YYYY-MM-dd');
+      
+      const actualizado = await this.acuerdosService.actualizarAcuerdo(this.acuerdo);
+  
+      if(actualizado){
+        //Mensaje actualizado
+        this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
+        this.alertasService.presentToast('Acuerdo modificado exitosamente');
+      }else{
+        //Mensaje error
+        this.alertasService.presentToast('El acuerdo no pudo ser modificado');
+      }
+    }
+  }
 
-    if(actualizado){
-      //Mensaje actualizado
-      this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
-      this.alertasService.presentToast('Votación modificada exitosamente');
-    }else{
-      //Mensaje error
-      console.log('No se logra' + actualizado);
+  validacion(){
+    //Validación caracteres extraños en titulo
+    var caracteresTitulo = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
 
+    if(caracteresTitulo.test(this.acuerdo.titulo) == false){
+      
+      return this.alertasService.alerta('El título del acuerdo no permite tener los caracteres ingresados');
     }
 
+    //Validación caracteres extraños en la descripción
+    var caracteresDescripcion = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+
+    if(caracteresDescripcion.test(this.acuerdo.descripcion) == false){
+      
+      return this.alertasService.alerta('La descripción del acuerdo no permite tener los caracteres ingresados');
+    }
+
+    //Validación duracion del acuerdo
+    if(this.acuerdo.duracion > 48){
+      
+      return this.alertasService.alerta('La duración del acuerdo no puede ser mayor a 48 horas');
+    }
   }
 }
