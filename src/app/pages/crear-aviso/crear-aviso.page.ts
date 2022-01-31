@@ -49,6 +49,19 @@ export class CrearAvisoPage implements OnInit {
   
    async crearAviso()
    {
+     //Validación caracteres extraños en nombre
+     var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+     var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+
+     if(caracteres.test(this.aviso.titulo) == false){
+      this.alertasService.alerta('El título no permite tener caracteres especiales');
+      return;
+    }
+
+    if(caracteres2.test(this.aviso.descripcion) == false){
+      this.alertasService.alerta('La descripción no permite tener caracteres especiales');
+      return;
+    }
      if(this.aviso.titulo.length > 30)
      {
       this.alertasService.alerta('Título demasiado largo');
@@ -138,6 +151,15 @@ export class CrearAvisoPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    //Vaciamos las variables para limpiar los campos
+    this.aviso = {
+      titulo: '',
+      descripcion: '',
+      tipoAviso: 0
+    };
+    this.imagenCarrete = '';
+    this.Roltype = [];
+    this.usuario = {};
     this.obtenerRolUsuario();
 
     

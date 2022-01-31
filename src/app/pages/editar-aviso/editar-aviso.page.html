@@ -101,7 +101,7 @@
     <ion-grid *ngIf="imagenCarrete">
       
       <ion-card>
-      <img [src]="imagenCarrete">
+      <img class="formatoImagen" [src]="imagenCarrete">
       </ion-card>
   
 </ion-grid>
@@ -115,8 +115,8 @@
                    expand="full"
                    (click)="editarAviso()"
                    style="margin-top: 30%;"
-                   [disabled]="avisoEdicion.titulo.length < 1 ||
-                               avisoEdicion.descripcion.length < 1 ||
+                   [disabled]="avisoEdicion.titulo.length <= 2 ||
+                               avisoEdicion.descripcion.length <= 2 ||
                                avisoEdicion.tipoAviso == 0"
                    >
         Actualizar

@@ -27,7 +27,7 @@ export class ComunidadPage implements OnInit {
               ) { }
 
   ngOnInit() {
-    this.obtenerComunidades();
+    //this.obtenerComunidades();
     this.comunidadService.nuevaComunidad.subscribe(
       respuesta =>
       {
@@ -54,6 +54,8 @@ export class ComunidadPage implements OnInit {
     this.usuarioService.obtenerComunidadUsuario().subscribe(
       respuesta =>
       {
+        this.roles = [];
+        this.Comunidad = [];
       
         //console.log(respuesta);
         this.Comunidad.push(...respuesta['comunidades']['comunidad']);
@@ -116,6 +118,12 @@ export class ComunidadPage implements OnInit {
   {
   
     this.ruta.navigateByUrl('main/tabs/buscar-com');
+  }
+
+  ionViewWillEnter() {
+    this.roles = [];
+    this.Comunidad = [];
+    this.obtenerComunidades();
   }
 
 }

@@ -34,7 +34,7 @@
       <!--INICIO NOMBRE COMUNIDAD-->
       <ion-item>
         <ion-label  position="floating"><b>Nombre:</b></ion-label>
-        <ion-input type="text" maxlength="25" [(ngModel)]='comunidadEditada.nombreComunidad' required></ion-input>
+        <ion-input type="text" minlength="3" maxlength="25" [(ngModel)]='comunidadEditada.nombreComunidad' required></ion-input>
 
       </ion-item>
       <span class="caracteres">{{ 25 - comunidadEditada.nombreComunidad.length }} caracteres restantes</span>
@@ -43,7 +43,7 @@
       <!--INICIO DESCRIPCION-->
       <ion-item>
         <ion-label position="floating"><b>Descripción:</b></ion-label>
-        <ion-textarea type="text" maxlength="250" [(ngModel)]='comunidadEditada.descripcion' required></ion-textarea>
+        <ion-textarea type="text" minlength="3" maxlength="250" [(ngModel)]='comunidadEditada.descripcion' required></ion-textarea>
 
       </ion-item>
       <span class="caracteres">{{ 250 - comunidadEditada.descripcion.length }} caracteres restantes</span>
@@ -583,8 +583,9 @@
                    expand="full"
                    (click)="editarComunidad()"
                    style="margin-top: 30%;"
-                   [disabled]="comunidadEditada.nombreComunidad.length < 1 ||
-                               comunidadEditada.descripcion.length < 1 ||
+                   class="sendData"
+                   [disabled]="comunidadEditada.nombreComunidad.length <= 2 ||
+                               comunidadEditada.descripcion.length <= 2 ||
                                comunidadEditada.region == '' ||
                                comunidadEditada.comuna == ''
                    "
