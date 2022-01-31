@@ -16,7 +16,7 @@ export class ComunidadService {
 
   nuevaComunidad = new EventEmitter<Comunidad>();
 
-  Objeto = new BehaviorSubject<{}>({});
+  Objeto = new EventEmitter<Comunidad>();
 
   constructor( private http: HttpClient,
                private usuarioService: UsuarioService

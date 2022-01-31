@@ -32,7 +32,7 @@
 
   <ion-grid style="text-align:center">
     <!-- Animated Searchbar -->
-    <ion-searchbar [(ngModel)]="comunidad.nombreComunidad" animated placeholder="Ingrese el nombre" color="light"></ion-searchbar>
+    <ion-searchbar maxlength="30"  [(ngModel)]="comunidad.nombreComunidad" animated placeholder="Ingrese el nombre" color="light"></ion-searchbar>
 
     <!--INICIO SELECT REGIONES-->
     
@@ -622,6 +622,7 @@
               
               <ion-textarea [(ngModel)]="solicitud.mensaje"
                             style="border: 1px #241816 solid;"
+                            minlength="3" maxlength="250"
                             >
                             
               </ion-textarea>
@@ -633,7 +634,7 @@
                 size="small"
                 color="tertiary"
                 (click)="enviarSolicitud(comunity)"
-                [disabled]="this.solicitud.mensaje.length < 1"
+                [disabled]="this.solicitud.mensaje.length <= 2"
                 ><span >Enviar</span>
               </ion-button>
             </ion-col>

@@ -33,10 +33,8 @@ export class SolicitudService {
         this.http.post(`${url}/solicitud/crear`, solicitud, {headers})
         .subscribe(respuesta =>
           {
-            
               this.nuevaSolicitud.emit(respuesta);
               resolve(true);
-            
             
           })
       }

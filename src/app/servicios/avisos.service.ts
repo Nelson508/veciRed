@@ -21,7 +21,8 @@ export class AvisosService {
   contadorPaginaAvisosUser= 0;
 
   //objeto que recibe data desde mis avisos y lo envia a editar aviso
-  Objeto = new BehaviorSubject<{}>({});
+  //Objeto = new BehaviorSubject<{}>({});
+  Objeto = new EventEmitter<Avisos>();
 
   //inyectamos el Http para poder hacer nuestra peticion de los avisos
   constructor( private http: HttpClient,

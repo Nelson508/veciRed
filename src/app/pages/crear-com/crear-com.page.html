@@ -34,7 +34,7 @@
       <!--INICIO NOMBRE COMUNIDAD-->
       <ion-item>
         <ion-label  position="floating"><b>Nombre:</b></ion-label>
-        <ion-input type="text" maxlength="25" [(ngModel)]='comunidad.nombreComunidad' required></ion-input>
+        <ion-input type="text" minlength="3" maxlength="25" [(ngModel)]='comunidad.nombreComunidad' required></ion-input>
 
       </ion-item>
       <span class="caracteres">{{ 25 - comunidad.nombreComunidad.length }} caracteres restantes</span>
@@ -43,7 +43,7 @@
       <!--INICIO DESCRIPCION-->
       <ion-item>
         <ion-label position="floating"><b>Descripción:</b></ion-label>
-        <ion-textarea type="text" maxlength="250" [(ngModel)]='comunidad.descripcion' required></ion-textarea>
+        <ion-textarea type="text" minlength="3" maxlength="250" [(ngModel)]='comunidad.descripcion' required></ion-textarea>
 
       </ion-item>
       <span class="caracteres">{{ 250 - comunidad.descripcion.length }} caracteres restantes</span>
@@ -592,8 +592,8 @@
                    expand="full"
                    (click)="crearComunidad()"
                    style="margin-top: 30%;"
-                   [disabled]="comunidad.nombreComunidad.length < 1 ||
-                               comunidad.descripcion.length < 1     ||
+                   [disabled]="comunidad.nombreComunidad.length <= 2 ||
+                               comunidad.descripcion.length <= 2     ||
                                comunidad.region == ''               ||
                                comunidad.comuna == ''
                    "

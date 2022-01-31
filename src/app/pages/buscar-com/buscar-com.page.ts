@@ -43,11 +43,14 @@ export class BuscarComPage implements OnInit {
 
   ngOnInit() {
 
-    this.obtenerComunidadesUsuario();
+    //this.obtenerComunidadesUsuario();
     
     this.solicitudService.nuevaSolicitud.subscribe(
       async respuesta =>
       {
+        
+
+
         if(respuesta['ok'] === true)
         {
           await this.alertasService.alerta('¡Su solicitud ha sido enviada!');
@@ -56,6 +59,7 @@ export class BuscarComPage implements OnInit {
           await this.alertasService.alerta('¡Ya has enviado una solicitud a esta comunidad!');
           return;
         }
+        
       }
     );
   }
@@ -80,6 +84,7 @@ export class BuscarComPage implements OnInit {
 
         this.mostrarInputMensaje = false;
         this.position = null;
+        //this.arrayComunidades = [];
         
         
         this.comunidades.push(...respuesta['comunidades']);
@@ -113,12 +118,12 @@ export class BuscarComPage implements OnInit {
     this.mostrarInputMensaje = false;
     this.position = null;
     //this.arrayComunidades = [];
-    this.obtenerComunidadesUsuario();
+    //this.obtenerComunidadesUsuario();
     
   }
 
 
-  unirme(indexOfelement)
+  async unirme(indexOfelement)
   {
     this.solicitud = {
       _id: '',
@@ -126,16 +131,26 @@ export class BuscarComPage implements OnInit {
     };
     this.position = indexOfelement;
     this.mostrarInputMensaje = true;
+    this.obtenerComunidadesUsuario();
    
   }
 
-    async enviarSolicitud(comunity)
+  enviarSolicitud(comunity)
   {
     //validacion para comprobar que usuario no pertenece
     /*enviamos desde el *ngFor a comunity._id variable que almacena la id del usuario y luego la evaluamos en el array
     del usuario para verificar si existe alguna coincidencia*/
-    
+ 
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+ 
+    if(caracteres.test(this.solicitud.mensaje) == false){
+     this.alertasService.alerta('El mensaje no permite tener caracteres especiales');
+     return;
+   }
     this.solicitud._id = comunity._id;
+    
+
 
     let index = this.arrayComunidades.indexOf(this.solicitud._id);
     if(index != -1)
@@ -146,20 +161,9 @@ export class BuscarComPage implements OnInit {
     
     //INICIO ENVIO DE DATOS
     this.solicitudService.crearSolicitud(this.solicitud);
-    // await this.solicitudService.nuevaSolicitud.subscribe(
-    //   async respuesta =>
-    //   {
-    //     if(respuesta['ok'] === true)
-    //     {
-    //       await this.alertasService.alerta('¡Su solicitud ha sido enviada!');
-    //       return;
-    //     }else{
-    //       await this.alertasService.alerta('¡Ya has enviado una solicitud a esta comunidad!');
-    //       return;
-    //     }
-    //   }
-    // );
-    //FIN ENVIO DE DATOS
+ 
+    this.comunidades = [];
+    
 
   }
 
@@ -168,6 +172,7 @@ export class BuscarComPage implements OnInit {
     await this.usuarioService.obtenerArrayComunidadesUsuario().subscribe(
        async respuesta =>
       {
+        this.arrayComunidades = [];
         this.arrayComunidades = await respuesta['comunidades']['comunidad']; 
       }
     )

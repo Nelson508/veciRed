@@ -13,7 +13,14 @@ export class AvisoPublicadoComponent implements OnInit {
 
   
 
-  @Input() aviso: Avisos= {};
+  @Input() aviso: Avisos= {
+    titulo: '',
+    descripcion: '',
+    imagenAviso: [],
+    fechaCreacion: '',
+    usuario: {},
+    comunidad: {}
+  };
 
   constructor() { }
 

@@ -47,7 +47,7 @@ export class Tab1Page implements OnInit{
 
   ngOnInit()
   {
-    this.paginaSiguiente();
+    //this.paginaSiguiente();
 
     this.AvisosService.nuevoAviso.subscribe(
       aviso =>
@@ -103,6 +103,7 @@ export class Tab1Page implements OnInit{
 
   refresher(event?)
   {
+    this.emptyAvisos=false;
     this.paginaSiguiente(event, true);
   }
 
@@ -178,7 +179,10 @@ export class Tab1Page implements OnInit{
 
 
   ionViewWillEnter() {
+    this.refresher();
+    this.emptyAvisos=false;
     this.obtenerComunidades();
+    
   }
 
   validarCrearAviso()

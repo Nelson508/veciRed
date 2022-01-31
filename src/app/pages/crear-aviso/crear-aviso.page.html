@@ -35,7 +35,7 @@
     <!---INICIO TITULO-->
     <ion-item>
       <ion-label position="floating"><b>Título:</b></ion-label>
-      <ion-input type="text" maxlength="30" [(ngModel)]="aviso.titulo" required ></ion-input>
+      <ion-input type="text" minlength="3" maxlength="30" [(ngModel)]="aviso.titulo" required ></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - aviso.titulo.length }} caracteres restantes</span> 
     
@@ -44,7 +44,7 @@
     <!---INICIO DESCRIPCION-->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea type="text" maxlength="250" [(ngModel)]="aviso.descripcion"  required ></ion-textarea>
+      <ion-textarea type="text" minlength="3" maxlength="250" [(ngModel)]="aviso.descripcion"  required ></ion-textarea>
       
     </ion-item>
     <span class="caracteres">{{ 250 - aviso.descripcion.length }} caracteres restantes</span> 
@@ -116,8 +116,8 @@
                    expand="full"
                    (click)="crearAviso()"
                    style="margin-top: 30%;"
-                   [disabled]="aviso.titulo.length < 1 ||
-                               aviso.descripcion.length < 1 ||
+                   [disabled]="aviso.titulo.length <= 2 ||
+                               aviso.descripcion.length <= 2 ||
                                aviso.tipoAviso == 0"
                    >
         Publicar

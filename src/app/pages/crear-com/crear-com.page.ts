@@ -36,6 +36,18 @@ export class CrearComPage implements OnInit {
 
   async crearComunidad()
   {
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    if(caracteres.test(this.comunidad.nombreComunidad) == false){
+     this.alertasService.alerta('El Nombre de la comunidad no permite tener caracteres especiales');
+     return;
+   }
+
+   if(caracteres2.test(this.comunidad.descripcion) == false){
+     this.alertasService.alerta('La descripción de la comunidad no permite tener caracteres especiales');
+     return;
+   }
 
     if(this.comunidad.nombreComunidad.length > 25)
     {

@@ -11,7 +11,13 @@ import { AlertasService } from '../../servicios/alertas.service';
 })
 export class EditarComPage implements OnInit {
 
-  comunidadEditada: Comunidad = {};
+  comunidadEditada: Comunidad = {
+    nombreComunidad: '',
+    descripcion: '',
+    region: '',
+    comuna: ''
+
+  };
   
   constructor( private comunidadService: ComunidadService,
                private navController: NavController,
@@ -26,6 +32,19 @@ export class EditarComPage implements OnInit {
 
   editarComunidad()
   {
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    if(caracteres.test(this.comunidadEditada.nombreComunidad) == false){
+     this.alertasService.alerta('El Nombre de la comunidad no permite tener caracteres especiales');
+     return;
+   }
+
+   if(caracteres2.test(this.comunidadEditada.descripcion) == false){
+     this.alertasService.alerta('La descripción de la comunidad no permite tener caracteres especiales');
+     return;
+   }
+
     if(this.comunidadEditada.nombreComunidad.length > 25)
     {
       this.alertasService.alerta('Nombre demasiado largo');
@@ -41,7 +60,13 @@ export class EditarComPage implements OnInit {
     const actualizado = this.comunidadService.actualizarComunidad(this.comunidadEditada);
     if(actualizado)
     {
-      this.comunidadEditada = {};
+        this.comunidadEditada = {
+        nombreComunidad: '',
+        descripcion: '',
+        region: '',
+        comuna: ''
+    
+      };
       this.navController.navigateRoot('/main/tabs/comunidad',{animated: true});
       this.alertasService.presentToast('Comunidad editada exitosamente'); 
     }else{

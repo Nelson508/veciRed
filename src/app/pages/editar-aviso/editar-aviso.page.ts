@@ -17,7 +17,9 @@ declare var window: any;
 export class EditarAvisoPage implements OnInit {
 
   avisoEdicion: Avisos = {
-    
+    titulo: '',
+    descripcion: '',
+    tipoAviso : 0
   };
   imagenCarrete: string;
   usuario: Usuario = {};
@@ -44,6 +46,18 @@ export class EditarAvisoPage implements OnInit {
 
   async editarAviso()
   {
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    if(caracteres.test(this.avisoEdicion.titulo) == false){
+     this.alertasService.alerta('El título no permite tener caracteres especiales');
+     return;
+   }
+
+   if(caracteres2.test(this.avisoEdicion.descripcion) == false){
+     this.alertasService.alerta('La descripción no permite tener caracteres especiales');
+     return;
+   }
     // if(this.avisoEdicion.titulo.length > 30)
     //  {
     //   this.alertasService.alerta('Título demasiado largo');
@@ -63,7 +77,11 @@ export class EditarAvisoPage implements OnInit {
       this.imagenCarrete= '';
       this.Roltype = [];
       this.usuario = {};
-      this.avisoEdicion = {};
+      this.avisoEdicion = {
+        titulo: '',
+        descripcion: '',
+        tipoAviso : 0
+      };
       this.navController.navigateRoot('/main/tabs/mis-avisos',{animated: true});
       this.alertasService.presentToast('Aviso actualizado exitosamente'); 
     }else
@@ -132,8 +150,21 @@ export class EditarAvisoPage implements OnInit {
 
 
   ionViewWillEnter() {
+    //this.obtenerAvisoEditar();
     this.obtenerRolUsuario();
     
+    
+  }
+  
+  ionViewDidLeave(){
+    this.imagenCarrete= '';
+    this.Roltype = [];
+    this.usuario = {};
+    this.avisoEdicion = {
+      titulo: '',
+      descripcion: '',
+      tipoAviso : 0
+    };
   }
 
 }
