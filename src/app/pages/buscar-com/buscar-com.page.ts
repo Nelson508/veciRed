@@ -97,7 +97,6 @@ export class BuscarComPage implements OnInit {
       }
     )
     
-    
   }
 
   //al cargar la pagina vaciaremos todas las variables

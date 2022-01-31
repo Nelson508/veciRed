@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Comunidad } from '../interfaces/interfaces';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { UsuarioService } from './usuario.service';
 
 
@@ -16,7 +16,8 @@ export class ComunidadService {
 
   nuevaComunidad = new EventEmitter<Comunidad>();
 
-  Objeto = new EventEmitter<Comunidad>();
+  //Objeto = new EventEmitter<Comunidad>();
+  Objeto = new ReplaySubject<{}>();
 
   constructor( private http: HttpClient,
                private usuarioService: UsuarioService
