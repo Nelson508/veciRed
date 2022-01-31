@@ -74,15 +74,19 @@ export class EditarComPage implements OnInit {
     }
   }
 
-  obtenerComunidadEditar()
+  async obtenerComunidadEditar()
   {
-    this.comunidadService.Objeto.subscribe(
-      respuesta =>
+    await  this.comunidadService.Objeto.subscribe(
+      async respuesta =>
       {
-        this.comunidadEditada = respuesta;
+         this.comunidadEditada =  await respuesta;
 
       }
     )
+  }
+
+  ionViewWillEnter(){
+    this.obtenerComunidadEditar();
   }
 
 }
