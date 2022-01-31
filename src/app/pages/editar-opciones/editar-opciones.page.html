@@ -28,56 +28,56 @@
     <!-- OPCIÓN 1 -->
     <ion-item>
       <ion-label position="floating"><b>Opción 1:</b></ion-label>
-      <ion-input type="text" maxlength="30" [(ngModel)]="opcion[0]['titulo']"></ion-input>
+      <ion-input type="text" minlength="3" maxlength="30" [(ngModel)]="opcion[0]['titulo']" required></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - opcion[0]['titulo'].length }} caracteres restantes</span> 
 
     <!-- DESCRIPCIÓN 1 -->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea maxlength="250" [(ngModel)]="opcion[0]['descripcion']"></ion-textarea>
+      <ion-textarea minlength="3" maxlength="250" [(ngModel)]="opcion[0]['descripcion']" required></ion-textarea>
     </ion-item>
     <span class="caracteres">{{ 250 - opcion[0]['descripcion'].length }} caracteres restantes</span> 
 
     <!-- OPCIÓN 2 -->
     <ion-item>
       <ion-label position="floating"><b>Opción 2:</b></ion-label>
-      <ion-input type="text" maxlength="30" [(ngModel)]="opcion[1]['titulo']"></ion-input>
+      <ion-input type="text" minlength="3" maxlength="30" [(ngModel)]="opcion[1]['titulo']" required></ion-input>
     </ion-item>
     <span class="caracteres">{{ 30 - opcion[1]['titulo'].length }} caracteres restantes</span> 
     
     <!-- DESCRIPCIÓN 2 -->
     <ion-item>
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea maxlength="250" [(ngModel)]="opcion[1]['descripcion']"></ion-textarea>
+      <ion-textarea minlength="3" maxlength="250" [(ngModel)]="opcion[1]['descripcion']" required></ion-textarea>
     </ion-item>
     <span class="caracteres">{{ 250 - opcion[1]['descripcion'].length }} caracteres restantes</span>
 
     <!-- OPCIÓN 3 -->
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating"><b>Opción 3:</b></ion-label>
-      <ion-input type="text" maxlength="30" [(ngModel)]="opcion[2]['titulo']"></ion-input>
+      <ion-input type="text" minlength="3" maxlength="30" [(ngModel)]="opcion[2]['titulo']" required></ion-input>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion3">{{ 30 - opcion[2]['titulo'].length }} caracteres restantes</span> 
     
     <!-- DESCRIPCIÓN 3 -->
     <ion-item [hidden]="ocultarOpcion3">
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea maxlength="250" [(ngModel)]="opcion[2]['descripcion']"></ion-textarea>
+      <ion-textarea minlength="3" maxlength="250" [(ngModel)]="opcion[2]['descripcion']" required></ion-textarea>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion3">{{ 250 - opcion[2]['descripcion'].length }} caracteres restantes</span>
 
     <!-- OPCIÓN 4 -->
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating"><b>Opción 4:</b></ion-label>
-      <ion-input type="text" maxlength="30" [(ngModel)]="opcion[3]['titulo']"></ion-input>
+      <ion-input type="text" minlength="3" maxlength="30" [(ngModel)]="opcion[3]['titulo']" required></ion-input>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion4">{{ 30 - opcion[3]['titulo'].length }} caracteres restantes</span> 
     
     <!-- DESCRIPCIÓN 4 -->
     <ion-item [hidden]="ocultarOpcion4">
       <ion-label position="floating"><b>Descripción:</b></ion-label>
-      <ion-textarea maxlength="250" [(ngModel)]="opcion[3]['descripcion']"></ion-textarea>
+      <ion-textarea minlength="3" maxlength="250" [(ngModel)]="opcion[3]['descripcion']" required></ion-textarea>
     </ion-item>
     <span class="caracteres" [hidden]="ocultarOpcion4">{{ 250 - opcion[3]['descripcion'].length }} caracteres restantes</span>
 
@@ -104,14 +104,14 @@
                shape="round" 
                expand="full"
                (click)="enviarOpciones()"
-               [disabled]="opcion[0]['titulo'].length < 1 ||
-                           opcion[0]['descripcion'].length < 1 ||
-                           opcion[1]['titulo'].length < 1 ||
-                           opcion[1]['descripcion'].length < 1 ||
-                           (opcion[2]['titulo'].length < 1 && contador > 0)||
-                           (opcion[2]['descripcion'].length < 1 && contador > 0)||
-                           (opcion[3]['titulo'].length < 1 && contador > 1)||
-                           (opcion[3]['descripcion'].length < 1 && contador > 1)">
+               [disabled]="opcion[0]['titulo'].length < 3 ||
+                           opcion[0]['descripcion'].length < 3 ||
+                           opcion[1]['titulo'].length < 3 ||
+                           opcion[1]['descripcion'].length < 3 ||
+                           (opcion[2]['titulo'].length < 3 && contador > 0)||
+                           (opcion[2]['descripcion'].length < 3 && contador > 0)||
+                           (opcion[3]['titulo'].length < 3 && contador > 1)||
+                           (opcion[3]['descripcion'].length < 3 && contador > 1)">
     Enviar
   </ion-button>
 

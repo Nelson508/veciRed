@@ -58,35 +58,71 @@ export class CrearAcuerdoPage implements OnInit {
 
   async crearAcuerdo(){
 
-    console.log(this.acuerdo);
+    const validado = this.validacion();
 
-    const datepipe: DatePipe = new DatePipe('en-US');
+    if(validado == null){
 
-    let fecha = new Date(this.acuerdo.fecha);
+      console.log(this.acuerdo);
+  
+      const datepipe: DatePipe = new DatePipe('en-US');
+  
+      let fecha = new Date(this.acuerdo.fecha);
+  
+      this.acuerdo.fecha = datepipe.transform(fecha,'YYYY-MM-dd');
+      this.acuerdo.hora = datepipe.transform(this.acuerdo.hora,'HH:mm');
+  
+      const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
+  
+      console.log(this.acuerdo);
+      console.log(this.acuerdo.fecha);
+  
+      this.acuerdo = { 
+        titulo:'',
+        descripcion:'',
+        fecha:null,
+        hora:null,
+        duracion:null,
+        opciones: {}
+      };
+  
+      this.tempImages = '';
+  
+      this.acuerdosService.limpiar(true);
 
-    this.acuerdo.fecha = datepipe.transform(fecha,'YYYY-MM-dd');
-    this.acuerdo.hora = datepipe.transform(this.acuerdo.hora,'HH:mm');
+      if(acuerdoCreado){
 
-    const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
+        this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
+        this.alertasService.presentToast('Acuerdo creado exitosamente'); 
+      }else{
+        this.alertasService.presentToast('El acuerdo no pudo ser creado');
+      }
+  
+    }
 
-    console.log(this.acuerdo);
-    console.log(this.acuerdo.fecha);
+  }
 
-    this.acuerdo = { 
-      titulo:'',
-      descripcion:'',
-      fecha:null,
-      hora:null,
-      duracion:null,
-      opciones: {}
-    };
+  validacion(){
+    //Validación caracteres extraños en titulo
+    var caracteresTitulo = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
 
-    this.tempImages = '';
+    if(caracteresTitulo.test(this.acuerdo.titulo) == false){
+      
+      return this.alertasService.alerta('El título del acuerdo no permite tener los caracteres ingresados');
+    }
 
-    this.acuerdosService.limpiar(true);
+    //Validación caracteres extraños en la descripción
+    var caracteresDescripcion = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
 
-    this.navCtrl.navigateRoot('/main/tabs/acuerdos', {animated: true});
-    this.alertasService.presentToast('Acuerdo creado exitosamente'); 
+    if(caracteresDescripcion.test(this.acuerdo.descripcion) == false){
+      
+      return this.alertasService.alerta('La descripción del acuerdo no permite tener los caracteres ingresados');
+    }
+
+    //Validación duracion del acuerdo
+    if(this.acuerdo.duracion > 48){
+      
+      return this.alertasService.alerta('La duración del acuerdo no puede ser mayor a 48 horas');
+    }
   }
 
   galeria(){

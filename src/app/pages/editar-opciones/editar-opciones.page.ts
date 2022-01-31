@@ -3,6 +3,7 @@ import { AcuerdosService } from '../../servicios/acuerdos.service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
+import { AlertasService } from 'src/app/servicios/alertas.service';
 
 @Component({
   selector: 'app-editar-opciones',
@@ -47,7 +48,8 @@ export class EditarOpcionesPage implements OnInit {
 
   constructor(private acuerdosService: AcuerdosService,
               private router: Router,
-              private navCtrl: NavController) { }
+              private navCtrl: NavController,
+              private alertasService: AlertasService) { }
 
   ngOnInit() {
     this.acuerdosService.Objeto.subscribe(respuesta =>{
@@ -117,26 +119,102 @@ export class EditarOpcionesPage implements OnInit {
 
   enviarOpciones(){
 
-    this.opciones.push( this.opcion[0] );
-    this.opciones.push( this.opcion[1] );
+    const validado = this.validacion();
+
+    if(validado == null){
+
+      this.opciones.push( this.opcion[0] );
+      this.opciones.push( this.opcion[1] );
+  
+      if(this.contador >= 1){
+  
+        this.opciones.push( this.opcion[2] );
+      }
+  
+      if(this.contador == 2){
+  
+        this.opciones.push( this.opcion[3] );
+      }
+      
+      console.log(this.opciones);
+     
+      this.acuerdosService.enviarDatos(this.opciones, false);
+      this.router.navigate(['/main/tabs/editar-acuerdo']);
+      //this.navCtrl.navigateRoot('/main/tabs/editar-acuerdo');
+      this.opciones = [];
+    } 
+  }
+
+  validacion(){
+
+    //Validación caracteres extraños en titulo de la opcipón 1
+    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+
+    if(caracteresTitulo1.test(this.opcion[0]['titulo']) == false){
+      
+      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+    }
+
+    //Validación caracteres extraños en la descripción de la opcipón 1
+    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+
+    if(caracteresDescripcion1.test(this.opcion[0]['descripcion']) == false){
+      
+      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+    }
+
+    //Validación caracteres extraños en titulo de la opcipón 2
+    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+
+    if(caracteresTitulo1.test(this.opcion[1]['titulo']) == false){
+      
+      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+    }
+
+    //Validación caracteres extraños en la descripción de la opcipón 2
+    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+
+    if(caracteresDescripcion1.test(this.opcion[1]['descripcion']) == false){
+      
+      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+    }
 
     if(this.contador >= 1){
+      //Validación caracteres extraños en titulo de la opcipón 3
+      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
 
-      this.opciones.push( this.opcion[2] );
+      if(caracteresTitulo1.test(this.opcion[2]['titulo']) == false){
+        
+        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      }
+
+      //Validación caracteres extraños en la descripción de la opcipón 3
+      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+
+      if(caracteresDescripcion1.test(this.opcion[2]['descripcion']) == false){
+        
+        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      }
+
     }
 
     if(this.contador == 2){
+      //Validación caracteres extraños en titulo de la opcipón 4
+      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
 
-      this.opciones.push( this.opcion[3] );
+      if(caracteresTitulo1.test(this.opcion[3]['titulo']) == false){
+        
+        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      }
+
+      //Validación caracteres extraños en la descripción de la opcipón 4
+      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+
+      if(caracteresDescripcion1.test(this.opcion[3]['descripcion']) == false){
+        
+        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      }
     }
-    
-    console.log(this.opciones);
-   
-    this.acuerdosService.enviarDatos(this.opciones, false);
-    this.router.navigate(['/main/tabs/editar-acuerdo']);
-    //this.navCtrl.navigateRoot('/main/tabs/editar-acuerdo');
-    this.opciones = [];
-    
   }
 
 }

@@ -41,7 +41,7 @@ export class RegistroPage implements OnInit {
   }
 
   
-  async registro(/* registrarse:NgForm */){
+  async registro(registrarse:NgForm){
     //Validación caracteres extraños en nombre
     var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ ]{1,50})+$/g;
 
@@ -65,11 +65,11 @@ export class RegistroPage implements OnInit {
     }
     
     //Validación de campos vacios
-    /* if(registrarse.invalid){
+     if(registrarse.invalid){
       this.alertasService.alerta('Complete los campos vacíos');
       return;
     }
- */
+    
     const existe = await this.usuarioService.registro(this.userRegistro);
 
     if(existe){
