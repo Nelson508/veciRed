@@ -32,34 +32,13 @@ export class EditarComPage implements OnInit {
 
   editarComunidad()
   {
-    //Validación caracteres extraños en nombre
-    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-    if(caracteres.test(this.comunidadEditada.nombreComunidad) == false){
-     this.alertasService.alerta('El Nombre de la comunidad no permite tener caracteres especiales');
-     return;
-   }
+    const validado = this.validacion();
 
-   if(caracteres2.test(this.comunidadEditada.descripcion) == false){
-     this.alertasService.alerta('La descripción de la comunidad no permite tener caracteres especiales');
-     return;
-   }
-
-    if(this.comunidadEditada.nombreComunidad.length > 25)
+    if(validado == null)
     {
-      this.alertasService.alerta('Nombre demasiado largo');
-      return;
-    }
-
-    if(this.comunidadEditada.descripcion.length > 250)
-    {
-      this.alertasService.alerta('Descripción demasiada larga');
-      return;
-
-    }
-    const actualizado = this.comunidadService.actualizarComunidad(this.comunidadEditada);
-    if(actualizado)
-    {
+      const actualizado = this.comunidadService.actualizarComunidad(this.comunidadEditada);
+      if(actualizado)
+      {
         this.comunidadEditada = {
         nombreComunidad: '',
         descripcion: '',
@@ -67,11 +46,14 @@ export class EditarComPage implements OnInit {
         comuna: ''
     
       };
-      this.navController.navigateRoot('/main/tabs/comunidad',{animated: true});
-      this.alertasService.presentToast('Comunidad editada exitosamente'); 
-    }else{
-      console.log('fallo');
+        this.navController.navigateRoot('/main/tabs/comunidad',{animated: true});
+        this.alertasService.presentToast('Comunidad editada exitosamente'); 
+      }else{
+        this.alertasService.presentToast('Comunidad No pudo ser editada'); 
+      }
     }
+    
+    
   }
 
   async obtenerComunidadEditar()
@@ -87,6 +69,58 @@ export class EditarComPage implements OnInit {
 
   ionViewWillEnter(){
     this.obtenerComunidadEditar();
+  }
+
+  validacion()
+  {
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+
+    if(caracteres.test(this.comunidadEditada.nombreComunidad) == false){
+     
+     return this.alertasService.alerta('El Nombre de la comunidad no permite tener caracteres especiales');
+   }
+
+   if(caracteres2.test(this.comunidadEditada.descripcion) == false){
+     
+     return this.alertasService.alerta('La descripción de la comunidad no permite tener caracteres especiales');
+   }
+
+    if(this.comunidadEditada.nombreComunidad.length > 25)
+    {
+      
+      return this.alertasService.alerta('Nombre demasiado largo');
+    }
+
+    if(this.comunidadEditada.nombreComunidad.length <= 2)
+    {
+      
+      return this.alertasService.alerta('Nombre debe tener al menos 3 caracteres');
+    }
+
+    if(this.comunidadEditada.descripcion.length > 250)
+    { 
+      return this.alertasService.alerta('Descripción demasiada larga');
+    }
+
+    if(this.comunidadEditada.descripcion.length <= 2)
+    { 
+      return this.alertasService.alerta('Descripción debe tener al menos 3 caracteres');
+    }
+
+    if(this.comunidadEditada.region == '')
+    {
+      return this.alertasService.alerta('Debe seleccionar una región');
+    }
+
+    if(this.comunidadEditada.comuna == '')
+    {
+      return this.alertasService.alerta('Debe seleccionar una comuna');
+    }
+
+    return null;
+
   }
 
 }

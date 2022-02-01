@@ -63,6 +63,7 @@ export class CrearComPage implements OnInit {
     }
 
     const comunidadCreada =  await this.comunidadService.crearComunidad(this.comunidad);
+    
     if(comunidadCreada)
     {
       //VACIAMOS VARIABLES 8)
@@ -77,6 +78,8 @@ export class CrearComPage implements OnInit {
       this.usuario = {};
       this.navController.navigateRoot('main/tabs/comunidad');
       this.alertasService.presentToast('Comunidad creada exitosamente'); 
+    }else{
+      this.alertasService.presentToast('Ya existe un nombre con esa comunidad'); 
     }
   
   }

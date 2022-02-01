@@ -32,9 +32,15 @@ export class ComunidadService {
         this.http.post(`${url}/comunidad/crear`, comunidad).subscribe(
           respuesta =>
           {
-            console.log(respuesta);
-            this.nuevaComunidad.emit(respuesta)
-            resolve(true);
+            
+            if(respuesta['ok'] === true)
+            {
+              this.nuevaComunidad.emit(respuesta)
+              resolve(true);
+            }else{
+              resolve(false);
+            }
+            
           }
         )
       });
