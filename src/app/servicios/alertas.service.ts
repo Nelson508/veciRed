@@ -22,7 +22,7 @@ export class AlertasService {
     await alert.present();
 
     const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    //console.log('onDidDismiss resolved with role', role);
   }
 
   async alertaDecision(message: string) {

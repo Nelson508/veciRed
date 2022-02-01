@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { AvisosCreados, Avisos } from '../interfaces/interfaces';
 import { UsuarioService } from './usuario.service';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 
 const url = environment.url;
@@ -22,7 +22,8 @@ export class AvisosService {
 
   //objeto que recibe data desde mis avisos y lo envia a editar aviso
   //Objeto = new BehaviorSubject<{}>({});
-  Objeto = new EventEmitter<Avisos>();
+  // Objeto = new EventEmitter<Avisos>();
+  Objeto = new ReplaySubject<{}>();
 
   //inyectamos el Http para poder hacer nuestra peticion de los avisos
   constructor( private http: HttpClient,

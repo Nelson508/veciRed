@@ -153,13 +153,13 @@ export class UsuarioService {
         .subscribe( async respuesta =>
           {
             
-            console.log(respuesta);
+            //console.log(respuesta);
             if(respuesta['ok'])
             {
               await this.almacenarToken(respuesta['token']);
               resolve(true);
             }else{
-              console.log('fallo');
+              //console.log('fallo');
               resolve(false);
               
             }
@@ -179,14 +179,14 @@ export class UsuarioService {
       'Utoken': this.userToken
     });
 
-    console.log(comunidad);
+    //console.log(comunidad);
 
     return new Promise(resolve =>
       {
         this.http.post(`${URL}/usuario/abandonarComunidad`, comunidad, {headers})
         .subscribe( async respuesta =>
           {
-            console.log(respuesta);
+            //console.log(respuesta);
             if(respuesta['token'])
             {
               await this.almacenarToken(respuesta['token']);
@@ -197,10 +197,10 @@ export class UsuarioService {
             if(respuesta['ok'] === true)
             {
               this.comunidadRemovida.emit(respuesta);
-              console.log('no se actualizo token');
+              //console.log('no se actualizo token');
               resolve(true);
             }else{
-              console.log('fallo');
+              //console.log('fallo');
               resolve(false);
             }
 

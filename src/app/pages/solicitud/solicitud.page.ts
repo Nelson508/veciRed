@@ -78,7 +78,7 @@ export class SolicitudPage implements OnInit {
               
         }else
         {
-          console.log('No desea eliminar');
+          //console.log('No desea eliminar');
         }
         
 
@@ -101,7 +101,7 @@ export class SolicitudPage implements OnInit {
           this.alertasService.presentToast('Vecino rechazado exitosamente');
               
         }else{
-          console.log('No desea eliminar');
+          //console.log('No desea eliminar');
         }
         
 
