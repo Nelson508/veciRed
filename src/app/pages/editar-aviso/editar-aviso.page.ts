@@ -46,48 +46,32 @@ export class EditarAvisoPage implements OnInit {
 
   async editarAviso()
   {
-    //Validación caracteres extraños en nombre
-    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-    if(caracteres.test(this.avisoEdicion.titulo) == false){
-     this.alertasService.alerta('El título no permite tener caracteres especiales');
-     return;
-   }
+    const validado = this.validacion();
 
-   if(caracteres2.test(this.avisoEdicion.descripcion) == false){
-     this.alertasService.alerta('La descripción no permite tener caracteres especiales');
-     return;
-   }
-    // if(this.avisoEdicion.titulo.length > 30)
-    //  {
-    //   this.alertasService.alerta('Título demasiado largo');
-    //   return;
-    //  }
-
-    //  if(this.avisoEdicion.descripcion.length > 250)
-    //  {
-    //    this.alertasService.alerta('Descripción demasiada larga');
-    //    return;
-    //  }
-    //console.log('click' + this.avisoEdicion.descripcion + this.avisoEdicion.titulo + this.avisoEdicion.tipoAviso);
-    const actualizado = await this.avisosService.actualizarAviso(this.avisoEdicion);
-
-    if(actualizado)
+    if(validado == null)
     {
-      this.imagenCarrete= '';
-      this.Roltype = [];
-      this.usuario = {};
-      this.avisoEdicion = {
-        titulo: '',
-        descripcion: '',
-        tipoAviso : 0
-      };
+      //console.log('click' + this.avisoEdicion.descripcion + this.avisoEdicion.titulo + this.avisoEdicion.tipoAviso);
+      const actualizado = await this.avisosService.actualizarAviso(this.avisoEdicion);
+
+      if(actualizado)
+      {
+        this.imagenCarrete= '';
+        this.Roltype = [];
+        this.usuario = {};
+        this.avisoEdicion = {
+          titulo: '',
+          descripcion: '',
+          tipoAviso : 0
+        };
       this.navController.navigateRoot('/main/tabs/mis-avisos',{animated: true});
       this.alertasService.presentToast('Aviso actualizado exitosamente'); 
-    }else
-    {
-      console.log('error' + actualizado);
+      }else
+      {
+      this.alertasService.presentToast('Aviso no se pudo actualizar'); 
+      }
     }
+   
+   
   }
 
 
@@ -165,6 +149,49 @@ export class EditarAvisoPage implements OnInit {
       descripcion: '',
       tipoAviso : 0
     };
+  }
+
+  validacion()
+  {
+     //Validación caracteres extraños en nombre
+     var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+     var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+
+     if(caracteres.test(this.avisoEdicion.titulo) == false)
+     {
+      return this.alertasService.alerta('El título no permite tener caracteres especiales');
+     }
+ 
+    if(caracteres2.test(this.avisoEdicion.descripcion) == false)
+    {
+      return this.alertasService.alerta('La descripción no permite tener caracteres especiales');
+    }
+    if(this.avisoEdicion.titulo.length > 30)
+    {
+      return this.alertasService.alerta('Título demasiado largo');
+    }
+
+    if(this.avisoEdicion.titulo.length <= 2)
+    {
+      return this.alertasService.alerta('Título debe tener más de 3 caracteres');
+    }
+ 
+    if(this.avisoEdicion.descripcion.length > 250)
+    {   
+      return this.alertasService.alerta('Descripción demasiada larga');
+    }
+
+    if(this.avisoEdicion.descripcion.length <= 2)
+    {   
+      return this.alertasService.alerta('Descripción debe tener más de caracteres');
+    }
+
+    if(this.avisoEdicion.tipoAviso == 0)
+    {
+      return this.alertasService.alerta('Debe seleccionar un tipo de aviso');
+    }
+
+    return null;
   }
 
 }

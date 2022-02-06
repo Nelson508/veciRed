@@ -97,6 +97,7 @@ export class MisAvisosPage implements OnInit {
     await this.alertasService.alertaDecision('Este aviso será eliminado permanentemente').then(
       respuesta =>
       {
+        var resp = respuesta['data']; 
         if(respuesta['data'] === true)
         {
           aviso.estadoAviso = 0;

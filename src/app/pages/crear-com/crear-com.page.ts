@@ -36,51 +36,32 @@ export class CrearComPage implements OnInit {
 
   async crearComunidad()
   {
-    //Validación caracteres extraños en nombre
-    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-    if(caracteres.test(this.comunidad.nombreComunidad) == false){
-     this.alertasService.alerta('El Nombre de la comunidad no permite tener caracteres especiales');
-     return;
-   }
+    const validado = this.validacion();
 
-   if(caracteres2.test(this.comunidad.descripcion) == false){
-     this.alertasService.alerta('La descripción de la comunidad no permite tener caracteres especiales');
-     return;
-   }
-
-    if(this.comunidad.nombreComunidad.length > 25)
+    if(validado == null)
     {
-      this.alertasService.alerta('Nombre demasiado largo');
-      return;
-    }
-
-    if(this.comunidad.descripcion.length > 250)
-    {
-      this.alertasService.alerta('Descripción demasiada larga');
-      return;
-
-    }
-
-    const comunidadCreada =  await this.comunidadService.crearComunidad(this.comunidad);
+      const comunidadCreada =  await this.comunidadService.crearComunidad(this.comunidad);
     
-    if(comunidadCreada)
-    {
-      //VACIAMOS VARIABLES 8)
-      this.comunidad = {
-        nombreComunidad: '',
-        descripcion: '',
-        coordenadas: '',
-        usuario: '',
-        region: '',
-        comuna: ''
+      if(comunidadCreada)
+      {
+        //VACIAMOS VARIABLES 8)
+        this.comunidad = {
+          nombreComunidad: '',
+          descripcion: '',
+          coordenadas: '',
+          usuario: '',
+          region: '',
+          comuna: ''
       }
       this.usuario = {};
       this.navController.navigateRoot('main/tabs/comunidad');
       this.alertasService.presentToast('Comunidad creada exitosamente'); 
     }else{
       this.alertasService.presentToast('Ya existe un nombre con esa comunidad'); 
+      }
     }
+  
+    
   
   }
 
@@ -105,6 +86,56 @@ export class CrearComPage implements OnInit {
     }
     this.usuario = {};
     this.obtenerUsuario();
+  }
+
+  validacion()
+  {
+     //Validación caracteres extraños en nombre
+     var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+     var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+
+     if(caracteres.test(this.comunidad.nombreComunidad) == false)
+     {
+      return this.alertasService.alerta('El Nombre de la comunidad no permite tener caracteres especiales');
+    }
+ 
+    if(caracteres2.test(this.comunidad.descripcion) == false){
+      return this.alertasService.alerta('La descripción de la comunidad no permite tener caracteres especiales');
+    }
+ 
+     if(this.comunidad.nombreComunidad.length > 25)
+     {
+       return this.alertasService.alerta('Nombre demasiado largo');
+     }
+
+     if(this.comunidad.nombreComunidad.length <= 2)
+     {
+       return this.alertasService.alerta('Nombre debe tener más de 3 caracteres');
+     }
+ 
+     if(this.comunidad.descripcion.length > 250)
+     {
+       return this.alertasService.alerta('Descripción demasiada larga');
+     }
+
+     if(this.comunidad.descripcion.length <= 2)
+     {
+       return this.alertasService.alerta('Descripción debe tener más de 3 caracteres');
+     }
+
+     if(this.comunidad.region == '')
+     {
+      return this.alertasService.alerta('Debe seleccionar una región');
+
+     }
+
+     if(this.comunidad.comuna == '')
+     {
+       return this.alertasService.alerta('Debe seleccionar una comuna');
+     }
+
+     return null;
+
   }
 
 }

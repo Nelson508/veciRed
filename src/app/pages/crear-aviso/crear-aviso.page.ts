@@ -49,50 +49,31 @@ export class CrearAvisoPage implements OnInit {
   
    async crearAviso()
    {
-     //Validación caracteres extraños en nombre
-     var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-     var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+     const validado = this.validacion();
 
-     if(caracteres.test(this.aviso.titulo) == false){
-      this.alertasService.alerta('El título no permite tener caracteres especiales');
-      return;
-    }
-
-    if(caracteres2.test(this.aviso.descripcion) == false){
-      this.alertasService.alerta('La descripción no permite tener caracteres especiales');
-      return;
-    }
-     if(this.aviso.titulo.length > 30)
+     if(validado == null)
      {
-      this.alertasService.alerta('Título demasiado largo');
-      return;
+       const avisoInsertado = await this.avisosService.crearNuevoAviso(this.aviso);
+
+      if(this.aviso.tipoAviso == 1)
+      {
+        this.pushService.enviarNotificacion(this.aviso.titulo,this.aviso.descripcion);
+      }
+      //Vaciamos las variables para limpiar los campos
+      this.aviso = {
+        titulo: '',
+        descripcion: '',
+        tipoAviso: 0
+      };
+      this.imagenCarrete = '';
+      this.Roltype = [];
+      this.usuario = {};
+
+      this.ruta.navigateByUrl('main/tabs/tab1');
+      this.alertasService.presentToast('Aviso publicado exitosamente'); 
      }
 
-     if(this.aviso.descripcion.length > 250)
-     {
-       this.alertasService.alerta('Descripción demasiada larga');
-       return;
-     }
-
-     const avisoInsertado = await this.avisosService.crearNuevoAviso(this.aviso);
-
-     if(this.aviso.tipoAviso == 1){
-      
-      this.pushService.enviarNotificacion(this.aviso.titulo,this.aviso.descripcion);
-
-     }
-     //Vaciamos las variables para limpiar los campos
-     this.aviso = {
-      titulo: '',
-      descripcion: '',
-      tipoAviso: 0
-    };
-    this.imagenCarrete = '';
-    this.Roltype = [];
-    this.usuario = {};
-
-    this.ruta.navigateByUrl('main/tabs/tab1');
-    this.alertasService.presentToast('Aviso publicado exitosamente'); 
+     
    }
 
   
@@ -163,6 +144,49 @@ export class CrearAvisoPage implements OnInit {
     this.obtenerRolUsuario();
 
     
+  }
+
+  validacion()
+  {
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+
+    if(caracteres.test(this.aviso.titulo) == false){
+     
+     return this.alertasService.alerta('El título no permite tener caracteres especiales');
+   }
+
+   if(caracteres2.test(this.aviso.descripcion) == false){
+     
+     return this.alertasService.alerta('La descripción no permite tener caracteres especiales');
+   }
+    if(this.aviso.titulo.length > 30)
+    {
+     return this.alertasService.alerta('Título demasiado largo');
+    }
+
+    if(this.aviso.titulo.length <= 2)
+    {
+     return this.alertasService.alerta('Título debe tener más de 3 caracteres');
+    }
+
+    if(this.aviso.descripcion.length > 250)
+    {
+      return this.alertasService.alerta('Descripción demasiada larga');
+    }
+    if(this.aviso.descripcion.length <= 2)
+    {
+      return this.alertasService.alerta('Descripción debe tener más de 3 caracteres');
+    }
+
+    if(this.aviso.tipoAviso == 0)
+    {
+      return this.alertasService.alerta('Debe seleccionar un tipo aviso');
+    }
+
+    return null;
+
   }
 
 }

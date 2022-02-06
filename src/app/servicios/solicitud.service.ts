@@ -74,8 +74,8 @@ export class SolicitudService {
         this.http.post(`${url}/solicitud/aceptar`, aceptar)
         .subscribe(respuesta =>
           {
-            console.log('resp: =>>>>')
-            console.log(respuesta);
+            // console.log('resp: =>>>>')
+            // console.log(respuesta);
             this.deletedSolicitud.emit(respuesta);
              resolve(true);
           })

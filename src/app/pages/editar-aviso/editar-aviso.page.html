@@ -1,11 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="cabecera">
 
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/main/tabs/mis-avisos"></ion-back-button>
+      <ion-back-button defaultHref="/main/tabs/mis-avisos" color="light"></ion-back-button>
     </ion-buttons>
   
-    <ion-title class="ion-text-center">VeciRed</ion-title>
+    <ion-title class="ion-text-center" color="light">VeciRed</ion-title>
   
     <ion-buttons slot="end">   
       <ion-button disabled>
@@ -110,7 +110,8 @@
 
 
     <!--INICIO BOTON ACTUALIZAR-->
-    <ion-button  color="tertiary" 
+    <ion-button    class="editarAviso"
+                   color="tertiary" 
                    shape="round" 
                    expand="full"
                    (click)="editarAviso()"
