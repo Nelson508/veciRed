@@ -66,7 +66,10 @@ export class BuscarComPage implements OnInit {
 
   async buscar()
   {
-    //console.log(this.comunidad.nombreComunidad + this.comunidad.region +' '+ this.comunidad.comuna);
+    const validado = this.validacionBuscarCom();
+    if(validado == null)
+    {
+      //console.log(this.comunidad.nombreComunidad + this.comunidad.region +' '+ this.comunidad.comuna);
     await this.comunidadService.filtrarComunidad(this.comunidad).subscribe(
       respuesta =>
       {
@@ -96,7 +99,37 @@ export class BuscarComPage implements OnInit {
         
       }
     )
+
+    }
+
     
+    
+  }
+
+  validacionBuscarCom()
+  {
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    
+    if(this.comunidad.nombreComunidad.length > 30)
+    {
+      return this.alertasService.alerta('El nombre de la comunidad buscada no puede tener más de 30 caracteres');
+    }
+    
+    if(caracteres.test(this.comunidad.nombreComunidad) == false)
+    {
+     return this.alertasService.alerta('El buscador no permite tener caracteres especiales');
+    }
+
+    if(this.comunidad.nombreComunidad.length < 1)
+    {
+      return this.alertasService.alerta('La comunidad buscada debe tener más de 2 caracteres');
+    }
+
+    
+    
+
+   return null;
   }
 
   //al cargar la pagina vaciaremos todas las variables
@@ -139,31 +172,26 @@ export class BuscarComPage implements OnInit {
     //validacion para comprobar que usuario no pertenece
     /*enviamos desde el *ngFor a comunity._id variable que almacena la id del usuario y luego la evaluamos en el array
     del usuario para verificar si existe alguna coincidencia*/
- 
-    //Validación caracteres extraños en nombre
-    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
- 
-    if(caracteres.test(this.solicitud.mensaje) == false){
-     this.alertasService.alerta('El mensaje no permite tener caracteres especiales');
-     return;
-   }
-    this.solicitud._id = comunity._id;
     
+    const validado = this.validacion();
 
-
-    let index = this.arrayComunidades.indexOf(this.solicitud._id);
-    if(index != -1)
+    if(validado == null)
     {
-      this.alertasService.alerta('¡Ya perteneces a esta comunidad!');
-      return;    
+      this.solicitud._id = comunity._id;
+    
+      let index = this.arrayComunidades.indexOf(this.solicitud._id);
+      if(index != -1)
+      {
+        
+        return this.alertasService.alerta('¡Ya perteneces a esta comunidad!');
+      }
+    
+      //INICIO ENVIO DE DATOS
+      this.solicitudService.crearSolicitud(this.solicitud);
+ 
+      this.comunidades = [];
     }
     
-    //INICIO ENVIO DE DATOS
-    this.solicitudService.crearSolicitud(this.solicitud);
- 
-    this.comunidades = [];
-    
-
   }
 
    async obtenerComunidadesUsuario()
@@ -176,6 +204,29 @@ export class BuscarComPage implements OnInit {
       }
     )
 
+  }
+
+  validacion()
+  {
+    //Validación caracteres extraños en nombre
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+ 
+    if(caracteres.test(this.solicitud.mensaje) == false)
+    {
+     return this.alertasService.alerta('El mensaje no permite tener caracteres especiales');
+    }
+
+    if(this.solicitud.mensaje.length <= 2)
+    {
+      return this.alertasService.alerta('El mensaje no puede tener menos de 3 caracteres');
+    }
+
+    if(this.solicitud.mensaje.length > 250)
+    {
+      return this.alertasService.alerta('El mensaje no puede tener más de 250 caracteres');
+    }
+
+    return null;
   }
 
 }

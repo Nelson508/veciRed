@@ -572,7 +572,8 @@
 
     <!--FIN SELECT REGIONES-->
     <!-- Round -->
-    <ion-button style="margin-top: 2vw;"
+    <ion-button class="searchComunity"
+                style="margin-top: 2vw;"
                 shape="round"
                 (click)="buscar()"
                 [disabled] ="comunidad.region == '' && comunidad.nombreComunidad == ''"
@@ -631,6 +632,8 @@
               </ion-row>
               
               <ion-button  
+                class="buscarCom"
+                id="test"
                 size="small"
                 color="tertiary"
                 (click)="enviarSolicitud(comunity)"

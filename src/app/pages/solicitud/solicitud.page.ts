@@ -12,6 +12,9 @@ export class SolicitudPage implements OnInit {
 
   solicitudes: Solicitud[] = [];
   emptySolicitud = false;
+  aceptar: any;
+  rechazar: any;
+  AlertasService: any;
 
   constructor(private solicitudService: SolicitudService,
               private alertasService: AlertasService) { }
@@ -70,7 +73,8 @@ export class SolicitudPage implements OnInit {
     this.alertasService.alertaDecision('¿Desea aceptar a este usuario?').then(
       respuesta =>
       {
-        if(respuesta['data'] === true)
+         this.aceptar = respuesta['data']
+        if(this.aceptar  === true)
         {
           //console.log('entro');
           this.solicitudService.aceptarSolicitud(aceptar);
@@ -78,7 +82,7 @@ export class SolicitudPage implements OnInit {
               
         }else
         {
-          //console.log('No desea eliminar');
+          return this.alertasService.presentToast('Operación cancelada');
         }
         
 
@@ -95,13 +99,14 @@ export class SolicitudPage implements OnInit {
     await this.alertasService.alertaDecision('¿Desea rechazar a este usuario?').then(
       respuesta =>
       {
-        if(respuesta['data'] === true)
+        this.rechazar = respuesta['data'];
+        if(this.rechazar === true)
         {
           this.solicitudService.eliminarSolicitudes(rechazar);
           this.alertasService.presentToast('Vecino rechazado exitosamente');
               
         }else{
-          //console.log('No desea eliminar');
+          this.alertasService.presentToast('Operación cancelada');
         }
         
 

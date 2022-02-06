@@ -46,6 +46,10 @@ export class AppComponent implements OnInit{
       respuesta =>{
    
         this.rol = respuesta['currentRol'];
+        if(this.rol == 1)
+        {
+          this.obtenerLargoSolicitud();
+        }
        
       }
     )
