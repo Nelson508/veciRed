@@ -74,7 +74,7 @@
               style="margin-top:-3%;margin-left: 20%;"
               
               >
-              <ion-select (ionChange)="onSelectedChange($event, indexOfelement, usuario.rol)"
+              <ion-select  class="selectChange"(ionChange)="onSelectedChange($event, indexOfelement, usuario.rol)"
              
               placeholder="Miembro"
               
@@ -90,7 +90,7 @@
                           
                           
             >
-            <ion-button
+            <ion-button class="actualizarRol"
             (click)="actualizarRol(usuario)"
             [disabled]="position != indexOfelement"
             >

@@ -209,12 +209,9 @@ export class BuscarComPage implements OnInit {
   validacion()
   {
     //Validación caracteres extraños en nombre
-    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,250})+$/g;
  
-    if(caracteres.test(this.solicitud.mensaje) == false)
-    {
-     return this.alertasService.alerta('El mensaje no permite tener caracteres especiales');
-    }
+    
 
     if(this.solicitud.mensaje.length <= 2)
     {
@@ -224,6 +221,11 @@ export class BuscarComPage implements OnInit {
     if(this.solicitud.mensaje.length > 250)
     {
       return this.alertasService.alerta('El mensaje no puede tener más de 250 caracteres');
+    }
+
+    if(caracteres.test(this.solicitud.mensaje) == false)
+    {
+     return this.alertasService.alerta('El mensaje no permite tener caracteres especiales');
     }
 
     return null;
