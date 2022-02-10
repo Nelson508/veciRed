@@ -150,13 +150,14 @@ export class CrearAvisoPage implements OnInit {
   {
     //Validación caracteres extraños en nombre
     var caracteres = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
-    var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,50})+$/g;
+    
 
     if(caracteres.test(this.aviso.titulo) == false){
      
      return this.alertasService.alerta('El título no permite tener caracteres especiales');
    }
 
+   var caracteres2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!?¿@-_.,/()= ]{1,250})+$/g;
    if(caracteres2.test(this.aviso.descripcion) == false){
      
      return this.alertasService.alerta('La descripción no permite tener caracteres especiales');
