@@ -36,8 +36,8 @@
                     picker-format="DD/MMMM/YYYY"
                     month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
                     [min]="minTime"
-                    max="2125-12-31" 
-                    [(ngModel)]="acuerdo.fecha" 
+                    max="2122-03-07" 
+                    [(ngModel)]="fecha" 
                     doneText="Aceptar"
                     cancelText="Cancelar" required></ion-datetime>
     </ion-item>
@@ -47,7 +47,7 @@
       <ion-label position="floating"><b>Hora:</b></ion-label>
       <ion-datetime display-format="HH:mm" 
                     picker-format="HH mm"
-                    [(ngModel)]="acuerdo.hora" 
+                    [(ngModel)]="hora" 
                     doneText="Aceptar"
                     cancelText="Cancelar" required></ion-datetime>
     </ion-item>
@@ -125,12 +125,14 @@
                shape="round" 
                expand="full"
                (click)="crearAcuerdo()"
+               class="sendData"
                [disabled]="acuerdo.titulo.length < 3 ||
                            acuerdo.descripcion.length < 3 ||
-                           acuerdo.fecha == null ||
-                           acuerdo.hora == null ||
+                           fecha == null ||
+                           hora == null ||
                            acuerdo.duracion < 1 ||
                            (acuerdo.opciones | json) == '{}' ">
+                           
     Publicar
   </ion-button>
 

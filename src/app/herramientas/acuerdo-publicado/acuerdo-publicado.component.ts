@@ -36,12 +36,9 @@ export class AcuerdoPublicadoComponent implements OnInit {
   ngOnInit() {
 
     if(this.acuerdoPublicado.estado == 1){
-      this.ocultar = true;
-      console.log(this.ocultar);
+      this.ocultar = true;   
     }else if(this.acuerdoPublicado.estado == 2){
       this.ocultar = false;
-      console.log(this.ocultar);
-      
     }
 
     this.formatearFecha();
@@ -63,14 +60,12 @@ export class AcuerdoPublicadoComponent implements OnInit {
       if(respuesta['data'] === true){
 
         this.acuerdoPublicado.estado = 0;
-        console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
-        console.log(respuesta['data']);
-        this.alertasService.presentToast('Votación eliminada exitosamente');//d
-      }else{
+        this.alertasService.presentToast('Votación eliminada exitosamente');
+      }/* else{
 
-        console.log('No desea eliminar');
-      }
+        
+      } */
     })
   }
 
@@ -83,15 +78,12 @@ export class AcuerdoPublicadoComponent implements OnInit {
         var lanzamiento = new Date().getTime();
         this.acuerdoPublicado.fechaLanzada = lanzamiento;
         this.acuerdoPublicado.estado = 2;
-        console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
-        console.log(respuesta['data']);
         this.alertasService.presentToast('Votación lanzada exitosamente');
         this.pushService.enviarNotificacion(this.acuerdoPublicado.titulo, this.acuerdoPublicado.descripcion);
-      }else{
+      }/* else{
 
-        console.log('No desea eliminar');
-      }
+      } */
     })
   }
 
@@ -102,28 +94,22 @@ export class AcuerdoPublicadoComponent implements OnInit {
       if(respuesta['data'] === true){
 
         this.acuerdoPublicado.estado = 3;
-        console.log(this.acuerdoPublicado);
         this.acuerdosService.eliminarAcuerdo(this.acuerdoPublicado);
-        console.log(respuesta['data']);
         this.alertasService.presentToast('Votación terminada exitosamente');
-      }else{
+      }/* else{
 
-        console.log('No desea eliminar');
-      }
+      } */
     })
   }
 
   formatearFecha(){
     
     const datepipe: DatePipe = new DatePipe('en-US');
-    console.log(this.acuerdoPublicado.fecha);
     let fecha = new Date(this.acuerdoPublicado.fecha);
-    console.log(fecha);
 
     let days = ['Lunes','Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     var diaSemana = days[fecha.getUTCDay()-1];
 
     this.fechaFormateada = diaSemana + datepipe.transform(this.acuerdoPublicado.fecha,', dd-MM-YYYY');
-
   }
 }

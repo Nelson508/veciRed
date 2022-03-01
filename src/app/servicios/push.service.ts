@@ -53,11 +53,8 @@ export class PushService {
     if(this.platform.is('capacitor')){
 
       OneSignal.setAppId("971b279e-dd53-47c9-9c33-286653e8243d");
-
-      console.log('noti: 29');
       
       OneSignal.setNotificationWillShowInForegroundHandler(async (notificacion) => {
-        console.log('noti: 29');  
         await this.notificacionRecibida(notificacion.getNotification());
       
         //La notificacion llega de inmediato
@@ -67,8 +64,6 @@ export class PushService {
 
       OneSignal.setNotificationOpenedHandler(async (notificacion) => {
         var noti = JSON.stringify(notificacion.notification);
-
-        console.log('notificationOpenedCallback: ' + JSON.parse(noti));
         await this.notificacionRecibida(notificacion.notification);
         this.router.navigate(['/main/tabs/tab2']);
         
@@ -76,15 +71,12 @@ export class PushService {
 
       //Obtener ID del suscriptor
       /* OneSignal.getDeviceState((stateChanges) => {
-        console.log('OneSignal getDeviceState: ' + JSON.stringify(stateChanges));
         this.userId = stateChanges.userId;
-        console.log('Player ID: ' + this.userId);
-        //console.log('Player ID: ' + this.userId);
 
       }); */
 
     }else{
-      console.log('No es movil');
+      //console.log('No es movil');
     }
 
   }
@@ -133,12 +125,7 @@ export class PushService {
     skip = skip * 10;
 
     this.pagMen = await this.cargarMensajes();
-
-    console.log(this.pagMen);
-
     var ultMens = this.pagMen.slice(skip, this.paginaMensajes*10);
-
-    console.log(ultMens);
 
     return ultMens;
   } 
@@ -164,13 +151,11 @@ export class PushService {
     this.usuario = this.usuarioService.obtenerUsuario();
     
     var user = this.usuario._id;
-    
-    console.log('el id de mi usuario es: ' + user);
 
     OneSignal.setExternalUserId(user, (results) => {
       // The results will contain push and email success statuses
-      console.log('Results of setting external user id');
-      console.log(results);  
+      //console.log('Results of setting external user id');
+      //console.log(results);  
             
     });
   
@@ -193,10 +178,8 @@ export class PushService {
       this.notificacion.contents.es = title;
       this.notificacion.headings.es = body; 
 
-      console.log(this.notificacion.include_external_user_ids);
-
       const headers = new HttpHeaders({
-        'Authorization': 'Aqui va la clave de OneSignal Luis'
+        'Authorization': 'Basic YWQ1OGE1OGYtOTUwZC00ZWE3LWFmZDQtMDRkMDkxZjIwZWY1'
       });
 
       return new Promise( resolve => {

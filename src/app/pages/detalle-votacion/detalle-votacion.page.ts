@@ -46,7 +46,6 @@ export class DetalleVotacionPage implements OnInit {
     this.acuerdosService.Objeto.subscribe(respuesta =>{
   
       this.votacion = respuesta;
-      console.log(this.votacion);
     });
 
     this.obtenerUsuario();
@@ -85,16 +84,10 @@ export class DetalleVotacionPage implements OnInit {
   obtenerUsuario(){
 
     this.usuario = this.usuarioService.obtenerUsuario();
-    //console.log(this.usuario);
-    //console.log(this.votacion.votantes);
 
     if(this.votacion.votantes.length !== 0){
 
-      console.log(this.votacion.votantes.length);
       for (let index = 0; index < this.votacion.votantes.length; index++) {
-        
-        //console.log(this.usuario._id);
-        //console.log(this.votacion.votantes[index]);
   
         if(this.usuario._id == this.votacion.votantes[index]){
           this.ocultar = false;

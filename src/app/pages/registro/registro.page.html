@@ -14,7 +14,7 @@
    </ion-col>
  </ion-row>
 
- <form (ngSubmit)="registro(registrarse)" #registrarse="ngForm">
+ <form (ngSubmit)="registro()" #registrarse="ngForm">
    <ion-grid fixed>
      <ion-row>
        <ion-col>
@@ -26,7 +26,7 @@
               <ion-icon name="person" item-start></ion-icon>
               Nombre
             </ion-label>
-            <ion-input name="nombre" type="text" maxlength="50" [(ngModel)]="userRegistro.nombre" color="light" required>
+            <ion-input name="nombre" type="text" minlength="3" maxlength="50" [(ngModel)]="userRegistro.nombre" color="light" required>
             </ion-input>
           </ion-item>
           <span class="caracteres">{{ 50 - userRegistro.nombre.length }} caracteres restantes</span> 
@@ -51,7 +51,7 @@
           <ion-item color="none">
              <ion-label position="floating" color="light" class="my-label">
                <ion-icon name="mail" item-start></ion-icon>
-               Correo Electronico
+               Correo Electrónico
              </ion-label>
              <ion-input name="email" type="email" maxlength="150" [(ngModel)]="userRegistro.email" color="light" color="light" required>
              </ion-input>
