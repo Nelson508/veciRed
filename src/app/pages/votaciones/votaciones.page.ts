@@ -47,10 +47,6 @@ export class VotacionesPage implements OnInit {
 
     this.acuerdosService.getAcuerdos(pull)
       .subscribe(response => {
-        console.log(response );
-        console.log(this.acuerdos);
-
-        //this.emptyVotaciones=true;
 
         if(pull)
         {
@@ -61,7 +57,6 @@ export class VotacionesPage implements OnInit {
 
         for (let index = 0; index < response.acuerdosPublicados.length; index++) {
           //const element = response.acuerdosPublicados[index];
-          //console.log(index);
 
           
           if(response.acuerdosPublicados[index]['estado'] == 2){
@@ -89,15 +84,13 @@ export class VotacionesPage implements OnInit {
 
           this.acuerdos.push(response.acuerdosPublicados[this.contador]);
         }
-        console.log(this.acuerdos);
+        
         this.contador++; */
-       /*console.log(response.acuerdosPublicados[0]);
-        this.contador++;
-        console.log(response.acuerdosPublicados[1]);*/
+       /*
+        this.contador++;*/
         if(this.acuerdos.length == 0 && response.pagina === 1)
         {
           this.emptyVotaciones=true;
-          console.log(this.emptyVotaciones );
         }
 
         if(event)

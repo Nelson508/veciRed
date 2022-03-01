@@ -37,7 +37,6 @@ export class CuentaRegresivaComponent implements OnInit, OnDestroy {
     //fecha lanzada + duracion en milisegundos componen el dDay
     var dDay = this.votacionLanzada.fechaLanzada + duracionMilisegundos;
     this.timeDifference = dDay - new  Date().getTime();
-    //console.log(this.timeDifference);
 
     if(this.timeDifference < 0){ 
 
@@ -57,9 +56,7 @@ export class CuentaRegresivaComponent implements OnInit, OnDestroy {
   finVotacion(){
 
     this.votacionLanzada.estado = 3;
-    console.log(this.votacionLanzada);
     this.acuerdosService.eliminarAcuerdo(this.votacionLanzada);
-    console.log('el plazo de la votacion a terminado');
     //navctrl eso falta
     this.navCtrl.navigateRoot('/main/tabs/votaciones');
     //this.router.

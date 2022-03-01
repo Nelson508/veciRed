@@ -35,33 +35,49 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  async login(logearse: NgForm){
+  async login(){
 
-    if(logearse.invalid){
-      
-      this.alertasService.alerta('Complete los campos vacíos');
-      return;
-    }
+    const validado = this.validacion();
 
-    const existe = await this.usuarioService.login(this.User.email, this.User.password);
+    if(validado == null){
 
-    if(existe){
-      //navegar al tabs
-      this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
+      const existe = await this.usuarioService.login(this.User.email, this.User.password);
 
-      if(this.platform.is('capacitor')){
-        this.pushService.setUserId();
+      console.log(existe);
+  
+      if(existe){
+        //navegar al tabs
+        this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
+  
+        if(this.platform.is('capacitor')){
+          this.pushService.setUserId();
+        }
+        
+      }else{
+        //mostrar alerta de usuario y contraseña no correctos
+        this.alertasService.alerta('Usario y/o contraseña no son correctos');
       }
-      
-    }else{
-      //mostrar alerta de usuario y contraseña no correctos
-      this.alertasService.alerta('Usario y/o contraseña no son correctos');
     }
-
   }
 
   registrarse() {
     this.navCtrl.navigateRoot('/registro');
+  }
+
+  
+  validacion(){
+
+    if(this.User.email == ''){
+
+      return this.alertasService.alerta('Correo requerido.');
+    }
+
+    if(this.User.password == ''){
+
+      return this.alertasService.alerta('Contraseña requerida.');
+    }
+
+    return null;
   }
 
   /* async comunidadesUsuario(){
@@ -70,11 +86,9 @@ export class LoginPage implements OnInit {
       async respuesta =>
      {
        this.arrayComunidades = await respuesta['comunidades']['comunidad']; 
-       console.log('Respuesta de mis comunidades: ' + this.arrayComunidades);
      }
    )
 
-   console.log('Mis comunidades: ' + this.arrayComunidades);
    this.pushService.setUserId(this.arrayComunidades);
 
   } */

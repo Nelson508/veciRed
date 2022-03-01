@@ -41,9 +41,156 @@ describe('RegistroPage', () => {
   //   component.registro();
   //   expect(component).toBeTruthy();
   // });
+  /* it('El nombre no deber contener menos de 3 caracteres ingresados', () => {
 
+    component.userRegistro = {
+      nombre: 'Fr',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanches@gmail.com',
+      password: '123456',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
 
+  it('El nombre no deber contener más de 50 caracteres ingresados', () => {
 
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez lorem ipsum dolor sit amet consectetur',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanches@gmail.com',
+      password: '123456',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
 
+  it('Se debe ingresar un nombre valido', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez 123',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanches@gmail.com',
+      password: '123456',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('Debe ingresar una fecha de nacimiento', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez',
+      fechaNacimiento:  null,
+      email: 'francisco.sanches@gmail.com',
+      password: '123456',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('La fecha de nacimiento no puede superar a la fecha actual', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez',
+      fechaNacimiento:  '2022-04-02',
+      email: 'francisco.sanches@gmail.com',
+      password: '123456',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('Debe ingresar un correo valido', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanchesgmail.com',
+      password: '123456',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('Debe ingresar un correo valido', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanches@gmail.c',
+      password: '123456',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('La contraseña no debe tener menos de 6 caracteres', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanches@gmail.com',
+      password: '1234',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('La contraseña no debe tener más de 100 caracteres', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanches@gmail.com',
+      password: 'lorem ipsum dolor sit amet, consectetur adipiscing elit. In a ante auctor, consectetur quam at, tempus tellus',
+    }
+    component.repitaPassword = '123456'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('Las contraseñas deben coincidir', () => {
+
+    component.userRegistro = {
+      nombre: 'Francisco Sánchez',
+      fechaNacimiento:  '1988-03-02',
+      email: 'francisco.sanches@gmail.com',
+      password: '123456',
+    }
+    component.repitaPassword = '12345678'
+    
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+ */
 
 });

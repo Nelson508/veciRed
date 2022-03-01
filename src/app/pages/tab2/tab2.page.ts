@@ -40,7 +40,7 @@ export class Tab2Page implements OnInit {
   //Se ejecuta cada vez que esta página es cargada
   /* async ionViewWillEnter(){
 
-    //console.log('Will Enter - Cargar mensajes');
+    
 
     //Se cargan los mensajes desde el servicio 
     this.mensajes = await this.pushService.getMensajes();

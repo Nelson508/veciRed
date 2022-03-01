@@ -38,7 +38,6 @@ export class RegistrosAcuerdosPage implements OnInit {
 
           if(response.acuerdosPublicados[index]['estado'] == 3){
             //this.emptyAcuerdos = false;
-            //console.log(response.acuerdosPublicados[index]['estado']);
             this.acuerdoTerminado = response.acuerdosPublicados[index];
             this.acuerdos.push(this.acuerdoTerminado);
           }
@@ -48,7 +47,6 @@ export class RegistrosAcuerdosPage implements OnInit {
         if(this.acuerdos.length == 0 && response.pagina === 1)
         {
           this.emptyAcuerdos=true;
-          console.log(this.emptyAcuerdos );
         }
         
         if(event)

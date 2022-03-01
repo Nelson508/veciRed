@@ -55,9 +55,6 @@ export class AcuerdosPage implements OnInit {
 
     this.acuerdosService.getAcuerdos(pull)
       .subscribe(response => {
-        console.log(response );
-
-        //this.emptyAcuerdos=true;
 
         if(pull)
         {
@@ -95,7 +92,6 @@ export class AcuerdosPage implements OnInit {
         if(this.acuerdos.length == 0 && response.pagina === 1)
         {
           this.emptyAcuerdos=true;
-          console.log(this.emptyAcuerdos );
         }
        
 

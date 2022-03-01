@@ -31,7 +31,7 @@
         <ion-col size="1">
   
           <ion-buttons class="botones" >
-            <ion-button shape="round" (click)="lanzarVotacion()" [disabled]="!ocultar">
+            <ion-button shape="round" class="lanzarVotacion" (click)="lanzarVotacion()" [disabled]="!ocultar">
               <ion-icon name="arrow-forward-circle-outline"></ion-icon>
             </ion-button>  
           </ion-buttons>
@@ -43,12 +43,12 @@
           </ion-buttons>
 
           <ion-buttons class="botones" [hidden]="!ocultar">
-            <ion-button shape="round" (click)="eliminar()">
+            <ion-button shape="round" class="eliminar" (click)="eliminar()">
               <ion-icon name="trash-bin-outline"></ion-icon>
             </ion-button>          
           </ion-buttons>
           <ion-buttons class="botones" [hidden]="ocultar">
-            <ion-button shape="round" (click)="terminar()">
+            <ion-button shape="round" class="terminar" (click)="terminar()">
               <ion-icon name="hourglass-outline"></ion-icon>
             </ion-button>          
           </ion-buttons>

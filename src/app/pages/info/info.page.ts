@@ -27,7 +27,6 @@ export class InfoPage implements OnInit {
     this.acuerdosService.Objeto.subscribe(respuesta =>{
   
       this.votacion = respuesta;
-      console.log(this.votacion);
     });
   }
 

@@ -54,11 +54,7 @@ export class OpcionesPage implements OnInit {
     
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
-      console.log('la respuesta es: ' + respuesta);
-
       if(respuesta == true){
-
-        console.log(respuesta);
         this.limpiar();
       }
     });
@@ -117,8 +113,6 @@ export class OpcionesPage implements OnInit {
   
         this.opciones.push( this.opcion4 );
       }
-      
-      console.log(this.opciones);
      
       this.acuerdosService.enviarDatos(this.opciones);
       this.router.navigate(['/main/tabs/crear-acuerdo']);
@@ -130,71 +124,71 @@ export class OpcionesPage implements OnInit {
   validacion(){
 
     //Validación caracteres extraños en titulo de la opcipón 1
-    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
     if(caracteresTitulo1.test(this.opcion1.titulo) == false){
       
-      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
     }
 
     //Validación caracteres extraños en la descripción de la opcipón 1
-    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
     if(caracteresDescripcion1.test(this.opcion1.descripcion) == false){
       
-      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
     }
 
     //Validación caracteres extraños en titulo de la opcipón 2
-    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresTitulo2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
-    if(caracteresTitulo1.test(this.opcion2.titulo) == false){
+    if(caracteresTitulo2.test(this.opcion2.titulo) == false){
       
-      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
     }
 
     //Validación caracteres extraños en la descripción de la opcipón 2
-    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresDescripcion2 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
-    if(caracteresDescripcion1.test(this.opcion2.descripcion) == false){
+    if(caracteresDescripcion2.test(this.opcion2.descripcion) == false){
       
-      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
     }
 
     if(this.contador >= 1){
-      //Validación caracteres extraños en titulo de la opcipón 3
-      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      //Validación caracteres extraños en titulo de la opción 3
+      var caracteresTitulo3 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
-      if(caracteresTitulo1.test(this.opcion3.titulo) == false){
+      if(caracteresTitulo3.test(this.opcion3.titulo) == false){
         
-        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
       }
 
-      //Validación caracteres extraños en la descripción de la opcipón 3
-      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      //Validación caracteres extraños en la descripción de la opción 3
+      var caracteresDescripcion3 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
-      if(caracteresDescripcion1.test(this.opcion3.descripcion) == false){
+      if(caracteresDescripcion3.test(this.opcion3.descripcion) == false){
         
-        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
       }
 
     }
 
     if(this.contador == 2){
-      //Validación caracteres extraños en titulo de la opcipón 4
-      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      //Validación caracteres extraños en titulo de la opción 4
+      var caracteresTitulo4 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
-      if(caracteresTitulo1.test(this.opcion4.titulo) == false){
+      if(caracteresTitulo4.test(this.opcion4.titulo) == false){
         
-        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
       }
 
-      //Validación caracteres extraños en la descripción de la opcipón 4
-      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      //Validación caracteres extraños en la descripción de la opción 4
+      var caracteresDescripcion4 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
-      if(caracteresDescripcion1.test(this.opcion4.descripcion) == false){
+      if(caracteresDescripcion4.test(this.opcion4.descripcion) == false){
         
-        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
       }
     }
   }

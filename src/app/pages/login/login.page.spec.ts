@@ -23,7 +23,43 @@ describe('LoginPage', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  /* it('should create', () => {
     expect(component).toBeTruthy();
+  }); */
+
+  /* it('Sesión iniciada', () => {
+
+    component.User = {
+      email: 'test3@test3.com',
+      password: '123456'
+    };
+
+    var resultado = component.login();
+    fixture.detectChanges();
+    expect(resultado).toEqual(true);
+  }); */
+
+  it('Correo requerido', () => {
+
+    component.User = {
+      email: '',
+      password: '123456'
+    };
+
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+  });
+
+  it('Contraseña requerida', () => {
+
+    component.User = {
+      email: 'test3@test3.com',
+      password: ''
+    };
+
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
   });
 });

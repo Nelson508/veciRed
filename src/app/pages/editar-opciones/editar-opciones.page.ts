@@ -55,10 +55,7 @@ export class EditarOpcionesPage implements OnInit {
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
       this.res = respuesta['opciones'];
-        //console.log(respuesta);
-        //console.log(this.res);
       var count = 0;
-      console.log(this.res.length);
 
       for(let i = 0; i < this.res.length ; i++){
 
@@ -100,9 +97,7 @@ export class EditarOpcionesPage implements OnInit {
 
   eliminarOpcion(){
 
-    console.log(this.contador);
     this.contador --;
-    console.log(this.contador);
 
     if(this.contador < 1){
       
@@ -135,8 +130,6 @@ export class EditarOpcionesPage implements OnInit {
   
         this.opciones.push( this.opcion[3] );
       }
-      
-      console.log(this.opciones);
      
       this.acuerdosService.enviarDatos(this.opciones, false);
       this.router.navigate(['/main/tabs/editar-acuerdo']);
@@ -148,71 +141,71 @@ export class EditarOpcionesPage implements OnInit {
   validacion(){
 
     //Validación caracteres extraños en titulo de la opcipón 1
-    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
     if(caracteresTitulo1.test(this.opcion[0]['titulo']) == false){
       
-      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
     }
 
     //Validación caracteres extraños en la descripción de la opcipón 1
-    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
     if(caracteresDescripcion1.test(this.opcion[0]['descripcion']) == false){
       
-      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
     }
 
     //Validación caracteres extraños en titulo de la opcipón 2
-    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
     if(caracteresTitulo1.test(this.opcion[1]['titulo']) == false){
       
-      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
     }
 
     //Validación caracteres extraños en la descripción de la opcipón 2
-    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
     if(caracteresDescripcion1.test(this.opcion[1]['descripcion']) == false){
       
-      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+      return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
     }
 
     if(this.contador >= 1){
       //Validación caracteres extraños en titulo de la opcipón 3
-      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
       if(caracteresTitulo1.test(this.opcion[2]['titulo']) == false){
         
-        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
       }
 
       //Validación caracteres extraños en la descripción de la opcipón 3
-      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
       if(caracteresDescripcion1.test(this.opcion[2]['descripcion']) == false){
         
-        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
       }
 
     }
 
     if(this.contador == 2){
       //Validación caracteres extraños en titulo de la opcipón 4
-      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      var caracteresTitulo1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
       if(caracteresTitulo1.test(this.opcion[3]['titulo']) == false){
         
-        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
       }
 
       //Validación caracteres extraños en la descripción de la opcipón 4
-      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+      var caracteresDescripcion1 = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
 
       if(caracteresDescripcion1.test(this.opcion[3]['descripcion']) == false){
         
-        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados.');
+        return this.alertasService.alerta('Las descripciones de las opciones del acuerdo no permiten tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
       }
     }
   }

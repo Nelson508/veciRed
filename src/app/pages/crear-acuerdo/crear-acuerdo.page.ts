@@ -20,9 +20,13 @@ export class CrearAcuerdoPage implements OnInit {
 
   tempImages: string;
 
-  minTime: String = new Date().toISOString();
+  today = new Date(); 
+  minTime: String = this.today.toISOString();
 
   plataforma:boolean;
+  //acuerdoCreado: any;
+  fecha;
+  hora = null;
 
   acuerdo: Acuerdos = 
   {
@@ -50,31 +54,21 @@ export class CrearAcuerdoPage implements OnInit {
 
     this.acuerdosService.Objeto.subscribe(respuesta =>{
 
-      console.log(respuesta['tipo']);
       this.acuerdo.opciones = respuesta;
-      console.log(this.acuerdo.opciones);
     });
   }
 
   async crearAcuerdo(){
 
+    const datepipe: DatePipe = new DatePipe('en-US');
+    this.acuerdo.fecha = datepipe.transform(this.fecha,'YYYY-MM-dd');
+    this.acuerdo.hora = datepipe.transform(this.hora,'HH:mm');
+
     const validado = this.validacion();
 
     if(validado == null){
-
-      console.log(this.acuerdo);
-  
-      const datepipe: DatePipe = new DatePipe('en-US');
-  
-      let fecha = new Date(this.acuerdo.fecha);
-  
-      this.acuerdo.fecha = datepipe.transform(fecha,'YYYY-MM-dd');
-      this.acuerdo.hora = datepipe.transform(this.acuerdo.hora,'HH:mm');
   
       const acuerdoCreado = await this.acuerdosService.crearAcuerdo(this.acuerdo);
-  
-      console.log(this.acuerdo);
-      console.log(this.acuerdo.fecha);
   
       this.acuerdo = { 
         titulo:'',
@@ -103,26 +97,75 @@ export class CrearAcuerdoPage implements OnInit {
 
   validacion(){
     //Validación caracteres extraños en titulo
-    var caracteresTitulo = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
+    var caracteresTitulo = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,30})+$/g;
 
     if(caracteresTitulo.test(this.acuerdo.titulo) == false){
       
-      return this.alertasService.alerta('El título del acuerdo no permite tener los caracteres ingresados');
+      return this.alertasService.alerta('El título del acuerdo no permite tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 30.');
     }
 
-    //Validación caracteres extraños en la descripción
-    var caracteresDescripcion = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{1,30})+$/g;
-
-    if(caracteresDescripcion.test(this.acuerdo.descripcion) == false){
+    //Validación fecha vacia
+    if(this.acuerdo.fecha == null){
       
-      return this.alertasService.alerta('La descripción del acuerdo no permite tener los caracteres ingresados');
+      return this.alertasService.alerta('Debe seleccionar una día');
+    }
+    
+    const yesterday = new Date(this.today);
+    yesterday.setDate(yesterday.getDate() - 1);
+  
+    //Validar que la fecha no sea anterior a la fecha actual
+    if(this.acuerdo.fecha < yesterday.toISOString()){
+      
+      return this.alertasService.alerta('El día seleccionado no debe ser anterior a la fecha actual');
+    }
+    //var fechaMaxima = new Date('2126-01-01').toISOString(); 
+    console.log(new Date('2122-03-07').toISOString());
+    console.log(this.acuerdo.fecha);
+    //Validar que la fecha no sea superior a 31/12/2125
+    if(this.acuerdo.fecha > new Date('2122-03-07').toISOString()){
+      
+      return this.alertasService.alerta('El día seleccionado no debe superar el 07/03/2122');
+    }
+
+    //Validación hora vacia
+    if(this.acuerdo.hora == null){
+      
+      return this.alertasService.alerta('Debe seleccionar una hora');
+    }
+
+    //Validación duracion vacia
+    if(this.acuerdo.duracion == null){
+      
+      return this.alertasService.alerta('Debe seleccionar una duracion');
+    }
+
+    //Validación duracion del acuerdo
+    if(this.acuerdo.duracion < 1){
+          
+      return this.alertasService.alerta('La duración del acuerdo no puede ser menor a 1 hora');
     }
 
     //Validación duracion del acuerdo
     if(this.acuerdo.duracion > 48){
-      
+          
       return this.alertasService.alerta('La duración del acuerdo no puede ser mayor a 48 horas');
     }
+
+    //Validación caracteres extraños en la descripción
+    var caracteresDescripcion = /(^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9¡!¿?\-.,()=/@ ]{3,250})+$/g;
+
+    if(caracteresDescripcion.test(this.acuerdo.descripcion) == false){
+      
+      return this.alertasService.alerta('La descripción del acuerdo no permite tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 250.');
+    }
+
+    //Validación opciones vacio
+    if(Object.keys(this.acuerdo.opciones).length === 0){
+          
+      return this.alertasService.alerta('Las opciones no pueden estar vacias');
+    }
+    
+    return null;
   }
 
   galeria(){
@@ -139,7 +182,6 @@ export class CrearAcuerdoPage implements OnInit {
     this.camera.getPicture(options).then((imageData) => {
      
       const imagen = window.Ionic.WebView.convertFileSrc(imageData);
-      console.log(imagen);
 
       /*    this.avisosService.uploadImagen(imageData);
       this.imagenCarrete = imagen;

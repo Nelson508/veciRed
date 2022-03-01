@@ -1,13 +1,13 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="cabecera">
     <ion-buttons slot="start">
       <ion-button (click)="volverAtras()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
+        <ion-icon name="arrow-back-outline" color="light"></ion-icon>
       </ion-button>
      <!--  <ion-back-button defaultHref="/main/tabs/acuerdos"></ion-back-button> -->
     </ion-buttons>
 
-    <ion-title class="ion-text-center">
+    <ion-title class="ion-text-center" color="light">
       VeciRed
     </ion-title>
 
@@ -39,7 +39,7 @@
                     picker-format="DD/MMMM/YYYY"
                     month-names="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
                     [min]="minTime"
-                    max="2125-12-31" 
+                    max="2122-03-07" 
                     [(ngModel)]="acuerdo.fecha" 
                     doneText="Aceptar"
                     cancelText="Cancelar" required></ion-datetime>

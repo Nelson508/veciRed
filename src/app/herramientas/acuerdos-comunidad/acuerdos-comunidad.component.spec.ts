@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+/* import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { AcuerdosComunidadComponent } from './acuerdos-comunidad.component';
@@ -21,4 +21,4 @@ describe('AcuerdosComunidadComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+}); */

@@ -39,16 +39,13 @@ export class VotacionPublicadaComponent implements OnInit {
   abrirVotacion(){
 
     this.acuerdosService.enviarDatos(this.votacionPublicada);
-    console.log(this.votacionPublicada);
     this.navCtrl.navigateRoot('/main/tabs/detalle-votacion');
   }
 
   formatearFecha(){
     
     const datepipe: DatePipe = new DatePipe('en-US');
-    //console.log(this.votacionPublicada.fecha);
     let fecha = new Date(this.votacionPublicada.fecha);
-    //console.log(fecha);
 
     let days = ['Lunes','Martes','Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     var diaSemana = days[fecha.getUTCDay()-1];
