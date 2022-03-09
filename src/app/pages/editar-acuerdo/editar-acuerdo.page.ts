@@ -18,7 +18,14 @@ export class EditarAcuerdoPage implements OnInit {
 
   tempImages: string;
   today = new Date(); 
-  minTime: String = new Date(new Date().setHours(new Date().getHours() - 48)).toISOString();
+
+  /* El método getTimezoneOffset() devuelve la diferencia, 
+  en minutos, entre una fecha evaluada en la zona horaria UTC y 
+  la misma fecha evaluada en la zona horaria local. 
+  Luego se multiplican los minutos por 60000 obteniedo la diferencia horaria en milisegundos */
+  diferenciaZonaHorariaLocal = (new Date()).getTimezoneOffset() * 60000;
+  minTime = (new Date(Date.now() - this.diferenciaZonaHorariaLocal)).toISOString().slice(0, -1);
+
   plataforma:boolean;
 
   acuerdo: Acuerdos = {
@@ -107,6 +114,7 @@ export class EditarAcuerdoPage implements OnInit {
 
     const datepipe: DatePipe = new DatePipe('en-US');
     this.acuerdo.fecha = datepipe.transform(this.acuerdo.fecha,'YYYY-MM-dd');
+    this.minTime = datepipe.transform(this.minTime,'YYYY-MM-dd');
 
     const validado = this.validacion();
 
@@ -140,11 +148,8 @@ export class EditarAcuerdoPage implements OnInit {
       return this.alertasService.alerta('Debe seleccionar una día');
     }
     
-    const yesterday = new Date(this.today);
-    yesterday.setDate(yesterday.getDate() - 1);
-  
     //Validar que la fecha no sea anterior a la fecha actual
-    if(this.acuerdo.fecha < yesterday.toISOString()){
+    if(this.acuerdo.fecha < this.minTime){
       
       return this.alertasService.alerta('El día seleccionado no debe ser anterior a la fecha actual');
     }

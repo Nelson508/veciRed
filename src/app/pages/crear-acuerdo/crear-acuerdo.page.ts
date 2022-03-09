@@ -20,11 +20,14 @@ export class CrearAcuerdoPage implements OnInit {
 
   tempImages: string;
 
-  today = new Date(); 
-  minTime: String = this.today.toISOString();
+  /* El método getTimezoneOffset() devuelve la diferencia, 
+  en minutos, entre una fecha evaluada en la zona horaria UTC y 
+  la misma fecha evaluada en la zona horaria local. 
+  Luego se multiplican los minutos por 60000 obteniedo la diferencia horaria en milisegundos */
+  diferenciaZonaHorariaLocal = (new Date()).getTimezoneOffset() * 60000;
+  minTime = (new Date(Date.now() - this.diferenciaZonaHorariaLocal)).toISOString().slice(0, -1);
 
   plataforma:boolean;
-  //acuerdoCreado: any;
   fecha;
   hora = null;
 
@@ -62,6 +65,7 @@ export class CrearAcuerdoPage implements OnInit {
 
     const datepipe: DatePipe = new DatePipe('en-US');
     this.acuerdo.fecha = datepipe.transform(this.fecha,'YYYY-MM-dd');
+    this.minTime = datepipe.transform(this.minTime,'YYYY-MM-dd');
     this.acuerdo.hora = datepipe.transform(this.hora,'HH:mm');
 
     const validado = this.validacion();
@@ -110,17 +114,12 @@ export class CrearAcuerdoPage implements OnInit {
       return this.alertasService.alerta('Debe seleccionar una día');
     }
     
-    const yesterday = new Date(this.today);
-    yesterday.setDate(yesterday.getDate() - 1);
-  
     //Validar que la fecha no sea anterior a la fecha actual
-    if(this.acuerdo.fecha < yesterday.toISOString()){
+    if(this.acuerdo.fecha < this.minTime){
       
       return this.alertasService.alerta('El día seleccionado no debe ser anterior a la fecha actual');
     }
-    //var fechaMaxima = new Date('2126-01-01').toISOString(); 
-    console.log(new Date('2122-03-07').toISOString());
-    console.log(this.acuerdo.fecha);
+
     //Validar que la fecha no sea superior a 31/12/2125
     if(this.acuerdo.fecha > new Date('2122-03-07').toISOString()){
       
