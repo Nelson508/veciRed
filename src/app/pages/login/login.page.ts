@@ -46,7 +46,9 @@ export class LoginPage implements OnInit {
         //navegar al tabs
         this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
   
+        //Si el usuario se encuentra en un dispositivo móvil se crea el id del usuario para recivir notificaciones
         if(this.platform.is('capacitor')){
+
           this.pushService.setUserId();
         }
         

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, MenuController } from '@ionic/angular';
+import { NavController, MenuController, Platform } from '@ionic/angular';
 import { DatePipe } from '@angular/common';
 import { Usuario, Comunidad } from '../../interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { AlertasService } from '../../servicios/alertas.service';
+import { PushService } from '../../servicios/push.service';
 
 @Component({
   selector: 'app-registro',
@@ -38,7 +39,9 @@ export class RegistroPage implements OnInit {
   constructor( public navCtrl: NavController,
                public usuarioService: UsuarioService,
                public alertasService: AlertasService,
-               private menuCtrl: MenuController ) { 
+               private menuCtrl: MenuController,
+               private platform: Platform,
+               private pushService: PushService ) { 
                 this.menuCtrl.enable(false, 'first');
                }
 
@@ -60,6 +63,11 @@ export class RegistroPage implements OnInit {
       const existe = await this.usuarioService.registro(this.userRegistro);
   
       if(existe){
+
+        //Si el usuario se encuentra en un dispositivo móvil se crea el id del usuario para recivir notificaciones
+        if(this.platform.is('capacitor')){
+          this.pushService.setUserId();
+        }
         //navegar al tabs
         this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
       }else{
