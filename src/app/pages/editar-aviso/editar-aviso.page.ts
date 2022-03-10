@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Avisos, Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { AvisosService } from '../../servicios/avisos.service';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { AlertasService } from '../../servicios/alertas.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
@@ -25,12 +25,14 @@ export class EditarAvisoPage implements OnInit {
   usuario: Usuario = {};
   tipoAvisoName = 'default';
   Roltype = [];
+  plataforma:boolean;
 
   constructor( private usuarioService: UsuarioService,
                private avisosService: AvisosService,
                private navController: NavController,
                private alertasService: AlertasService,
-               private camera: Camera
+               private camera: Camera,
+               private platform: Platform
              ) { }
 
   ngOnInit() 
@@ -40,6 +42,12 @@ export class EditarAvisoPage implements OnInit {
     this.obtenerRolUsuario();
     //obtenemos el aviso enviado desde mis avisos
     this.obtenerAvisoEditar();
+
+    if(this.platform.is('capacitor')){
+      this.plataforma = false;
+    }else{
+      this.plataforma = true;
+    }
 
   }
 

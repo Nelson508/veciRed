@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AvisosService } from '../../servicios/avisos.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { AlertasService } from '../../servicios/alertas.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { AvisoModalComponent } from 'src/app/herramientas/aviso-modal/aviso-modal.component';
 import { Usuario } from 'src/app/interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
@@ -27,6 +27,7 @@ export class CrearAvisoPage implements OnInit {
   Roltype = [];
   rol;
 
+  plataforma:boolean;
   imagenCarrete: string;
 
   usuario: Usuario = {};
@@ -38,12 +39,18 @@ export class CrearAvisoPage implements OnInit {
                 public alertasService: AlertasService,
                 private modalController: ModalController,
                 private usuarioService: UsuarioService,
-                private pushService: PushService ) {
+                private pushService: PushService,
+                private platform: Platform ) {
     
    }
 
    ngOnInit() {
     //this.obtenerRolUsuario();
+    if(this.platform.is('capacitor')){
+      this.plataforma = false;
+    }else{
+      this.plataforma = true;
+    }
     
   }
   
