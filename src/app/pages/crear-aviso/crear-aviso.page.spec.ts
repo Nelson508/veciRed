@@ -28,15 +28,15 @@ describe('CrearAvisoPage', () => {
   //   expect(component).toBeTruthy();
   // });
 
-  it('Verdadero si no viene el Titulo || Titulo.length <= 2', () => {
-    component.aviso.titulo = 'ti'
-    component.aviso.descripcion= 'Aviso testing'
+  it('El título no puede tener menos de 3 caracteres', () => {
+    component.aviso.titulo = ''
+    component.aviso.descripcion= 'Aviso de testing'
     component.aviso.tipoAviso = 3;
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelector('.crearAviso').disabled).toBeTruthy();
    });
 
-   it('Verdadero si no viene el Descripción || Descripción.length <= 2', () => {
+   it('La descripcion no puede tener menos de 3 caracteres', () => {
     component.aviso.titulo = 'unit testing title'
     component.aviso.descripcion= ''
     component.aviso.tipoAviso = 3;
@@ -44,7 +44,7 @@ describe('CrearAvisoPage', () => {
     expect(fixture.debugElement.nativeElement.querySelector('.crearAviso').disabled).toBeTruthy();
    });
 
-   it('Verdadero si no viene el TipoAviso', () => {
+   it('Debe seleccionar un tipo de aviso', () => {
     component.aviso.titulo = 'unit testing title'
     component.aviso.descripcion= 'unit testing description'
     component.aviso.tipoAviso = 0;
@@ -52,32 +52,56 @@ describe('CrearAvisoPage', () => {
     expect(fixture.debugElement.nativeElement.querySelector('.crearAviso').disabled).toBeTruthy();
    });
 
-   it('Falso si titulo incluye caracteres especiales', () => {
-    //component.aviso.titulo = '<h1>unit testing title</h1>'
-    component.aviso.titulo = 'unit testing title'
+   it('El titulo no debe incluir caracteres especiales', () => {
+    component.aviso.titulo = '<h1>unit testing title</h1>'
+    //component.aviso.titulo = 'unit testing title'
     component.aviso.descripcion= 'unit testing description'
     component.aviso.tipoAviso = 5;
     var resultado = component.validacion();
     fixture.detectChanges();
-    expect(resultado).toEqual(null);
+    expect(resultado).not.toEqual(null);
    });
 
-   it('Falso si Descripción incluye caracteres especiales', () => {
+   it('La descripción no debe incluir caracteres especiales', () => {
     component.aviso.titulo = 'unit testing title'
-    //component.aviso.descripcion= '<h1>unit testing description</h1>'
-    component.aviso.descripcion= 'unit testing description'
+    component.aviso.descripcion= '<h1>unit testing description</h1>'
+    //component.aviso.descripcion= 'unit testing description'
     component.aviso.tipoAviso = 5;
     var resultado = component.validacion();
     fixture.detectChanges();
-    expect(resultado).toEqual(null);
+    expect(resultado).not.toEqual(null);
    });
 
-   it('Verdadero si todos los campos estan completados', () => {
+   it('Aviso creado exitosamente', () => {
     component.aviso.titulo = 'unit testing title'
     component.aviso.descripcion= 'unit testing description'
     component.aviso.tipoAviso = 3;
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelector('.crearAviso').disabled).toBeFalsy();
+   });
+
+
+   it('El título no debe tener más de 30 caracteres', () => {
+    component.aviso.titulo = 'titulo con mas de 30 caracteres'
+    component.aviso.descripcion= 'unit testing description'
+    //component.aviso.descripcion= 'unit testing description'
+    component.aviso.tipoAviso = 5;
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+   });
+
+
+   it('La descripción no debe tener más de 250 caracteres', () => {
+    component.aviso.titulo = 'unit testing title'
+    component.aviso.descripcion= 'descripcion de prueba. lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus nunc ut malesuada lobortis. Fusce sollicitudin efficitur dapibus. In vitae lectus sit amet nulla lobortis venenatis at at felis. Orci varius natoque penatibus et magnis'
+    //component.aviso.descripcion= 'unit testing description'
+    component.aviso.tipoAviso = 5;
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+
+    
    });
 
 

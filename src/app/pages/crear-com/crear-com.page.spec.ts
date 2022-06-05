@@ -26,34 +26,34 @@ describe('CrearComPage', () => {
   //   expect(component).toBeTruthy();
   // });
 
-  it('Verdadero si no viene el nombre || nombre.length <= 2', () => {
+  it('El nombre no puede tener menos de 3 caracteres', () => {
     component.comunidad.nombreComunidad = ''
     component.comunidad.descripcion = 'comunidad vecired'
     component.comunidad.region = 'Bío-Bío'
-    component.comunidad.comuna = 'Arauco'
+    component.comunidad.comuna = 'Concepción'
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelector('.crearCom').disabled).toBeTruthy();
    });
 
-   it('Verdadero si no viene Descripción || Descripción.length <= 2', () => {
+   it('La descripcion no puede tener menos de 3 caracteres', () => {
     component.comunidad.nombreComunidad = 'VeciRed'
     component.comunidad.descripcion = ''
     component.comunidad.region = 'Bío-Bío'
-    component.comunidad.comuna = 'Arauco'
+    component.comunidad.comuna = 'Concepción'
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelector('.crearCom').disabled).toBeTruthy();
    });
 
-   it('Verdadero si región es vacío', () => {
+   it('Debe ingresar una region', () => {
     component.comunidad.nombreComunidad = 'VeciRed'
     component.comunidad.descripcion = 'comunidad vecired'
     component.comunidad.region = ''
-    component.comunidad.comuna = 'Arauco'
+    component.comunidad.comuna = 'Concepción'
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelector('.crearCom').disabled).toBeTruthy();
    });
 
-   it('Verdadero si comuna es vacío', () => {
+   it('Debe ingresar una comuna', () => {
     component.comunidad.nombreComunidad = 'VeciRed'
     component.comunidad.descripcion = 'comunidad vecired'
     component.comunidad.region = 'Bío-Bío'
@@ -62,12 +62,12 @@ describe('CrearComPage', () => {
     expect(fixture.debugElement.nativeElement.querySelector('.crearCom').disabled).toBeTruthy();
    });
 
-    it('Falso si nombreComunidad incluye caracteres especiales', () => {
+    it('nombreComunidad no puede tener caracteres especiales', () => {
       //component.comunidad.nombreComunidad = '<h1>VeciRed</h1>'
       component.comunidad.nombreComunidad = 'VeciRed'
     component.comunidad.descripcion = 'comunidad vecired'
     component.comunidad.region = 'Bío-Bío'
-    component.comunidad.comuna = 'Arauco'
+    component.comunidad.comuna = 'Concepción'
     /*funcion validacion retorna NULL cuando cumple todas las condiciones en caso contrario
     retorna una alerta con un mensaje la cual es un object*/
     var resultado = component.validacion();
@@ -76,11 +76,11 @@ describe('CrearComPage', () => {
     expect(resultado).toEqual(null);
    });
 
-   it('Falso si descripción incluye caracteres especiales', () => {
+   it('Descripción no puede tener caracteres especiales', () => {
     component.comunidad.nombreComunidad = 'VeciRed'
   component.comunidad.descripcion = 'Comunidad VeciRed'
   component.comunidad.region = 'Bío-Bío'
-  component.comunidad.comuna = 'Arauco'
+  component.comunidad.comuna = 'Concepción'
   /*funcion validacion retorna NULL cuando cumple todas las condiciones en caso contrario
   retorna una alerta con un mensaje la cual es un object*/
   var resultado = component.validacion();
@@ -89,7 +89,7 @@ describe('CrearComPage', () => {
   expect(resultado).toEqual(null);
  });
 
- it('Verdadero si todos los campos estan completados', () => {
+ it('Comunidad creada exitosamente', () => {
   component.comunidad.nombreComunidad = 'VeciRed'
 component.comunidad.descripcion = 'Comunidad VeciRed'
 component.comunidad.region = 'Bío-Bío'
@@ -102,6 +102,28 @@ fixture.detectChanges();
 expect(resultado).toEqual(null);
 });
 
+it('nombreComunidad no debe contener más de 25 caracteres', () => {
+  component.comunidad.nombreComunidad = 'Comunidad VeciRed varios caracteres'
+  component.comunidad.descripcion = 'comunidad creada por los desarrolladores de VeciRed'
+  component.comunidad.region = 'Bío-Bío'
+  component.comunidad.comuna = 'Concepción'
+  var resultado = component.validacion();
+  fixture.detectChanges();
+
+  expect(resultado).not.toEqual(null);
+ });
+
+
+ it('Descripcion no debe contener más de 250 caracteres', () => {
+  component.comunidad.nombreComunidad = 'Comunidad VeciRed'
+  component.comunidad.descripcion = 'Comunidad creada por los desarrolladores de VeciRed. lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus nunc ut malesuada lobortis. Fusce sollicitudin efficitur dapibus. In vitae lectus sit amet nulla lobortis venenatis at at felis. Orci varius natoque penatibus et magnis'
+  component.comunidad.region = 'Bío-Bío'
+  component.comunidad.comuna = 'Concepción'
+  var resultado = component.validacion();
+  fixture.detectChanges();
+
+  expect(resultado).not.toEqual(null);
+ });
 
 
 

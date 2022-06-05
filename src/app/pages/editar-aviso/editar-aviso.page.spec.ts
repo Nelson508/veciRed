@@ -28,7 +28,7 @@ describe('EditarAvisoPage', () => {
   //   expect(component).toBeTruthy();
   // });
 
-  it('Verdadero si no viene el Titulo || Titulo.length <= 2', () => {
+  it('El título no puede tener menos de 3 caracteres', () => {
     component.avisoEdicion.titulo = ''
     component.avisoEdicion.descripcion= 'Aviso testing'
     component.avisoEdicion.tipoAviso = 3;
@@ -36,7 +36,7 @@ describe('EditarAvisoPage', () => {
     expect(fixture.debugElement.nativeElement.querySelector('.editarAviso').disabled).toBeTruthy();
    });
 
-   it('Verdadero si no viene el Descripcion || Descripcion.length <= 2', () => {
+   it('La descripción no puede tener menos de 3 caracteres', () => {
     component.avisoEdicion.titulo = 'aviso title'
     component.avisoEdicion.descripcion= ''
     component.avisoEdicion.tipoAviso = 3;
@@ -44,16 +44,35 @@ describe('EditarAvisoPage', () => {
     expect(fixture.debugElement.nativeElement.querySelector('.editarAviso').disabled).toBeTruthy();
    });
 
-   it('Verdadero si no viene el tipo Aviso', () => {
+   it('Debe seleccionar un tipo de aviso', () => {
     component.avisoEdicion.titulo = 'aviso title'
-    component.avisoEdicion.descripcion= 'aviso unit testing'
+    component.avisoEdicion.descripcion= 'descripción de aviso'
     component.avisoEdicion.tipoAviso = 0;
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelector('.editarAviso').disabled).toBeTruthy();
    });
 
-   it('Falso si titulo tiene caracteres especiales', () => {
-    //component.avisoEdicion.titulo = '<h3>aviso title</h3>'
+   it('El título no debe incluir caracteres especiales', () => {
+    component.avisoEdicion.titulo = '<h3>aviso title</h3>'
+    //component.avisoEdicion.titulo = 'aviso title'
+    component.avisoEdicion.descripcion= 'descripción de aviso'
+    component.avisoEdicion.tipoAviso = 5;
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+   });
+
+   it('La descripción no debe incluir caracteres especiales', () => {
+    component.avisoEdicion.titulo = 'aviso title'
+    //component.avisoEdicion.descripcion= 'aviso unit testing'
+    component.avisoEdicion.descripcion= '<h1>testing description</h1>'
+    component.avisoEdicion.tipoAviso = 5;
+    var resultado = component.validacion();
+    fixture.detectChanges();
+    expect(resultado).not.toEqual(null);
+   });
+
+   it('Aviso editado exitosamente', () => {
     component.avisoEdicion.titulo = 'aviso title'
     component.avisoEdicion.descripcion= 'aviso unit testing'
     component.avisoEdicion.tipoAviso = 5;
@@ -62,23 +81,27 @@ describe('EditarAvisoPage', () => {
     expect(resultado).toEqual(null);
    });
 
-   it('Falso si Descripcion tiene caracteres especiales', () => {
-    component.avisoEdicion.titulo = 'aviso title'
-    component.avisoEdicion.descripcion= 'aviso unit testing'
-    //component.avisoEdicion.descripcion= '<h3>aviso unit testing</h3>'
+   it('El título no debe tener más de 30 caracteres', () => {
+    component.avisoEdicion.titulo = 'titulo con mas de 30 caracteres'
+    component.avisoEdicion.descripcion= 'unit testing description'
+    //component.aviso.descripcion= 'unit testing description'
     component.avisoEdicion.tipoAviso = 5;
     var resultado = component.validacion();
     fixture.detectChanges();
-    expect(resultado).toEqual(null);
+    expect(resultado).not.toEqual(null);
    });
 
-   it('Verdadero si todos los campos estan completos', () => {
-    component.avisoEdicion.titulo = 'aviso title'
-    component.avisoEdicion.descripcion= 'aviso unit testing'
+
+   it('La descripción no debe tener más de 250 caracteres', () => {
+    component.avisoEdicion.titulo = 'unit testing title'
+    component.avisoEdicion.descripcion= 'descripcion de prueba. lorem ipsum dolor sit amet, consectetur adipiscing elit. In dapibus nunc ut malesuada lobortis. Fusce sollicitudin efficitur dapibus. In vitae lectus sit amet nulla lobortis venenatis at at felis. Orci varius natoque penatibus et magnis'
+    //component.aviso.descripcion= 'unit testing description'
     component.avisoEdicion.tipoAviso = 5;
     var resultado = component.validacion();
     fixture.detectChanges();
-    expect(resultado).toEqual(null);
+    expect(resultado).not.toEqual(null);
+
+    
    });
 
    

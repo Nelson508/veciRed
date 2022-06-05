@@ -29,7 +29,7 @@ describe('MisAvisosPage', () => {
 
   //INICIO DE LAS VALIDACIONES ELIMINAR AVISO
 
-  it('Debería llamar a la funcion rechazarVecino', (() => {
+  it('Aviso eliminado exitosamente', (() => {
     //creamos una solicitud para testear el boton
     //recordemos que solo si existen solicitudes se muestra el boton de aceptar
     //por lo tanto debemos crear una solicitud
@@ -51,7 +51,7 @@ describe('MisAvisosPage', () => {
    fixture.detectChanges();
 
    //'aceptarVecino' es una funcion spyOn( component, 'funcion del js')
-   spyOn(component, 'eliminarAviso');
+   spyOn(component, 'eliminarAviso').and.callThrough();
    
    //spyOn(component, 'aceptarVecino');
    //capturamo el boton por css como es de costumbre

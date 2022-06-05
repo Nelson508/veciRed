@@ -31,7 +31,7 @@ describe('SolicitudPage', () => {
  
 
     
-   it('Debería llamar a la funcion aceptarVecino', () => {
+   it('Vecino aceptado exitosamente', () => {
      //creamos una solicitud para testear el boton
      //recordemos que solo si existen solicitudes se muestra el boton de aceptar
      //por lo tanto debemos crear una solicitud
@@ -66,7 +66,7 @@ describe('SolicitudPage', () => {
 
 
    //INICIO VALIDACIONES RECHAZAR VECINO
-   it('Debería llamar a la funcion rechazarVecino', (() => {
+   it('Vecino rechazado exitosamente', (() => {
     //creamos una solicitud para testear el boton
     //recordemos que solo si existen solicitudes se muestra el boton de aceptar
     //por lo tanto debemos crear una solicitud
@@ -84,7 +84,7 @@ describe('SolicitudPage', () => {
 
    //'aceptarVecino' es una funcion spyOn( component, 'funcion del js')
    //spyOn(component, 'rechazoVecino').and.callThrough();
-   spyOn(component, 'aceptarVecino');
+   spyOn(component, 'aceptarVecino').and.callThrough();
    //capturamo el boton por css como es de costumbre
    let button = fixture.debugElement.nativeElement.querySelector('.rechazarVecino');
    

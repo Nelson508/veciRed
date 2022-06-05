@@ -28,7 +28,7 @@ describe('ComunidadPage', () => {
 
   //INICIO VALIDACIONES ABANDONAR COMUNIDAD
  
-  it('Debería llamar a la funcion rechazarVecino', (() => {
+  it('Comunidad abandonada exitosamente', (() => {
     //creamos una solicitud para testear el boton
     //recordemos que solo si existen solicitudes se muestra el boton de aceptar
     //por lo tanto debemos crear una solicitud
