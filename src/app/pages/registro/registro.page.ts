@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, MenuController } from '@ionic/angular';
+import { NavController, MenuController, Platform } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 import { Usuario, Comunidad } from '../../interfaces/interfaces';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { AlertasService } from '../../servicios/alertas.service';
+import { PushService } from '../../servicios/push.service';
 
 @Component({
   selector: 'app-registro',
@@ -11,14 +13,19 @@ import { AlertasService } from '../../servicios/alertas.service';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-
-  maxTime: String = new Date().toISOString();
+ 
+  /* El método getTimezoneOffset() devuelve la diferencia, 
+  en minutos, entre una fecha evaluada en la zona horaria UTC y 
+  la misma fecha evaluada en la zona horaria local. 
+  Luego se multiplican los minutos por 60000 obteniedo la diferencia horaria en milisegundos */
+  diferenciaZonaHorariaLocal = (new Date()).getTimezoneOffset() * 60000;
+  maxTime = (new Date(Date.now() - this.diferenciaZonaHorariaLocal)).toISOString().slice(0, -1);
 
   userRegistro: Usuario = {
-    nombre: 'Francisco Sánchez',
+    nombre: '',
     fechaNacimiento: null,
-    email: 'francisco.sanches@gmail.com',
-    password: '123456',
+    email: '',
+    password: '',
   }
 
   veciRed:Comunidad = {
@@ -32,7 +39,9 @@ export class RegistroPage implements OnInit {
   constructor( public navCtrl: NavController,
                public usuarioService: UsuarioService,
                public alertasService: AlertasService,
-               private menuCtrl: MenuController ) { 
+               private menuCtrl: MenuController,
+               private platform: Platform,
+               private pushService: PushService ) { 
                 this.menuCtrl.enable(false, 'first');
                }
 
@@ -43,6 +52,10 @@ export class RegistroPage implements OnInit {
   
   async registro(){
 
+    const datepipe: DatePipe = new DatePipe('en-US');
+    this.userRegistro.fechaNacimiento  = datepipe.transform(this.userRegistro.fechaNacimiento ,'YYYY-MM-dd');
+    this.maxTime = datepipe.transform(this.maxTime,'YYYY-MM-dd');
+
     const validado = this.validacion();
 
     if(validado == null){
@@ -50,6 +63,11 @@ export class RegistroPage implements OnInit {
       const existe = await this.usuarioService.registro(this.userRegistro);
   
       if(existe){
+
+        //Si el usuario se encuentra en un dispositivo móvil se crea el id del usuario para recivir notificaciones
+        if(this.platform.is('capacitor')){
+          this.pushService.setUserId();
+        }
         //navegar al tabs
         this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
       }else{
@@ -68,17 +86,14 @@ export class RegistroPage implements OnInit {
 
       return this.alertasService.alerta('El nombre de usuario no permite tener los caracteres ingresados. Con un mínimo de 3 caracteres y un máximo de 50.');
     }
-    console.log(this.userRegistro.fechaNacimiento);
 
     if(this.userRegistro.fechaNacimiento == null){
 
       return this.alertasService.alerta('Debe seleccionar una día.');
     }
-
-    const today = new Date();
   
     //Validar que la fecha no sea mayor a la fecha actual
-    if(this.userRegistro.fechaNacimiento > today.toISOString()){
+    if(this.userRegistro.fechaNacimiento > this.maxTime){
       
       return this.alertasService.alerta('El día seleccionado no debe ser mayor a la fecha actual.');
     }
@@ -111,15 +126,8 @@ export class RegistroPage implements OnInit {
 
       return this.alertasService.alerta('Las contraseñas no coinciden.'); 
     }
-    
-    //Validación de campos vacios
-     /* if(registrarse.invalid){
-      this.alertasService.alerta('Complete los campos vacíos');
-      return;
-    } */
 
     return null;
-
   }
 
   login() {

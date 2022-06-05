@@ -13,11 +13,8 @@ import { PushService } from '../../servicios/push.service';
 export class LoginPage implements OnInit {
 
   User = {
-    email: 'test3@test3.com',
-    password: '123456'
-    /* email: '',
+    email: '',
     password: ''
-   */
   };
 
   //Array que guarda las comunidades
@@ -49,7 +46,9 @@ export class LoginPage implements OnInit {
         //navegar al tabs
         this.navCtrl.navigateRoot('/main/tabs/tab1', {animated: true});
   
+        //Si el usuario se encuentra en un dispositivo móvil se crea el id del usuario para recivir notificaciones
         if(this.platform.is('capacitor')){
+
           this.pushService.setUserId();
         }
         
@@ -79,17 +78,4 @@ export class LoginPage implements OnInit {
 
     return null;
   }
-
-  /* async comunidadesUsuario(){
-
-    await this.usuarioService.obtenerArrayComunidadesUsuario().subscribe(
-      async respuesta =>
-     {
-       this.arrayComunidades = await respuesta['comunidades']['comunidad']; 
-     }
-   )
-
-   this.pushService.setUserId(this.arrayComunidades);
-
-  } */
 }

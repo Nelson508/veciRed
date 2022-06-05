@@ -13,10 +13,8 @@ import { Usuario } from '../interfaces/interfaces';
   providedIn: 'root'
 })
 export class PushService {
-  //OSNotification
-  mensajes: OSNotification[] = [];
-  //Array que guarda las comunidades
-  //arrayComunidades = [];
+
+  mensajes: OSNotification[] = [];  
   paginaMensajes = 0;
   usuario: Usuario = {};
 
@@ -68,12 +66,6 @@ export class PushService {
         this.router.navigate(['/main/tabs/tab2']);
         
       });
-
-      //Obtener ID del suscriptor
-      /* OneSignal.getDeviceState((stateChanges) => {
-        this.userId = stateChanges.userId;
-
-      }); */
 
     }else{
       //console.log('No es movil');
@@ -130,16 +122,9 @@ export class PushService {
     return ultMens;
   } 
 
-  /* async getMensajes(){
-
-    await this.cargarMensajes();
-    return [...this.mensajes];
-  } */
-
   //Borrar los mensajes
   async borrarMensajes(){
     await this.storage.clear();
-    //this.storage.remove('mensajes');
     this.mensajes = [];
     this.guardarMensajes();
 
@@ -152,12 +137,7 @@ export class PushService {
     
     var user = this.usuario._id;
 
-    OneSignal.setExternalUserId(user, (results) => {
-      // The results will contain push and email success statuses
-      //console.log('Results of setting external user id');
-      //console.log(results);  
-            
-    });
+    OneSignal.setExternalUserId(user, (results) => {});
   
   }
 
@@ -179,7 +159,8 @@ export class PushService {
       this.notificacion.headings.es = body; 
 
       const headers = new HttpHeaders({
-        'Authorization': 'Basic YWQ1OGE1OGYtOTUwZC00ZWE3LWFmZDQtMDRkMDkxZjIwZWY1'
+        'Authorization': 'Basic Aqui va el API Key'
+        
       });
 
       return new Promise( resolve => {
